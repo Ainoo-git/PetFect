@@ -42,7 +42,7 @@ Patricia Paun
 Sara Ulgazi
 
 ---
-##  4. Estructura del Proyecto
+##  5. Estructura del Proyecto
 
 PetFect/
 ├── AndroidManifest.xml
