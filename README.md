@@ -35,6 +35,13 @@ Otros: Google Maps API, notificaciones push
 
 ---
 
+##  4.Equipo de desarrollo
+
+Ainoha Yubero
+Patricia Paun
+Sara Ulgazi
+
+---
 ##  4. Estructura del Proyecto
 
 PetFect/
