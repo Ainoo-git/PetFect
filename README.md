@@ -35,6 +35,11 @@ Otros: Google Maps API, notificaciones push
 
 ---
 
+## Configuración adicional
+Para el uso del mapa será necesaria una API Key de Google Maps, que deberá configurarse en el archivo `local.properties`.
+
+---
+
 ##  4.Equipo de desarrollo
 
 Ainoha Yubero
@@ -42,9 +47,8 @@ Patricia Paun
 Sara Ulgazi
 
 ---
-##  5. Estructura del Proyecto
 
-## 5. Estructura del Proyecto
+##5. Estructura del Proyecto
 
 ```
 PetFect/
@@ -72,6 +76,13 @@ PetFect/
 https://www.figma.com/design/06eBS84aSirWxt0tDWtGxG/PetFect?node-id=0-1&t=PAzMS1DZz4Tj30AR-1
 
 <img width="1383" height="765" alt="image" src="https://github.com/user-attachments/assets/fc34b954-b5a2-43b1-8354-a52894b076ea" />
+
+---
+
+## 7. Clona el repositorio:
+git clone https://github.com/Ainoo-git/PetFect.git
+
+---
 
 ##  4. Licencia
 
