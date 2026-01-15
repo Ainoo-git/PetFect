@@ -19,6 +19,7 @@ public class PreferenciasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferencias);
 
+        // Referencias a los CheckBox
         cbPerdidos = findViewById(R.id.cbPerdidos);
         cbAdopciones = findViewById(R.id.cbAdopciones);
         cbVeterinarias = findViewById(R.id.cbVeterinarias);
@@ -26,20 +27,22 @@ public class PreferenciasActivity extends AppCompatActivity {
 
         Button btnGuardar = findViewById(R.id.btnGuardarPreferencias);
 
+
         cargarPreferencias();
 
+        // Guardar al pulsar el botón
         btnGuardar.setOnClickListener(v -> {
             guardarPreferencias();
             Toast.makeText(this, "Preferencias guardadas", Toast.LENGTH_SHORT).show();
-            finish();
+            finish(); // vuelve a MainActivity
         });
     }
 
     private void cargarPreferencias() {
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
 
-        cbPerdidos.setChecked(prefs.getBoolean("pref_perdidos", true));
-        cbAdopciones.setChecked(prefs.getBoolean("pref_adopciones", true));
+        cbPerdidos.setChecked(prefs.getBoolean("pref_perdidos", false));
+        cbAdopciones.setChecked(prefs.getBoolean("pref_adopciones", false));
         cbVeterinarias.setChecked(prefs.getBoolean("pref_veterinarias", false));
         cbNotificaciones.setChecked(prefs.getBoolean("pref_notificaciones", false));
     }
