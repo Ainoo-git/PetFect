@@ -10,16 +10,34 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PetFect">
+        android:theme="@style/Theme.PetFect"
+        tools:targetApi="31">
+
+        <!-- LOGIN -->
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+
+        <!-- SIGN UP / REGISTRO -->
+        <activity
+            android:name=".SignUp"
+            android:exported="false" />
+
+        <!-- MAIN -->
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <!-- PROFILE -->
+        <activity
+            android:name=".Profile"
+            android:exported="false" />
+
+        <!-- PREFERENCIAS -->
+        <activity
+            android:name=".PreferenciasActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
