@@ -13,7 +13,7 @@
         android:id="@+id/overlay_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/img"
+        android:src="@drawable/img1"
         android:scaleType="centerCrop"
         android:alpha="0.35"
         app:layout_constraintTop_toTopOf="parent"
@@ -51,14 +51,14 @@
 
     <ImageView
         android:id="@+id/cereza"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="216dp"
+        android:layout_height="195dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_action_name"
-        app:layout_constraintTop_toTopOf="@id/guideline_top"
-        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        android:src="@drawable/img"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        app:layout_constraintHorizontal_bias="0.5"/>
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toTopOf="@id/guideline_top" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilUser"

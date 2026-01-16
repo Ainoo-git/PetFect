@@ -72,10 +72,11 @@
         android:id="@+id/btnGuardarPreferencias"
         android:layout_width="0dp"
         android:layout_height="56dp"
+        android:layout_marginTop="312dp"
         android:text="Guardar"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@id/cbNotificaciones"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/cbNotificaciones" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
