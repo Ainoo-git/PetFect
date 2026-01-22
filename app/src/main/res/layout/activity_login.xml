@@ -5,15 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/gradient">
+    android:layout_height="match_parent">
 
     <!--IMAGEN TRANSLÚCIDA ENCIMA DEL DEGRADADO, SE AÑADE ALPHA -->
     <ImageView
         android:id="@+id/overlay_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/img1"
+        android:src="@drawable/perroimg"
         android:scaleType="centerCrop"
         android:alpha="0.35"
         app:layout_constraintTop_toTopOf="parent"
@@ -120,7 +119,7 @@
         android:backgroundTintMode="@color/white"
         android:onClick="SignLogin"
         android:text="LOGIN"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
