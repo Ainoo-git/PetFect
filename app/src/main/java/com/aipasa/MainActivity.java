@@ -14,23 +14,23 @@ public class MainActivity extends AppCompatActivity {
     private View sectionPerdidos, sectionAdopciones, sectionVeterinarias;
     private TextView tvNadaSeleccionado;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        sectionPerdidos = findViewById(R.id.sectionPerdidos);
-        sectionAdopciones = findViewById(R.id.sectionAdopciones);
-        sectionVeterinarias = findViewById(R.id.sectionVeterinarias);
-        tvNadaSeleccionado = findViewById(R.id.tvNadaSeleccionado);
-
-        Button btnOpenPreferencias = findViewById(R.id.btnOpenPreferencias);
-        btnOpenPreferencias.setOnClickListener(v ->
-                startActivity(new Intent(MainActivity.this, PreferenciasActivity.class))
-        );
-
-        aplicarPreferencias();
-    }
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//
+//        sectionPerdidos = findViewById(R.id.sectionPerdidos);
+//        sectionAdopciones = findViewById(R.id.sectionAdopciones);
+//        sectionVeterinarias = findViewById(R.id.sectionVeterinarias);
+//        tvNadaSeleccionado = findViewById(R.id.tvNadaSeleccionado);
+//
+//        Button btnOpenPreferencias = findViewById(R.id.btnOpenPreferencias);
+//        btnOpenPreferencias.setOnClickListener(v ->
+//                startActivity(new Intent(MainActivity.this, PreferenciasActivity.class))
+//        );
+//
+//        aplicarPreferencias();
+//    }
 
     @Override
     protected void onResume() {
