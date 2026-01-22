@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="cian_oscuro_iconos">#0F5052</color>
+    <color name="cian_botones">#3ACAAE</color>
+    <color name="cian_clarito_bordes">#C3FFFC</color>
+    <color name="rosa_pastel_fondos">#FFC3C3</color>
+    <color name="coral_acciones_errores">#FF8C8C</color>
+
 </resources>

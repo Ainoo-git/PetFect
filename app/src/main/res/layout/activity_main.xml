@@ -1,19 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:padding="16dp">
 
+    <!-- Nombre usuario (lo cambias desde Java con SharedPreferences) -->
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tvNombreUsuario"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Alisss_"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/imgPerfil"
+        android:layout_marginEnd="12dp"/>
+
+    <!-- Icono perfil -->
+    <ImageView
+        android:id="@+id/imgPerfil"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:src="@drawable/baseline_person_24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Subtítulo -->
+    <TextView
+        android:id="@+id/tvComunidad"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Comunidad FectPet"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginTop="6dp"
+        app:layout_constraintTop_toBottomOf="@id/tvNombreUsuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- ====== TU BLOQUE (MISMO CONTENIDO), SOLO LE AÑADO CONSTRAINTS + ID ====== -->
+    <HorizontalScrollView
+        android:id="@+id/hsOpciones"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tvComunidad"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Adopciones" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Lost" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Mapa" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+    <!-- ===================================================================== -->
+
+    <!-- Contenido de abajo (para que quede como el mockup).
+         Aquí luego metes tus RecyclerViews / cards / listas. -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollContenido"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="14dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/hsOpciones"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Ejemplo de título tipo mockup -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Recientemente"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ver todo"/>
+            </LinearLayout>
+
+            <!-- Aquí luego pones tu RecyclerView horizontal -->
+            <!-- <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRecientes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"/> -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="Sin Encontrar"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
+
+            <!-- Aquí luego pones tu lista vertical -->
+            <!-- <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSinEncontrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"/> -->
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

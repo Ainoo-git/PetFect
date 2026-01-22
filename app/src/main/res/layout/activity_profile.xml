@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Toolbar real con flecha atrás -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/rosita"
+        android:title="Profile"
+        android:titleTextColor="@color/white"
+        app:navigationIcon="@drawable/outline_arrow_back_ios_24" />
+
+    <!-- Contenido del perfil -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <View
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/circle_background" />
+
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="10dp"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/baseline_person_24" />
+
+        <TextView
+            android:id="@+id/nombre2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="180dp"
+            android:gravity="center"
+            android:text="Nombre"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/descripcion"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="230dp"
+            android:gravity="center"
+            android:text="@string/descripcion"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
