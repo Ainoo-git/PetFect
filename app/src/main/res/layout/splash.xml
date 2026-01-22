@@ -15,10 +15,11 @@
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="426dp"
-        android:layout_height="323dp"
-        android:layout_marginTop="160dp"
-        android:src="@drawable/PetFect"
-    </ImageView>
+        android:layout_width="178dp"
+        android:layout_height="105dp"
+        android:src="@drawable/icono"
+        tools:layout_editor_absoluteX="116dp"
+        tools:layout_editor_absoluteY="408dp" />
+</ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

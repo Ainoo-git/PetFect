@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillAfter="true">
+
+    <!-- Entrada con rebote -->
+    <translate
+        android:fromYDelta="-500dp"
+        android:toYDelta="0dp"
+        android:duration="1000"
+        android:interpolator="@android:anim/bounce_interpolator" />
+
+    <!-- Giro -->
+    <rotate
+        android:fromDegrees="0"
+        android:toDegrees="360"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:duration="1200"
+        android:startOffset="1000" />
+
+    <!-- Escala: de grande a pequeño -->
+    <scale
+        android:fromXScale="1.5"
+        android:fromYScale="1.5"
+        android:toXScale="0.4"
+        android:toYScale="0.4"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:duration="1200"
+        android:startOffset="1000" />
+
+    <!-- Traslación hacia arriba después del rebote -->
+    <translate
+        android:fromYDelta="0"
+        android:toYDelta="-350dp"
+        android:duration="800"
+        android:startOffset="2200"
+        android:interpolator="@android:anim/accelerate_interpolator" />
+
+</set>
