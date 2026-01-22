@@ -1,5 +1,6 @@
 package com.aipasa;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -31,9 +32,12 @@ public class SignUp extends AppCompatActivity {
         }
 
         SharedPreferences prefs = getSharedPreferences("petfect_prefs", MODE_PRIVATE);
-        prefs.edit().putString("username", username).apply();
+        prefs.edit()
+                .putString("username", username)
+                .apply();
 
-        Toast.makeText(this, "Usuario guardado", Toast.LENGTH_SHORT).show();
-        finish(); // vuelve atrás (normalmente al Login)
+        startActivity(new Intent(this, PreferenciasActivity.class));
+        finish();
+
     }
 }

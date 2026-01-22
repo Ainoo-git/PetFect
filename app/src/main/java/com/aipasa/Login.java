@@ -39,7 +39,12 @@ public class Login extends AppCompatActivity {
 
         // Guardamos el usuario para usarlo en Profile
         SharedPreferences prefs = getSharedPreferences("petfect_prefs", MODE_PRIVATE);
-        prefs.edit().putString("username", username).apply();
+        prefs.edit()
+                .putString("username", username)
+                .apply();
+
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
 
         // Ir a la pantalla principal
         Intent i = new Intent(Login.this, MainActivity.class);
