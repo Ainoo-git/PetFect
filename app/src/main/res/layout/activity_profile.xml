@@ -10,7 +10,7 @@
         android:id="@+id/topAppBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/rosita"
+        android:background="@color/rosa_pastel_fondos"
         android:title="Profile"
         android:titleTextColor="@color/white"
         app:navigationIcon="@drawable/outline_arrow_back_ios_24" />
