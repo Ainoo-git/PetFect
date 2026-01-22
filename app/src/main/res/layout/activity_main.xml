@@ -8,7 +8,6 @@
 
     <!-- Nombre usuario (lo cambias desde Java con SharedPreferences) -->
     <TextView
-        android:id="@+id/tvNombreUsuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Alisss_"

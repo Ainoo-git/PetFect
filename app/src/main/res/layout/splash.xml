@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/gradient">
+    android:layout_height="match_parent">
+
 
     <ImageView
         android:id="@+id/backView"
@@ -19,11 +19,6 @@
         android:layout_height="323dp"
         android:layout_marginTop="160dp"
         android:src="@drawable/PetFect"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
     </ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
