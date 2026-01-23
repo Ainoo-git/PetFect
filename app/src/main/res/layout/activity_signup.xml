@@ -5,13 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/signup_layout"
     android:layout_width="match_parent"
-<<<<<<< HEAD
     android:layout_height="match_parent"
     android:background="@drawable/imgfondo">
-=======
-    android:layout_height="match_parent">
-
->>>>>>> origin/master
     <!-- IMAGEN TRANSLÚCIDA ENCIMA DEL DEGRADADO, se usa alpha -->
     <ImageView
         android:id="@+id/overlay_image"
