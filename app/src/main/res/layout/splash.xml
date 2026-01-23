@@ -20,6 +20,5 @@
         android:src="@drawable/icono"
         tools:layout_editor_absoluteX="116dp"
         tools:layout_editor_absoluteY="408dp" />
-</ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
