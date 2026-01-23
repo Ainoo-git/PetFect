@@ -5,13 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/signup_layout"
     android:layout_width="match_parent"
-<<<<<<< HEAD
     android:layout_height="match_parent"
     android:background="@drawable/imgfondo">
-=======
-    android:layout_height="match_parent">
-
->>>>>>> origin/master
     <!-- IMAGEN TRANSLÚCIDA ENCIMA DEL DEGRADADO, se usa alpha -->
     <ImageView
         android:id="@+id/overlay_image"
@@ -24,35 +19,35 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- CONTENEDOR SUPERIOR: flecha + nombre app -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
-        <!-- Flecha volver -->
-        <ImageView
-            android:id="@+id/back_arrow"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/flecha"
-            android:contentDescription="Volver atrás"
-            android:onClick="OpenLogin"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-        <!-- Nombre de la app -->
-        <TextView
-            android:id="@+id/app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PetFect"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@id/back_arrow"
-            app:layout_constraintTop_toTopOf="@id/back_arrow"
-            app:layout_constraintBottom_toBottomOf="@id/back_arrow"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="16dp">-->
+<!--        &lt;!&ndash; Flecha volver  // tenemos un boton para volver al login esto  no  nos sirve&ndash;&gt;-->
+<!--        <ImageView-->
+<!--            android:id="@+id/back_arrow"-->
+<!--            android:layout_width="28dp"-->
+<!--            android:layout_height="28dp"-->
+<!--            android:src="@drawable/flecha"-->
+<!--            android:contentDescription="Volver atrás"-->
+<!--            android:onClick="OpenLogin"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"/>-->
+<!--        &lt;!&ndash; Nombre de la app &ndash;&gt;-->
+<!--        <TextView-->
+<!--            android:id="@+id/app_name"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="PetFect"-->
+<!--            android:textSize="22sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            app:layout_constraintStart_toEndOf="@id/back_arrow"-->
+<!--            app:layout_constraintTop_toTopOf="@id/back_arrow"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/back_arrow"/>-->
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_start"
