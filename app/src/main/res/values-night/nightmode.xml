@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="cian_oscuro_iconos">#175859</color>
+    <color name="cian_botones">#23927C</color>
+    <color name="cian_clarito_bordes">#FF88C8C3</color>
+    <color name="rosita">#FFD49090</color>
+    <color name="coral_acciones_errores">#FFE57A7A</color>
+
+
+
+</resources>
