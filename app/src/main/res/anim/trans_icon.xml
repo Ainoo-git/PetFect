@@ -2,39 +2,51 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android"
     android:fillAfter="true">
 
-    <!-- Entrada con rebote -->
+    <!-- Entrada desde Y=75% hacia Y=25% y X=0 a X=25% -->
     <translate
-        android:fromYDelta="-500dp"
-        android:toYDelta="0dp"
+        android:fromXDelta="0%"
+        android:toXDelta="25%"
+        android:fromYDelta="75%"
+        android:toYDelta="25%"
         android:duration="1000"
         android:interpolator="@android:anim/bounce_interpolator" />
 
-    <!-- Giro -->
+    <!-- Giro mientras se mueve -->
     <rotate
         android:fromDegrees="0"
         android:toDegrees="360"
         android:pivotX="50%"
         android:pivotY="50%"
-        android:duration="1200"
-        android:startOffset="1000" />
+        android:duration="1000"
+        android:startOffset="0" />
 
-    <!-- Escala: de grande a pequeño -->
+    <!-- Escala mientras se mueve -->
     <scale
         android:fromXScale="1.5"
         android:fromYScale="1.5"
-        android:toXScale="0.4"
-        android:toYScale="0.4"
+        android:toXScale="0.5"
+        android:toYScale="0.5"
         android:pivotX="50%"
         android:pivotY="50%"
-        android:duration="1200"
-        android:startOffset="1000" />
+        android:duration="1000"
+        android:startOffset="0" />
 
-    <!-- Traslación hacia arriba después del rebote -->
+    <!-- Movimiento hacia X=50%, Y=50% -->
     <translate
-        android:fromYDelta="0"
-        android:toYDelta="-350dp"
+        android:fromXDelta="25%"
+        android:toXDelta="50%"
+        android:fromYDelta="25%"
+        android:toYDelta="50%"
         android:duration="800"
-        android:startOffset="2200"
-        android:interpolator="@android:anim/accelerate_interpolator" />
+        android:startOffset="1000"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
+
+    <!-- Pequeño salto final hacia arriba -->
+    <translate
+        android:fromYDelta="50%"
+        android:toYDelta="40%"
+        android:duration="500"
+        android:startOffset="1800"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
 
 </set>
