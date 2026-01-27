@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/imgfondo">
 
-    <!-- Imagen translúcida encima -->
+    <!-- Overlay translúcido -->
     <ImageView
         android:id="@+id/overlay_image"
         android:layout_width="0dp"
@@ -20,64 +20,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Flecha volver -->
-    <ImageView
-        android:id="@+id/back_arrow"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:src="@drawable/outline_arrow_back_ios_24"
-        android:contentDescription="Volver atrás"
-        android:onClick="OpenLogin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="16dp"/>
-
-    <!-- Nombre app -->
-    <TextView
-        android:id="@+id/app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PetFect"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@id/back_arrow"
-        app:layout_constraintTop_toTopOf="@id/back_arrow"
-        app:layout_constraintBottom_toBottomOf="@id/back_arrow"
-        android:layout_marginStart="8dp"/>
-
-    <!-- Guidelines -->
+    <!-- Guidelines para márgenes -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_start"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.24"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.77"/>
 
+
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_top"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="83dp"/>
+    android:id="@+id/guideline_top"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_begin="83dp"/>
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_bottom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.9"/>
 
-    <!-- Icono -->
+
+    <!-- Icono principal -->
     <ImageView
         android:id="@+id/icon_signup"
-        android:layout_width="216dp"
-        android:layout_height="195dp"
-        android:src="@drawable/icono"
-        app:layout_constraintTop_toTopOf="@id/guideline_top"
-        app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"/>
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/logologin"
+        android:contentDescription="Icono registro"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- USERNAME -->
+    <!-- Username -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilUsername"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -100,7 +87,7 @@
             android:textColor="@color/black"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- PASSWORD -->
+    <!-- Password -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilPassword"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -124,7 +111,7 @@
             android:textColor="@color/black"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- EMAIL -->
+    <!-- Email -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -147,26 +134,30 @@
             android:textColor="@color/black"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- BOTONES -->
+    <!-- Botón Crear cuenta -->
     <Button
         android:id="@+id/btnRegister"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/black"
-        android:text="CREATE ACCOUNT"
+        android:text="@string/create_account"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/tilEmail"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"/>
 
+    <!-- Botón Login -->
     <Button
         android:id="@+id/btnGoToLogin"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
-        android:text="LOGIN"
+        android:text="@string/login"
         android:textColor="@color/black"
+        android:onClick="openLogin"
         app:layout_constraintTop_toBottomOf="@id/btnRegister"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"/>

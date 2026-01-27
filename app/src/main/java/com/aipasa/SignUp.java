@@ -19,7 +19,13 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        etUser = findViewById(R.id.etUser);
+        // ⚠ Aquí estaba mal el ID
+        etUser = findViewById(R.id.etUsername);
+    }
+
+    public void openLogin(View view) {
+        startActivity(new Intent(this, Login.class));
+        finish();
     }
 
 
@@ -38,6 +44,5 @@ public class SignUp extends AppCompatActivity {
 
         startActivity(new Intent(this, PreferenciasActivity.class));
         finish();
-
     }
 }

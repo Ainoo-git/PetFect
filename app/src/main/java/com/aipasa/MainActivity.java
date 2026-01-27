@@ -16,11 +16,11 @@ public class MainActivity extends AppCompatActivity {
     private boolean prefPerdidos, prefAdopciones, prefVeterinarias;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bab);
-    }
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_bab);
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

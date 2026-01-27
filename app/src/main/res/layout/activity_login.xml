@@ -49,12 +49,13 @@
 
     <ImageView
         android:id="@+id/iconopng"
-        android:layout_width="216dp"
-        android:layout_height="195dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/icono"
-        tools:layout_editor_absoluteX="118dp"
-        tools:layout_editor_absoluteY="103dp" />
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/logologin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilUser"

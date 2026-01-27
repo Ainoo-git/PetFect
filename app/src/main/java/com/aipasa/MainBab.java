@@ -46,29 +46,29 @@ public class MainBab extends AppCompatActivity {
     // BottomSheet
     private void showBottomSheetDialog() {
         View view = LayoutInflater.from(this)
-                .inflate(R.layout.bottom_sheet_layout, null);
+                .inflate(R.layout.activity_bab, null);
 
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         dialog.setContentView(view);
         dialog.show();
 
-        TextView option1 = view.findViewById(R.id.option1);
-        TextView option2 = view.findViewById(R.id.option2);
-        TextView option3 = view.findViewById(R.id.option3);
-
-        option1.setOnClickListener(v -> {
-            Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-        });
-
-        option2.setOnClickListener(v -> {
-            Toast.makeText(this, "About clicked", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-        });
-
-        option3.setOnClickListener(v -> {
-            Toast.makeText(this, "Logout clicked", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-        });
+//        TextView option1 = view.findViewById(R.id.option1);
+//        TextView option2 = view.findViewById(R.id.option2);
+//        TextView option3 = view.findViewById(R.id.option3);
+//
+//        option1.setOnClickListener(v -> {
+//            Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
+//            dialog.dismiss();
+//        });
+//
+//        option2.setOnClickListener(v -> {
+//            Toast.makeText(this, "About clicked", Toast.LENGTH_SHORT).show();
+//            dialog.dismiss();
+//        });
+//
+//        option3.setOnClickListener(v -> {
+//            Toast.makeText(this, "Logout clicked", Toast.LENGTH_SHORT).show();
+//            dialog.dismiss();
+//        });
     }
 }
