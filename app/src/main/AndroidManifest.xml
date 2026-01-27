@@ -13,7 +13,7 @@
         android:theme="@style/Theme.PetFect">
 
         <activity
-            android:name=".Splash"
+            android:name=".splash.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,11 +25,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="TU_API_KEY_AQUI" />
 
-        <activity android:name=".Login" android:exported="false" />
-        <activity android:name=".SignUp" android:exported="false" />
-        <activity android:name=".PreferenciasActivity" android:exported="false" />
-        <activity android:name=".MainActivity" android:exported="false" />
-        <activity android:name=".Profile" android:exported="false" />
+        <activity android:name=".auth.Login" android:exported="false" />
+        <activity android:name=".auth.SignUp" android:exported="false" />
+        <activity android:name=".main.PreferenciasActivity" android:exported="false" />
+        <activity android:name=".main.MainActivity" android:exported="false" />
+        <activity android:name=".main.Profile" android:exported="false" />
 
     </application>
 </manifest>

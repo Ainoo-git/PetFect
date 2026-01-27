@@ -1,4 +1,4 @@
-package com.aipasa;
+package com.aipasa.main;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.aipasa.R;
 
 public class PreferenciasActivity extends AppCompatActivity {
 

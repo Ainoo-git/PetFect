@@ -1,4 +1,4 @@
-package com.aipasa;
+package com.aipasa.auth;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aipasa.main.PreferenciasActivity;
+import com.aipasa.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class SignUp extends AppCompatActivity {

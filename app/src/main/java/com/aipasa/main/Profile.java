@@ -1,4 +1,4 @@
-package com.aipasa; // Cambia esto si tu paquete es distinto
+package com.aipasa.main; // Cambia esto si tu paquete es distinto
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aipasa.R;
 import com.google.android.material.appbar.MaterialToolbar;
 
 public class Profile extends AppCompatActivity {

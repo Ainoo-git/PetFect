@@ -1,4 +1,4 @@
-package com.aipasa;
+package com.aipasa.auth;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aipasa.main.MainActivity;
+import com.aipasa.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class Login extends AppCompatActivity {
