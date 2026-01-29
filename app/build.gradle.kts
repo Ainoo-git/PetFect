@@ -46,6 +46,10 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
 
+    // Room
+    implementation ("androidx.room:room-runtime:2.6.0")
+    annotationProcessor ("androidx.room:room-compiler:2.6.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -59,5 +63,5 @@ dependencies {
 
     // Lottie
     implementation("com.airbnb.android:lottie:6.3.0")
-
 }
+
