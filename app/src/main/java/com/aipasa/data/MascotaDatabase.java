@@ -11,7 +11,7 @@ public abstract class MascotaDatabase extends RoomDatabase {
 
     private static MascotaDatabase INSTANCE;
 
-    public abstract MascotaDao mascotaDao();
+    public abstract MascotaDAO mascotaDao();
 
     public static MascotaDatabase getInstance(Context context) {
         if (INSTANCE == null) {

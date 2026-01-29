@@ -35,9 +35,9 @@ public class MainBab extends AppCompatActivity {
             if (item.getItemId() == R.id.heart) {
                 Toast.makeText(this, "Added to favourites", Toast.LENGTH_SHORT).show();
                 return true;
-            } else if (item.getItemId() == R.id.search) {
-                Toast.makeText(this, "Beginning search", Toast.LENGTH_SHORT).show();
-                return true;
+//            } else if (item.getItemId() == R.id.search) {
+//                Toast.makeText(this, "Beginning search", Toast.LENGTH_SHORT).show();
+//                return true;
             }
             return false;
         });
