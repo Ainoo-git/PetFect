@@ -7,7 +7,7 @@ import androidx.room.Query;
 import java.util.List;
 
 @Dao
-public interface MascotaDao {
+public interface MascotaDAO {
 
     @Insert
     void insertar(Mascota mascota);
