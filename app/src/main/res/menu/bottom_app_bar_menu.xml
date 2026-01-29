@@ -10,10 +10,18 @@
         />
 
     <item
-        android:id="@+id/search"
-        android:title="Language"
-        android:icon="@drawable/ic_planet"
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/baseline_house_24"
         app:showAsAction="ifRoom"
         />
+
+    <item
+        android:id="@+id/Perfil"
+        android:title="Perfil"
+        android:icon="@drawable/baseline_person_24"
+        app:showAsAction="ifRoom"
+        />
+
 
 </menu>

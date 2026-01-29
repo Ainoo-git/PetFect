@@ -58,7 +58,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="45dp"
-        android:src="@drawable/logoLogin"
+        android:src="@drawable/logologin"
         android:contentDescription="Icono registro"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
