@@ -26,6 +26,18 @@ Registro y perfil de usuario: Permite guardar tus búsquedas y favoritos.
 Notificaciones: Recibe alertas sobre animales encontrados cerca de ti.
 
 --- 
+##  2. Pantallas de la Aplicación
+
+| Pantalla | Imagen | Descripción |
+|----------|-------|------------|
+| Uso de la app |  |
+| Splash / Principal | |
+| Icono app || icono de la aplicación |
+| Login | | Login con campos y botones de navegación |
+| Registro (Signup) || Registro de usuario con Username, Password y Email |
+| Perfil de Usuario || Visualización de avatar, nombre y descripción |
+| MainActivity || WebView con SwipeRefreshLayout y menú contextual |
+
 
 ##  3.Tecnologías utilizadas
 Plataforma: Android
@@ -78,10 +90,30 @@ PetFect/
 
 ```
 
+---
+##6. Características Principales
 
+### 6.1 Diseño UI/UX
+- Material Design 3  
+- Layouts responsivos con Edge-to-Edge  
+- Animaciones con Lottie y Glide  
+- Gradientes personalizados e iconos vectoriales  
+- Soporte para tema claro/oscuro  
+
+### 6.2 Autenticación y Navegación
+- Login y Signup con navegación directa  
+- Campos de usuario, contraseña y email  
+- Botones con colores y estilos personalizados  
+- Toolbar en perfil con flecha atrás  
+
+### 6.3 Funcionalidades Especiales
+- BottomAppBar con FloatingActionButton  
+- Menú contextual con opciones de guardar animales, pantalla principal, cámara para registrar al animal y perfil del usuario
+- WebView con SwipeRefreshLayout  
+- Cambio de idioma y alternancia modo claro/oscuro
 
 ---
-##  6. Enlace al prototipo en Figma:  
+##  7. Enlace al prototipo en Figma:  
 https://www.figma.com/design/06eBS84aSirWxt0tDWtGxG/PetFect?node-id=0-1&t=PAzMS1DZz4Tj30AR-1
 
 <img width="1383" height="765" alt="image" src="https://github.com/user-attachments/assets/fc34b954-b5a2-43b1-8354-a52894b076ea" />
@@ -93,7 +125,6 @@ git clone https://github.com/Ainoo-git/PetFect.git
 
 ---
 
-hola
 ##  4. Licencia
 
 Este proyecto está licenciado bajo **Creative Commons Atribución-CompartirIgual 4.0 Internacional**.  

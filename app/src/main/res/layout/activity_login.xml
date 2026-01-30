@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.26" />
+        app:layout_constraintGuide_percent="0.24" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_end"
@@ -66,8 +66,6 @@
         android:background="#80FFFFFF"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/personita"
-        app:boxStrokeColor="@android:color/transparent"
-        app:boxStrokeWidth="0dp"
         app:layout_constraintTop_toBottomOf="@id/iconopng"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintEnd_toEndOf="@id/guideline_end">
@@ -91,8 +89,6 @@
         android:background="#80FFFFFF"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/llavecita"
-        app:boxStrokeColor="@android:color/transparent"
-        app:boxStrokeWidth="0dp"
         app:layout_constraintTop_toBottomOf="@id/tilUser"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"

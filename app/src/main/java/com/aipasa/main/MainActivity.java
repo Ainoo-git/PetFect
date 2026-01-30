@@ -17,17 +17,21 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean prefPerdidos, prefAdopciones, prefVeterinarias;
 
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_bab);
-//    }
+    // TextView para mostrar el usuario
+    private TextView tvNombreUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Conectar TextView del layout
+        tvNombreUsuario = findViewById(R.id.tvNombreUsuario);
+
+        // Leer username de SharedPreferences y mostrarlo
+        SharedPreferences prefs = getSharedPreferences("petfect_prefs", MODE_PRIVATE);
+        String username = prefs.getString("username", "Usuario"); // Valor por defecto si no existe
+        tvNombreUsuario.setText(username);
 
         // Secciones
         sectionPerdidos = findViewById(R.id.sectionPerdidos);
@@ -63,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         sectionPerdidos.setVisibility(prefPerdidos ? View.VISIBLE : View.GONE);
         sectionAdopciones.setVisibility(prefAdopciones ? View.VISIBLE : View.GONE);
         sectionVeterinarias.setVisibility(prefVeterinarias ? View.VISIBLE : View.GONE);
-
         mostrarMensajeSiNada();
     }
 
@@ -71,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         sectionPerdidos.setVisibility(prefPerdidos ? View.VISIBLE : View.GONE);
         sectionAdopciones.setVisibility(View.GONE);
         sectionVeterinarias.setVisibility(View.GONE);
-
         mostrarMensajeSiNada();
     }
 
@@ -79,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         sectionPerdidos.setVisibility(View.GONE);
         sectionAdopciones.setVisibility(prefAdopciones ? View.VISIBLE : View.GONE);
         sectionVeterinarias.setVisibility(View.GONE);
-
         mostrarMensajeSiNada();
     }
 
@@ -87,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         sectionPerdidos.setVisibility(View.GONE);
         sectionAdopciones.setVisibility(View.GONE);
         sectionVeterinarias.setVisibility(prefVeterinarias ? View.VISIBLE : View.GONE);
-
         mostrarMensajeSiNada();
     }
 

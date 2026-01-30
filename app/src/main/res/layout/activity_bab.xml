@@ -16,6 +16,9 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Contenido scrollable -->
+
+        <!-- BottomAppBar -->
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -27,10 +30,9 @@
                 android:layout_margin="16dp"
                 android:text="@string/lorem"
                 android:textColor="@color/cian_oscuro_iconos"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
         </androidx.core.widget.NestedScrollView>
 
-        <!-- BottomAppBar -->
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottom_app_bar"
             android:layout_width="match_parent"
