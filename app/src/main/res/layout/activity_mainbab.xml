@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Contenido principal de la pantalla -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Contenido de ejemplo -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1000dp"
+                android:layout_margin="16dp"
+                android:text="@string/lorem"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- BottomBar fija -->
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="28dp"
+        app:fabCradleVerticalOffset="10dp"
+        app:hideOnScroll="false"
+        android:backgroundTint="@color/cian_oscuro_iconos"/>
+
+    <!-- Círculo central sobresaliente -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_central"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="28dp"
+        app:srcCompat="@drawable/ic_planet"
+        app:tint="@color/cian_oscuro_iconos"
+        app:backgroundTint="@color/cian_clarito_bordes"
+        app:useCompatPadding="true"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
