@@ -28,17 +28,16 @@ Notificaciones: Recibe alertas sobre animales encontrados cerca de ti.
 --- 
 ##  3. Pantallas de la Aplicación
 
-| Pantalla | Imagen | Descripción |
-|----------|-------|------------|
-| Uso de la app |  |
-| Splash / Principal |https://github.com/user-attachments/assets/b482af67-cb6c-406d-be81-31d7852562f8|
-| Icono app || icono de la aplicación |
-| Login |<img width="272" height="605" alt="Captura de pantalla 2026-01-30 125248" src="https://github.com/user-attachments/assets/af41a17c-0108-4cc9-93e2-e25718540d8e" />
-| Login con campos y botones de navegación |
-| Registro (Signup) |<img width="268" height="602" alt="image" src="https://github.com/user-attachments/assets/9f5f5046-195b-4bc0-8076-4f62db7aba18" />
-| Registro de usuario con Username, Password y Email |
-| Perfil de Usuario || Visualización de avatar, nombre y descripción |
-| MainActivity || WebView con SwipeRefreshLayout y menú contextual |
+| Pantalla              | Imagen                                                                 | Descripción                                         |
+|-----------------------|------------------------------------------------------------------------|---------------------------------------------------|
+| Uso de la app         |                                                                        | Breve explicación de cómo se usa la app          |
+| Splash / Principal    | ![AnimacionPetFect](https://github.com/user-attachments/assets/fe8cc27f-e294-4c66-8a1d-c7fb9501b668) | Animación inicial al abrir la app                |
+| Icono app             | <img width="1259" height="1080" alt="petfectfin" src="https://github.com/user-attachments/assets/0add9382-9a19-4bf3-822d-22a89886957c" /> | Icono de la aplicación |
+| Login                 | <img width="383" height="853" alt="image" src="https://github.com/user-attachments/assets/b39e7266-8319-498e-bc84-1868e63a578d" /> | Pantalla de login con campos y botones de navegación |
+| Registro (Signup)     | <img width="386" height="853" alt="image" src="https://github.com/user-attachments/assets/d5cd5c2e-c4df-4d54-a6db-8d4d9e50967d" /> | Registro de usuario con Username, Password y Email |
+| Perfil de Usuario     |                                                                        | Visualización de avatar, nombre y descripción    |
+| MainActivity          |                                                                        | WebView con SwipeRefreshLayout y menú contextual |
+
 
 
 ##  4.Tecnologías utilizadas
