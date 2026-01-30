@@ -1,4 +1,5 @@
 package com.aipasa.auth;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,6 +24,18 @@ public class Login extends AppCompatActivity {
 
         etUser = findViewById(R.id.etUser);
         etPass = findViewById(R.id.etPass);
+
+        // Comprobar si el usuario ya inició sesión
+        SharedPreferences prefs = getSharedPreferences("petfect_prefs", MODE_PRIVATE);
+        boolean logueado = prefs.getBoolean("usuarioLogueado", false);
+
+        if (logueado) {
+            // Saltar directamente a MainActivity
+            Intent intent = new Intent(Login.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
     }
 
     // Lo llama el botón LOGIN (android:onClick="SignLogin")
@@ -39,18 +52,18 @@ public class Login extends AppCompatActivity {
             return;
         }
 
-        // Guardamos el usuario para usarlo en Profile
+        // Guardar sesión activa
         SharedPreferences prefs = getSharedPreferences("petfect_prefs", MODE_PRIVATE);
         prefs.edit()
-                .putString("username", username)
+                .putString("username", username)      // guardar username
+                .putBoolean("usuarioLogueado", true)  // marcar sesión activa
                 .apply();
 
-        startActivity(new Intent(this, MainActivity.class));
+        // Ir a la pantalla principal y limpiar la pila
+        Intent intent = new Intent(Login.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
         finish();
-
-        // Ir a la pantalla principal
-        Intent i = new Intent(Login.this, MainActivity.class);
-        startActivity(i);
     }
 
     // Lo llama el botón SIGN UP (android:onClick="OpenSignup")
