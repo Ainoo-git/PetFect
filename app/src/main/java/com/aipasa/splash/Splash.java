@@ -23,7 +23,14 @@ public class Splash extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+        // Fondo
+        ImageView mSea = findViewById(R.id.backView);
+        Glide.with(this)
+                .load(R.drawable.fondosplash)
+                .centerCrop()
+                .into(mSea);
 
+        // Logo animado
         ImageView logo = findViewById(R.id.img);
         Animation starAnim = AnimationUtils.loadAnimation(this, R.anim.trans_icon);
 
@@ -52,11 +59,11 @@ public class Splash extends AppCompatActivity {
         logo.startAnimation(starAnim);
 
         // Fondo con Glide
-        ImageView mSea = findViewById(R.id.backView);
-        Glide.with(this)
-                .load(R.drawable.imgfondo)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .centerCrop()
-                .into(mSea);
+//        ImageView mSea = findViewById(R.id.backView);
+//        Glide.with(this)
+//                .load(R.drawable.imgfondo)
+//                .transition(DrawableTransitionOptions.withCrossFade())
+//                .centerCrop()
+//                .into(mSea);
     }
 }
