@@ -26,6 +26,18 @@ Registro y perfil de usuario: Permite guardar tus búsquedas y favoritos.
 Notificaciones: Recibe alertas sobre animales encontrados cerca de ti.
 
 --- 
+##  2. Pantallas de la Aplicación
+
+| Pantalla | Imagen | Descripción |
+|----------|-------|------------|
+| Uso de la app |  |
+| Splash / Principal | |
+| Icono app || icono de la aplicación |
+| Login | | Login con campos y botones de navegación |
+| Registro (Signup) || Registro de usuario con Username, Password y Email |
+| Perfil de Usuario || Visualización de avatar, nombre y descripción |
+| MainActivity || WebView con SwipeRefreshLayout y menú contextual |
+
 
 ##  3.Tecnologías utilizadas
 Plataforma: Android
