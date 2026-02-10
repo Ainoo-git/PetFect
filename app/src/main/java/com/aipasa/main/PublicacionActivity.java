@@ -1,4 +1,4 @@
-package com.aipasa;
+package com.aipasa.main;
 
 import android.content.Intent;
 import android.graphics.Bitmap;

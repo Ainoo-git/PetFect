@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Permisos -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -12,41 +13,52 @@
         android:roundIcon="@mipmap/petfect_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PetFect">
-        <activity
-            android:name=".MainBab"
-            android:exported="false" />
+
+        <!-- Splash -->
         <activity
             android:name=".splash.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="TU_API_KEY_AQUI" />
+        <!-- Auth -->
+        <activity
+            android:name=".auth.Login"
+            android:exported="false" />
+
+        <activity
+            android:name=".auth.SignUp"
+            android:exported="false" />
+
+        <!-- Main -->
+        <activity
+            android:name=".main.MainActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".MainBab"
+            android:exported="false" />
+
+        <activity
+            android:name=".main.Profile"
+            android:exported="false" />
+
+        <activity
+            android:name=".main.PreferenciasActivity"
+            android:exported="false" />
+
+        <!-- Publicación de mascota -->
+        <activity
+            android:name=".main.PublicacionActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity
-            android:name=".auth.Login"
-            android:exported="false" />
-        <activity
-            android:name=".auth.SignUp"
-            android:exported="false" />
-        <activity
-            android:name=".main.PreferenciasActivity"
-            android:exported="false" />
-        <activity
-            android:name=".main.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".main.Profile"
-            android:exported="false" />
     </application>
 
 </manifest>

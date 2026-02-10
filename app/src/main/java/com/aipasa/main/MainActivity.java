@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.R;
 
+
 public class MainActivity extends AppCompatActivity {
 
     // Secciones de la pantalla principal
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnAll = findViewById(R.id.btnAll);
         Button btnAdopciones = findViewById(R.id.btnAdopciones);
         Button btnPerdidos = findViewById(R.id.btnPerdidos);
-        Button btnMapa = findViewById(R.id.btnMapa);
+
 
         // Cargar preferencias guardadas
         cargarPreferencias();
