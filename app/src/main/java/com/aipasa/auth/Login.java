@@ -112,7 +112,7 @@ public class Login extends AppCompatActivity {
     }
 
     // Botón SIGN UP
-    public void OpenSignup(View view) {
+    public void OpenSignup(View view ) {
         Intent i = new Intent(Login.this, SignUp.class);
         startActivity(i);
     }
