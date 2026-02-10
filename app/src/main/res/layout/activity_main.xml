@@ -4,14 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    >
 
     <!-- Nombre usuario -->
     <TextView
         android:id="@+id/tvNombreUsuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Alisss_"
+        android:text="ExampleUser_"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,7 +27,9 @@
         android:layout_height="44dp"
         android:src="@drawable/baseline_person_24"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="OpenProfile"
+        android:clickable="true"/>
 
     <!-- Subtítulo -->
     <TextView
@@ -61,28 +64,32 @@
                 android:id="@+id/btnAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="All"/>
+                android:text="All"
+                style="@style/BotonPetFect"/>
 
             <Button
                 android:id="@+id/btnAdopciones"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Adopciones"/>
+                android:text="Adopciones"
+                style="@style/BotonPetFect"/>
 
             <Button
                 android:id="@+id/btnPerdidos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Lost"/>
+                android:text="Lost"
+                style="@style/BotonPetFect"/>
 
             <Button
                 android:id="@+id/btnMapa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Mapa"/>
+                android:text="Mapa"
+                style="@style/BotonPetFect"/>
         </LinearLayout>
     </HorizontalScrollView>
 

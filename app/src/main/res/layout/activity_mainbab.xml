@@ -22,7 +22,8 @@
                 android:layout_height="1000dp"
                 android:layout_margin="16dp"
                 android:text="@string/lorem"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:fontFamily="@font/text_app"/>
 
         </LinearLayout>
     </ScrollView>

@@ -8,16 +8,19 @@
     android:layout_height="match_parent">
 
     <!--IMAGEN TRANSLÚCIDA ENCIMA DEL DEGRADADO, SE AÑADE ALPHA -->
+
     <ImageView
         android:id="@+id/overlay_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/imgfondo"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/imgfondo"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_start"
@@ -64,6 +67,7 @@
         android:layout_marginTop="16dp"
         android:hint="Username"
         android:background="#80FFFFFF"
+        android:fontFamily="@font/text_app"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/personita"
         app:layout_constraintTop_toBottomOf="@id/iconopng"
@@ -87,6 +91,7 @@
         android:layout_marginTop="12dp"
         android:hint="Password"
         android:background="#80FFFFFF"
+        android:fontFamily="@font/text_app"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/llavecita"
         app:layout_constraintTop_toBottomOf="@id/tilUser"
@@ -110,11 +115,8 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/cian_botones"
-        android:backgroundTintMode="@color/white"
         android:onClick="SignLogin"
         android:text="LOGIN"
-        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
@@ -130,6 +132,7 @@
         android:onClick="OpenSignup"
         android:text="SIGN UP"
         android:textColor="@color/black"
+        android:fontFamily="@font/baloo_2"
         app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintHorizontal_bias="0.0"
