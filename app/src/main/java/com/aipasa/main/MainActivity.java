@@ -13,6 +13,8 @@ import com.aipasa.R;
 import com.aipasa.auth.Login;
 import com.aipasa.auth.SignUp;
 
+import com.aipasa.main.Profile;
+
 public class MainActivity extends AppCompatActivity {
 
     private View sectionPerdidos, sectionAdopciones, sectionVeterinarias;
@@ -53,10 +55,16 @@ public class MainActivity extends AppCompatActivity {
         btnPerdidos.setOnClickListener(v -> mostrarSoloPerdidos());
         btnMapa.setOnClickListener(v -> mostrarSoloVeterinarias());
     }
+//    public void OpenProfile(View view) {
+//        Intent i = new Intent(MainActivity.this, Profile.class);
+//        startActivity(i);
+//    }
+
     public void OpenProfile(View view) {
-        Intent i = new Intent(MainActivity.this, Profile.class);
+        Intent i = new Intent(this, Profile.class);
         startActivity(i);
     }
+
     private void cargarPreferencias() {
         SharedPreferences prefs = getSharedPreferences("petfect_prefs", MODE_PRIVATE);
         prefPerdidos = prefs.getBoolean("pref_perdidos", false);
