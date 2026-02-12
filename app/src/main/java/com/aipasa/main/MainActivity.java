@@ -38,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
         Button btnAdopciones = findViewById(R.id.btnAdopciones);
         Button btnPerdidos = findViewById(R.id.btnPerdidos);
 
+        // FAB central
+        FloatingActionButton fabCentral = findViewById(R.id.fab_central);
+
+        fabCentral.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, PublicacionActivity.class);
+            startActivity(intent);
+        });
 
         // Cargar preferencias guardadas
         cargarPreferencias();
@@ -45,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         // Estado inicial
         mostrarAll();
 
-        // Botón ALL muestra tod según preferencia
+        // Botón ALL muestra todo según preferencia
         btnAll.setOnClickListener(v -> mostrarAll());
 
         // Botón ADOPCIONES → abre nueva activity
@@ -63,13 +70,6 @@ public class MainActivity extends AppCompatActivity {
         // Botón MAPA / VETERINARIAS
         //btnMapa.setOnClickListener(v -> mostrarSoloVeterinarias());
     }
-    FloatingActionButton fabCentral = findViewById(R.id.fab_central);
-
-    fabCentral.setOnClickListener(v -> {
-        Intent intent = new Intent(MainActivity.this, PublicacionActivity.class);
-        startActivity(intent);
-    });
-
 
     // Abrir perfil del usuario
     public void OpenProfile(View view) {
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         mostrarMensajeSiNada();
     }
 
-    // Mostrar solo veterinarias (mapa)
+    // Mostrar solo veterinarias
     private void mostrarSoloVeterinarias() {
         sectionPerdidos.setVisibility(View.GONE);
         sectionAdopciones.setVisibility(View.GONE);
@@ -110,5 +110,4 @@ public class MainActivity extends AppCompatActivity {
 
         tvNadaSeleccionado.setVisibility(nadaVisible ? View.VISIBLE : View.GONE);
     }
-
 }
