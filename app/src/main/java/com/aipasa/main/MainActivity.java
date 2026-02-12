@@ -1,5 +1,6 @@
 package com.aipasa.main;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.R;
+import com.aipasa.auth.Login;
+import com.aipasa.auth.SignUp;
+
+import com.aipasa.main.Profile;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,21 +22,16 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean prefPerdidos, prefAdopciones, prefVeterinarias;
 
-    // TextView para mostrar el usuario
-    private TextView tvNombreUsuario;
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_bab);
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Conectar TextView del layout
-        tvNombreUsuario = findViewById(R.id.tvNombreUsuario);
-
-        // Leer username de SharedPreferences y mostrarlo
-        SharedPreferences prefs = getSharedPreferences("petfect_prefs", MODE_PRIVATE);
-        String username = prefs.getString("username", "Usuario"); // Valor por defecto si no existe
-        tvNombreUsuario.setText(username);
 
         // Secciones
         sectionPerdidos = findViewById(R.id.sectionPerdidos);
@@ -55,6 +55,15 @@ public class MainActivity extends AppCompatActivity {
         btnPerdidos.setOnClickListener(v -> mostrarSoloPerdidos());
         btnMapa.setOnClickListener(v -> mostrarSoloVeterinarias());
     }
+//    public void OpenProfile(View view) {
+//        Intent i = new Intent(MainActivity.this, Profile.class);
+//        startActivity(i);
+//    }
+
+    public void OpenProfile(View view) {
+        Intent i = new Intent(this, Profile.class);
+        startActivity(i);
+    }
 
     private void cargarPreferencias() {
         SharedPreferences prefs = getSharedPreferences("petfect_prefs", MODE_PRIVATE);
@@ -67,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         sectionPerdidos.setVisibility(prefPerdidos ? View.VISIBLE : View.GONE);
         sectionAdopciones.setVisibility(prefAdopciones ? View.VISIBLE : View.GONE);
         sectionVeterinarias.setVisibility(prefVeterinarias ? View.VISIBLE : View.GONE);
+
         mostrarMensajeSiNada();
     }
 
@@ -74,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         sectionPerdidos.setVisibility(prefPerdidos ? View.VISIBLE : View.GONE);
         sectionAdopciones.setVisibility(View.GONE);
         sectionVeterinarias.setVisibility(View.GONE);
+
         mostrarMensajeSiNada();
     }
 
@@ -81,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         sectionPerdidos.setVisibility(View.GONE);
         sectionAdopciones.setVisibility(prefAdopciones ? View.VISIBLE : View.GONE);
         sectionVeterinarias.setVisibility(View.GONE);
+
         mostrarMensajeSiNada();
     }
 
@@ -88,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         sectionPerdidos.setVisibility(View.GONE);
         sectionAdopciones.setVisibility(View.GONE);
         sectionVeterinarias.setVisibility(prefVeterinarias ? View.VISIBLE : View.GONE);
+
         mostrarMensajeSiNada();
     }
 

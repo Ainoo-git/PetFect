@@ -10,23 +10,25 @@
         android:id="@+id/tvTitulo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/text_titulos"
         android:text="¿En qué podemos ayudarte?"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvSubtitulo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/text_app"
         android:text="Selecciona tus preferencias para mostrar contenido más relevante."
         android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/tvTitulo"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/tvTitulo" />
 
     <CheckBox
         android:id="@+id/cbPerdidos"
@@ -34,9 +36,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:text="Ver mascotas perdidas"
+        android:fontFamily="@font/text_app"
         app:layout_constraintTop_toBottomOf="@id/tvSubtitulo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
 
     <CheckBox
         android:id="@+id/cbAdopciones"
@@ -44,9 +48,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Ver animales en adopción"
+        android:fontFamily="@font/text_app"
         app:layout_constraintTop_toBottomOf="@id/cbPerdidos"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
 
     <CheckBox
         android:id="@+id/cbVeterinarias"
@@ -54,9 +60,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Mostrar veterinarias cercanas"
+        android:fontFamily="@font/text_app"
         app:layout_constraintTop_toBottomOf="@id/cbAdopciones"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
 
     <CheckBox
         android:id="@+id/cbNotificaciones"
@@ -64,9 +72,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Recibir notificaciones"
+        android:fontFamily="@font/text_app"
         app:layout_constraintTop_toBottomOf="@id/cbVeterinarias"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
 
     <Button
         android:id="@+id/btnGuardarPreferencias"
@@ -77,6 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cbNotificaciones" />
+        app:layout_constraintTop_toBottomOf="@id/cbNotificaciones"
+        style="@style/BotonPetFect"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

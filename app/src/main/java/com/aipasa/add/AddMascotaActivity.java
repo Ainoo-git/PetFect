@@ -17,7 +17,7 @@ public class AddMascotaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_mascota);
+        setContentView(R.layout.activity_publicacion);
 
         CheckBox cbPerro = findViewById(R.id.cbPerro);
         CheckBox cbGato = findViewById(R.id.cbGato);
@@ -25,9 +25,9 @@ public class AddMascotaActivity extends AppCompatActivity {
         CheckBox cbPerdido = findViewById(R.id.cbPerdido);
 
         EditText etChip = findViewById(R.id.etChip);
-        EditText etInfo = findViewById(R.id.etInfo);
+        EditText etInfo = findViewById(R.id.etInfoAdicional);
 
-        Button btnGuardar = findViewById(R.id.btnGuardar);
+        Button btnGuardar = findViewById(R.id.btnPublicar);
 
         btnGuardar.setOnClickListener(v -> {
             Mascota mascota = new Mascota();

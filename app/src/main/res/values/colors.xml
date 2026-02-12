@@ -5,6 +5,6 @@
     <color name="cian_oscuro_iconos">#0F5052</color>
     <color name="cian_botones">#3ACAAE</color>
     <color name="cian_clarito_bordes">#C3FFFC</color>
-    <color name="rosita">#FFC3C3</color>
-    <color name="coral_acciones_errores">#FF8C8C</color>
+    <color name="rosita_fondoss_tarjetas_alertaslev">#FFC3C3</color>
+    <color name="coral_alertasimp_errores">#FF8C8C</color>
 </resources>
