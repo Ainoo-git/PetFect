@@ -9,8 +9,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.R;
-import com.aipasa.data.Mascota;
-import com.aipasa.data.MascotaDatabase;
+import com.aipasa.data_Room.Mascota;
+import com.aipasa.data_Room.MascotaDatabase;
 
 public class AddMascotaActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.aipasa.data;
+package com.aipasa.data_Room;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
