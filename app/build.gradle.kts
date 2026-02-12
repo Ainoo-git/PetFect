@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
+    // Add the Google services Gradle plugin
+    id("com.google.gms.google-services")
 }
 
 
@@ -70,5 +72,16 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:22.3.1")
     // Lottie
     implementation("com.airbnb.android:lottie:6.3.0")
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:34.9.0"))
+
+
+    // TODO: Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation("com.google.firebase:firebase-analytics")
+
+
+    // Add the dependencies for any other desired Firebase products
+    // https://firebase.google.com/docs/android/setup#available-libraries
 }
 
