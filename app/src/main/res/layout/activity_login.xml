@@ -2,73 +2,64 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--IMAGEN TRANSLÚCIDA ENCIMA DEL DEGRADADO, SE AÑADE ALPHA -->
-
+    <!-- Fondo -->
     <ImageView
         android:id="@+id/overlay_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:src="@drawable/imgfondo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Guidelines -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.24" />
+        app:layout_constraintGuide_percent="0.24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.77" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_top"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="83dp" />
+        app:layout_constraintGuide_percent="0.77"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_percent="0.9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
+    <!-- Logo -->
     <ImageView
         android:id="@+id/iconopng"
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:layout_marginTop="45dp"
         android:src="@drawable/logologin"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- Username -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilUser"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Username"
+        android:hint="Email"
         android:background="#80FFFFFF"
-        android:fontFamily="@font/text_app"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/personita"
         app:layout_constraintTop_toBottomOf="@id/iconopng"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
@@ -78,74 +69,71 @@
             android:id="@+id/etUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:paddingStart="49dp"
+            android:inputType="textEmailAddress"
             android:textColor="@color/black"
-            android:textColorHint="@color/black" />
+            android:textColorHint="@color/black"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Password -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilPass"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="Password"
         android:background="#80FFFFFF"
-        android:fontFamily="@font/text_app"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/llavecita"
+        app:endIconMode="password_toggle"
         app:layout_constraintTop_toBottomOf="@id/tilUser"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        app:endIconMode="password_toggle">
+        app:layout_constraintEnd_toEndOf="@id/guideline_end">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="48dp"
             android:inputType="textPassword"
-            android:textColorHint="@color/black"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- LOGIN -->
     <Button
         android:id="@+id/login"
         style="@style/BotonPetFect"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
-        android:onClick="SignLogin"
         android:text="LOGIN"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:onClick="SignLogin"
+        app:layout_constraintTop_toBottomOf="@id/tilPass"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/tilPass" />
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"/>
 
+    <!-- GOOGLE -->
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btnGoogle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/login"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"/>
+
+    <!-- SIGN UP -->
     <Button
         android:id="@+id/signup"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@android:color/transparent"
-        android:onClick="OpenSignup"
+        android:layout_marginTop="12dp"
         android:text="SIGN UP"
         android:textColor="@color/black"
-        android:fontFamily="@font/baloo_2"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:onClick="OpenSignup"
+        app:layout_constraintTop_toBottomOf="@id/btnGoogle"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/login"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/btnGoogle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"/>
-
-
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
