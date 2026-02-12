@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="8dp"
+    android:backgroundTint="@color/white">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Imagen -->
+        <ImageView
+            android:id="@+id/imgMascota"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop" />
+
+        <!-- Contenido -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Nombre -->
+            <TextView
+                android:id="@+id/txtNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/text_titulos" />
+
+            <!-- Estado -->
+            <TextView
+                android:id="@+id/txtEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Perdido"
+                android:textSize="14sp"
+                android:textColor="@color/rosita_fondoss_tarjetas_alertaslev"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/text_app" />
+
+            <!-- Info breve -->
+            <TextView
+                android:id="@+id/txtInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Información adicional..."
+                android:textSize="13sp"
+                android:layout_marginTop="6dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:fontFamily="@font/text_app" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

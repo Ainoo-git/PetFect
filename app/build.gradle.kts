@@ -49,6 +49,7 @@ dependencies {
 
     // Room
     implementation("androidx.room:room-runtime:2.6.0")
+    implementation(libs.firebase.firestore)
     annotationProcessor("androidx.room:room-compiler:2.6.0")
 
     testImplementation(libs.junit)
@@ -61,7 +62,11 @@ dependencies {
     // Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
     kapt("com.github.bumptech.glide:compiler:4.16.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
+    // Firebase
+    implementation("com.google.firebase:firebase-firestore:24.10.0")
+    implementation("com.google.firebase:firebase-storage:20.3.0")
     // Lottie
     implementation("com.airbnb.android:lottie:6.3.0")
 }
