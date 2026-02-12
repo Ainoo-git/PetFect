@@ -38,19 +38,17 @@
             android:name=".main.MainActivity"
             android:exported="false" />
 
-        <activity
-            android:name=".MainBab"
-            android:exported="false" />
-
+        <!-- Perfil -->
         <activity
             android:name=".main.Profile"
             android:exported="false" />
 
+        <!-- Preferencias -->
         <activity
             android:name=".main.PreferenciasActivity"
             android:exported="false" />
 
-        <!-- Publicación de mascota -->
+        <!-- Publicación -->
         <activity
             android:name=".main.PublicacionActivity"
             android:exported="false" />

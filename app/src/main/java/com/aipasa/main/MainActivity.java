@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -62,6 +63,13 @@ public class MainActivity extends AppCompatActivity {
         // Botón MAPA / VETERINARIAS
         //btnMapa.setOnClickListener(v -> mostrarSoloVeterinarias());
     }
+    FloatingActionButton fabCentral = findViewById(R.id.fab_central);
+
+    fabCentral.setOnClickListener(v -> {
+        Intent intent = new Intent(MainActivity.this, PublicacionActivity.class);
+        startActivity(intent);
+    });
+
 
     // Abrir perfil del usuario
     public void OpenProfile(View view) {
@@ -102,4 +110,5 @@ public class MainActivity extends AppCompatActivity {
 
         tvNadaSeleccionado.setVisibility(nadaVisible ? View.VISIBLE : View.GONE);
     }
+
 }
