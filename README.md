@@ -26,8 +26,21 @@ Registro y perfil de usuario: Permite guardar tus búsquedas y favoritos.
 Notificaciones: Recibe alertas sobre animales encontrados cerca de ti.
 
 --- 
+##  3. Pantallas de la Aplicación
 
-##  3.Tecnologías utilizadas
+| Pantalla              | Imagen                                                                 | Descripción                                         |
+|-----------------------|------------------------------------------------------------------------|---------------------------------------------------|
+| Uso de la app         |                                                                        | Breve explicación de cómo se usa la app          |
+| Splash / Principal    | ![AnimacionPetFect](https://github.com/user-attachments/assets/fe8cc27f-e294-4c66-8a1d-c7fb9501b668) | Animación inicial al abrir la app                |
+| Icono app             | <img width="1259" height="1080" alt="petfectfin" src="https://github.com/user-attachments/assets/0add9382-9a19-4bf3-822d-22a89886957c" /> | Icono de la aplicación |
+| Login                 | <img width="383" height="853" alt="image" src="https://github.com/user-attachments/assets/b39e7266-8319-498e-bc84-1868e63a578d" /> | Pantalla de login con campos y botones de navegación |
+| Registro (Signup)     | <img width="386" height="853" alt="image" src="https://github.com/user-attachments/assets/d5cd5c2e-c4df-4d54-a6db-8d4d9e50967d" /> | Registro de usuario con Username, Password y Email |
+| Perfil de Usuario     |                                                                        | Visualización de avatar, nombre y descripción    |
+| MainActivity          |                                                                        | WebView con SwipeRefreshLayout y menú contextual |
+
+
+
+##  4.Tecnologías utilizadas
 Plataforma: Android
 Lenguaje de programación: Java / Kotlin
 IDE: Android Studio
@@ -41,7 +54,7 @@ Para el uso del mapa será necesaria una API Key de Google Maps, que deberá con
 
 ---
 
-##  4.Equipo de desarrollo
+##  5.Equipo de desarrollo
 
 Ainoha Yubero
 Patricia Paun
@@ -49,7 +62,7 @@ Sara Ulgazi
 
 ---
 
-##5. Estructura del Proyecto
+##6. Estructura del Proyecto
 
 ```
 PetFect/
@@ -78,23 +91,42 @@ PetFect/
 
 ```
 
+---
+##7. Características Principales
 
+### 7.1 Diseño UI/UX
+- Material Design 3  
+- Layouts responsivos con Edge-to-Edge  
+- Animaciones con Lottie y Glide  
+- Gradientes personalizados e iconos vectoriales  
+- Soporte para tema claro/oscuro  
+
+### 7.2 Autenticación y Navegación
+- Login y Signup con navegación directa  
+- Campos de usuario, contraseña y email  
+- Botones con colores y estilos personalizados  
+- Toolbar en perfil con flecha atrás  
+
+### 7.3 Funcionalidades Especiales
+- BottomAppBar con FloatingActionButton  
+- Menú contextual con opciones de guardar animales, pantalla principal, cámara para registrar al animal y perfil del usuario
+- WebView con SwipeRefreshLayout  
+- Cambio de idioma y alternancia modo claro/oscuro
 
 ---
-##  6. Enlace al prototipo en Figma:  
+##  8. Enlace al prototipo en Figma:  
 https://www.figma.com/design/06eBS84aSirWxt0tDWtGxG/PetFect?node-id=0-1&t=PAzMS1DZz4Tj30AR-1
 
 <img width="1383" height="765" alt="image" src="https://github.com/user-attachments/assets/fc34b954-b5a2-43b1-8354-a52894b076ea" />
 
 ---
 
-## 7. Clona el repositorio:
+## 9. Clona el repositorio:
 git clone https://github.com/Ainoo-git/PetFect.git
 
 ---
 
-hola
-##  4. Licencia
+##  10. Licencia
 
 Este proyecto está licenciado bajo **Creative Commons Atribución-CompartirIgual 4.0 Internacional**.  
 [![CC BY-SA 4.0](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)

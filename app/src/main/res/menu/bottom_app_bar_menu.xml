@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/heart"
+        android:title="Favourite"
+        android:icon="@drawable/ic_heart"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/baseline_house_24"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/Perfil"
+        android:title="Perfil"
+        android:icon="@drawable/baseline_person_24"
+        app:showAsAction="ifRoom"
+        />
+
+
+</menu>

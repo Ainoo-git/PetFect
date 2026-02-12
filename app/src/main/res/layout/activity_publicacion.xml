@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+
+            <!-- Contenedor subir imagen -->
+            <LinearLayout
+                android:id="@+id/layoutImagen"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_dashed"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:id="@+id/iconAddPhoto"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/outline_add_24"
+                    app:tint="@color/cian_botones" />
+
+                <TextView
+                    android:id="@+id/txtAddPhoto"
+                    android:layout_marginTop="8dp"
+                    android:text="Subir imagen o abrir cámara"
+                    android:textSize="13sp"
+                    android:textColor="@color/cian_botones"
+                    android:fontFamily="@font/text_app"/>
+
+            </LinearLayout>
+
+            <!-- Imagen real (oculta al inicio) -->
+            <ImageView
+                android:id="@+id/imgMascota"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"/>
+
+
+            <!-- Nombre -->
+            <EditText
+                android:id="@+id/etNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Nombre de la mascota"
+                android:textSize="14sp"
+                android:fontFamily="@font/text_app"/>
+
+<!--            PERDIDOO O EN ADOPCION-->
+            <TextView
+                android:layout_marginTop="10dp"
+                android:text="Estado del animal"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_titulos"/>
+
+
+            <CheckBox
+                android:id="@+id/cbPerdido"
+                android:text="Perdido"
+                android:textSize="13sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_app"
+                android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
+
+            <CheckBox
+                android:id="@+id/cbAdopcion"
+                android:text="En adopción"
+                android:textSize="13sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_app"
+                android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
+
+
+            <!-- Tipo -->
+            <TextView
+                android:layout_marginTop="10dp"
+                android:text="Tipo de mascota"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_titulos"/>
+
+
+            <CheckBox
+                android:id="@+id/cbPerro"
+                android:text="Perro"
+                android:textSize="13sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_app"
+                android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
+
+            <CheckBox
+                android:id="@+id/cbGato"
+                android:text="Gato"
+                android:textSize="13sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_app"
+                android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
+
+            <CheckBox
+                android:id="@+id/cbOtro"
+                android:text="Otro"
+                android:textSize="13sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_app"
+                android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
+
+            <EditText
+                android:id="@+id/etOtroTipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Especificar otro tipo"
+                android:textSize="13sp"
+                android:visibility="gone"
+                android:fontFamily="@font/text_app"/>
+
+            <!-- Edad -->
+            <EditText
+                android:id="@+id/etEdad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Edad aproximada"
+                android:textSize="14sp"
+                android:inputType="number"
+                android:fontFamily="@font/text_app"/>
+
+            <!-- Chip -->
+            <EditText
+                android:id="@+id/etChip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Número de chip (opcional)"
+                android:textSize="14sp"
+                android:fontFamily="@font/text_app"/>
+
+            <!-- Info adicional -->
+            <EditText
+                android:id="@+id/etInfoAdicional"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Información adicional (opcional)"
+                android:textSize="14sp"
+                android:minLines="2"
+                android:inputType="textMultiLine"
+                android:fontFamily="@font/text_app"/>
+
+            <!-- Checkbox legal -->
+            <CheckBox
+                android:id="@+id/checkLegal"
+                android:layout_marginTop="10dp"
+                android:text="Confirmo que la imagen es mía o tengo permiso para publicarla y que no contiene personas identificables"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
+
+            <!-- Publicar -->
+            <Button
+                android:id="@+id/btnPublicar"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="14dp"
+                android:enabled="false"
+                android:text="Publicar"
+                android:textSize="14sp"
+                style="@style/BotonPetFect"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

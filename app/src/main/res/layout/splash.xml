@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient">
+    android:background="@drawable/fondosplash">
 
     <ImageView
         android:id="@+id/backView"
@@ -26,10 +26,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/baloo"
         android:text="@string/app_name"
-        android:textColor="@android:color/black"
+        android:textColor="@color/cian_oscuro_iconos"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="@id/img"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/img"
         app:layout_constraintTop_toBottomOf="@id/img">
 
