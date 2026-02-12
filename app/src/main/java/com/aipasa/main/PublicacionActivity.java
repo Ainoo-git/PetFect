@@ -113,14 +113,20 @@ public class PublicacionActivity extends AppCompatActivity {
         if (!cbPerdido.isChecked() && !cbAdopcion.isChecked()) return;
         if (imageUri == null && imageBitmap == null) return;
 
-        String tipo = "";
+        String tipo;
         if (cbPerro.isChecked()) tipo = "Perro";
         else if (cbGato.isChecked()) tipo = "Gato";
         else if (cbOtro.isChecked()) tipo = "Otro";
+        else {
+            tipo = "";
+        }
 
-        String estado = "";
+        String estado;
         if (cbPerdido.isChecked()) estado = "Perdido";
         else if (cbAdopcion.isChecked()) estado = "En adopción";
+        else {
+            estado = "";
+        }
 
         String fileName = "imagenes/" + System.currentTimeMillis() + ".jpg";
         StorageReference fileRef = storageRef.child(fileName);
@@ -156,6 +162,7 @@ public class PublicacionActivity extends AppCompatActivity {
                 estado,
                 telefono,
                 info,
+                fotoUrl,   // ← ESTO ES LO QUE FALTABA
                 System.currentTimeMillis()
         );
 
@@ -163,6 +170,8 @@ public class PublicacionActivity extends AppCompatActivity {
                 .add(mascota)
                 .addOnSuccessListener(documentReference -> finish());
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
