@@ -73,7 +73,15 @@ PetFect/
 │   ├── Signup.java
 │   ├── Splash.java
 │   ├── Profile.java
-│   └── PreferenciasActivity.java
+│   ├── PreferenciasActivity.java
+│   │
+│   ├── PerdidosActivity.java
+│   ├── PublicacionActivity.java
+│   ├── AdopcionesActivity.java
+│   ├── ScrollingActivity.java
+│   
+│  
+│
 ├── res/
 │   ├── layout/
 │   │   ├── activity_main.xml
@@ -81,13 +89,22 @@ PetFect/
 │   │   ├── activity_signup.xml
 │   │   ├── activity_profile.xml
 │   │   ├── activity_preferencias.xml
+│   │   ├── activity_perdidos.xml
+│   │   ├── activity_publicacion.xml
+│   │   ├── activity_adopciones.xml
+│   │   ├── activity_scrolling.xml
 │   │   └── splash.xml
+│   │
 │   ├── menu/
+│   │   └── bottom_nav_menu.xml
+│   │
 │   ├── drawable/
 │   ├── anim/
 │   ├── color/
 │   └── values/
+│
 └── Gradle Scripts/
+
 
 ```
 
