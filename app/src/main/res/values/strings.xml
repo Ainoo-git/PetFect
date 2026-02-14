@@ -4,4 +4,10 @@
     <string name="create_account">CREATE ACCOUNT</string>
     <string name="login">LOGIN</string>
     <string name="empty_behavior">androidx.coordinatorlayout.widget.CoordinatorLayout$Behavior</string>
+    <string name="default_web_client_id">
+        186211507177-ipu68gutsj715u0aqon7u3pmcujqcdvs.apps.googleusercontent.com
+
+</string>
+
 </resources>
+

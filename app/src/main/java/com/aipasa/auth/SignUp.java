@@ -29,6 +29,7 @@ public class SignUp extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
     }
 
+    // ESTE método lo llama el botón desde el XML
     public void CreateAccount(View view) {
 
         String email = etUser.getText().toString().trim();
@@ -39,20 +40,30 @@ public class SignUp extends AppCompatActivity {
             return;
         }
 
+        if (password.length() < 6) {
+            Toast.makeText(this,
+                    "La contraseña debe tener mínimo 6 caracteres",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
+
                     if (task.isSuccessful()) {
 
-                        Toast.makeText(this,
+                        Toast.makeText(SignUp.this,
                                 "Cuenta creada correctamente",
                                 Toast.LENGTH_SHORT).show();
 
-                        startActivity(new Intent(this, Login.class));
+                        mAuth.signOut();
+
+                        startActivity(new Intent(SignUp.this, Login.class));
                         finish();
 
                     } else {
 
-                        Toast.makeText(this,
+                        Toast.makeText(SignUp.this,
                                 "Error: " + task.getException().getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }

@@ -11,16 +11,17 @@ public abstract class MascotaDatabase extends RoomDatabase {
 
     private static MascotaDatabase INSTANCE;
 
-    public abstract MascotaDAO mascotaDao();
+    public abstract MascotaDAO mascotaDAO();
 
     public static MascotaDatabase getInstance(Context context) {
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(
                     context.getApplicationContext(),
                     MascotaDatabase.class,
-                    "petfect_db"
-            ).allowMainThreadQueries().build();
+                    "mascota_db"
+            ).build();
         }
         return INSTANCE;
     }
 }
+

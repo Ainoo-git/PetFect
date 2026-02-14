@@ -2,22 +2,19 @@ package com.aipasa.data_Room;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
-
 @Dao
 public interface MascotaDAO {
 
-    @Insert
-    void insertar(Mascota mascota);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAll(List<Mascota> mascotas);
 
-    @Query("SELECT * FROM mascotas ORDER BY fecha DESC")
-    List<Mascota> obtenerTodas();
+    @Query("SELECT * FROM mascotas")
+    List<Mascota> getAll();
 
-    @Query("SELECT * FROM mascotas WHERE estado = 'adopcion' ORDER BY fecha DESC")
-    List<Mascota> obtenerAdopciones();
-
-    @Query("SELECT * FROM mascotas WHERE estado = 'perdido' ORDER BY fecha DESC")
-    List<Mascota> obtenerPerdidos();
+    @Query("DELETE FROM mascotas")
+    void deleteAll();
 }

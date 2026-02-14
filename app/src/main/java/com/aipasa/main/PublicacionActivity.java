@@ -12,13 +12,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.R;
-import com.aipasa.firebase.Mascotaa;
+import com.aipasa.data_Room.Mascota;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -113,20 +116,10 @@ public class PublicacionActivity extends AppCompatActivity {
         if (!cbPerdido.isChecked() && !cbAdopcion.isChecked()) return;
         if (imageUri == null && imageBitmap == null) return;
 
-        String tipo;
-        if (cbPerro.isChecked()) tipo = "Perro";
-        else if (cbGato.isChecked()) tipo = "Gato";
-        else if (cbOtro.isChecked()) tipo = "Otro";
-        else {
-            tipo = "";
-        }
+        String tipo = cbPerro.isChecked() ? "Perro" :
+                cbGato.isChecked() ? "Gato" : "Otro";
 
-        String estado;
-        if (cbPerdido.isChecked()) estado = "Perdido";
-        else if (cbAdopcion.isChecked()) estado = "En adopción";
-        else {
-            estado = "";
-        }
+        String estado = cbPerdido.isChecked() ? "Perdido" : "En adopción";
 
         String fileName = "imagenes/" + System.currentTimeMillis() + ".jpg";
         StorageReference fileRef = storageRef.child(fileName);
@@ -156,22 +149,39 @@ public class PublicacionActivity extends AppCompatActivity {
     private void guardarEnFirestore(String nombre, String tipo, String estado,
                                     String telefono, String info, String fotoUrl) {
 
-        Mascotaa mascota = new Mascotaa(
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
+        if (auth.getCurrentUser() == null) {
+            Toast.makeText(this, "Debes iniciar sesión", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String userId = auth.getCurrentUser().getUid();
+
+        DocumentReference docRef = db.collection("mascotas").document();
+        String id = docRef.getId();
+
+        Mascota mascota = new Mascota(
+                id,
                 nombre,
                 tipo,
                 estado,
                 telefono,
                 info,
-                fotoUrl,   // ← ESTO ES LO QUE FALTABA
-                System.currentTimeMillis()
+                fotoUrl,
+                System.currentTimeMillis(),
+                userId
         );
 
-        db.collection("mascotas")
-                .add(mascota)
-                .addOnSuccessListener(documentReference -> finish());
+        docRef.set(mascota)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(this, "Publicación guardada", Toast.LENGTH_SHORT).show();
+                    finish();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show()
+                );
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
