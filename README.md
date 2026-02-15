@@ -1,5 +1,5 @@
 
-# 🐾 PetFect
+# PetFect
 
 <div align="center">
 
@@ -21,9 +21,31 @@ PetFect es una aplicación diseñada para facilitar la adopción responsable de 
 ##  2.Funcionalidades
 Consulta de animales perdidos: Busca mascotas perdidas en tu zona.
 Adopciones: Visualiza animales disponibles para adopción en refugios cercanos.
-Mapa interactivo: Localiza mascotas perdidas y veterinarias cercanas.
 Registro y perfil de usuario: Permite guardar tus búsquedas y favoritos.
 Notificaciones: Recibe alertas sobre animales encontrados cerca de ti.
+
+  ## 2.1. Funcionalidades Implementadas
+    Autenticación
+      Registro con email y contraseña
+      Inicio de sesión con Google
+      Persistencia de sesión (si el usuario ya ha iniciado sesión, no se vuelve a pedir login)
+    Publicación de Mascotas
+      Formulario para registrar mascota perdida o en adopción
+      Subida de imagen mediante:
+      Cámara 
+      Galería
+      Información opcional editable (chip, descripción adicional)
+      Datos almacenados en Firebase Firestore
+      Imagen almacenada en Firebase Storage
+    Perfil de Usuario
+      Visualización de datos del usuario
+      Cambio de imagen de perfil
+      Cierre de sesión
+    UI/UX
+      Material Design 3
+      BottomAppBar con FloatingActionButton para crear publicaciones
+      Navegación sencilla y clara
+      Soporte modo claro / oscuro
 
 --- 
 ##  3. Pantallas de la Aplicación
