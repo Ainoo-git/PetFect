@@ -1,175 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    >
+    android:layout_height="match_parent">
 
-    <!-- Nombre usuario -->
-    <TextView
-        android:id="@+id/tvNombreUsuario"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="ExampleUser_"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/imgPerfil"
-        android:layout_marginEnd="12dp"/>
+    <!-- CONTENIDO PRINCIPAL -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
-    <!-- Icono perfil -->
-    <ImageView
-        android:id="@+id/imgPerfil"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:src="@drawable/baseline_person_24"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="OpenProfile"
-        android:clickable="true"/>
-
-    <!-- Subtítulo -->
-    <TextView
-        android:id="@+id/tvComunidad"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Comunidad FectPet"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:layout_marginTop="6dp"
-        app:layout_constraintTop_toBottomOf="@id/tvNombreUsuario"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <!-- ACTION BAR HORIZONTAL -->
-    <HorizontalScrollView
-        android:id="@+id/hsOpciones"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@id/tvComunidad"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <!-- Nombre usuario -->
+        <TextView
+            android:id="@+id/tvNombreUsuario"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="ExampleUser_"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imgPerfil"
+            android:layout_marginEnd="12dp"/>
 
-            <Button
-                android:id="@+id/btnAll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="All"
-                style="@style/BotonPetFect"/>
+        <!-- Icono perfil -->
+        <ImageView
+            android:id="@+id/imgPerfil"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@drawable/baseline_person_24"
+            android:onClick="OpenProfile"
+            android:clickable="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-            <Button
-                android:id="@+id/btnAdopciones"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Adopciones"
-                style="@style/BotonPetFect"/>
-
-            <Button
-                android:id="@+id/btnPerdidos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Lost"
-                style="@style/BotonPetFect"/>
-
-            <Button
-                android:id="@+id/btnMapa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Mapa"
-                style="@style/BotonPetFect"/>
-        </LinearLayout>
-    </HorizontalScrollView>
-
-    <!-- CONTENIDO -->
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollContenido"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="14dp"
-        android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/hsOpciones"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!-- Subtítulo -->
+        <TextView
+            android:id="@+id/tvComunidad"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="Comunidad FectPet"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginTop="6dp"
+            app:layout_constraintTop_toBottomOf="@id/tvNombreUsuario"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-            <!-- MENSAJE CUANDO NO HAY NADA -->
-            <TextView
-                android:id="@+id/tvNadaSeleccionado"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="No hay contenido disponible"
-                android:gravity="center"
-                android:textSize="16sp"
-                android:visibility="gone"
-                android:layout_marginTop="24dp"/>
+        <!-- Action horizontal -->
+        <HorizontalScrollView
+            android:id="@+id/hsOpciones"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/tvComunidad"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-            <!-- ====== SECCIÓN PERDIDOS ====== -->
             <LinearLayout
-                android:id="@+id/sectionPerdidos"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="16dp">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/btnAll"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Recientemente"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
-            </LinearLayout>
+                    android:text="All"
+                    style="@style/BotonPetFect"/>
 
-            <!-- ====== SECCIÓN ADOPCIONES ====== -->
-            <LinearLayout
-                android:id="@+id/sectionAdopciones"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/btnAdopciones"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="Adopciones"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
-            </LinearLayout>
+                    style="@style/BotonPetFect"/>
 
-            <!-- ====== SECCIÓN VETERINARIAS / MAPA ====== -->
+                <Button
+                    android:id="@+id/btnPerdidos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Lost"
+                    style="@style/BotonPetFect"/>
+
+                <Button
+                    android:id="@+id/btnMapa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Mapa"
+                    style="@style/BotonPetFect"/>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Scroll contenido -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollContenido"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="14dp"
+            android:fillViewport="true"
+            app:layout_constraintTop_toBottomOf="@id/hsOpciones"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottom_app_bar">
+
             <LinearLayout
-                android:id="@+id/sectionVeterinarias"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="16dp">
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvNadaSeleccionado"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mapa / Veterinarias"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
+                    android:text="No hay contenido disponible"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    android:layout_marginTop="24dp"/>
+
+                <LinearLayout
+                    android:id="@+id/sectionPerdidos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"/>
+
+                <LinearLayout
+                    android:id="@+id/sectionAdopciones"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"/>
+
+                <LinearLayout
+                    android:id="@+id/sectionVeterinarias"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"/>
+
             </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- BottomAppBar -->
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="28dp"
+        app:fabCradleVerticalOffset="10dp"
+        android:backgroundTint="@color/cian_oscuro_iconos"/>
+
+    <!-- FAB central -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_central"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="28dp"
+        app:srcCompat="@drawable/ic_planet"
+        app:tint="@color/cian_oscuro_iconos"
+        app:backgroundTint="@color/cian_clarito_bordes"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
