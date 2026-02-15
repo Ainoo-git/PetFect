@@ -86,6 +86,20 @@ public class PublicacionActivity extends AppCompatActivity {
         );
 
         btnPublicar.setOnClickListener(v -> subirPublicacion());
+
+        // si viene desde el FAB con foto ya hecha
+        if (getIntent() != null && getIntent().hasExtra("fotoDesdeCamara")) {
+
+            imageBitmap = getIntent().getParcelableExtra("fotoDesdeCamara");
+
+            if (imageBitmap != null) {
+                imgMascota.setImageBitmap(imageBitmap);
+                imgMascota.setVisibility(View.VISIBLE);
+
+                layoutImagen.setVisibility(View.GONE);
+                txtAddPhoto.setVisibility(View.GONE);
+            }
+        }
     }
 
     private void mostrarOpcionesImagen() {
@@ -167,7 +181,7 @@ public class PublicacionActivity extends AppCompatActivity {
                                     String telefono, String info, String fotoUrl) {
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
-    // lo guarda en el firebase los datos del animal que se ha publicado
+        // lo guarda en el firebase los datos del animal que se ha publicado
 
         if (auth.getCurrentUser() == null) {
             Toast.makeText(this, "Debes iniciar sesión", Toast.LENGTH_SHORT).show();
