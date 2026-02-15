@@ -8,10 +8,13 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import android.Manifest;
+import android.content.pm.PackageManager;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,8 +30,9 @@ public class MainActivity extends AppCompatActivity {
     // Preferencias del usuario
     private boolean prefPerdidos, prefAdopciones, prefVeterinarias;
 
-    // NUEVO: código de cámara
+    // Código cámara
     private static final int REQUEST_CAMERA = 1;
+    private static final int CAMERA_PERMISSION_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +53,20 @@ public class MainActivity extends AppCompatActivity {
         // FAB central
         FloatingActionButton fabCentral = findViewById(R.id.fab_central);
 
-        // CAMBIO: ahora abre la cámara
+        // Ahora abre cámara con permiso correcto
         fabCentral.setOnClickListener(v -> {
 
-            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(cameraIntent, REQUEST_CAMERA);
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED) {
 
+                abrirCamara();
+
+            } else {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CAMERA},
+                        CAMERA_PERMISSION_CODE);
+            }
         });
 
         // Cargar preferencias guardadas
@@ -63,26 +75,26 @@ public class MainActivity extends AppCompatActivity {
         // Estado inicial
         mostrarAll();
 
-        // Botón ALL muestra todo según preferencia
         btnAll.setOnClickListener(v -> mostrarAll());
 
-        // Botón ADOPCIONES → abre nueva activity
         btnAdopciones.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AdopcionesActivity.class);
             startActivity(intent);
         });
 
-        // Botón PERDIDOS → abre nueva activity
         btnPerdidos.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, PerdidosActivity.class);
             startActivity(intent);
         });
-
-        // Botón MAPA / VETERINARIAS, para el proyecto final
-        //btnMapa.setOnClickListener(v -> mostrarSoloVeterinarias());
     }
 
-    // NUEVO: recibir imagen de cámara
+    // Método abrir cámara
+    private void abrirCamara() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, REQUEST_CAMERA);
+    }
+
+    // Recibir imagen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -91,10 +103,31 @@ public class MainActivity extends AppCompatActivity {
 
             Bitmap photo = (Bitmap) data.getExtras().get("data");
 
-            // Mandamos la foto a PublicacionActivity
             Intent intent = new Intent(MainActivity.this, PublicacionActivity.class);
             intent.putExtra("fotoDesdeCamara", photo);
             startActivity(intent);
+        }
+    }
+
+    // Resultado permiso
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions,
+                                           int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                abrirCamara();
+
+            } else {
+
+                Toast.makeText(this,
+                        "Permiso de cámara denegado",
+                        Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
