@@ -13,8 +13,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUp extends AppCompatActivity {
 
-    private TextInputEditText etUser;
-    private TextInputEditText etPass;
+    private TextInputEditText etEmail;
+    private TextInputEditText etPassword;
 
     private FirebaseAuth mAuth;
 
@@ -23,17 +23,18 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        etUser = findViewById(R.id.etUsername);
-        etPass = findViewById(R.id.etPassword);
+        // 👇 IMPORTANTE: usar los IDs reales del XML
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
 
         mAuth = FirebaseAuth.getInstance();
     }
 
-    // ESTE métodoo lo llama el botón desde el XML
-    public void CreateAccount(View view) {
+    // Coincide con android:onClick="crearCuenta"
+    public void crearCuenta(View view) {
 
-        String email = etUser.getText().toString().trim();
-        String password = etPass.getText().toString().trim();
+        String email = etEmail.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
 
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show();
@@ -52,21 +53,26 @@ public class SignUp extends AppCompatActivity {
 
                     if (task.isSuccessful()) {
 
-                        Toast.makeText(SignUp.this,
+                        Toast.makeText(this,
                                 "Cuenta creada correctamente",
                                 Toast.LENGTH_SHORT).show();
 
                         mAuth.signOut();
 
-                        startActivity(new Intent(SignUp.this, Login.class));
+                        startActivity(new Intent(this, Login.class));
                         finish();
 
                     } else {
 
-                        Toast.makeText(SignUp.this,
+                        Toast.makeText(this,
                                 "Error: " + task.getException().getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+    public void openLogin(View view) {
+        startActivity(new Intent(this, Login.class));
+        finish();
     }
 }

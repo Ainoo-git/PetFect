@@ -2,13 +2,14 @@ package com.aipasa.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.aipasa.main.MainActivity;
 import com.aipasa.R;
+import com.aipasa.main.MainActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -65,7 +66,8 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    public void SignLogin(android.view.View view) {
+    // LOGIN NORMAL
+    public void SignLogin(View view) {
 
         String email = etUser.getText().toString().trim();
         String password = etPass.getText().toString().trim();
@@ -77,6 +79,7 @@ public class Login extends AppCompatActivity {
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
+
                     if (task.isSuccessful()) {
 
                         Toast.makeText(this,
@@ -88,24 +91,61 @@ public class Login extends AppCompatActivity {
 
                     } else {
 
-                        Toast.makeText(this,
-                                "Credenciales incorrectas",
-                                Toast.LENGTH_SHORT).show();
+                        Exception exception = task.getException();
+
+                        if (exception != null &&
+                                exception.getMessage() != null &&
+                                exception.getMessage().contains("There is no user record")) {
+
+                            Toast.makeText(this,
+                                    "Usuario no registrado",
+                                    Toast.LENGTH_SHORT).show();
+
+                        } else if (exception != null &&
+                                exception.getMessage() != null &&
+                                exception.getMessage().contains("password is invalid")) {
+
+                            Toast.makeText(this,
+                                    "Contraseña incorrecta",
+                                    Toast.LENGTH_SHORT).show();
+
+                        } else if (exception != null &&
+                                exception.getMessage() != null &&
+                                exception.getMessage().contains("Google")) {
+
+                            Toast.makeText(this,
+                                    "Esta cuenta está registrada con Google. Usa el botón Google.",
+                                    Toast.LENGTH_LONG).show();
+
+                        } else {
+
+                            Toast.makeText(this,
+                                    "Error de autenticación",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }
 
+    // BOTÓN SIGN UP
+    public void OpenSignup(View view) {
+        startActivity(new Intent(this, SignUp.class));
+    }
+
+    // RESULTADO GOOGLE
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN) {
+
             Task<GoogleSignInAccount> task =
                     GoogleSignIn.getSignedInAccountFromIntent(data);
 
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account.getIdToken());
+
             } catch (ApiException e) {
                 Toast.makeText(this,
                         "Error Google Sign-In",
