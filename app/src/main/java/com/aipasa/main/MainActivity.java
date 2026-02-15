@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Botón MAPA / VETERINARIAS
+        // Botón MAPA / VETERINARIAS, para el proyecto final
         //btnMapa.setOnClickListener(v -> mostrarSoloVeterinarias());
     }
 

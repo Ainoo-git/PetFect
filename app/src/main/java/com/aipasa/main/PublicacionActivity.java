@@ -19,7 +19,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.R;
-import com.aipasa.data_Room.Mascota;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,6 +26,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PublicacionActivity extends AppCompatActivity {
 
@@ -37,7 +38,7 @@ public class PublicacionActivity extends AppCompatActivity {
     private ImageView imgMascota;
     private TextView txtAddPhoto;
     private Button btnPublicar;
-    private CheckBox checkLegal;
+    private CheckBox checkLegal; // añadirlo al xml
 
     private CheckBox cbPerro, cbGato, cbOtro;
     private CheckBox cbPerdido, cbAdopcion;
@@ -47,7 +48,7 @@ public class PublicacionActivity extends AppCompatActivity {
     private Uri imageUri;
     private Bitmap imageBitmap;
 
-    private FirebaseFirestore db;
+    private FirebaseFirestore db; // guarda imagenes
     private StorageReference storageRef;
 
     @Override
@@ -78,25 +79,7 @@ public class PublicacionActivity extends AppCompatActivity {
         imgMascota.setVisibility(View.GONE);
         btnPublicar.setEnabled(false);
 
-        layoutImagen.setOnClickListener(v -> {
-            String[] opciones = {"Hacer foto", "Elegir de galería"};
-
-            new AlertDialog.Builder(this)
-                    .setTitle("Añadir imagen")
-                    .setItems(opciones, (dialog, which) -> {
-                        if (which == 0) {
-                            Intent cameraIntent =
-                                    new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            startActivityForResult(cameraIntent, REQUEST_CAMERA);
-                        } else {
-                            Intent galleryIntent =
-                                    new Intent(Intent.ACTION_PICK,
-                                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                            startActivityForResult(galleryIntent, REQUEST_GALLERY);
-                        }
-                    })
-                    .show();
-        });
+        layoutImagen.setOnClickListener(v -> mostrarOpcionesImagen());
 
         checkLegal.setOnCheckedChangeListener((buttonView, isChecked) ->
                 btnPublicar.setEnabled(isChecked)
@@ -105,16 +88,50 @@ public class PublicacionActivity extends AppCompatActivity {
         btnPublicar.setOnClickListener(v -> subirPublicacion());
     }
 
+    private void mostrarOpcionesImagen() {
+
+        String[] opciones = {"Hacer foto", "Elegir de galería"};
+
+        new AlertDialog.Builder(this)
+                .setTitle("Añadir imagen")
+                .setItems(opciones, (dialog, which) -> {
+                    if (which == 0) {
+                        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(cameraIntent, REQUEST_CAMERA);
+                    } else {
+                        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(galleryIntent, REQUEST_GALLERY);
+                    }
+                })
+                .show();
+    }
+
     private void subirPublicacion() {
 
         String nombre = etNombre.getText().toString().trim();
         String telefono = etTelefono.getText().toString().trim();
         String info = etInfoAdicional.getText().toString().trim();
 
-        if (nombre.isEmpty()) return;
-        if (!cbPerro.isChecked() && !cbGato.isChecked() && !cbOtro.isChecked()) return;
-        if (!cbPerdido.isChecked() && !cbAdopcion.isChecked()) return;
-        if (imageUri == null && imageBitmap == null) return;
+        if (nombre.isEmpty()) {
+            Toast.makeText(this, "Introduce el nombre", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!cbPerro.isChecked() && !cbGato.isChecked() && !cbOtro.isChecked()) {
+            Toast.makeText(this, "Selecciona un tipo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!cbPerdido.isChecked() && !cbAdopcion.isChecked()) {
+            Toast.makeText(this, "Selecciona un estado", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (imageUri == null && imageBitmap == null) {
+            Toast.makeText(this, "Añade una imagen", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         String tipo = cbPerro.isChecked() ? "Perro" :
                 cbGato.isChecked() ? "Gato" : "Otro";
@@ -135,7 +152,7 @@ public class PublicacionActivity extends AppCompatActivity {
         } else {
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos);
             byte[] data = baos.toByteArray();
 
             fileRef.putBytes(data)
@@ -150,6 +167,7 @@ public class PublicacionActivity extends AppCompatActivity {
                                     String telefono, String info, String fotoUrl) {
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
+    // lo guarda en el firebase los datos del animal que se ha publicado
 
         if (auth.getCurrentUser() == null) {
             Toast.makeText(this, "Debes iniciar sesión", Toast.LENGTH_SHORT).show();
@@ -159,19 +177,17 @@ public class PublicacionActivity extends AppCompatActivity {
         String userId = auth.getCurrentUser().getUid();
 
         DocumentReference docRef = db.collection("mascotas").document();
-        String id = docRef.getId();
 
-        Mascota mascota = new Mascota(
-                id,
-                nombre,
-                tipo,
-                estado,
-                telefono,
-                info,
-                fotoUrl,
-                System.currentTimeMillis(),
-                userId
-        );
+        Map<String, Object> mascota = new HashMap<>();
+        mascota.put("id", docRef.getId());
+        mascota.put("nombre", nombre);
+        mascota.put("tipo", tipo);
+        mascota.put("estado", estado);
+        mascota.put("telefono", telefono);
+        mascota.put("infoAdicional", info);
+        mascota.put("fotoUrl", fotoUrl);
+        mascota.put("fecha", System.currentTimeMillis());
+        mascota.put("userId", userId);
 
         docRef.set(mascota)
                 .addOnSuccessListener(aVoid -> {
@@ -190,7 +206,7 @@ public class PublicacionActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK && data != null) {
 
-            if (requestCode == REQUEST_CAMERA) {
+            if (requestCode == REQUEST_CAMERA && data.getExtras() != null) {
                 imageBitmap = (Bitmap) data.getExtras().get("data");
                 imgMascota.setImageBitmap(imageBitmap);
             }

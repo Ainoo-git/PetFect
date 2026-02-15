@@ -1,11 +1,8 @@
 package com.aipasa.repository;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Map;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class MascotaRepository {
 
@@ -15,13 +12,12 @@ public class MascotaRepository {
         db = FirebaseFirestore.getInstance();
     }
 
-    public void guardarMascota(Map<String, Object> mascota,
-                               OnSuccessListener<DocumentReference> success,
-                               OnFailureListener failure) {
+    public void obtenerMascotas(String estado,
+                                OnSuccessListener<QuerySnapshot> success) {
 
         db.collection("mascotas")
-                .add(mascota)
-                .addOnSuccessListener(success)
-                .addOnFailureListener(failure);
+                .whereEqualTo("estado", estado)
+                .get()
+                .addOnSuccessListener(success);
     }
 }

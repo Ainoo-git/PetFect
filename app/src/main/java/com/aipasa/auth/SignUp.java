@@ -29,7 +29,7 @@ public class SignUp extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
     }
 
-    // ESTE método lo llama el botón desde el XML
+    // ESTE métodoo lo llama el botón desde el XML
     public void CreateAccount(View view) {
 
         String email = etUser.getText().toString().trim();

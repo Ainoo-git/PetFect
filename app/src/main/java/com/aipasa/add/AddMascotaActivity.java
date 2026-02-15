@@ -9,42 +9,96 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.R;
-import com.aipasa.data_Room.Mascota;
-import com.aipasa.data_Room.MascotaDatabase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddMascotaActivity extends AppCompatActivity {
+
+    private EditText etNombre, etTelefono, etEdad, etChip, etInfoAdicional, etOtroTipo;
+    private CheckBox cbPerdido, cbAdopcion;
+    private CheckBox cbPerro, cbGato, cbOtro;
+    private CheckBox checkLegal;
+    private Button btnPublicar;
+
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicacion);
 
-        CheckBox cbPerro = findViewById(R.id.cbPerro);
-        CheckBox cbGato = findViewById(R.id.cbGato);
-        CheckBox cbAdopcion = findViewById(R.id.cbAdopcion);
-        CheckBox cbPerdido = findViewById(R.id.cbPerdido);
+        // Referencias
+        etNombre = findViewById(R.id.etNombre);
+        etTelefono = findViewById(R.id.etTelefono);
+        etEdad = findViewById(R.id.etEdad);
+        etChip = findViewById(R.id.etChip);
+        etInfoAdicional = findViewById(R.id.etInfoAdicional);
+        etOtroTipo = findViewById(R.id.etOtroTipo);
 
-        EditText etChip = findViewById(R.id.etChip);
-        EditText etInfo = findViewById(R.id.etInfoAdicional);
+        cbPerdido = findViewById(R.id.cbPerdido);
+        cbAdopcion = findViewById(R.id.cbAdopcion);
 
-        Button btnGuardar = findViewById(R.id.btnPublicar);
+        cbPerro = findViewById(R.id.cbPerro);
+        cbGato = findViewById(R.id.cbGato);
+        cbOtro = findViewById(R.id.cbOtro);
 
-        btnGuardar.setOnClickListener(v -> {
-            Mascota mascota = new Mascota();
+        checkLegal = findViewById(R.id.checkLegal);
+        btnPublicar = findViewById(R.id.btnPublicar);
 
-            mascota.tipo = cbPerro.isChecked() ? "perro" : "gato";
-            mascota.estado = cbAdopcion.isChecked() ? "adopcion" : "perdido";
-            mascota.chip = etChip.getText().toString();
-            mascota.infoAdicional = etInfo.getText().toString();
-            mascota.fecha = System.currentTimeMillis();
-            mascota.fotoUri = "";
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
-            MascotaDatabase.getInstance(this)
-                    .mascotaDAO()
-                    .insertar(mascota);
+        btnPublicar.setOnClickListener(v -> publicarMascota());
+    }
 
-            Toast.makeText(this, "Mascota guardada", Toast.LENGTH_SHORT).show();
-            finish();
-        });
+    private void publicarMascota() {
+
+        if (auth.getCurrentUser() == null) {
+            Toast.makeText(this, "Debes iniciar sesión", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!checkLegal.isChecked()) {
+            Toast.makeText(this, "Debes aceptar la condición legal", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String userId = auth.getCurrentUser().getUid();
+
+        // Estado
+        String estado = "";
+        if (cbPerdido.isChecked()) estado = "perdido";
+        else if (cbAdopcion.isChecked()) estado = "adopcion";
+
+        // Tipo
+        String tipo = "";
+        if (cbPerro.isChecked()) tipo = "perro";
+        else if (cbGato.isChecked()) tipo = "gato";
+        else if (cbOtro.isChecked()) tipo = etOtroTipo.getText().toString();
+
+        Map<String, Object> mascota = new HashMap<>();
+        mascota.put("nombre", etNombre.getText().toString());
+        mascota.put("telefono", etTelefono.getText().toString());
+        mascota.put("edad", etEdad.getText().toString());
+        mascota.put("chip", etChip.getText().toString());
+        mascota.put("infoAdicional", etInfoAdicional.getText().toString());
+        mascota.put("estado", estado);
+        mascota.put("tipo", tipo);
+        mascota.put("fecha", System.currentTimeMillis());
+        mascota.put("userId", userId);
+
+        db.collection("mascotas")
+                .add(mascota)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Mascota publicada", Toast.LENGTH_SHORT).show();
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error al publicar", Toast.LENGTH_SHORT).show();
+                });
     }
 }
