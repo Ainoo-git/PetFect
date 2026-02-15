@@ -16,7 +16,7 @@
             android:id="@+id/tvNombreUsuario"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ExampleUser_"
+            android:text=""
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
