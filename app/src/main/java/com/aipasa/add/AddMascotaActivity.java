@@ -40,7 +40,7 @@ public class AddMascotaActivity extends AppCompatActivity {
             mascota.fotoUri = "";
 
             MascotaDatabase.getInstance(this)
-                    .mascotaDao()
+                    .mascotaDAO()
                     .insertar(mascota);
 
             Toast.makeText(this, "Mascota guardada", Toast.LENGTH_SHORT).show();
