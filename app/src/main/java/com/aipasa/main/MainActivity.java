@@ -2,17 +2,21 @@ package com.aipasa.main;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
 
     // Preferencias del usuario
     private boolean prefPerdidos, prefAdopciones, prefVeterinarias;
+
+    // NUEVO: código de cámara
+    private static final int REQUEST_CAMERA = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +49,12 @@ public class MainActivity extends AppCompatActivity {
         // FAB central
         FloatingActionButton fabCentral = findViewById(R.id.fab_central);
 
+        // CAMBIO: ahora abre la cámara
         fabCentral.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, PublicacionActivity.class);
-            startActivity(intent);
+
+            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, REQUEST_CAMERA);
+
         });
 
         // Cargar preferencias guardadas
@@ -70,6 +80,22 @@ public class MainActivity extends AppCompatActivity {
 
         // Botón MAPA / VETERINARIAS, para el proyecto final
         //btnMapa.setOnClickListener(v -> mostrarSoloVeterinarias());
+    }
+
+    // NUEVO: recibir imagen de cámara
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CAMERA && resultCode == RESULT_OK && data != null) {
+
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+            // Mandamos la foto a PublicacionActivity
+            Intent intent = new Intent(MainActivity.this, PublicacionActivity.class);
+            intent.putExtra("fotoDesdeCamara", photo);
+            startActivity(intent);
+        }
     }
 
     // Abrir perfil del usuario
