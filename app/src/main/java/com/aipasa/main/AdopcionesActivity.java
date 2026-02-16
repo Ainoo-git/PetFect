@@ -48,6 +48,7 @@ public class AdopcionesActivity {public class AdopcionActivity extends AppCompat
                     lista.addAll(queryDocumentSnapshots.getDocuments());
                     adapter.notifyDataSetChanged();
                 });
-    }
+    }}
 }
+
 
