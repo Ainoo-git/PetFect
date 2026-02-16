@@ -65,17 +65,18 @@
                 android:fontFamily="@font/text_app"/>
 
             <!-- Teléfono -->
+
+            <!-- Estado -->
             <EditText
                 android:id="@+id/etTelefono"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/text_app"
                 android:hint="Teléfono de contacto"
-                android:textSize="14sp"
                 android:inputType="phone"
-                android:fontFamily="@font/text_app"/>
+                android:textSize="14sp" />
 
-            <!-- Estado -->
             <TextView
                 android:layout_marginTop="10dp"
                 android:text="Estado del animal"

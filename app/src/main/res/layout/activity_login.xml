@@ -60,7 +60,7 @@
         android:layout_marginTop="16dp"
         android:hint="Email"
         android:background="#80FFFFFF"
-        app:startIconDrawable="@drawable/personita"
+        app:startIconDrawable="@drawable/email"
         app:layout_constraintTop_toBottomOf="@id/iconopng"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintEnd_toEndOf="@id/guideline_end">
@@ -111,31 +111,29 @@
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"/>
 
-    <!-- GOOGLE -->
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/btnGoogle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@id/login"
-        app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"/>
-
     <!-- SIGN UP -->
     <Button
         android:id="@+id/signup"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:onClick="OpenSignup"
         android:text="SIGN UP"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@id/login"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/btnGoogle"
-        app:layout_constraintVertical_bias="0.116" />
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"/>
+
+    <!-- GOOGLE SIGN-UP -->
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btnGoogle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/signup"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
