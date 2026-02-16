@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.aipasa.MainActivity;
+import com.aipasa.main.MainActivity;
 import com.aipasa.R;
 import com.google.android.material.textfield.TextInputEditText;
 

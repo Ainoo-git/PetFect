@@ -10,7 +10,7 @@
         android:id="@+id/topAppBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/rosita"
+        android:background="@color/rosita_fondoss_tarjetas_alertaslev"
         android:title="Profile"
         android:titleTextColor="@color/white"
         app:navigationIcon="@drawable/outline_arrow_back_ios_24" />
@@ -20,12 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="?attr/actionBarSize">
-
-        <View
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_gravity="center_horizontal|top"
-            android:background="@drawable/circle_background" />
 
         <ImageView
             android:id="@+id/profile_image"
@@ -46,7 +40,8 @@
             android:gravity="center"
             android:text="Nombre"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:fontFamily="@font/text_app"/>
 
         <TextView
             android:id="@+id/descripcion"
@@ -57,7 +52,8 @@
             android:gravity="center"
             android:text="@string/app_name"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:fontFamily="@font/text_app"/>
 
     </FrameLayout>
 
