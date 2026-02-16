@@ -10,13 +10,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.R;
-<<<<<<< HEAD
-=======
 import com.aipasa.auth.Login;
 import com.aipasa.auth.SignUp;
 
 import com.aipasa.main.Profile;
->>>>>>> 1d9908a3dc98d9e375d0724f8ae4f2a83b4b4205
 
 public class MainActivity extends AppCompatActivity {
 
