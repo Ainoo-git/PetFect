@@ -1,13 +1,17 @@
 package com.aipasa.main; // Cambia esto si tu paquete es distinto
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.R;
+import com.aipasa.auth.Login;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Profile extends AppCompatActivity {
 
@@ -27,5 +31,18 @@ public class Profile extends AppCompatActivity {
         String username = prefs.getString("username", "Nombre");
 
         tvNombre.setText(username);
+
+    }
+    public void openLogin2(View view) {
+        // Cierra sesión en Firebase
+        FirebaseAuth.getInstance().signOut();
+
+        // Borra SharedPreferences si estás usando para el nombre u otros datos
+        SharedPreferences prefs = getSharedPreferences("petfect_prefs", MODE_PRIVATE);
+        prefs.edit().clear().apply();
+
+        // Abre la Activity de Login
+        startActivity(new Intent(this, Login.class));
+        finish(); // para que el usuario no pueda volver con el botón atrás
     }
 }
