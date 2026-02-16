@@ -1,5 +1,6 @@
 package com.aipasa.firebase;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_mascota, parent, false);
+                .inflate(R.layout.activity_perdidos, parent, false);
 
         return new ViewHolder(view);
     }
@@ -38,14 +39,31 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
         DocumentSnapshot mascota = listaMascotas.get(position);
 
         String nombre = mascota.getString("nombre");
-        String estado = mascota.getString("estado");
-        String info = mascota.getString("infoAdicional");
+        String tipo = mascota.getString("tipo");
+        String zona = mascota.getString("infoAdicional");
+        String fecha = mascota.getString("fechaTexto"); // si guardas fecha como texto
 
         holder.txtNombre.setText(nombre != null ? nombre : "Sin nombre");
-        holder.txtEstado.setText(estado != null ? estado : "");
-        holder.txtInfo.setText(info != null ? info : "");
+        holder.txtTipo.setText(tipo != null ? tipo : "");
+        holder.txtZona.setText(zona != null ? zona : "");
+        holder.txtFecha.setText(fecha != null ? fecha : "");
 
-        // donde cogera la imagen
+        // Cambiar color según tipo
+        if (tipo != null) {
+            switch (tipo) {
+                case "Perro":
+                    holder.txtTipo.setBackgroundColor(Color.parseColor("#FF9800"));
+                    break;
+                case "Gato":
+                    holder.txtTipo.setBackgroundColor(Color.parseColor("#2196F3"));
+                    break;
+                default:
+                    holder.txtTipo.setBackgroundColor(Color.parseColor("#4CAF50"));
+                    break;
+            }
+        }
+
+        // Imagen (de momento placeholder)
         holder.imgMascota.setImageResource(R.drawable.ic_launcher_background);
     }
 
@@ -57,15 +75,16 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgMascota;
-        TextView txtNombre, txtEstado, txtInfo;
+        TextView txtNombre, txtTipo, txtZona, txtFecha;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imgMascota = itemView.findViewById(R.id.imgMascota);
             txtNombre = itemView.findViewById(R.id.txtNombre);
-            txtEstado = itemView.findViewById(R.id.txtEstado);
-            txtInfo = itemView.findViewById(R.id.txtInfo);
+            txtTipo = itemView.findViewById(R.id.txtTipo);
+            txtZona = itemView.findViewById(R.id.txtZona);
+            txtFecha = itemView.findViewById(R.id.txtFecha);
         }
     }
 }
