@@ -16,45 +16,132 @@
         app:navigationIcon="@drawable/outline_arrow_back_ios_24" />
 
     <!-- Contenido del perfil -->
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/profile_image"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_marginTop="10dp"
-            android:clipToOutline="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/baseline_person_24" />
+        <!-- MENSAJE CUANDO NO HAY NADA -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="294dp"
+            android:layout_marginTop="?attr/actionBarSize">
+
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginTop="10dp"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_person_24" />
+
+            <TextView
+                android:id="@+id/nombre2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="180dp"
+                android:fontFamily="@font/text_app"
+                android:gravity="center"
+                android:text="Nombre"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/descripcion"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="230dp"
+                android:fontFamily="@font/text_app"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+        </FrameLayout>
 
         <TextView
-            android:id="@+id/nombre2"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvNadaSeleccionado"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="180dp"
+            android:layout_marginTop="24dp"
             android:gravity="center"
-            android:text="Nombre"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:fontFamily="@font/text_app"/>
-
-        <TextView
-            android:id="@+id/descripcion"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="230dp"
-            android:gravity="center"
-            android:text="@string/app_name"
-            android:textColor="@color/black"
+            android:text="No hay contenido disponible"
             android:textSize="16sp"
-            android:fontFamily="@font/text_app"/>
+            android:visibility="gone" />
 
-    </FrameLayout>
+        <!-- ====== SECCIÓN PERDIDOS ====== -->
+        <LinearLayout
+            android:id="@+id/sectionPerdidos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/text_app"
+                android:text="Recientemente"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- ====== SECCIÓN ADOPCIONES ====== -->
+        <LinearLayout
+            android:id="@+id/sectionAdopciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_app"
+                android:text="Adopciones"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- ====== SECCIÓN VETERINARIAS / MAPA ====== -->
+        <LinearLayout
+            android:id="@+id/sectionVeterinarias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_app"
+                android:text="Mapa / Veterinarias"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Salirse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            android:onClick="openLogin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_app"
+                android:text="Cerrar sesión"
+                android:textColor="@color/coral_alertasimp_errores"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+    </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
