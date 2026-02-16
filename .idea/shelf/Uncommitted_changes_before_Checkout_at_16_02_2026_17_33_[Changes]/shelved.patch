@@ -1,0 +1,45 @@
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"VcsDirectoryMappings\">\r\n<<<<<<< HEAD\r\n    <mapping directory=\"$PROJECT_DIR$\" vcs=\"Git\" />\r\n=======\r\n>>>>>>> ad696360465e74c90df5afb3f20792902b078af1\r\n    <mapping directory=\"\" vcs=\"Git\" />\r\n  </component>\r\n</project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+--- a/.idea/vcs.xml	(revision bf3ae8b5115a5bbf8afe242ffd7cb31d3fa9f1b1)
++++ b/.idea/vcs.xml	(date 1771245276843)
+@@ -1,10 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="VcsDirectoryMappings">
+-<<<<<<< HEAD
+-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+-=======
+->>>>>>> ad696360465e74c90df5afb3f20792902b078af1
+     <mapping directory="" vcs="Git" />
++    <mapping directory="$PROJECT_DIR$/ProyectoNicestart" vcs="Git" />
+   </component>
+-</project>
++</project>
+\ No newline at end of file
+Index: .idea/deploymentTargetSelector.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetSelector.xml b/.idea/deploymentTargetSelector.xml
+new file mode 100644
+--- /dev/null	(date 1771246504768)
++++ b/.idea/deploymentTargetSelector.xml	(date 1771246504768)
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="deploymentTargetSelector">
++    <selectionStates>
++      <SelectionState runConfigName="Unnamed (1)">
++        <option name="selectionMode" value="DROPDOWN" />
++      </SelectionState>
++    </selectionStates>
++  </component>
++</project>
+\ No newline at end of file
