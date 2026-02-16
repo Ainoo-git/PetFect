@@ -12,6 +12,7 @@ glide = "4.16.0"
 lottie = "6.3.0"
 swiperefresh = "1.1.0"
 roomCommonJvm = "2.8.4"
+firebaseFirestore = "26.1.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -28,6 +29,7 @@ glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = 
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 swiperefresh = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefresh" }
 room-common-jvm = { group = "androidx.room", name = "room-common-jvm", version.ref = "roomCommonJvm" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

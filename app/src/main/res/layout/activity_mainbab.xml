@@ -5,28 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Contenido principal de la pantalla -->
-    <ScrollView
+    <!-- CONTENIDO DINÁMICO -->
+    <FrameLayout
+        android:id="@+id/content_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!-- Contenido de ejemplo -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1000dp"
-                android:layout_margin="16dp"
-                android:text="@string/lorem"
-                android:textSize="20sp"
-                android:fontFamily="@font/text_app"/>
-
-        </LinearLayout>
-    </ScrollView>
+        android:layout_marginBottom="56dp"/>
 
     <!-- BottomBar fija -->
     <com.google.android.material.bottomappbar.BottomAppBar
@@ -37,10 +21,9 @@
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="28dp"
         app:fabCradleVerticalOffset="10dp"
-        app:hideOnScroll="false"
         android:backgroundTint="@color/cian_oscuro_iconos"/>
 
-    <!-- Círculo central sobresaliente -->
+    <!-- FAB central -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_central"
         android:layout_width="64dp"
@@ -49,7 +32,6 @@
         android:layout_marginBottom="28dp"
         app:srcCompat="@drawable/ic_planet"
         app:tint="@color/cian_oscuro_iconos"
-        app:backgroundTint="@color/cian_clarito_bordes"
-        app:useCompatPadding="true"/>
+        app:backgroundTint="@color/cian_clarito_bordes"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
