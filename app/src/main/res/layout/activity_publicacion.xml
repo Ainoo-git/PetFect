@@ -17,7 +17,6 @@
             android:orientation="vertical"
             android:padding="12dp">
 
-
             <!-- Contenedor subir imagen -->
             <LinearLayout
                 android:id="@+id/layoutImagen"
@@ -55,7 +54,6 @@
                 android:scaleType="centerCrop"
                 android:visibility="gone"/>
 
-
             <!-- Nombre -->
             <EditText
                 android:id="@+id/etNombre"
@@ -66,7 +64,18 @@
                 android:textSize="14sp"
                 android:fontFamily="@font/text_app"/>
 
-<!--            PERDIDOO O EN ADOPCION-->
+            <!-- Teléfono -->
+            <EditText
+                android:id="@+id/etTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Teléfono de contacto"
+                android:textSize="14sp"
+                android:inputType="phone"
+                android:fontFamily="@font/text_app"/>
+
+            <!-- Estado -->
             <TextView
                 android:layout_marginTop="10dp"
                 android:text="Estado del animal"
@@ -75,7 +84,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/text_titulos"/>
-
 
             <CheckBox
                 android:id="@+id/cbPerdido"
@@ -95,7 +103,6 @@
                 android:fontFamily="@font/text_app"
                 android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
 
-
             <!-- Tipo -->
             <TextView
                 android:layout_marginTop="10dp"
@@ -105,7 +112,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/text_titulos"/>
-
 
             <CheckBox
                 android:id="@+id/cbPerro"
