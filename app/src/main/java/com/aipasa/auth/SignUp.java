@@ -23,7 +23,7 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        // 👇 IMPORTANTE: usar los IDs reales del XML
+        // IMPORTANTE: usar los IDs reales del XML
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
 
