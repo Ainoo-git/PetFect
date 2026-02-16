@@ -55,19 +55,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Ahora abre cámara con permiso correcto
         fabCentral.setOnClickListener(v -> {
-
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                    == PackageManager.PERMISSION_GRANTED) {
-
-                abrirCamara();
-
-            } else {
-
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.CAMERA},
-                        CAMERA_PERMISSION_CODE);
-            }
+            Intent intent = new Intent(MainActivity.this, PublicacionActivity.class);
+            startActivity(intent);
         });
+
 
         // Cargar preferencias guardadas
         cargarPreferencias();

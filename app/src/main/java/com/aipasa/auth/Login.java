@@ -1,3 +1,4 @@
+
 package com.aipasa.auth;
 
 import android.content.Intent;
@@ -127,12 +128,6 @@ public class Login extends AppCompatActivity {
                 });
     }
 
-<<<<<<< HEAD
-    // Botón SIGN UP
-    public void OpenSignup(View view ) {
-        Intent i = new Intent(Login.this, SignUp.class);
-        startActivity(i);
-=======
     // BOTÓN SIGN UP
     public void OpenSignup(View view) {
         startActivity(new Intent(this, SignUp.class));
@@ -180,6 +175,5 @@ public class Login extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
->>>>>>> ad696360465e74c90df5afb3f20792902b078af1
     }
 }
