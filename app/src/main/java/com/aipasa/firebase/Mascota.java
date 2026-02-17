@@ -12,8 +12,8 @@ public class Mascota {
     private long fecha;
     private String userId;
 
-    // Constructor vacío obligatorio para Firebase
     public Mascota() {
+
     }
 
     public Mascota(String id, String nombre, String tipo, String estado,
@@ -31,11 +31,7 @@ public class Mascota {
         this.userId = userId;
     }
 
-    // Getters y Setters
-
     public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
-
     public String getNombre() { return nombre; }
     public String getTipo() { return tipo; }
     public String getEstado() { return estado; }
@@ -44,4 +40,14 @@ public class Mascota {
     public String getFotoUrl() { return fotoUrl; }
     public long getFecha() { return fecha; }
     public String getUserId() { return userId; }
+
+    public void setId(String id) { this.id = id; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setTipo(String tipo) { this.tipo = tipo; }
+    public void setEstado(String estado) { this.estado = estado; }
+    public void setTelefono(String telefono) { this.telefono = telefono; }
+    public void setInfoAdicional(String infoAdicional) { this.infoAdicional = infoAdicional; }
+    public void setFotoUrl(String fotoUrl) { this.fotoUrl = fotoUrl; }
+    public void setFecha(long fecha) { this.fecha = fecha; }
+    public void setUserId(String userId) { this.userId = userId; }
 }

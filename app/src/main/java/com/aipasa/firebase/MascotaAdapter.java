@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.aipasa.R;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHolder> {
 
@@ -28,7 +31,7 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_perdidos, parent, false);
+                .inflate(R.layout.item_mascota, parent, false);
 
         return new ViewHolder(view);
     }
@@ -41,35 +44,50 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
         String nombre = mascota.getString("nombre");
         String tipo = mascota.getString("tipo");
         String zona = mascota.getString("infoAdicional");
-        String fecha = mascota.getString("fechaTexto"); // si guardas fecha como texto
+        Long fechaLong = mascota.getLong("fecha");
 
+        // Nombre
         holder.txtNombre.setText(nombre != null ? nombre : "Sin nombre");
-        holder.txtTipo.setText(tipo != null ? tipo : "");
-        holder.txtZona.setText(zona != null ? zona : "");
-        holder.txtFecha.setText(fecha != null ? fecha : "");
 
-        // Cambiar color según tipo
+        // Tipo
+        holder.txtTipo.setText(tipo != null ? tipo : "");
+
+        // Zona
+        holder.txtZona.setText(zona != null ? zona : "");
+
+        // Fecha
+        if (fechaLong != null) {
+            String fechaFormateada = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                    .format(new Date(fechaLong));
+            holder.txtFecha.setText(fechaFormateada);
+        } else {
+            holder.txtFecha.setText("");
+        }
+
+        // Color según tipo
         if (tipo != null) {
-            switch (tipo) {
-                case "Perro":
+            switch (tipo.toLowerCase()) {
+                case "perro":
                     holder.txtTipo.setBackgroundColor(Color.parseColor("#FF9800"));
                     break;
-                case "Gato":
+                case "gato":
                     holder.txtTipo.setBackgroundColor(Color.parseColor("#2196F3"));
                     break;
                 default:
                     holder.txtTipo.setBackgroundColor(Color.parseColor("#4CAF50"));
                     break;
             }
+        } else {
+            holder.txtTipo.setBackgroundColor(Color.TRANSPARENT);
         }
 
-        // Imagen (de momento placeholder)
+        // Imagen (placeholder por ahora)
         holder.imgMascota.setImageResource(R.drawable.ic_launcher_background);
     }
 
     @Override
     public int getItemCount() {
-        return listaMascotas.size();
+        return listaMascotas != null ? listaMascotas.size() : 0;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

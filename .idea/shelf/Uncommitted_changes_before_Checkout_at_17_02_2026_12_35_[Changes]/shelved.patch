@@ -1,0 +1,22 @@
+Index: app/src/main/res/layout/activity_creditos.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n             android:layout_width=\"match_parent\"\r\n             android:layout_height=\"match_parent\">\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+===================================================================
+diff --git a/app/src/main/res/layout/activity_creditos.xml b/app/src/main/res/layout/activity_creditos.xml
+--- a/app/src/main/res/layout/activity_creditos.xml	(revision 92d31e71e24f1c019944b850bbee9f9ce978975d)
++++ b/app/src/main/res/layout/activity_creditos.xml	(date 1771261189220)
+@@ -1,6 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-             android:layout_width="match_parent"
+-             android:layout_height="match_parent">
+-
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
++<androidx.recyclerview.widget.RecyclerView
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    android:id="@+id/recyclerMascotas"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:padding="8dp"/>
