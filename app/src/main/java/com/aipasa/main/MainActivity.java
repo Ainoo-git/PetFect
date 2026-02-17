@@ -127,7 +127,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
     }
-
+    public void openPerdidos(View view) {
+        Intent intent = new Intent(this, PerdidosActivity.class);
+        startActivity(intent);
+    }
     // Cargar preferencias del usuario
     private void cargarPreferencias() {
         SharedPreferences prefs = getSharedPreferences("petfect_prefs", MODE_PRIVATE);
