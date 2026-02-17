@@ -49,6 +49,11 @@
             android:name=".main.PreferenciasActivity"
             android:exported="false" />
 
+        <!-- Preferencias -->
+        <activity
+            android:name=".main.PerdidosActivity"
+            android:exported="false" />
+
         <!-- Publicación -->
         <activity
             android:name=".main.PublicacionActivity"
