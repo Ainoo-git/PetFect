@@ -1,6 +1,6 @@
 package com.aipasa.repository;
 
-import com.aipasa.data_Room.Mascota;
+import com.aipasa.firebase.Mascota;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;

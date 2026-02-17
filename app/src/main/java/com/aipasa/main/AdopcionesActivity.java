@@ -14,7 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdopcionesActivity {public class AdopcionActivity extends AppCompatActivity {
+public class AdopcionesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private MascotaAdapter adapter;
@@ -40,7 +40,7 @@ public class AdopcionesActivity {public class AdopcionActivity extends AppCompat
     private void cargarAdopciones() {
 
         db.collection("mascotas")
-                .whereEqualTo("categoria", "adopcion")
+                .whereEqualTo("estado", "adopcion")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
 
@@ -48,7 +48,5 @@ public class AdopcionesActivity {public class AdopcionActivity extends AppCompat
                     lista.addAll(queryDocumentSnapshots.getDocuments());
                     adapter.notifyDataSetChanged();
                 });
-    }}
+    }
 }
-
-
