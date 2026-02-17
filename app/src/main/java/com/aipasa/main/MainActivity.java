@@ -127,10 +127,24 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
     }
+    //abrir pestaña animales perdidos
     public void openPerdidos(View view) {
         Intent intent = new Intent(this, PerdidosActivity.class);
         startActivity(intent);
     }
+
+    //abrir pestaña animales en adopcion
+    public void openAdopcion(View view) {
+        Intent intent = new Intent(this, AdopcionesActivity.class);
+        startActivity(intent);
+    }
+
+    //abrir pestaña mapa
+    public void openMapa(View view) {
+        Intent intent = new Intent(this, MapaActivity.class);
+        startActivity(intent);
+    }
+
     // Cargar preferencias del usuario
     private void cargarPreferencias() {
         SharedPreferences prefs = getSharedPreferences("petfect_prefs", MODE_PRIVATE);
