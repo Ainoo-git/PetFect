@@ -77,7 +77,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="Adopciones"
-                    style="@style/BotonPetFect"/>
+                    style="@style/BotonPetFect"
+                    android:onClick="openAdopcion"/>
 
                 <Button
                     android:id="@+id/btnPerdidos"
@@ -94,7 +95,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="Mapa"
-                    style="@style/BotonPetFect"/>
+                    style="@style/BotonPetFect"
+                    android:onClick="openMapa"/>
             </LinearLayout>
         </HorizontalScrollView>
 
@@ -108,7 +110,8 @@
             app:layout_constraintTop_toBottomOf="@id/hsOpciones"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/bottom_app_bar">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
