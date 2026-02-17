@@ -24,11 +24,11 @@ public class Splash extends AppCompatActivity {
             getSupportActionBar().hide();
         }
         // Fondo
-        ImageView mSea = findViewById(R.id.backView);
-        Glide.with(this)
-                .load(R.drawable.fondosplash)
-                .centerCrop()
-                .into(mSea);
+//        ImageView mSea = findViewById(R.id.backView);
+//        Glide.with(this)
+//                .load(R.drawable.fondosplash)
+//                .centerCrop()
+//                .into(mSea);
 
         // Logo animado
         ImageView logo = findViewById(R.id.img);
