@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="56dp"/>
 
-     BottomBar fija
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"
         android:layout_width="match_parent"
@@ -69,4 +68,3 @@
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
