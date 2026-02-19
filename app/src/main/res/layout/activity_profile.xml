@@ -85,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/text_app"
-                android:text="Recientemente"
+                android:text="MASCOTAS"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -102,9 +102,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/text_app"
-                android:text="Adopciones"
+                android:text="Configuración"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:onClick="openMapa"/>
         </LinearLayout>
 
         <!-- ====== SECCIÓN VETERINARIAS / MAPA ====== -->
@@ -119,9 +120,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/text_app"
-                android:text="Mapa / Veterinarias"
+                android:text="Información"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:onClick="openMapa"/>
         </LinearLayout>
 
         <LinearLayout
