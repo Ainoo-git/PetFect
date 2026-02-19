@@ -172,7 +172,7 @@
         android:layout_height="64dp"
         android:layout_gravity="center|bottom"
         android:layout_marginBottom="28dp"
-        app:srcCompat="@drawable/ic_planet"
+        app:srcCompat="@drawable/camara"
         app:tint="@color/cian_oscuro_iconos"
         app:backgroundTint="@color/cian_clarito_bordes"/>
 
