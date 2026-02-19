@@ -14,15 +14,13 @@
         android:orientation="horizontal"
         android:padding="12dp">
 
-        <!-- Imagen -->
         <ImageView
             android:id="@+id/imgMascota"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@drawable/ic_launcher_background"/>
 
-        <!-- Contenido central -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -31,7 +29,6 @@
             android:paddingStart="12dp"
             android:paddingEnd="8dp">
 
-            <!-- Nombre y tipo -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,7 +38,6 @@
                     android:id="@+id/txtNombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nombre"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#333333"/>
@@ -50,45 +46,37 @@
                     android:id="@+id/txtTipo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:textSize="13sp"
                     android:layout_marginStart="8dp"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp"
                     android:textColor="#FFFFFF"/>
             </LinearLayout>
 
-            <!-- Zona -->
             <TextView
                 android:id="@+id/txtZona"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
                 android:textSize="14sp"
                 android:textColor="#666666"
                 android:layout_marginTop="4dp"/>
 
-            <!-- Fecha -->
             <TextView
                 android:id="@+id/txtFecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
                 android:textSize="12sp"
                 android:textColor="#999999"
                 android:layout_marginTop="4dp"/>
 
         </LinearLayout>
 
-        <!-- Flecha -->
         <ImageView
             android:id="@+id/imgFlecha"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/flecha_seguir" />
+            android:src="@drawable/flecha_seguir"/>
 
     </LinearLayout>
 
