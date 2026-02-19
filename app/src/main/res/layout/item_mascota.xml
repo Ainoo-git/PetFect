@@ -18,7 +18,7 @@
             android:id="@+id/imgMascota"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:scaleType="centerCrop"
+            android:scaleTypge="centerCrop"
             android:src="@drawable/ic_launcher_background"/>
 
         <LinearLayout
