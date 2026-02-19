@@ -1,114 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <!-- CONTENIDO DINÁMICO -->
-    <FrameLayout
-        android:id="@+id/content_container"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="72dp"/>
-    <!-- deja espacio para la barra inferior -->
+        android:layout_height="match_parent">
+
+        <!-- CONTENIDO DINÁMICO -->
+        <FrameLayout
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="72dp"/>
+        <!-- deja espacio para la barra inferior -->
 
 
-    <!-- BARRA INFERIOR FIJA -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_gravity="bottom"
-        android:background="@color/cian_oscuro_iconos"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        app:menu="@menu/bottom_nav_menu" />
+        <!-- BARRA INFERIOR FIJA -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_gravity="bottom"
+            android:background="@color/cian_oscuro_iconos"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"
+            app:menu="@menu/bottom_nav_menu" />
 
-    <!-- FAB CENTRAL FIJO -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_central"
-        android:layout_width="58dp"
-        android:layout_height="57dp"
-        android:layout_gravity="center|bottom"
-        android:layout_marginBottom="28dp"
-        app:srcCompat="@drawable/camara"
-        app:maxImageSize="35dp"
-        app:tint="@color/cian_oscuro_iconos"
-        app:backgroundTint="@color/cian_clarito_bordes"/>
+        <!-- FAB CENTRAL FIJO -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_central"
+            android:layout_width="58dp"
+            android:layout_height="57dp"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="28dp"
+            app:srcCompat="@drawable/camara"
+            app:maxImageSize="35dp"
+            app:tint="@color/cian_oscuro_iconos"
+            app:backgroundTint="@color/cian_clarito_bordes"/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-
-
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<androidx.coordinatorlayout.widget.CoordinatorLayout-->
-<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent">-->
-
-<!--    &lt;!&ndash; CONTENIDO DINÁMICO &ndash;&gt;-->
-<!--    <FrameLayout-->
-<!--        android:id="@+id/content_container"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_marginBottom="56dp"/>-->
-
-<!--    &lt;!&ndash; BottomBar fija&ndash;&gt;-->
-<!--    <com.google.android.material.bottomappbar.BottomAppBar-->
-<!--        android:id="@+id/bottom_app_bar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="56dp"-->
-<!--        android:layout_gravity="bottom"-->
-<!--        app:fabCradleMargin="10dp"-->
-<!--        app:fabCradleRoundedCornerRadius="28dp"-->
-<!--        app:fabCradleVerticalOffset="10dp"-->
-<!--        android:backgroundTint="@color/cian_oscuro_iconos"/>-->
-
-<!--    &lt;!&ndash; FAB central &ndash;&gt;-->
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fab_central"-->
-<!--        android:layout_width="58dp"-->
-<!--        android:layout_height="57dp"-->
-<!--        android:layout_gravity="center_horizontal|bottom"-->
-<!--        android:layout_marginBottom="35dp"-->
-<!--        app:srcCompat="@drawable/camara"-->
-<!--        app:fabSize="normal"-->
-<!--        app:maxImageSize="35dp"-->
-<!--        app:tint="@color/cian_oscuro_iconos"-->
-<!--        app:backgroundTint="@color/cian_clarito_bordes"/>-->
-<!--&lt;!&ndash;    <androidx.recyclerview.widget.RecyclerView&ndash;&gt;-->
-<!--&lt;!&ndash;        android:id="@+id/recyclerPeces"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_marginTop="102dp"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_height="match_parent"/>&ndash;&gt;-->
-
-<!--&lt;!&ndash;    <com.google.android.material.bottomappbar.BottomAppBar&ndash;&gt;-->
-<!--&lt;!&ndash;        android:id="@+id/bottom_app_bar"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_gravity="bottom"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:fabAlignmentMode="center"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:menu="@menu/bottom_app_bar_menu"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:navigationIcon="@drawable/usericon"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:fabCradleVerticalOffset="1dp"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:fabCradleMargin="16dp"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:fabCradleRoundedCornerRadius="8dp"&ndash;&gt;-->
-<!--&lt;!&ndash;        />&ndash;&gt;-->
-
-<!--&lt;!&ndash;    &lt;!&ndash;            style="@style/Widget.MaterialComponents.BottomAppBar.PrimarySurface"&ndash;&gt;&ndash;&gt;-->
-
-<!--&lt;!&ndash;    <com.google.android.material.floatingactionbutton.FloatingActionButton&ndash;&gt;-->
-<!--&lt;!&ndash;        android:id="@+id/fab"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_width="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:backgroundTint="@color/blue_200"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:src="@drawable/outline_add_2_24"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:fabSize="normal"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:layout_anchor="@+id/bottom_app_bar"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:tint="@android:color/holo_orange_light" />&ndash;&gt;-->
-
-
-<!--</androidx.coordinatorlayout.widget.CoordinatorLayout>-->
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

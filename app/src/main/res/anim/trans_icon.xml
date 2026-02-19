@@ -30,11 +30,11 @@
         android:startOffset="1000"/>
 
     <!-- Traslación hacia arriba después del rebote -->
-    <translate
-        android:fromYDelta="0"
-        android:toYDelta="-350dp"
-        android:duration="800"
-        android:startOffset="2200"
-        android:interpolator="@android:anim/accelerate_interpolator"/>
+<!--    <translate-->
+<!--        android:fromYDelta="0"-->
+<!--        android:toYDelta="-350dp"-->
+<!--        android:duration="800"-->
+<!--        android:startOffset="2200"-->
+<!--        android:interpolator="@android:anim/accelerate_interpolator"/>-->
 
 </set>
