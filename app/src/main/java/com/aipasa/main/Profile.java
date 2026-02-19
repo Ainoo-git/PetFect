@@ -37,7 +37,7 @@ public class Profile extends AppCompatActivity {
         // Cierra sesión en Firebase
         FirebaseAuth.getInstance().signOut();
 
-        // Borra SharedPreferences si estás usando para el nombre u otros datos
+
         SharedPreferences prefs = getSharedPreferences("petfect_prefs", MODE_PRIVATE);
         prefs.edit().clear().apply();
 

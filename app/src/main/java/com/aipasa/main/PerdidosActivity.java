@@ -1,6 +1,7 @@
 package com.aipasa.main;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,15 +39,19 @@ public class PerdidosActivity extends AppCompatActivity {
     }
 
     private void cargarPerdidos() {
-
         db.collection("mascotas")
                 .whereEqualTo("estado", "perdido")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-
                     lista.clear();
                     lista.addAll(queryDocumentSnapshots.getDocuments());
                     adapter.notifyDataSetChanged();
-                });
+
+                    if (lista.isEmpty()) {
+                        Toast.makeText(this, "No hay mascotas perdidas", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Error al cargar", Toast.LENGTH_SHORT).show());
     }
 }
