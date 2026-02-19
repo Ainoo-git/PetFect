@@ -16,40 +16,37 @@ import java.util.List;
 
 public class PerdidosActivity extends AppCompatActivity {
 
-        private RecyclerView recyclerView;
-        private MascotaAdapter adapter;
-        private List<DocumentSnapshot> lista = new ArrayList<>();
-        private FirebaseFirestore db;
+    private RecyclerView recyclerView;
+    private MascotaAdapter adapter;
+    private List<DocumentSnapshot> lista = new ArrayList<>();
+    private FirebaseFirestore db;
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_perdidos);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_perdidos);
 
-            recyclerView = findViewById(R.id.recyclerMascotas);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView = findViewById(R.id.recyclerMascotas);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        adapter = new MascotaAdapter(lista);
+        recyclerView.setAdapter(adapter);
 
-            adapter = new MascotaAdapter(lista);
-            recyclerView.setAdapter(adapter);
+        db = FirebaseFirestore.getInstance();
 
-            db = FirebaseFirestore.getInstance();
-
-            cargarPerdidos();
-        }
-
-        private void cargarPerdidos() {
-
-            db.collection("mascotas")
-                    .whereEqualTo("categoria", "perdido")
-                    .get()
-                    .addOnSuccessListener(queryDocumentSnapshots -> {
-
-                        lista.clear();
-                        lista.addAll(queryDocumentSnapshots.getDocuments());
-                        adapter.notifyDataSetChanged();
-                    });
-        }
+        cargarPerdidos();
     }
 
+    private void cargarPerdidos() {
 
+        db.collection("mascotas")
+                .whereEqualTo("estado", "perdido")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+
+                    lista.clear();
+                    lista.addAll(queryDocumentSnapshots.getDocuments());
+                    adapter.notifyDataSetChanged();
+                });
+    }
+}

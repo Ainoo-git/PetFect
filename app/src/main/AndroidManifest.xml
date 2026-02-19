@@ -55,7 +55,7 @@
             android:name=".main.MapaActivity"
             android:exported="false" /> <!-- mapa -->
         <activity
-            android:name=".main.PublicacionActivity"
+            android:name=".main.PublicacionActivityy"
             android:exported="false" />
 
         <meta-data

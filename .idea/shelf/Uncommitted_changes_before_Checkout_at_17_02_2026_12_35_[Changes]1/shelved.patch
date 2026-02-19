@@ -1,0 +1,538 @@
+Index: app/src/main/res/layout/activity_publicacion.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.coordinatorlayout.widget.CoordinatorLayout\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"@color/white\">\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:fillViewport=\"true\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\"\r\n            android:padding=\"12dp\">\r\n\r\n            <!-- Contenedor subir imagen -->\r\n            <LinearLayout\r\n                android:id=\"@+id/layoutImagen\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"160dp\"\r\n                android:layout_marginBottom=\"12dp\"\r\n                android:background=\"@drawable/bg_dashed\"\r\n                android:gravity=\"center\"\r\n                android:orientation=\"vertical\"\r\n                android:clickable=\"true\"\r\n                android:focusable=\"true\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/iconAddPhoto\"\r\n                    android:layout_width=\"32dp\"\r\n                    android:layout_height=\"32dp\"\r\n                    android:src=\"@drawable/outline_add_24\"\r\n                    app:tint=\"@color/cian_botones\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/txtAddPhoto\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"8dp\"\r\n                    android:text=\"Subir imagen o abrir cámara\"\r\n                    android:textSize=\"13sp\"\r\n                    android:textColor=\"@color/cian_botones\"\r\n                    android:fontFamily=\"@font/text_app\"/>\r\n\r\n\r\n            </LinearLayout>\r\n\r\n            <!-- Imagen real (oculta al inicio) -->\r\n            <ImageView\r\n                android:id=\"@+id/imgMascota\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"160dp\"\r\n                android:scaleType=\"centerCrop\"\r\n                android:visibility=\"gone\"/>\r\n\r\n            <!-- Nombre -->\r\n            <EditText\r\n                android:id=\"@+id/etNombre\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:hint=\"Nombre de la mascota\"\r\n                android:textSize=\"14sp\"\r\n                android:fontFamily=\"@font/text_app\"/>\r\n\r\n            <!-- Teléfono -->\r\n\r\n            <!-- Estado -->\r\n            <EditText\r\n                android:id=\"@+id/etTelefono\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:fontFamily=\"@font/text_app\"\r\n                android:hint=\"Teléfono de contacto\"\r\n                android:inputType=\"phone\"\r\n                android:textSize=\"14sp\" />\r\n\r\n            <TextView\r\n                android:layout_marginTop=\"10dp\"\r\n                android:text=\"Estado del animal\"\r\n                android:textStyle=\"bold\"\r\n                android:textSize=\"13sp\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:fontFamily=\"@font/text_titulos\"/>\r\n\r\n            <CheckBox\r\n                android:id=\"@+id/cbPerdido\"\r\n                android:text=\"Perdido\"\r\n                android:textSize=\"13sp\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:fontFamily=\"@font/text_app\"\r\n                android:buttonTint=\"@color/rosita_fondoss_tarjetas_alertaslev\"/>\r\n\r\n            <CheckBox\r\n                android:id=\"@+id/cbAdopcion\"\r\n                android:text=\"En adopción\"\r\n                android:textSize=\"13sp\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:fontFamily=\"@font/text_app\"\r\n                android:buttonTint=\"@color/rosita_fondoss_tarjetas_alertaslev\"/>\r\n\r\n            <!-- Tipo -->\r\n            <TextView\r\n                android:layout_marginTop=\"10dp\"\r\n                android:text=\"Tipo de mascota\"\r\n                android:textStyle=\"bold\"\r\n                android:textSize=\"13sp\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:fontFamily=\"@font/text_titulos\"/>\r\n\r\n            <CheckBox\r\n                android:id=\"@+id/cbPerro\"\r\n                android:text=\"Perro\"\r\n                android:textSize=\"13sp\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:fontFamily=\"@font/text_app\"\r\n                android:buttonTint=\"@color/rosita_fondoss_tarjetas_alertaslev\"/>\r\n\r\n            <CheckBox\r\n                android:id=\"@+id/cbGato\"\r\n                android:text=\"Gato\"\r\n                android:textSize=\"13sp\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:fontFamily=\"@font/text_app\"\r\n                android:buttonTint=\"@color/rosita_fondoss_tarjetas_alertaslev\"/>\r\n\r\n            <CheckBox\r\n                android:id=\"@+id/cbOtro\"\r\n                android:text=\"Otro\"\r\n                android:textSize=\"13sp\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:fontFamily=\"@font/text_app\"\r\n                android:buttonTint=\"@color/rosita_fondoss_tarjetas_alertaslev\"/>\r\n\r\n            <EditText\r\n                android:id=\"@+id/etOtroTipo\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:hint=\"Especificar otro tipo\"\r\n                android:textSize=\"13sp\"\r\n                android:visibility=\"gone\"\r\n                android:fontFamily=\"@font/text_app\"/>\r\n\r\n            <!-- Edad -->\r\n            <EditText\r\n                android:id=\"@+id/etEdad\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:hint=\"Edad aproximada\"\r\n                android:textSize=\"14sp\"\r\n                android:inputType=\"number\"\r\n                android:fontFamily=\"@font/text_app\"/>\r\n\r\n            <!-- Chip -->\r\n\r\n            <!-- Info adicional -->\r\n            <EditText\r\n                android:id=\"@+id/etChip\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:fontFamily=\"@font/text_app\"\r\n                android:hint=\"Número de chip (opcional)\"\r\n                android:textSize=\"14sp\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/etInfoAdicional\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:hint=\"Información adicional (opcional)\"\r\n                android:textSize=\"14sp\"\r\n                android:minLines=\"2\"\r\n                android:inputType=\"textMultiLine\"\r\n                android:fontFamily=\"@font/text_app\"/>\r\n\r\n            <!-- Checkbox legal -->\r\n            <CheckBox\r\n                android:id=\"@+id/checkLegal\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:text=\"Confirmo que la imagen es mía o tengo permiso para publicarla y que no contiene personas identificables\"\r\n                android:textSize=\"12sp\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:buttonTint=\"@color/rosita_fondoss_tarjetas_alertaslev\"/>\r\n\r\n            <!-- Publicar -->\r\n            <Button\r\n                android:id=\"@+id/btnPublicar\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"44dp\"\r\n                android:layout_marginTop=\"14dp\"\r\n                android:enabled=\"false\"\r\n                android:text=\"Publicar\"\r\n                android:textSize=\"14sp\"\r\n                style=\"@style/BotonPetFect\"/>\r\n\r\n        </LinearLayout>\r\n\r\n    </ScrollView>\r\n\r\n</androidx.coordinatorlayout.widget.CoordinatorLayout>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_publicacion.xml b/app/src/main/res/layout/activity_publicacion.xml
+--- a/app/src/main/res/layout/activity_publicacion.xml	(revision 92d31e71e24f1c019944b850bbee9f9ce978975d)
++++ b/app/src/main/res/layout/activity_publicacion.xml	(date 1771265172683)
+@@ -203,11 +203,11 @@
+                 android:layout_width="match_parent"
+                 android:layout_height="44dp"
+                 android:layout_marginTop="14dp"
+-                android:enabled="false"
+                 android:text="Publicar"
+                 android:textSize="14sp"
+                 style="@style/BotonPetFect"/>
+ 
++
+         </LinearLayout>
+ 
+     </ScrollView>
+Index: app/src/main/res/layout/activity_adopciones.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.cardview.widget.CardView\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\"\r\n    android:layout_margin=\"12dp\"\r\n    app:cardCornerRadius=\"16dp\"\r\n    app:cardElevation=\"6dp\">\r\n\r\n    <!-- RecyclerView -->\r\n    <androidx.recyclerview.widget.RecyclerView\r\n        android:id=\"@+id/recyclerMascotas\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"0dp\"\r\n        android:padding=\"8dp\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"/>\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\"\r\n        android:padding=\"12dp\">\r\n\r\n        <!-- Imagen izquierda -->\r\n        <ImageView\r\n            android:id=\"@+id/imgMascota\"\r\n            android:layout_width=\"80dp\"\r\n            android:layout_height=\"80dp\"\r\n            android:scaleType=\"centerCrop\"\r\n            android:src=\"@drawable/ic_launcher_background\"\r\n            android:contentDescription=\"Foto mascota\" />\r\n\r\n        <!-- Contenido centro -->\r\n        <LinearLayout\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_weight=\"1\"\r\n            android:orientation=\"vertical\"\r\n            android:paddingStart=\"12dp\"\r\n            android:paddingEnd=\"8dp\">\r\n\r\n            <!-- Nombre + Tipo -->\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/txtNombre\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"Nombre\"\r\n                    android:textSize=\"18sp\"\r\n                    android:textStyle=\"bold\"\r\n                    android:textColor=\"#333333\"/>\r\n\r\n                <TextView\r\n                    android:id=\"@+id/txtTipo\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"\"\r\n                    android:textSize=\"13sp\"\r\n                    android:layout_marginStart=\"8dp\"\r\n                    android:paddingHorizontal=\"8dp\"\r\n                    android:paddingVertical=\"2dp\"\r\n                    android:textColor=\"#FFFFFF\"/>\r\n            </LinearLayout>\r\n\r\n            <!-- Zona -->\r\n            <TextView\r\n                android:id=\"@+id/txtZona\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"\"\r\n                android:textSize=\"14sp\"\r\n                android:textColor=\"#666666\"\r\n                android:layout_marginTop=\"4dp\"/>\r\n\r\n            <!-- Fecha -->\r\n            <TextView\r\n                android:id=\"@+id/txtFecha\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"\"\r\n                android:textSize=\"12sp\"\r\n                android:textColor=\"#999999\"\r\n                android:layout_marginTop=\"4dp\"/>\r\n\r\n        </LinearLayout>\r\n\r\n        <!-- Flecha derecha -->\r\n        <ImageView\r\n            android:id=\"@+id/imgFlecha\"\r\n            android:layout_width=\"24dp\"\r\n            android:layout_height=\"24dp\"\r\n            android:src=\"@drawable/flecha_seguir\"\r\n            android:layout_gravity=\"center_vertical\"\r\n            android:contentDescription=\"Ver detalles\"/>\r\n\r\n    </LinearLayout>\r\n\r\n</androidx.cardview.widget.CardView>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_adopciones.xml b/app/src/main/res/layout/activity_adopciones.xml
+--- a/app/src/main/res/layout/activity_adopciones.xml	(revision 92d31e71e24f1c019944b850bbee9f9ce978975d)
++++ b/app/src/main/res/layout/activity_adopciones.xml	(date 1771261189203)
+@@ -1,105 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<androidx.cardview.widget.CardView
+-    xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    android:layout_width="match_parent"
+-    android:layout_height="wrap_content"
+-    android:layout_margin="12dp"
+-    app:cardCornerRadius="16dp"
+-    app:cardElevation="6dp">
+-
+-    <!-- RecyclerView -->
+-    <androidx.recyclerview.widget.RecyclerView
+-        android:id="@+id/recyclerMascotas"
+-        android:layout_width="0dp"
+-        android:layout_height="0dp"
+-        android:padding="8dp"
+-        app:layout_constraintTop_toTopOf="parent"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"/>
+-    <LinearLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:orientation="horizontal"
+-        android:padding="12dp">
+-
+-        <!-- Imagen izquierda -->
+-        <ImageView
+-            android:id="@+id/imgMascota"
+-            android:layout_width="80dp"
+-            android:layout_height="80dp"
+-            android:scaleType="centerCrop"
+-            android:src="@drawable/ic_launcher_background"
+-            android:contentDescription="Foto mascota" />
+-
+-        <!-- Contenido centro -->
+-        <LinearLayout
+-            android:layout_width="0dp"
+-            android:layout_height="wrap_content"
+-            android:layout_weight="1"
+-            android:orientation="vertical"
+-            android:paddingStart="12dp"
+-            android:paddingEnd="8dp">
+-
+-            <!-- Nombre + Tipo -->
+-            <LinearLayout
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:orientation="horizontal">
+-
+-                <TextView
+-                    android:id="@+id/txtNombre"
+-                    android:layout_width="wrap_content"
+-                    android:layout_height="wrap_content"
+-                    android:text="Nombre"
+-                    android:textSize="18sp"
+-                    android:textStyle="bold"
+-                    android:textColor="#333333"/>
+-
+-                <TextView
+-                    android:id="@+id/txtTipo"
+-                    android:layout_width="wrap_content"
+-                    android:layout_height="wrap_content"
+-                    android:text=""
+-                    android:textSize="13sp"
+-                    android:layout_marginStart="8dp"
+-                    android:paddingHorizontal="8dp"
+-                    android:paddingVertical="2dp"
+-                    android:textColor="#FFFFFF"/>
+-            </LinearLayout>
+-
+-            <!-- Zona -->
+-            <TextView
+-                android:id="@+id/txtZona"
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:text=""
+-                android:textSize="14sp"
+-                android:textColor="#666666"
+-                android:layout_marginTop="4dp"/>
+-
+-            <!-- Fecha -->
+-            <TextView
+-                android:id="@+id/txtFecha"
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:text=""
+-                android:textSize="12sp"
+-                android:textColor="#999999"
+-                android:layout_marginTop="4dp"/>
+-
+-        </LinearLayout>
+-
+-        <!-- Flecha derecha -->
+-        <ImageView
+-            android:id="@+id/imgFlecha"
+-            android:layout_width="24dp"
+-            android:layout_height="24dp"
+-            android:src="@drawable/flecha_seguir"
+-            android:layout_gravity="center_vertical"
+-            android:contentDescription="Ver detalles"/>
+-
+-    </LinearLayout>
+-
+-</androidx.cardview.widget.CardView>
++<androidx.recyclerview.widget.RecyclerView
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    android:id="@+id/recyclerMascotas"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:padding="8dp"/>
+Index: app/src/main/java/com/aipasa/main/PerdidosActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aipasa.main;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.aipasa.R;\r\nimport com.aipasa.firebase.MascotaAdapter;\r\nimport com.google.firebase.firestore.DocumentSnapshot;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class PerdidosActivity extends AppCompatActivity {\r\n\r\n        private RecyclerView recyclerView;\r\n        private MascotaAdapter adapter;\r\n        private List<DocumentSnapshot> lista = new ArrayList<>();\r\n        private FirebaseFirestore db;\r\n\r\n        @Override\r\n        protected void onCreate(Bundle savedInstanceState) {\r\n            super.onCreate(savedInstanceState);\r\n            setContentView(R.layout.activity_perdidos);\r\n\r\n            recyclerView = findViewById(R.id.recyclerMascotas);\r\n            recyclerView.setLayoutManager(new LinearLayoutManager(this));\r\n\r\n\r\n            adapter = new MascotaAdapter(lista);\r\n            recyclerView.setAdapter(adapter);\r\n\r\n            db = FirebaseFirestore.getInstance();\r\n\r\n            cargarPerdidos();\r\n        }\r\n\r\n        private void cargarPerdidos() {\r\n\r\n            db.collection(\"mascotas\")\r\n                    .whereEqualTo(\"categoria\", \"perdido\")\r\n                    .get()\r\n                    .addOnSuccessListener(queryDocumentSnapshots -> {\r\n\r\n                        lista.clear();\r\n                        lista.addAll(queryDocumentSnapshots.getDocuments());\r\n                        adapter.notifyDataSetChanged();\r\n                    });\r\n        }\r\n    }\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aipasa/main/PerdidosActivity.java b/app/src/main/java/com/aipasa/main/PerdidosActivity.java
+--- a/app/src/main/java/com/aipasa/main/PerdidosActivity.java	(revision 92d31e71e24f1c019944b850bbee9f9ce978975d)
++++ b/app/src/main/java/com/aipasa/main/PerdidosActivity.java	(date 1771261555057)
+@@ -16,40 +16,36 @@
+ 
+ public class PerdidosActivity extends AppCompatActivity {
+ 
+-        private RecyclerView recyclerView;
+-        private MascotaAdapter adapter;
+-        private List<DocumentSnapshot> lista = new ArrayList<>();
+-        private FirebaseFirestore db;
++    private RecyclerView recyclerView;
++    private MascotaAdapter adapter;
++    private List<DocumentSnapshot> lista = new ArrayList<>();
++    private FirebaseFirestore db;
+ 
+-        @Override
+-        protected void onCreate(Bundle savedInstanceState) {
+-            super.onCreate(savedInstanceState);
+-            setContentView(R.layout.activity_perdidos);
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_perdidos);
+ 
+-            recyclerView = findViewById(R.id.recyclerMascotas);
+-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
++        recyclerView = findViewById(R.id.recyclerMascotas);
++        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+ 
+-
+-            adapter = new MascotaAdapter(lista);
+-            recyclerView.setAdapter(adapter);
++        adapter = new MascotaAdapter(lista);
++        recyclerView.setAdapter(adapter);
+ 
+-            db = FirebaseFirestore.getInstance();
+-
+-            cargarPerdidos();
+-        }
++        db = FirebaseFirestore.getInstance();
++        cargarPerdidos();
++    }
+ 
+-        private void cargarPerdidos() {
++    private void cargarPerdidos() {
+ 
+-            db.collection("mascotas")
+-                    .whereEqualTo("categoria", "perdido")
+-                    .get()
+-                    .addOnSuccessListener(queryDocumentSnapshots -> {
++        db.collection("mascotas")
++                .whereEqualTo("estado", "Perdido")
++                .get()
++                .addOnSuccessListener(queryDocumentSnapshots -> {
+ 
+-                        lista.clear();
+-                        lista.addAll(queryDocumentSnapshots.getDocuments());
+-                        adapter.notifyDataSetChanged();
+-                    });
+-        }
+-    }
+-
+-
++                    lista.clear();
++                    lista.addAll(queryDocumentSnapshots.getDocuments());
++                    adapter.notifyDataSetChanged();
++                });
++    }
++}
+Index: app/src/main/java/com/aipasa/main/PublicacionActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aipasa.main;\r\n\r\nimport android.Manifest;\r\nimport android.content.Intent;\r\nimport android.content.pm.PackageManager;\r\nimport android.graphics.Bitmap;\r\nimport android.net.Uri;\r\nimport android.os.Bundle;\r\nimport android.provider.MediaStore;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.CheckBox;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageView;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AlertDialog;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.app.ActivityCompat;\r\nimport androidx.core.content.ContextCompat;\r\n\r\nimport com.aipasa.R;\r\n\r\npublic class PublicacionActivity extends AppCompatActivity {\r\n\r\n    private static final int REQUEST_CAMERA = 1;\r\n    private static final int REQUEST_GALLERY = 2;\r\n    private static final int CAMERA_PERMISSION_CODE = 200;\r\n\r\n    private LinearLayout layoutImagen;\r\n    private ImageView imgMascota;\r\n    private TextView txtAddPhoto;\r\n    private Button btnPublicar;\r\n    private CheckBox checkLegal;\r\n\r\n    private Uri imageUri;\r\n    private Bitmap imageBitmap;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_publicacion);\r\n\r\n        layoutImagen = findViewById(R.id.layoutImagen);\r\n        imgMascota = findViewById(R.id.imgMascota);\r\n        txtAddPhoto = findViewById(R.id.txtAddPhoto);\r\n        btnPublicar = findViewById(R.id.btnPublicar);\r\n        checkLegal = findViewById(R.id.checkLegal);\r\n\r\n        imgMascota.setVisibility(View.GONE);\r\n        btnPublicar.setEnabled(false);\r\n\r\n        layoutImagen.setOnClickListener(v -> mostrarOpcionesImagen());\r\n\r\n        checkLegal.setOnCheckedChangeListener((buttonView, isChecked) ->\r\n                btnPublicar.setEnabled(isChecked)\r\n        );\r\n    }\r\n\r\n    private void mostrarOpcionesImagen() {\r\n\r\n        String[] opciones = {\"Hacer foto\", \"Elegir de galería\"};\r\n\r\n        new AlertDialog.Builder(this)\r\n                .setTitle(\"Añadir imagen\")\r\n                .setItems(opciones, (dialog, which) -> {\r\n\r\n                    if (which == 0) {\r\n\r\n                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)\r\n                                == PackageManager.PERMISSION_GRANTED) {\r\n\r\n                            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);\r\n                            startActivityForResult(cameraIntent, REQUEST_CAMERA);\r\n\r\n                        } else {\r\n\r\n                            ActivityCompat.requestPermissions(this,\r\n                                    new String[]{Manifest.permission.CAMERA},\r\n                                    CAMERA_PERMISSION_CODE);\r\n                        }\r\n\r\n                    } else {\r\n\r\n                        Intent galleryIntent = new Intent(Intent.ACTION_PICK,\r\n                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);\r\n                        startActivityForResult(galleryIntent, REQUEST_GALLERY);\r\n                    }\r\n                })\r\n                .show();\r\n    }\r\n\r\n    @Override\r\n    public void onRequestPermissionsResult(int requestCode,\r\n                                           String[] permissions,\r\n                                           int[] grantResults) {\r\n        super.onRequestPermissionsResult(requestCode, permissions, grantResults);\r\n\r\n        if (requestCode == CAMERA_PERMISSION_CODE) {\r\n            if (grantResults.length > 0 &&\r\n                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {\r\n\r\n                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);\r\n                startActivityForResult(cameraIntent, REQUEST_CAMERA);\r\n            }\r\n        }\r\n    }\r\n\r\n    @Override\r\n    protected void onActivityResult(int requestCode, int resultCode,\r\n                                    @Nullable Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n\r\n        if (resultCode == RESULT_OK && data != null) {\r\n\r\n            if (requestCode == REQUEST_CAMERA && data.getExtras() != null) {\r\n                imageBitmap = (Bitmap) data.getExtras().get(\"data\");\r\n                imgMascota.setImageBitmap(imageBitmap);\r\n            }\r\n\r\n            if (requestCode == REQUEST_GALLERY) {\r\n                imageUri = data.getData();\r\n                imgMascota.setImageURI(imageUri);\r\n            }\r\n\r\n            layoutImagen.setVisibility(View.GONE);\r\n            txtAddPhoto.setVisibility(View.GONE);\r\n            imgMascota.setVisibility(View.VISIBLE);\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aipasa/main/PublicacionActivity.java b/app/src/main/java/com/aipasa/main/PublicacionActivity.java
+--- a/app/src/main/java/com/aipasa/main/PublicacionActivity.java	(revision 92d31e71e24f1c019944b850bbee9f9ce978975d)
++++ b/app/src/main/java/com/aipasa/main/PublicacionActivity.java	(date 1771265835480)
+@@ -23,6 +23,9 @@
+ import androidx.core.content.ContextCompat;
+ 
+ import com.aipasa.R;
++import com.google.firebase.firestore.FirebaseFirestore;
++
++import java.util.HashMap;
+ 
+ public class PublicacionActivity extends AppCompatActivity {
+ 
+@@ -33,8 +36,10 @@
+     private LinearLayout layoutImagen;
+     private ImageView imgMascota;
+     private TextView txtAddPhoto;
++
++    private EditText etNombre, etTelefono, etEdad, etChip, etInfoAdicional, etOtroTipo;
++    private CheckBox cbPerdido, cbAdopcion, cbPerro, cbGato, cbOtro, checkLegal;
+     private Button btnPublicar;
+-    private CheckBox checkLegal;
+ 
+     private Uri imageUri;
+     private Bitmap imageBitmap;
+@@ -47,17 +52,95 @@
+         layoutImagen = findViewById(R.id.layoutImagen);
+         imgMascota = findViewById(R.id.imgMascota);
+         txtAddPhoto = findViewById(R.id.txtAddPhoto);
+-        btnPublicar = findViewById(R.id.btnPublicar);
++
++        etNombre = findViewById(R.id.etNombre);
++        etTelefono = findViewById(R.id.etTelefono);
++        etEdad = findViewById(R.id.etEdad);
++        etChip = findViewById(R.id.etChip);
++        etInfoAdicional = findViewById(R.id.etInfoAdicional);
++        etOtroTipo = findViewById(R.id.etOtroTipo);
++
++        cbPerdido = findViewById(R.id.cbPerdido);
++        cbAdopcion = findViewById(R.id.cbAdopcion);
++        cbPerro = findViewById(R.id.cbPerro);
++        cbGato = findViewById(R.id.cbGato);
++        cbOtro = findViewById(R.id.cbOtro);
+         checkLegal = findViewById(R.id.checkLegal);
+ 
+-        imgMascota.setVisibility(View.GONE);
+-        btnPublicar.setEnabled(false);
++        btnPublicar = findViewById(R.id.btnPublicar);
+ 
+         layoutImagen.setOnClickListener(v -> mostrarOpcionesImagen());
+ 
+-        checkLegal.setOnCheckedChangeListener((buttonView, isChecked) ->
+-                btnPublicar.setEnabled(isChecked)
++        cbOtro.setOnCheckedChangeListener((buttonView, isChecked) ->
++                etOtroTipo.setVisibility(isChecked ? View.VISIBLE : View.GONE)
+         );
++
++        btnPublicar.setOnClickListener(v -> guardarMascota());
++    }
++
++    private void guardarMascota() {
++
++        if (!checkLegal.isChecked()) {
++            Toast.makeText(this, "Debes aceptar la confirmación legal", Toast.LENGTH_SHORT).show();
++            return;
++        }
++
++        String nombre = etNombre.getText().toString().trim();
++        String telefono = etTelefono.getText().toString().trim();
++        String edad = etEdad.getText().toString().trim();
++        String chip = etChip.getText().toString().trim();
++        String info = etInfoAdicional.getText().toString().trim();
++
++        String estado = null;
++        if (cbPerdido.isChecked()) estado = "perdido";
++        if (cbAdopcion.isChecked()) estado = "adopcion";
++
++        String tipo = null;
++        if (cbPerro.isChecked()) tipo = "Perro";
++        if (cbGato.isChecked()) tipo = "Gato";
++        if (cbOtro.isChecked()) tipo = etOtroTipo.getText().toString().trim();
++
++        if (nombre.isEmpty() || estado == null || tipo == null || tipo.isEmpty()) {
++            Toast.makeText(this, "Completa los campos obligatorios", Toast.LENGTH_SHORT).show();
++            return;
++        }
++
++        HashMap<String, Object> mascota = new HashMap<>();
++        mascota.put("nombre", nombre);
++        mascota.put("telefono", telefono);
++        mascota.put("edad", edad);
++        mascota.put("chip", chip);
++        mascota.put("infoAdicional", info);
++        mascota.put("estado", estado);
++        mascota.put("tipo", tipo);
++        mascota.put("fecha", System.currentTimeMillis());
++
++        guardarEnFirestore(mascota, estado);
++    }
++
++    private void guardarEnFirestore(HashMap<String, Object> mascota, String estado) {
++
++        FirebaseFirestore db = FirebaseFirestore.getInstance();
++
++        db.collection("mascotas")
++                .add(mascota)
++                .addOnSuccessListener(documentReference -> {
++
++                    Toast.makeText(this, "Publicado correctamente", Toast.LENGTH_SHORT).show();
++
++                    Intent intent;
++
++                    if ("perdido".equals(estado)) {
++                        intent = new Intent(this, PerdidosActivity.class);
++                    } else {
++                        intent = new Intent(this, AdopcionesActivity.class);
++                    }
++
++                    startActivity(intent);
++                    finish();
++                })
++                .addOnFailureListener(e ->
++                        Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show());
+     }
+ 
+     private void mostrarOpcionesImagen() {
+@@ -93,22 +176,6 @@
+                 .show();
+     }
+ 
+-    @Override
+-    public void onRequestPermissionsResult(int requestCode,
+-                                           String[] permissions,
+-                                           int[] grantResults) {
+-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+-
+-        if (requestCode == CAMERA_PERMISSION_CODE) {
+-            if (grantResults.length > 0 &&
+-                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+-
+-                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+-                startActivityForResult(cameraIntent, REQUEST_CAMERA);
+-            }
+-        }
+-    }
+-
+     @Override
+     protected void onActivityResult(int requestCode, int resultCode,
+                                     @Nullable Intent data) {
+Index: app/src/main/java/com/aipasa/main/AdopcionesActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aipasa.main;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.aipasa.R;\r\nimport com.aipasa.firebase.MascotaAdapter;\r\nimport com.google.firebase.firestore.DocumentSnapshot;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class AdopcionesActivity {public class AdopcionActivity extends AppCompatActivity {\r\n\r\n    private RecyclerView recyclerView;\r\n    private MascotaAdapter adapter;\r\n    private List<DocumentSnapshot> lista = new ArrayList<>();\r\n    private FirebaseFirestore db;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_adopciones);\r\n\r\n        recyclerView = findViewById(R.id.recyclerMascotas);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(this));\r\n\r\n        adapter = new MascotaAdapter(lista);\r\n        recyclerView.setAdapter(adapter);\r\n\r\n        db = FirebaseFirestore.getInstance();\r\n\r\n        cargarAdopciones();\r\n    }\r\n\r\n    private void cargarAdopciones() {\r\n\r\n        db.collection(\"mascotas\")\r\n                .whereEqualTo(\"categoria\", \"adopcion\")\r\n                .get()\r\n                .addOnSuccessListener(queryDocumentSnapshots -> {\r\n\r\n                    lista.clear();\r\n                    lista.addAll(queryDocumentSnapshots.getDocuments());\r\n                    adapter.notifyDataSetChanged();\r\n                });\r\n    }}\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aipasa/main/AdopcionesActivity.java b/app/src/main/java/com/aipasa/main/AdopcionesActivity.java
+--- a/app/src/main/java/com/aipasa/main/AdopcionesActivity.java	(revision 92d31e71e24f1c019944b850bbee9f9ce978975d)
++++ b/app/src/main/java/com/aipasa/main/AdopcionesActivity.java	(date 1771261564464)
+@@ -14,7 +14,7 @@
+ import java.util.ArrayList;
+ import java.util.List;
+ 
+-public class AdopcionesActivity {public class AdopcionActivity extends AppCompatActivity {
++public class AdopcionesActivity extends AppCompatActivity {
+ 
+     private RecyclerView recyclerView;
+     private MascotaAdapter adapter;
+@@ -33,14 +33,13 @@
+         recyclerView.setAdapter(adapter);
+ 
+         db = FirebaseFirestore.getInstance();
+-
+         cargarAdopciones();
+     }
+ 
+     private void cargarAdopciones() {
+ 
+         db.collection("mascotas")
+-                .whereEqualTo("categoria", "adopcion")
++                .whereEqualTo("estado", "Adopción")
+                 .get()
+                 .addOnSuccessListener(queryDocumentSnapshots -> {
+ 
+@@ -48,7 +47,5 @@
+                     lista.addAll(queryDocumentSnapshots.getDocuments());
+                     adapter.notifyDataSetChanged();
+                 });
+-    }}
++    }
+ }
+-
+-
+Index: app/src/main/java/com/aipasa/firebase/MascotaAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aipasa.firebase;\r\n\r\nimport android.graphics.Color;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.aipasa.R;\r\nimport com.google.firebase.firestore.DocumentSnapshot;\r\n\r\nimport java.util.List;\r\n\r\npublic class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHolder> {\r\n\r\n    private List<DocumentSnapshot> listaMascotas;\r\n\r\n    public MascotaAdapter(List<DocumentSnapshot> listaMascotas) {\r\n        this.listaMascotas = listaMascotas;\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {\r\n\r\n        View view = LayoutInflater.from(parent.getContext())\r\n                .inflate(R.layout.activity_perdidos, parent, false);\r\n\r\n        return new ViewHolder(view);\r\n    }\r\n\r\n    @Override\r\n    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {\r\n\r\n        DocumentSnapshot mascota = listaMascotas.get(position);\r\n\r\n        String nombre = mascota.getString(\"nombre\");\r\n        String tipo = mascota.getString(\"tipo\");\r\n        String zona = mascota.getString(\"infoAdicional\");\r\n        String fecha = mascota.getString(\"fechaTexto\"); // si guardas fecha como texto\r\n\r\n        holder.txtNombre.setText(nombre != null ? nombre : \"Sin nombre\");\r\n        holder.txtTipo.setText(tipo != null ? tipo : \"\");\r\n        holder.txtZona.setText(zona != null ? zona : \"\");\r\n        holder.txtFecha.setText(fecha != null ? fecha : \"\");\r\n\r\n        // Cambiar color según tipo\r\n        if (tipo != null) {\r\n            switch (tipo) {\r\n                case \"Perro\":\r\n                    holder.txtTipo.setBackgroundColor(Color.parseColor(\"#FF9800\"));\r\n                    break;\r\n                case \"Gato\":\r\n                    holder.txtTipo.setBackgroundColor(Color.parseColor(\"#2196F3\"));\r\n                    break;\r\n                default:\r\n                    holder.txtTipo.setBackgroundColor(Color.parseColor(\"#4CAF50\"));\r\n                    break;\r\n            }\r\n        }\r\n\r\n        // Imagen (de momento placeholder)\r\n        holder.imgMascota.setImageResource(R.drawable.ic_launcher_background);\r\n    }\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return listaMascotas.size();\r\n    }\r\n\r\n    public static class ViewHolder extends RecyclerView.ViewHolder {\r\n\r\n        ImageView imgMascota;\r\n        TextView txtNombre, txtTipo, txtZona, txtFecha;\r\n\r\n        public ViewHolder(@NonNull View itemView) {\r\n            super(itemView);\r\n\r\n            imgMascota = itemView.findViewById(R.id.imgMascota);\r\n            txtNombre = itemView.findViewById(R.id.txtNombre);\r\n            txtTipo = itemView.findViewById(R.id.txtTipo);\r\n            txtZona = itemView.findViewById(R.id.txtZona);\r\n            txtFecha = itemView.findViewById(R.id.txtFecha);\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aipasa/firebase/MascotaAdapter.java b/app/src/main/java/com/aipasa/firebase/MascotaAdapter.java
+--- a/app/src/main/java/com/aipasa/firebase/MascotaAdapter.java	(revision 92d31e71e24f1c019944b850bbee9f9ce978975d)
++++ b/app/src/main/java/com/aipasa/firebase/MascotaAdapter.java	(date 1771264163649)
+@@ -28,7 +28,7 @@
+     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+ 
+         View view = LayoutInflater.from(parent.getContext())
+-                .inflate(R.layout.activity_perdidos, parent, false);
++                .inflate(R.layout.item_mascota, parent, false);
+ 
+         return new ViewHolder(view);
+     }
+@@ -40,31 +40,25 @@
+ 
+         String nombre = mascota.getString("nombre");
+         String tipo = mascota.getString("tipo");
++        String estado = mascota.getString("estado");
+         String zona = mascota.getString("infoAdicional");
+-        String fecha = mascota.getString("fechaTexto"); // si guardas fecha como texto
++        Long fecha = mascota.getLong("fecha");
+ 
+         holder.txtNombre.setText(nombre != null ? nombre : "Sin nombre");
+         holder.txtTipo.setText(tipo != null ? tipo : "");
+         holder.txtZona.setText(zona != null ? zona : "");
+-        holder.txtFecha.setText(fecha != null ? fecha : "");
+ 
+-        // Cambiar color según tipo
+-        if (tipo != null) {
+-            switch (tipo) {
+-                case "Perro":
+-                    holder.txtTipo.setBackgroundColor(Color.parseColor("#FF9800"));
+-                    break;
+-                case "Gato":
+-                    holder.txtTipo.setBackgroundColor(Color.parseColor("#2196F3"));
+-                    break;
+-                default:
+-                    holder.txtTipo.setBackgroundColor(Color.parseColor("#4CAF50"));
+-                    break;
++        if (fecha != null) {
++            holder.txtFecha.setText(String.valueOf(fecha));
++        }
++
++        if (estado != null) {
++            if (estado.equals("Perdido")) {
++                holder.txtTipo.setBackgroundColor(Color.parseColor("#FF9800"));
++            } else {
++                holder.txtTipo.setBackgroundColor(Color.parseColor("#4CAF50"));
+             }
+         }
+-
+-        // Imagen (de momento placeholder)
+-        holder.imgMascota.setImageResource(R.drawable.ic_launcher_background);
+     }
+ 
+     @Override
+Index: app/src/main/java/com/aipasa/repository/MascotaRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aipasa.repository;\r\n\r\nimport com.aipasa.data_Room.Mascota;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.QuerySnapshot;\r\nimport com.google.firebase.firestore.DocumentReference;\r\n\r\npublic class MascotaRepository {\r\n\r\n    private FirebaseFirestore db;\r\n\r\n    public MascotaRepository() {\r\n        db = FirebaseFirestore.getInstance();\r\n    }\r\n\r\n    //OBTENER\r\n    public void obtenerMascotas(String estado,\r\n                                OnSuccessListener<QuerySnapshot> success) {\r\n\r\n        db.collection(\"mascotas\")\r\n                .whereEqualTo(\"estado\", estado)\r\n                .get()\r\n                .addOnSuccessListener(success);\r\n    }\r\n\r\n    // GUARDAR\r\n    public void guardarMascota(Mascota mascota,\r\n                               OnSuccessListener<Void> success) {\r\n\r\n        DocumentReference docRef = db.collection(\"mascotas\").document();\r\n        mascota.setId(docRef.getId());\r\n\r\n        docRef.set(mascota)\r\n                .addOnSuccessListener(success);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aipasa/repository/MascotaRepository.java b/app/src/main/java/com/aipasa/repository/MascotaRepository.java
+--- a/app/src/main/java/com/aipasa/repository/MascotaRepository.java	(revision 92d31e71e24f1c019944b850bbee9f9ce978975d)
++++ b/app/src/main/java/com/aipasa/repository/MascotaRepository.java	(date 1771262475891)
+@@ -1,6 +1,6 @@
+ package com.aipasa.repository;
+ 
+-import com.aipasa.data_Room.Mascota;
++import com.aipasa.firebase.Mascota;
+ import com.google.android.gms.tasks.OnSuccessListener;
+ import com.google.firebase.firestore.FirebaseFirestore;
+ import com.google.firebase.firestore.QuerySnapshot;
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\">\r\n\r\n    <!-- Permisos -->\r\n    <uses-feature\r\n        android:name=\"android.hardware.camera\"\r\n        android:required=\"false\" />\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />\r\n    <uses-permission android:name=\"android.permission.CAMERA\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:icon=\"@mipmap/petfect\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/petfect_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.PetFect\">\r\n\r\n        <!-- Splash -->\r\n        <activity\r\n            android:name=\".splash.Splash\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n\r\n        <!-- Auth -->\r\n        <activity\r\n            android:name=\".auth.Login\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity\r\n            android:name=\".auth.SignUp\"\r\n            android:exported=\"false\" />\r\n\r\n        <!-- Main -->\r\n        <activity\r\n            android:name=\".main.MainActivity\"\r\n            android:exported=\"false\" />\r\n\r\n        <!-- Perfil -->\r\n        <activity\r\n            android:name=\".main.Profile\"\r\n            android:exported=\"false\" />\r\n\r\n        <!-- Preferencias -->\r\n        <activity\r\n            android:name=\".main.PreferenciasActivity\"\r\n            android:exported=\"false\" />\r\n\r\n        <!-- Publicación -->\r\n        <activity\r\n            android:name=\".main.PublicacionActivity\"\r\n            android:exported=\"false\" />\r\n\r\n        <meta-data\r\n            android:name=\"preloaded_fonts\"\r\n            android:resource=\"@array/preloaded_fonts\" />\r\n\r\n    </application>\r\n\r\n</manifest>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 92d31e71e24f1c019944b850bbee9f9ce978975d)
++++ b/app/src/main/AndroidManifest.xml	(date 1771263302056)
+@@ -62,6 +62,10 @@
+             android:name="preloaded_fonts"
+             android:resource="@array/preloaded_fonts" />
+ 
++
++        <activity android:name=".main.PerdidosActivity"/>
++        <activity android:name=".main.AdopcionesActivity"/>
++
+     </application>
+ 
+ </manifest>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_21\" default=\"true\" project-jdk-name=\"jbr-21\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n  <component name=\"VisualizationToolProject\">\r\n    <option name=\"state\">\r\n      <ProjectState>\r\n        <option name=\"scale\" value=\"0.136826171875\" />\r\n      </ProjectState>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 92d31e71e24f1c019944b850bbee9f9ce978975d)
++++ b/.idea/misc.xml	(date 1771328053355)
+@@ -1,4 +1,3 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="jbr-21" project-jdk-type="JavaSDK">

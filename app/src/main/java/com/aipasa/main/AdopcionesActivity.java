@@ -38,10 +38,12 @@ public class AdopcionesActivity extends AppCompatActivity {
     }
 
     private void cargarAdopciones() {
+
         db.collection("mascotas")
-                .whereEqualTo("categoria", "adopcion")
+                .whereEqualTo("estado", "adopcion")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+
                     lista.clear();
                     lista.addAll(queryDocumentSnapshots.getDocuments());
                     adapter.notifyDataSetChanged();

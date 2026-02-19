@@ -10,11 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import android.Manifest;
 import android.content.pm.PackageManager;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -55,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Ahora abre cámara con permiso correcto
         fabCentral.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, PublicacionActivity.class);
+            Intent intent = new Intent(MainActivity.this, PublicacionActivityy.class);
             startActivity(intent);
         });
 
@@ -94,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
             Bitmap photo = (Bitmap) data.getExtras().get("data");
 
-            Intent intent = new Intent(MainActivity.this, PublicacionActivity.class);
+            Intent intent = new Intent(MainActivity.this, PublicacionActivityy.class);
             intent.putExtra("fotoDesdeCamara", photo);
             startActivity(intent);
         }
