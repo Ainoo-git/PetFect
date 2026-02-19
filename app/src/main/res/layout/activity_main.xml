@@ -154,26 +154,26 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- BottomAppBar -->
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottom_app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_gravity="bottom"
-        app:fabCradleMargin="10dp"
-        app:fabCradleRoundedCornerRadius="28dp"
-        app:fabCradleVerticalOffset="10dp"
-        android:backgroundTint="@color/cian_oscuro_iconos"/>
+<!--    &lt;!&ndash; BottomAppBar &ndash;&gt;-->
+<!--    <com.google.android.material.bottomappbar.BottomAppBar-->
+<!--        android:id="@+id/bottom_app_bar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        app:fabCradleMargin="10dp"-->
+<!--        app:fabCradleRoundedCornerRadius="28dp"-->
+<!--        app:fabCradleVerticalOffset="10dp"-->
+<!--        android:backgroundTint="@color/cian_oscuro_iconos"/>-->
 
-    <!-- FAB central -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_central"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_gravity="center|bottom"
-        android:layout_marginBottom="28dp"
-        app:srcCompat="@drawable/camara"
-        app:tint="@color/cian_oscuro_iconos"
-        app:backgroundTint="@color/cian_clarito_bordes"/>
+<!--    &lt;!&ndash; FAB central &ndash;&gt;-->
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fab_central"-->
+<!--        android:layout_width="64dp"-->
+<!--        android:layout_height="64dp"-->
+<!--        android:layout_gravity="center|bottom"-->
+<!--        android:layout_marginBottom="28dp"-->
+<!--        app:srcCompat="@drawable/camara"-->
+<!--        app:tint="@color/cian_oscuro_iconos"-->
+<!--        app:backgroundTint="@color/cian_clarito_bordes"/>-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

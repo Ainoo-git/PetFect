@@ -12,59 +12,29 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="56dp"/>
 
+    <!-- BottomBar fija -->
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_gravity="bottom"
+        android:backgroundTint="@color/cian_oscuro_iconos"
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="28dp"
         app:fabCradleVerticalOffset="10dp"
-        android:backgroundTint="@color/cian_oscuro_iconos"/>
+        app:fabAlignmentMode="center"/>
 
     <!-- FAB central -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_central"
-        android:layout_width="58dp"
-        android:layout_height="57dp"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="35dp"
-        app:srcCompat="@drawable/camara"
-        app:fabSize="normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/camara"
+        android:layout_marginBottom="28dp"
+        app:layout_anchor="@id/bottom_app_bar"
+        app:layout_anchorGravity="center"
         app:maxImageSize="35dp"
         app:tint="@color/cian_oscuro_iconos"
         app:backgroundTint="@color/cian_clarito_bordes"/>
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/recyclerPeces"-->
-<!--        android:layout_marginTop="102dp"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"/>-->
-
-<!--    <com.google.android.material.bottomappbar.BottomAppBar-->
-<!--        android:id="@+id/bottom_app_bar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom"-->
-<!--        app:fabAlignmentMode="center"-->
-<!--        app:menu="@menu/bottom_app_bar_menu"-->
-<!--        app:navigationIcon="@drawable/usericon"-->
-<!--        app:fabCradleVerticalOffset="1dp"-->
-<!--        app:fabCradleMargin="16dp"-->
-<!--        app:fabCradleRoundedCornerRadius="8dp"-->
-<!--        />-->
-
-<!--    &lt;!&ndash;            style="@style/Widget.MaterialComponents.BottomAppBar.PrimarySurface"&ndash;&gt;-->
-
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fab"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:backgroundTint="@color/blue_200"-->
-<!--        android:src="@drawable/outline_add_2_24"-->
-<!--        app:fabSize="normal"-->
-<!--        app:layout_anchor="@+id/bottom_app_bar"-->
-<!--        app:tint="@android:color/holo_orange_light" />-->
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
