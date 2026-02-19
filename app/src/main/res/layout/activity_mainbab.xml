@@ -13,7 +13,6 @@
         android:layout_marginBottom="72dp"/>
     <!-- deja espacio para la barra inferior -->
 
-
     <!-- BARRA INFERIOR FIJA -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_app_bar"
@@ -98,17 +97,4 @@
 <!--&lt;!&ndash;        app:fabCradleRoundedCornerRadius="8dp"&ndash;&gt;-->
 <!--&lt;!&ndash;        />&ndash;&gt;-->
 
-<!--&lt;!&ndash;    &lt;!&ndash;            style="@style/Widget.MaterialComponents.BottomAppBar.PrimarySurface"&ndash;&gt;&ndash;&gt;-->
-
-<!--&lt;!&ndash;    <com.google.android.material.floatingactionbutton.FloatingActionButton&ndash;&gt;-->
-<!--&lt;!&ndash;        android:id="@+id/fab"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_width="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:backgroundTint="@color/blue_200"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:src="@drawable/outline_add_2_24"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:fabSize="normal"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:layout_anchor="@+id/bottom_app_bar"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:tint="@android:color/holo_orange_light" />&ndash;&gt;-->
-
-
-<!--</androidx.coordinatorlayout.widget.CoordinatorLayout>-->
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
