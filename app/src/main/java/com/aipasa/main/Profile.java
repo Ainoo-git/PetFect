@@ -45,4 +45,8 @@ public class Profile extends AppCompatActivity {
         startActivity(new Intent(this, Login.class));
         finish(); // para que el usuario no pueda volver con el botón atrás
     }
+    public void openMapa(View view) {
+        Intent intent = new Intent(this, MapaActivity.class);
+        startActivity(intent);
+    }
 }
