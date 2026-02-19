@@ -23,7 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PublicacionActivity extends AppCompatActivity {
+public class PublicacionActivityy extends AppCompatActivity {
 
     private static final int REQUEST_CAMERA = 1;
     private static final int REQUEST_GALLERY = 2;
@@ -35,7 +35,7 @@ public class PublicacionActivity extends AppCompatActivity {
     private Button btnPublicar;
     private CheckBox checkLegal;
 
-    private EditText etNombre, etTelefono;
+    private EditText etNombre, etTelefono, etEdad, etChip, etInfoAdicional, etOtroTipo;
     private CheckBox cbPerdido, cbAdopcion, cbPerro, cbGato;
 
     private Uri imageUri;
@@ -54,6 +54,10 @@ public class PublicacionActivity extends AppCompatActivity {
 
         etNombre = findViewById(R.id.etNombre);
         etTelefono = findViewById(R.id.etTelefono);
+        etEdad = findViewById(R.id.etEdad);
+        etChip = findViewById(R.id.etChip);
+        etInfoAdicional = findViewById(R.id.etInfoAdicional);
+        etOtroTipo = findViewById(R.id.etOtroTipo);
 
         cbPerdido = findViewById(R.id.cbPerdido);
         cbAdopcion = findViewById(R.id.cbAdopcion);
@@ -76,6 +80,9 @@ public class PublicacionActivity extends AppCompatActivity {
 
         String nombre = etNombre.getText().toString().trim();
         String telefono = etTelefono.getText().toString().trim();
+        String edad = etEdad.getText().toString().trim();
+        String chip = etChip.getText().toString().trim();
+        String infoAdicional = etInfoAdicional.getText().toString().trim();
 
         String estado = null;
         if (cbPerdido.isChecked()) estado = "perdido";
@@ -99,6 +106,10 @@ public class PublicacionActivity extends AppCompatActivity {
         mascota.put("tipo", tipo);
         mascota.put("estado", estado);
         mascota.put("telefono", telefono);
+        mascota.put("edad", edad);
+        mascota.put("chip", chip);
+        mascota.put("infoAdicional", infoAdicional);
+        mascota.put("fotoUrl", "");
         mascota.put("fecha", System.currentTimeMillis());
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
