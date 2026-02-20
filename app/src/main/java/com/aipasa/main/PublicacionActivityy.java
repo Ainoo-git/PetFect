@@ -35,7 +35,7 @@ public class PublicacionActivityy extends AppCompatActivity {
     private Button btnPublicar;
     private CheckBox checkLegal;
 
-    private EditText etNombre, etTelefono, etEdad, etChip, etInfoAdicional, etOtroTipo;
+    private EditText etNombre, etTelefono, etEdad, etChip, etInfoAdicional;
     private CheckBox cbPerdido, cbAdopcion, cbPerro, cbGato;
 
     private Uri imageUri;
@@ -57,7 +57,6 @@ public class PublicacionActivityy extends AppCompatActivity {
         etEdad = findViewById(R.id.etEdad);
         etChip = findViewById(R.id.etChip);
         etInfoAdicional = findViewById(R.id.etInfoAdicional);
-        etOtroTipo = findViewById(R.id.etOtroTipo);
 
         cbPerdido = findViewById(R.id.cbPerdido);
         cbAdopcion = findViewById(R.id.cbAdopcion);
@@ -74,7 +73,6 @@ public class PublicacionActivityy extends AppCompatActivity {
         });
 
         btnPublicar.setOnClickListener(v -> guardarMascota());
-
     }
 
     private void guardarMascota() {

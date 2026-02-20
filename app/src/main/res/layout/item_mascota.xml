@@ -19,7 +19,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/placeholder_mascota"/>
+            android:src="@drawable/ic_launcher_foreground"/>
 
         <LinearLayout
             android:layout_width="match_parent"
