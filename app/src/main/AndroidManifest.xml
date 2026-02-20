@@ -17,9 +17,7 @@
         android:roundIcon="@mipmap/petfect_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PetFect">
-        <activity
-            android:name=".main.MapaActivity"
-            android:exported="false" />
+
         <!-- Splash -->
         <activity
             android:name=".splash.Splash"

@@ -1,6 +1,5 @@
 package com.aipasa.firebase;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aipasa.R;
+import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.text.SimpleDateFormat;
@@ -29,60 +29,66 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_mascota, parent, false);
-
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        DocumentSnapshot doc = listaMascotas.get(position);
 
-        DocumentSnapshot mascota = listaMascotas.get(position);
-
-        String nombre = mascota.getString("nombre");
-        String tipo = mascota.getString("tipo");
-        String zona = mascota.getString("infoAdicional");
-        Long fechaLong = mascota.getLong("fecha");
+        String nombre = doc.getString("nombre");
+        String tipo = doc.getString("tipo");
+        String estado = doc.getString("estado");
+        String infoAdicional = doc.getString("infoAdicional");
+        String edad = doc.getString("edad");
+        String fotoUrl = doc.getString("fotoUrl");
+        Long fechaLong = doc.getLong("fecha");
 
         // Nombre
         holder.txtNombre.setText(nombre != null ? nombre : "Sin nombre");
 
-        // Tipo
-        holder.txtTipo.setText(tipo != null ? tipo : "");
+        // Tipo y Estado
+        String tipoEstado = "";
+        if (tipo != null) {
+            tipoEstado += tipo.substring(0, 1).toUpperCase() + tipo.substring(1);
+        }
+        if (estado != null) {
+            if (!tipoEstado.isEmpty()) tipoEstado += " • ";
+            tipoEstado += estado.substring(0, 1).toUpperCase() + estado.substring(1);
+        }
+        holder.txtTipoEstado.setText(tipoEstado);
 
-        // Zona
-        holder.txtZona.setText(zona != null ? zona : "");
+        // Información adicional
+        String info = "";
+        if (edad != null && !edad.isEmpty()) {
+            info += "Edad: " + edad;
+        }
+        if (infoAdicional != null && !infoAdicional.isEmpty()) {
+            if (!info.isEmpty()) info += " • ";
+            info += infoAdicional;
+        }
+        holder.txtInfoAdicional.setText(info.isEmpty() ? "Sin información adicional" : info);
 
         // Fecha
         if (fechaLong != null) {
             String fechaFormateada = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                     .format(new Date(fechaLong));
-            holder.txtFecha.setText(fechaFormateada);
-        } else {
-            holder.txtFecha.setText("");
+            holder.txtFecha.setText("Publicado: " + fechaFormateada);
         }
 
-        // Color según tipo
-        if (tipo != null) {
-            switch (tipo.toLowerCase()) {
-                case "perro":
-                    holder.txtTipo.setBackgroundColor(Color.parseColor("#FF9800"));
-                    break;
-                case "gato":
-                    holder.txtTipo.setBackgroundColor(Color.parseColor("#2196F3"));
-                    break;
-                default:
-                    holder.txtTipo.setBackgroundColor(Color.parseColor("#4CAF50"));
-                    break;
-            }
+        // Imagen
+        if (fotoUrl != null && !fotoUrl.isEmpty()) {
+            Glide.with(holder.itemView.getContext())
+                    .load(fotoUrl)
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.ic_search)
+                    .centerCrop()
+                    .into(holder.imgMascota);
         } else {
-            holder.txtTipo.setBackgroundColor(Color.TRANSPARENT);
+            holder.imgMascota.setImageResource(R.drawable.ic_launcher_background);
         }
-
-        // Imagen (placeholder por ahora)
-        holder.imgMascota.setImageResource(R.drawable.ic_launcher_background);
     }
 
     @Override
@@ -90,18 +96,21 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
         return listaMascotas != null ? listaMascotas.size() : 0;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public void actualizarLista(List<DocumentSnapshot> nuevaLista) {
+        this.listaMascotas = nuevaLista;
+        notifyDataSetChanged();
+    }
 
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgMascota;
-        TextView txtNombre, txtTipo, txtZona, txtFecha;
+        TextView txtNombre, txtTipoEstado, txtInfoAdicional, txtFecha;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             imgMascota = itemView.findViewById(R.id.imgMascota);
             txtNombre = itemView.findViewById(R.id.txtNombre);
-            txtTipo = itemView.findViewById(R.id.txtTipo);
-            txtZona = itemView.findViewById(R.id.txtZona);
+            txtTipoEstado = itemView.findViewById(R.id.txtTipoEstado);
+            txtInfoAdicional = itemView.findViewById(R.id.txtInfoAdicional);
             txtFecha = itemView.findViewById(R.id.txtFecha);
         }
     }

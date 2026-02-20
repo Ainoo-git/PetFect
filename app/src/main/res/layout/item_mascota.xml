@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,20 +14,12 @@
         android:orientation="horizontal"
         android:padding="12dp">
 
-        <!-- Indicador de estado (barra lateral) -->
-        <View
-            android:id="@+id/estadoIndicator"
-            android:layout_width="4dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"/>
-
         <ImageView
             android:id="@+id/imgMascota"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginStart="8dp"
             android:scaleType="centerCrop"
-         />
+            android:src="@drawable/placeholder_mascota"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="@android:color/holo_blue_dark"
+                android:textColor="@color/cian_oscuro_iconos"
                 android:layout_marginTop="2dp"/>
 
             <TextView

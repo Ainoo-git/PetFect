@@ -1,6 +1,7 @@
 package com.aipasa.auth;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.R;
+import com.aipasa.main.PreferenciasActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -17,6 +19,8 @@ public class SignUp extends AppCompatActivity {
     private TextInputEditText etPassword;
 
     private FirebaseAuth mAuth;
+
+    private static final String PREFS = "petfect_prefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +61,9 @@ public class SignUp extends AppCompatActivity {
                                 "Cuenta creada correctamente",
                                 Toast.LENGTH_SHORT).show();
 
-                        mAuth.signOut();
-
-                        startActivity(new Intent(this, Login.class));
+                        //  REDIRIGIR A PREFERENCIAS
+                        Intent intent = new Intent(SignUp.this, PreferenciasActivity.class);
+                        startActivity(intent);
                         finish();
 
                     } else {

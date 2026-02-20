@@ -69,11 +69,12 @@ public class PublicacionActivityy extends AppCompatActivity {
 
         layoutImagen.setOnClickListener(v -> mostrarOpcionesImagen());
 
-        checkLegal.setOnCheckedChangeListener((buttonView, isChecked) ->
-                btnPublicar.setEnabled(isChecked)
-        );
+        checkLegal.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            btnPublicar.setEnabled(isChecked);
+        });
 
         btnPublicar.setOnClickListener(v -> guardarMascota());
+
     }
 
     private void guardarMascota() {

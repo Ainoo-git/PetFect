@@ -1,6 +1,7 @@
 package com.aipasa.main;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,15 +39,19 @@ public class AdopcionesActivity extends AppCompatActivity {
     }
 
     private void cargarAdopciones() {
-
         db.collection("mascotas")
                 .whereEqualTo("estado", "adopcion")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-
                     lista.clear();
                     lista.addAll(queryDocumentSnapshots.getDocuments());
                     adapter.notifyDataSetChanged();
-                });
+
+                    if (lista.isEmpty()) {
+                        Toast.makeText(this, "No hay mascotas en adopción", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Error al cargar", Toast.LENGTH_SHORT).show());
     }
 }

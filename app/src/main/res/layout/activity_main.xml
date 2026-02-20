@@ -128,26 +128,81 @@
                     android:visibility="gone"
                     android:layout_marginTop="24dp"/>
 
+                <!-- SECCIÓN PERDIDOS -->
                 <LinearLayout
                     android:id="@+id/sectionPerdidos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginTop="16dp"/>
+                    android:layout_marginTop="16dp">
 
+                    <TextView
+                        android:id="@+id/tvTituloPerdidos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mascotas Perdidas"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:paddingBottom="8dp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerPerdidos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"/>
+                </LinearLayout>
+
+                <!-- SECCIÓN ADOPCIONES -->
                 <LinearLayout
                     android:id="@+id/sectionAdopciones"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginTop="16dp"/>
+                    android:layout_marginTop="16dp">
 
+                    <TextView
+                        android:id="@+id/tvTituloAdopciones"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mascotas en Adopción"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:paddingBottom="8dp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerAdopciones"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"/>
+                </LinearLayout>
+
+                <!-- SECCIÓN VETERINARIAS -->
                 <LinearLayout
                     android:id="@+id/sectionVeterinarias"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginTop="16dp"/>
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Veterinarias"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:paddingBottom="8dp"/>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Próximamente..."
+                        android:gravity="center"
+                        android:padding="16dp"/>
+                </LinearLayout>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
