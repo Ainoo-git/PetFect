@@ -57,6 +57,10 @@
         <activity
             android:name=".main.PublicacionActivityy"
             android:exported="false" />
+        <activity
+            android:name=".MainBab"
+            android:exported="true">
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

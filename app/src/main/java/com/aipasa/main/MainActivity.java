@@ -48,14 +48,14 @@ public class MainActivity extends AppCompatActivity {
         Button btnAdopciones = findViewById(R.id.btnAdopciones);
         Button btnPerdidos = findViewById(R.id.btnPerdidos);
 
-        // FAB central
-        FloatingActionButton fabCentral = findViewById(R.id.fab_central);
-
-        // Ahora abre cámara con permiso correcto
-        fabCentral.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, PublicacionActivityy.class);
-            startActivity(intent);
-        });
+//        // FAB central
+//        FloatingActionButton fabCentral = findViewById(R.id.fabAdd);
+//
+//        // Ahora abre cámara con permiso correcto
+//        fabCentral.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, PublicacionActivityy.class);
+//            startActivity(intent);
+//        });
 
 
         // Cargar preferencias guardadas
