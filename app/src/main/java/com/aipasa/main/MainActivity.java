@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aipasa.R;
-import com.aipasa.add.AddMascotaActivity;
 import com.aipasa.firebase.MascotaAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fabCentral = findViewById(R.id.fab_central);
         if (fabCentral != null) {
             fabCentral.setOnClickListener(v -> {
-                Intent intent = new Intent(MainActivity.this, AddMascotaActivity.class);
+                Intent intent = new Intent(MainActivity.this, PublicacionActivity.class);
                 startActivity(intent);
             });
         }
@@ -99,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         btnMapa.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MapaActivity.class)));
 
         findViewById(R.id.imgPerfil).setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, PreferenciasActivity.class);
+            Intent intent = new Intent(MainActivity.this, Profile.class);
             startActivity(intent);
         });
     }
