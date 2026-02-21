@@ -218,7 +218,7 @@ public class PublicacionActivity extends AppCompatActivity {
                 .document(id)
                 .set(mascota)
                 .addOnSuccessListener(unused -> {
-                    Toast.makeText(this, "✅ Mascota publicada", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Mascota publicada", Toast.LENGTH_SHORT).show();
                     finish();
                 })
                 .addOnFailureListener(e -> {

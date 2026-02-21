@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
     <!-- Permisos -->
     <uses-feature
         android:name="android.hardware.camera"
@@ -24,38 +25,57 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Auth -->
+        </activity>
+
+        <!-- Auth -->
         <activity
             android:name=".auth.Login"
             android:exported="false" />
         <activity
             android:name=".auth.SignUp"
-            android:exported="false" /> <!-- Main -->
+            android:exported="false" />
+
+        <!-- Main -->
         <activity
             android:name=".main.MainActivity"
-            android:exported="false" /> <!-- Perfil -->
+            android:exported="false" />
+
+        <!-- Perfil -->
         <activity
             android:name=".main.Profile"
-            android:exported="false" /> <!-- Preferencias -->
+            android:exported="false" />
+
+        <!-- Preferencias -->
         <activity
             android:name=".main.PreferenciasActivity"
-            android:exported="false" /> <!-- Preferencias -->
+            android:exported="false" />
+
+        <!-- Perdidos -->
         <activity
             android:name=".main.PerdidosActivity"
-            android:exported="false" /> <!-- Perdidos -->
+            android:exported="false" />
+
+        <!-- Adopciones -->
         <activity
             android:name=".main.AdopcionesActivity"
-            android:exported="false" /> <!-- Adopciones -->
+            android:exported="false" />
+
+        <!-- Publicación -->
+        <activity
+            android:name=".main.PublicacionActivity"
+            android:exported="false" />
+
+        <!-- Mapa -->
         <activity
             android:name=".main.MapaActivity"
-            android:exported="false" /> <!-- mapa -->
-    
+            android:exported="false" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>
