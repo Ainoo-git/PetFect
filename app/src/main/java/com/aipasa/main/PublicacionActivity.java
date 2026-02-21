@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.*;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +30,7 @@ public class PublicacionActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA = 1;
     private static final int REQUEST_GALLERY = 2;
     private static final int CAMERA_PERMISSION_CODE = 200;
+    private static final int STORAGE_PERMISSION_CODE = 300;
 
     private LinearLayout layoutImagen;
     private ImageView imgMascota;
@@ -81,42 +84,66 @@ public class PublicacionActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle("Añadir imagen")
                 .setItems(opciones, (dialog, which) -> {
-
                     if (which == 0) {
-
-                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                                == PackageManager.PERMISSION_GRANTED) {
-
-                            abrirCamara();
-
-                        } else {
-
-                            ActivityCompat.requestPermissions(this,
-                                    new String[]{Manifest.permission.CAMERA},
-                                    CAMERA_PERMISSION_CODE);
-                        }
-
+                        verificarPermisoCamara();
                     } else {
-
-                        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-                        startActivityForResult(galleryIntent, REQUEST_GALLERY);
+                        verificarPermisoGaleria();
                     }
                 })
                 .show();
     }
 
-    private void abrirCamara() {
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    private void verificarPermisoCamara() {
 
-        if (cameraIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(cameraIntent, REQUEST_CAMERA);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    CAMERA_PERMISSION_CODE);
         } else {
-            Toast.makeText(this,
-                    "No hay aplicación de cámara disponible",
-                    Toast.LENGTH_SHORT).show();
+            abrirCamara();
         }
+    }
+
+    private void verificarPermisoGaleria() {
+
+        String permiso;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permiso = Manifest.permission.READ_MEDIA_IMAGES;
+        } else {
+            permiso = Manifest.permission.READ_EXTERNAL_STORAGE;
+        }
+
+        if (ContextCompat.checkSelfPermission(this, permiso)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{permiso},
+                    STORAGE_PERMISSION_CODE);
+        } else {
+            abrirGaleria();
+        }
+    }
+
+    private void abrirCamara() {
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        try {
+            startActivityForResult(intent, REQUEST_CAMERA);
+        } catch (Exception e) {
+            Toast.makeText(this,
+                    "El dispositivo no tiene aplicación de cámara instalada",
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void abrirGaleria() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, REQUEST_GALLERY);
     }
 
     @Override
@@ -124,42 +151,55 @@ public class PublicacionActivity extends AppCompatActivity {
                                     @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK && data != null) {
+        if (resultCode != RESULT_OK) return;
 
-            if (requestCode == REQUEST_CAMERA && data.getExtras() != null) {
-                imageBitmap = (Bitmap) data.getExtras().get("data");
-                imgMascota.setImageBitmap(imageBitmap);
+        if (requestCode == REQUEST_CAMERA) {
+
+            if (data != null && data.getExtras() != null) {
+
+                Object extra = data.getExtras().get("data");
+
+                if (extra instanceof Bitmap) {
+                    imageBitmap = (Bitmap) extra;
+                    imgMascota.setImageBitmap(imageBitmap);
+                    layoutImagen.setVisibility(View.GONE);
+                    imgMascota.setVisibility(View.VISIBLE);
+                }
             }
 
-            if (requestCode == REQUEST_GALLERY) {
+        } else if (requestCode == REQUEST_GALLERY) {
+
+            if (data != null && data.getData() != null) {
                 imageUri = data.getData();
                 imgMascota.setImageURI(imageUri);
+                layoutImagen.setVisibility(View.GONE);
+                imgMascota.setVisibility(View.VISIBLE);
             }
-
-            layoutImagen.setVisibility(View.GONE);
-            imgMascota.setVisibility(View.VISIBLE);
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String[] permissions,
-                                           int[] grantResults) {
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        if (grantResults.length == 0 ||
+                grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+
+            Toast.makeText(this,
+                    "Permiso denegado",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (requestCode == CAMERA_PERMISSION_CODE) {
+            abrirCamara();
+        }
 
-            if (grantResults.length > 0 &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                abrirCamara();
-
-            } else {
-                Toast.makeText(this,
-                        "Permiso de cámara denegado",
-                        Toast.LENGTH_SHORT).show();
-            }
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            abrirGaleria();
         }
     }
 
