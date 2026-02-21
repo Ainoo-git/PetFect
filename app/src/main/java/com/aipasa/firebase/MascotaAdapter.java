@@ -1,15 +1,18 @@
 package com.aipasa.firebase;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aipasa.R;
+import com.aipasa.main.ActivityTarjeta;
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -34,6 +37,7 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DocumentSnapshot doc = listaMascotas.get(position);
@@ -44,19 +48,20 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
         String infoAdicional = doc.getString("infoAdicional");
         String edad = doc.getString("edad");
         String fotoUrl = doc.getString("fotoUrl");
+        String id = doc.getId();
         Long fechaLong = doc.getLong("fecha");
 
         // Nombre
         holder.txtNombre.setText(nombre != null ? nombre : "Sin nombre");
 
-        // Tipo y Estado (con protección contra null)
+        // Tipo y Estado
         String tipoEstado = "";
         if (tipo != null && !tipo.isEmpty()) {
-            tipoEstado += tipo.substring(0, 1).toUpperCase() + tipo.substring(1);
+            tipoEstado += tipo.substring(0,1).toUpperCase() + tipo.substring(1);
         }
         if (estado != null && !estado.isEmpty()) {
             if (!tipoEstado.isEmpty()) tipoEstado += " • ";
-            tipoEstado += estado.substring(0, 1).toUpperCase() + estado.substring(1);
+            tipoEstado += estado.substring(0,1).toUpperCase() + estado.substring(1);
         }
         holder.txtTipoEstado.setText(tipoEstado);
 
@@ -91,6 +96,17 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
         } else {
             holder.imgMascota.setImageResource(R.drawable.ic_launcher_background);
         }
+
+        // --- CLICK PARA ABRIR ActivityTarjeta ---
+        holder.itemView.setOnClickListener(v -> {
+            if (id != null && !id.isEmpty()) {
+                Intent intent = new Intent(holder.itemView.getContext(), ActivityTarjeta.class);
+                intent.putExtra("ARTICULO_ID", id);
+                holder.itemView.getContext().startActivity(intent);
+            } else {
+                Toast.makeText(holder.itemView.getContext(), "No se puede abrir la publicación", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

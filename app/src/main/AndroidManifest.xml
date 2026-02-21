@@ -52,7 +52,9 @@
         <activity
             android:name=".main.MapaActivity"
             android:exported="false" /> <!-- mapa -->
-    
+
+        <activity android:name=".main.ActivityTarjeta"
+            android:exported="false" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
