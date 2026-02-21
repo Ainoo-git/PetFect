@@ -49,12 +49,12 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
         // Nombre
         holder.txtNombre.setText(nombre != null ? nombre : "Sin nombre");
 
-        // Tipo y Estado
+        // Tipo y Estado (con protección contra null)
         String tipoEstado = "";
-        if (tipo != null) {
+        if (tipo != null && !tipo.isEmpty()) {
             tipoEstado += tipo.substring(0, 1).toUpperCase() + tipo.substring(1);
         }
-        if (estado != null) {
+        if (estado != null && !estado.isEmpty()) {
             if (!tipoEstado.isEmpty()) tipoEstado += " • ";
             tipoEstado += estado.substring(0, 1).toUpperCase() + estado.substring(1);
         }
@@ -76,6 +76,8 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
             String fechaFormateada = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                     .format(new Date(fechaLong));
             holder.txtFecha.setText("Publicado: " + fechaFormateada);
+        } else {
+            holder.txtFecha.setText("");
         }
 
         // Imagen

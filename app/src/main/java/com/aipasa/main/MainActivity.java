@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aipasa.R;
+import com.aipasa.add.AddMascotaActivity;
 import com.aipasa.firebase.MascotaAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -71,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         mostrarNombreUsuario();
         cargarPreferencias();
         configurarFab();
-        //configurarBottomBar();
         configurarBotones();
 
         cargarMascotas();
@@ -79,31 +79,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void configurarFab() {
         FloatingActionButton fabCentral = findViewById(R.id.fab_central);
-
         if (fabCentral != null) {
             fabCentral.setOnClickListener(v -> {
-                Intent intent = new Intent(MainActivity.this, PublicacionFragment.class);
+                Intent intent = new Intent(MainActivity.this, AddMascotaActivity.class);
                 startActivity(intent);
             });
         }
     }
-
-//    private void configurarBottomBar() {
-//        BottomAppBar bottomAppBar = findViewById(R.id.bottom_app_bar);
-//        bottomAppBar.setOnMenuItemClickListener(item -> {
-//
-//            if (item.getItemId() == R.id.menu_home) {
-//                return true;
-//            }
-//
-//            if (item.getItemId() == R.id.menu_mapa) {
-//                startActivity(new Intent(MainActivity.this, MapaActivity.class));
-//                return true;
-//            }
-//
-//            return false;
-//        });
-//    }
 
     private void configurarBotones() {
         Button btnAll = findViewById(R.id.btnAll);
@@ -154,11 +136,12 @@ public class MainActivity extends AppCompatActivity {
                 .orderBy("fecha", Query.Direction.DESCENDING);
 
         mascotasListener = query.addSnapshotListener((snapshots, error) -> {
-
             if (error != null) {
                 Toast.makeText(this, "Error al cargar", Toast.LENGTH_SHORT).show();
                 return;
             }
+
+            if (snapshots == null) return;
 
             listaPerdidos.clear();
             listaAdopciones.clear();
@@ -197,10 +180,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void mostrarMensajeSiNada() {
-        boolean nadaVisible =
-                sectionPerdidos.getVisibility() != View.VISIBLE &&
-                        sectionAdopciones.getVisibility() != View.VISIBLE &&
-                        sectionVeterinarias.getVisibility() != View.VISIBLE;
+        boolean nadaVisible = sectionPerdidos.getVisibility() != View.VISIBLE &&
+                sectionAdopciones.getVisibility() != View.VISIBLE &&
+                sectionVeterinarias.getVisibility() != View.VISIBLE;
 
         tvNadaSeleccionado.setVisibility(nadaVisible ? View.VISIBLE : View.GONE);
 

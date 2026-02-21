@@ -14,23 +14,16 @@ public class MascotaRepository {
         db = FirebaseFirestore.getInstance();
     }
 
-    //OBTENER
-    public void obtenerMascotas(String estado,
-                                OnSuccessListener<QuerySnapshot> success) {
-
+    public void obtenerMascotas(String estado, OnSuccessListener<QuerySnapshot> success) {
         db.collection("mascotas")
                 .whereEqualTo("estado", estado)
                 .get()
                 .addOnSuccessListener(success);
     }
 
-    // GUARDAR
-    public void guardarMascota(Mascota mascota,
-                               OnSuccessListener<Void> success) {
-
+    public void guardarMascota(Mascota mascota, OnSuccessListener<Void> success) {
         DocumentReference docRef = db.collection("mascotas").document();
         mascota.setId(docRef.getId());
-
         docRef.set(mascota)
                 .addOnSuccessListener(success);
     }
