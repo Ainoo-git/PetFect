@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aipasa.R;
 import com.aipasa.firebase.MascotaAdapter;
-import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (fabCentral != null) {
             fabCentral.setOnClickListener(v -> {
-                Intent intent = new Intent(MainActivity.this, PublicacionActivityy.class);
+                Intent intent = new Intent(MainActivity.this, PublicacionFragment.class);
                 startActivity(intent);
             });
         }
