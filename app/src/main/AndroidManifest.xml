@@ -58,6 +58,10 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <!-- Publicacion -->
+        <activity
+            android:name=".main.PublicacionActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
