@@ -15,7 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddMascotaActivity extends AppCompatActivity {
+public classAddMascotaActivity extends AppCompatActivity {
 
     private EditText etNombre, etTelefono, etEdad, etChip, etInfoAdicional, etOtroTipo;
     private CheckBox cbPerdido, cbAdopcion;
