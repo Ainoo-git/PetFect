@@ -85,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="Lost"
+                    android:text="Perdidos"
                     style="@style/BotonPetFect"
                     android:onClick="openPerdidos"/>
 
