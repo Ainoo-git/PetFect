@@ -82,3 +82,66 @@ La aplicación conecta usuarios mediante publicaciones dinámicas, permitiendo r
 ---
 
 ## Estructura del Proyecto
+```
+PetFect/
+├── app/
+│   ├── src/
+│   │   └── main/
+│   │       ├── java/com/aipasa/
+│   │       │   ├── main/
+│   │       │   ├── auth/
+│   │       │   ├── firebase/
+│   │       │   └── repository/
+│   │       │
+│   │       ├── res/
+│   │       │   ├── layout/
+│   │       │   ├── drawable/
+│   │       │   ├── values/
+│   │       │   ├── menu/
+│   │       │   └── anim/
+│   │       │
+│   │       └── AndroidManifest.xml
+│   │
+│   └── build.gradle.kts
+│
+├── build.gradle.kts
+├── settings.gradle.kts
+└── gradle/
+```
+
+
+---
+
+## Instalación
+
+1. **Clonar el repositorio**
+   ```bash
+   git clone https://github.com/Ainoo-git/PetFect.git
+   ```
+
+2. **Abrir el proyecto en Android Studio**
+
+3. **Sincronizar Gradle**
+
+4. **Configurar claves necesarias**
+   - Añadir las API Keys correspondientes en el archivo `local.properties` si procede.
+
+5. **Ejecutar la aplicación**
+   - En emulador Android  
+   - O en dispositivo físico  
+
+---
+
+## Próximas Mejoras
+
+- Sistema completo de geolocalización
+- Notificaciones avanzadas en tiempo real
+- Filtros de búsqueda personalizados
+- Panel de administración para refugios
+
+---
+
+## Licencia
+
+Este proyecto está bajo la licencia  
+**Creative Commons BY-SA 4.0**
