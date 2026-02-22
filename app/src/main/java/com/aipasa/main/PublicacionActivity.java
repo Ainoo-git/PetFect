@@ -11,6 +11,12 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.*;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.android.gms.tasks.Task;
+import java.io.ByteArrayOutputStream;
+import java.util.UUID;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -211,17 +217,20 @@ public class PublicacionActivity extends AppCompatActivity {
         String chip = etChip.getText().toString().trim();
         String infoAdicional = etInfoAdicional.getText().toString().trim();
 
-        String estado = null;
-        if (cbPerdido.isChecked()) estado = "perdido";
-        if (cbAdopcion.isChecked()) estado = "adopcion";
+        final String estado = cbPerdido.isChecked() ? "perdido" :
+                cbAdopcion.isChecked() ? "adopcion" : null;
 
-        String tipo = null;
-        if (cbPerro.isChecked()) tipo = "perro";
-        if (cbGato.isChecked()) tipo = "gato";
+        final String tipo = cbPerro.isChecked() ? "perro" :
+                cbGato.isChecked() ? "gato" : null;
 
         if (nombre.isEmpty() || estado == null || tipo == null) {
-            Toast.makeText(this,
-                    "Completa los campos obligatorios",
+            Toast.makeText(this, "Completa los campos obligatorios",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (imageUri == null && imageBitmap == null) {
+            Toast.makeText(this, "Selecciona una imagen",
                     Toast.LENGTH_SHORT).show();
             return;
         }
@@ -229,35 +238,65 @@ public class PublicacionActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String id = db.collection("mascotas").document().getId();
 
-        Map<String, Object> mascota = new HashMap<>();
-        mascota.put("id", id);
-        mascota.put("nombre", nombre);
-        mascota.put("tipo", tipo);
-        mascota.put("estado", estado);
-        mascota.put("telefono", telefono);
-        mascota.put("edad", edad);
-        mascota.put("chip", chip);
-        mascota.put("infoAdicional", infoAdicional);
-        mascota.put("fotoUrl", "");
-        mascota.put("fecha", System.currentTimeMillis());
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference imageRef =
+                storageRef.child("mascotas/" + UUID.randomUUID() + ".jpg");
 
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            mascota.put("userId",
-                    FirebaseAuth.getInstance().getCurrentUser().getUid());
+        Task<?> uploadTask;
+
+        //GALERÍA
+        if (imageUri != null) {
+            uploadTask = imageRef.putFile(imageUri);
+        }
+        //CÁMARA
+        else {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+            byte[] data = baos.toByteArray();
+            uploadTask = imageRef.putBytes(data);
         }
 
-        db.collection("mascotas")
-                .document(id)
-                .set(mascota)
-                .addOnSuccessListener(unused -> {
-                    Toast.makeText(this,
-                            "Mascota publicada",
-                            Toast.LENGTH_SHORT).show();
-                    finish();
+        uploadTask
+                .continueWithTask(task -> imageRef.getDownloadUrl())
+                .addOnSuccessListener(uri -> {
+
+                    String urlDescarga = uri.toString();
+
+                    Map<String, Object> mascota = new HashMap<>();
+                    mascota.put("id", id);
+                    mascota.put("nombre", nombre);
+                    mascota.put("tipo", tipo);
+                    mascota.put("estado", estado);
+                    mascota.put("telefono", telefono);
+                    mascota.put("edad", edad);
+                    mascota.put("chip", chip);
+                    mascota.put("infoAdicional", infoAdicional);
+                    mascota.put("fotoUrl", urlDescarga);
+                    mascota.put("fecha", System.currentTimeMillis());
+
+                    if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                        mascota.put("userId",
+                                FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    }
+
+                    db.collection("mascotas")
+                            .document(id)
+                            .set(mascota)
+                            .addOnSuccessListener(unused -> {
+                                Toast.makeText(this,
+                                        "Mascota publicada",
+                                        Toast.LENGTH_SHORT).show();
+                                finish();
+                            })
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(this,
+                                            "Error al publicar",
+                                            Toast.LENGTH_SHORT).show());
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this,
-                                "Error al publicar",
+                                "Error al subir imagen",
                                 Toast.LENGTH_SHORT).show());
     }
+
 }
