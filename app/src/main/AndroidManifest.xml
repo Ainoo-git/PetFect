@@ -61,6 +61,9 @@
         <activity
             android:name=".main.PublicacionActivity"
             android:exported="false" />
+        <activity
+            android:name=".main.ActivityTarjeta"
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
