@@ -1,45 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+    <!-- CONTENEDOR DE FRAGMENTS -->
+    <FrameLayout
+        android:id="@+id/content_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="72dp"/>
 
-        <!-- CONTENIDO DINÁMICO -->
-        <FrameLayout
-            android:id="@+id/content_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="72dp"/>
-        <!-- deja espacio para la barra inferior -->
+    <!-- BARRA INFERIOR -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:background="@color/cian_oscuro_iconos"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/bottom_nav_menu" />
 
+    <!-- BOTÓN CENTRAL -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_central"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="28dp"
+        app:srcCompat="@drawable/camara"
+        app:maxImageSize="35dp"
+        app:tint="@color/cian_oscuro_iconos"
+        app:backgroundTint="@color/cian_clarito_bordes" />
 
-        <!-- BARRA INFERIOR FIJA -->
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_gravity="bottom"
-            android:background="@color/cian_oscuro_iconos"
-            app:itemIconTint="@color/white"
-            app:itemTextColor="@color/white"
-            app:menu="@menu/bottom_nav_menu" />
-
-        <!-- FAB CENTRAL FIJO -->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_central"
-            android:layout_width="58dp"
-            android:layout_height="57dp"
-            android:layout_gravity="center|bottom"
-            android:layout_marginBottom="28dp"
-            app:srcCompat="@drawable/camara"
-            app:maxImageSize="35dp"
-            app:tint="@color/cian_oscuro_iconos"
-            app:backgroundTint="@color/cian_clarito_bordes"/>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -34,6 +34,13 @@
             android:name=".auth.Login"
             android:exported="false" />
         <activity
+            android:name=".MainBab"
+            android:exported="false">
+
+
+        </activity>
+
+        <activity
             android:name=".auth.SignUp"
             android:exported="false" /> <!-- Main -->
         <activity
@@ -52,10 +59,7 @@
             android:name=".main.AdopcionesActivity"
             android:exported="false" /> <!-- Adopciones -->
         <activity
-            android:name=".main.MapaActivity"
-            android:exported="false" /> <!-- mapa -->
-        <activity
-            android:name=".main.PublicacionActivityy"
+            android:name=".main.PublicacionActivity"
             android:exported="false" />
 
         <meta-data

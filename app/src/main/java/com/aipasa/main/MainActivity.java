@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Ahora abre cámara con permiso correcto
         fabCentral.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, PublicacionActivityy.class);
+            Intent intent = new Intent(MainActivity.this, PublicacionActivity.class);
             startActivity(intent);
         });
 
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
             Bitmap photo = (Bitmap) data.getExtras().get("data");
 
-            Intent intent = new Intent(MainActivity.this, PublicacionActivityy.class);
+            Intent intent = new Intent(MainActivity.this, PublicacionActivity.class);
             intent.putExtra("fotoDesdeCamara", photo);
             startActivity(intent);
         }
