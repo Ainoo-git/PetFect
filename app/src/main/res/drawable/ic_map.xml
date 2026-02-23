@@ -1,13 +1,12 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="800dp"
-    android:height="800dp"
+    android:width="24dp"
+    android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
   <path
-      android:pathData="M5.7,15C4.034,15.635 3,16.521 3,17.5C3,19.433 7.029,21 12,21C16.971,21 21,19.433 21,17.5C21,16.521 19.966,15.635 18.3,15M12,9H12.01M18,9C18,13.064 13.5,15 12,18C10.5,15 6,13.064 6,9C6,5.686 8.686,3 12,3C15.314,3 18,5.686 18,9ZM13,9C13,9.552 12.552,10 12,10C11.448,10 11,9.552 11,9C11,8.448 11.448,8 12,8C12.552,8 13,8.448 13,9Z"
+      android:pathData="M5.7,17C4.034,17.635 3,18.521 3,19.5C3,21.433 7.029,23 12,23C16.971,23 21,21.433 21,19.5C21,18.521 19.966,17.635 18.3,17M12,11H12.01M18,11C18,15.064 13.5,17 12,20C10.5,17 6,15.064 6,11C6,7.686 8.686,5 12,5C15.314,5 18,7.686 18,11ZM13,11C13,11.552 12.552,12 12,12C11.448,12 11,11.552 11,11C11,10.448 11.448,10 12,10C12.552,10 13,10.448 13,11Z"
       android:strokeLineJoin="round"
       android:strokeWidth="2"
-      android:fillColor="#00000000"
       android:strokeColor="@color/cian_oscuro_iconos"
       android:strokeLineCap="round"/>
 </vector>
