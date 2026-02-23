@@ -6,17 +6,22 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.aipasa.R;
 import com.aipasa.auth.Login;
+import com.aipasa.main.MapaActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileFragment extends Fragment {
+
+    private TextView tvNombre;
 
     @Nullable
     @Override
@@ -24,25 +29,32 @@ public class ProfileFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        // Inflamos el layout de profile
-        View view = inflater.inflate(R.layout.activity_profile, container, false);
+        // Inflamos el layout
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        // Toolbar back
+        // Toolbar con flecha atrás
         MaterialToolbar toolbar = view.findViewById(R.id.topAppBar);
-        toolbar.setNavigationOnClickListener(v -> {
-            // Si quieres, podrías reemplazar con algo que vuelva al HomeFragment
-            requireActivity().onBackPressed();
-        });
+        toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
 
         // Nombre en el perfil
-        TextView tvNombre = view.findViewById(R.id.nombre2);
+        tvNombre = view.findViewById(R.id.nombre2);
         SharedPreferences prefs = requireContext().getSharedPreferences("petfect_prefs", getContext().MODE_PRIVATE);
         String username = prefs.getString("username", "Nombre");
         tvNombre.setText(username);
 
-        // Botones del layout
-//        view.findViewById(R.id.btnLogout).setOnClickListener(v -> openLogin(view));
-//        view.findViewById(R.id.btnMapa).setOnClickListener(v -> openMapa(view));
+        // Botón Cerrar sesión
+        Button btnCerrarSesion = view.findViewById(R.id.btnCerrarSesion);
+        btnCerrarSesion.setOnClickListener(this::openLogin);
+
+        // Botón Configuración
+        Button btnConfiguracion = view.findViewById(R.id.btnConfiguracion);
+        btnConfiguracion.setOnClickListener(this::openMapa);
+
+        // Botón Editar perfil (si quieres agregar funcionalidad más adelante)
+        Button btnEditarPerfil = view.findViewById(R.id.btnEditarPerfil);
+        btnEditarPerfil.setOnClickListener(v -> {
+            // Aquí puedes abrir un Activity o Fragment de edición de perfil
+        });
 
         return view;
     }
@@ -51,17 +63,19 @@ public class ProfileFragment extends Fragment {
         // Cierra sesión en Firebase
         FirebaseAuth.getInstance().signOut();
 
+        // Limpia SharedPreferences
         SharedPreferences prefs = requireContext().getSharedPreferences("petfect_prefs", getContext().MODE_PRIVATE);
         prefs.edit().clear().apply();
 
-        // Abre la Activity de Login
-        startActivity(new Intent(requireContext(), Login.class));
-        requireActivity().finish(); // para que no pueda volver con atrás
+        // Abre la Activity de Login y cierra la actual
+        Intent intent = new Intent(requireContext(), Login.class);
+        startActivity(intent);
+        requireActivity().finish();
     }
 
     private void openMapa(View view) {
-        // Si ya tienes MapFragment en MainBab, podrías reemplazar el fragment en vez de abrir Activity
-        startActivity(new Intent(requireContext(), com.aipasa.fragment.MapFragment.class));
-        // Nota: si quieres navegación interna, esto se puede reemplazar con getParentFragmentManager().replace(...)
+        // Abre el Activity de mapa
+        Intent intent = new Intent(requireContext(), MapaActivity.class);
+        startActivity(intent);
     }
 }
