@@ -2,210 +2,179 @@ package com.aipasa.main;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.LinearLayout;
 
+import android.content.pm.PackageManager;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.aipasa.R;
-import com.aipasa.firebase.MascotaAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.Query;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth auth;
-    private FirebaseUser currentUser;
-    private FirebaseFirestore db;
-    private ListenerRegistration mascotasListener;
+    // Secciones de la pantalla principal
+    private View sectionPerdidos, sectionAdopciones, sectionVeterinarias;
+    private TextView tvNadaSeleccionado;
 
-    private List<DocumentSnapshot> listaPerdidos = new ArrayList<>();
-    private List<DocumentSnapshot> listaAdopciones = new ArrayList<>();
-
-    private MascotaAdapter adapterPerdidos;
-    private MascotaAdapter adapterAdopciones;
-
-    private LinearLayout sectionPerdidos, sectionAdopciones, sectionVeterinarias;
-    private TextView tvNadaSeleccionado, tvNombreUsuario;
-    private TextView tvTituloPerdidos, tvTituloAdopciones;
-
-    private RecyclerView recyclerPerdidos, recyclerAdopciones;
-
+    // Preferencias del usuario
     private boolean prefPerdidos, prefAdopciones, prefVeterinarias;
-    private static final String PREFS = "petfect_prefs";
+
+    // Código cámara
+    private static final int REQUEST_CAMERA = 1;
+    private static final int CAMERA_PERMISSION_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        auth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
-        currentUser = auth.getCurrentUser();
-
+        // Referencias a las secciones
         sectionPerdidos = findViewById(R.id.sectionPerdidos);
         sectionAdopciones = findViewById(R.id.sectionAdopciones);
         sectionVeterinarias = findViewById(R.id.sectionVeterinarias);
         tvNadaSeleccionado = findViewById(R.id.tvNadaSeleccionado);
-        tvNombreUsuario = findViewById(R.id.tvNombreUsuario);
-        tvTituloPerdidos = findViewById(R.id.tvTituloPerdidos);
-        tvTituloAdopciones = findViewById(R.id.tvTituloAdopciones);
-        recyclerPerdidos = findViewById(R.id.recyclerPerdidos);
-        recyclerAdopciones = findViewById(R.id.recyclerAdopciones);
 
-        configurarRecyclerViews();
-        mostrarNombreUsuario();
-        cargarPreferencias();
-        configurarFab();
-        configurarBotones();
-
-        cargarMascotas();
-    }
-
-    private void configurarFab() {
-        FloatingActionButton fabCentral = findViewById(R.id.fab_central);
-        if (fabCentral != null) {
-            fabCentral.setOnClickListener(v -> {
-                Intent intent = new Intent(MainActivity.this, PublicacionActivity.class);
-                startActivity(intent);
-            });
-        }
-    }
-
-    private void configurarBotones() {
+        // Botones de la barra superior
         Button btnAll = findViewById(R.id.btnAll);
         Button btnAdopciones = findViewById(R.id.btnAdopciones);
         Button btnPerdidos = findViewById(R.id.btnPerdidos);
-        Button btnMapa = findViewById(R.id.btnMapa);
 
-        btnAll.setOnClickListener(v -> mostrarAll());
-        btnAdopciones.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AdopcionesActivity.class)));
-        btnPerdidos.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, PerdidosActivity.class)));
-        btnMapa.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MapaActivity.class)));
+        // FAB central
+        FloatingActionButton fabCentral = findViewById(R.id.fab_central);
 
-        findViewById(R.id.imgPerfil).setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, Profile.class);
+        // Ahora abre cámara con permiso correcto
+        fabCentral.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, PublicacionActivityy.class);
             startActivity(intent);
         });
+
+
+        // Cargar preferencias guardadas
+        cargarPreferencias();
+
+        // Estado inicial
+        mostrarAll();
+
+        btnAll.setOnClickListener(v -> mostrarAll());
+
+        btnAdopciones.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AdopcionesActivity.class);
+            startActivity(intent);
+        });
+
+        btnPerdidos.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, PerdidosActivity.class);
+            startActivity(intent);
+        });
+
     }
 
-    private void configurarRecyclerViews() {
-        recyclerPerdidos.setLayoutManager(new LinearLayoutManager(this));
-        adapterPerdidos = new MascotaAdapter(listaPerdidos);
-        recyclerPerdidos.setAdapter(adapterPerdidos);
-
-        recyclerAdopciones.setLayoutManager(new LinearLayoutManager(this));
-        adapterAdopciones = new MascotaAdapter(listaAdopciones);
-        recyclerAdopciones.setAdapter(adapterAdopciones);
+    // Método abrir cámara
+    private void abrirCamara() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, REQUEST_CAMERA);
     }
 
-    private void mostrarNombreUsuario() {
-        if (currentUser != null) {
-            String email = currentUser.getEmail();
-            String nombre = email != null ? email.split("@")[0] : "Usuario";
-            tvNombreUsuario.setText("¡Hola, " + nombre + "!");
-        } else {
-            tvNombreUsuario.setText("¡Hola, Invitado!");
+    // Recibir imagen
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CAMERA && resultCode == RESULT_OK && data != null) {
+
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+            Intent intent = new Intent(MainActivity.this, PublicacionActivityy.class);
+            intent.putExtra("fotoDesdeCamara", photo);
+            startActivity(intent);
         }
     }
 
+    // Resultado permiso
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions,
+                                           int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                abrirCamara();
+
+            } else {
+
+                Toast.makeText(this,
+                        "Permiso de cámara denegado",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    // Abrir perfil del usuario
+    public void OpenProfile(View view) {
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
+    }
+    //abrir pestaña animales perdidos
+    public void openPerdidos(View view) {
+        Intent intent = new Intent(this, PerdidosActivity.class);
+        startActivity(intent);
+    }
+
+    //abrir pestaña animales en adopcion
+    public void openAdopcion(View view) {
+        Intent intent = new Intent(this, AdopcionesActivity.class);
+        startActivity(intent);
+    }
+
+    //abrir pestaña mapa
+    public void openMapa(View view) {
+        Intent intent = new Intent(this, MapaActivity.class);
+        startActivity(intent);
+    }
+
+    // Cargar preferencias del usuario
     private void cargarPreferencias() {
-        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("petfect_prefs", MODE_PRIVATE);
         prefPerdidos = prefs.getBoolean("pref_perdidos", true);
         prefAdopciones = prefs.getBoolean("pref_adopciones", true);
         prefVeterinarias = prefs.getBoolean("pref_veterinarias", true);
     }
 
-    private void cargarMascotas() {
-        Query query = db.collection("mascotas")
-                .orderBy("fecha", Query.Direction.DESCENDING);
-
-        mascotasListener = query.addSnapshotListener((snapshots, error) -> {
-            if (error != null) {
-                Toast.makeText(this, "Error al cargar", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (snapshots == null) return;
-
-            listaPerdidos.clear();
-            listaAdopciones.clear();
-
-            for (DocumentSnapshot doc : snapshots.getDocuments()) {
-                String estado = doc.getString("estado");
-                if ("perdido".equals(estado)) {
-                    listaPerdidos.add(doc);
-                } else if ("adopcion".equals(estado)) {
-                    listaAdopciones.add(doc);
-                }
-            }
-
-            adapterPerdidos.notifyDataSetChanged();
-            adapterAdopciones.notifyDataSetChanged();
-
-            actualizarTitulos();
-            actualizarVisibilidadSecciones();
-        });
-    }
-
-    private void actualizarTitulos() {
-        tvTituloPerdidos.setText("Mascotas Perdidas (" + listaPerdidos.size() + ")");
-        tvTituloAdopciones.setText("Mascotas en Adopción (" + listaAdopciones.size() + ")");
-    }
-
-    private void actualizarVisibilidadSecciones() {
-        sectionPerdidos.setVisibility(prefPerdidos && !listaPerdidos.isEmpty() ? View.VISIBLE : View.GONE);
-        sectionAdopciones.setVisibility(prefAdopciones && !listaAdopciones.isEmpty() ? View.VISIBLE : View.GONE);
+    // Mostrar todas las secciones permitidas
+    private void mostrarAll() {
+        sectionPerdidos.setVisibility(prefPerdidos ? View.VISIBLE : View.GONE);
+        sectionAdopciones.setVisibility(prefAdopciones ? View.VISIBLE : View.GONE);
         sectionVeterinarias.setVisibility(prefVeterinarias ? View.VISIBLE : View.GONE);
         mostrarMensajeSiNada();
     }
 
-    private void mostrarAll() {
-        actualizarVisibilidadSecciones();
+    // Mostrar solo veterinarias
+    private void mostrarSoloVeterinarias() {
+        sectionPerdidos.setVisibility(View.GONE);
+        sectionAdopciones.setVisibility(View.GONE);
+        sectionVeterinarias.setVisibility(prefVeterinarias ? View.VISIBLE : View.GONE);
+        mostrarMensajeSiNada();
     }
 
+    // Mostrar mensaje si no hay contenido visible
     private void mostrarMensajeSiNada() {
-        boolean nadaVisible = sectionPerdidos.getVisibility() != View.VISIBLE &&
-                sectionAdopciones.getVisibility() != View.VISIBLE &&
-                sectionVeterinarias.getVisibility() != View.VISIBLE;
+        boolean nadaVisible =
+                sectionPerdidos.getVisibility() == View.GONE &&
+                        sectionAdopciones.getVisibility() == View.GONE &&
+                        sectionVeterinarias.getVisibility() == View.GONE;
 
         tvNadaSeleccionado.setVisibility(nadaVisible ? View.VISIBLE : View.GONE);
-
-        if (nadaVisible) {
-            if (listaPerdidos.isEmpty() && listaAdopciones.isEmpty()) {
-                tvNadaSeleccionado.setText("No hay mascotas publicadas");
-            } else {
-                tvNadaSeleccionado.setText("No hay contenido visible según tus preferencias");
-            }
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        cargarPreferencias();
-        actualizarVisibilidadSecciones();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mascotasListener != null) {
-            mascotasListener.remove();
-        }
     }
 }
