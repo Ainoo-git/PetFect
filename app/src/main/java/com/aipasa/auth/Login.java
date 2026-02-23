@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aipasa.MainBab;
 import com.aipasa.R;
 import com.aipasa.main.MainActivity;
 import com.aipasa.main.PreferenciasActivity;
@@ -88,7 +89,7 @@ public class Login extends AppCompatActivity {
                                 "Inicio de sesión correcto",
                                 Toast.LENGTH_SHORT).show();
 
-                        // 👉 VERIFICAR PREFERENCIAS ANTES DE IR A MAIN
+                        //  VERIFICAR PREFERENCIAS ANTES DE IR A MAIN
                         verificarPreferenciasYRedirigir();
 
                     } else {
@@ -185,7 +186,7 @@ public class Login extends AppCompatActivity {
 
         if (preferenciasConfiguradas) {
             // Ya configuró preferencias, va directo al Main
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, MainBab.class));
         } else {
             // No ha configurado preferencias, va a PreferenciasActivity
             startActivity(new Intent(this, PreferenciasActivity.class));
