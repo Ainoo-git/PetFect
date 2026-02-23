@@ -6,8 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import com.aipasa.fragment.HomeFragment;
+
 import com.aipasa.fragment.MapFragment;
 import com.aipasa.fragment.ProfileFragment;
 import com.aipasa.fragment.SearchFragment;

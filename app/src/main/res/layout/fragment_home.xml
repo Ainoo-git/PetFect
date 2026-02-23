@@ -85,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="Lost"
+                    android:text="Perdidos"
                     style="@style/BotonPetFect"
                     android:onClick="openPerdidos"/>
 
@@ -128,52 +128,85 @@
                     android:visibility="gone"
                     android:layout_marginTop="24dp"/>
 
+                <!-- SECCIÓN PERDIDOS -->
                 <LinearLayout
                     android:id="@+id/sectionPerdidos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginTop="16dp"/>
+                    android:layout_marginTop="16dp">
 
+                    <TextView
+                        android:id="@+id/tvTituloPerdidos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mascotas Perdidas"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:paddingBottom="8dp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerPerdidos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"/>
+                </LinearLayout>
+
+                <!-- SECCIÓN ADOPCIONES -->
                 <LinearLayout
                     android:id="@+id/sectionAdopciones"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginTop="16dp"/>
+                    android:layout_marginTop="16dp">
 
+                    <TextView
+                        android:id="@+id/tvTituloAdopciones"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mascotas en Adopción"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:paddingBottom="8dp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerAdopciones"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"/>
+                </LinearLayout>
+
+                <!-- SECCIÓN VETERINARIAS -->
                 <LinearLayout
                     android:id="@+id/sectionVeterinarias"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginTop="16dp"/>
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Veterinarias"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:paddingBottom="8dp"/>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Próximamente..."
+                        android:gravity="center"
+                        android:padding="16dp"/>
+                </LinearLayout>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--    &lt;!&ndash; BottomAppBar &ndash;&gt;-->
-    <!--    <com.google.android.material.bottomappbar.BottomAppBar-->
-    <!--        android:id="@+id/bottom_app_bar"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="56dp"-->
-    <!--        android:layout_gravity="bottom"-->
-    <!--        app:fabCradleMargin="10dp"-->
-    <!--        app:fabCradleRoundedCornerRadius="28dp"-->
-    <!--        app:fabCradleVerticalOffset="10dp"-->
-    <!--        android:backgroundTint="@color/cian_oscuro_iconos"/>-->
-
-    <!--    &lt;!&ndash; FAB central &ndash;&gt;-->
-    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-    <!--        android:id="@+id/fab_central"-->
-    <!--        android:layout_width="64dp"-->
-    <!--        android:layout_height="64dp"-->
-    <!--        android:layout_gravity="center|bottom"-->
-    <!--        android:layout_marginBottom="28dp"-->
-    <!--        app:srcCompat="@drawable/camara"-->
-    <!--        app:tint="@color/cian_oscuro_iconos"-->
-    <!--        app:backgroundTint="@color/cian_clarito_bordes"/>-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
