@@ -15,14 +15,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="12dp">
+            android:padding="16dp">
 
-            <!-- Contenedor subir imagen -->
+            <!-- IMAGEN -->
             <LinearLayout
                 android:id="@+id/layoutImagen"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_marginBottom="12dp"
+                android:layout_height="170dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/bg_dashed"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -30,186 +30,186 @@
                 android:focusable="true">
 
                 <ImageView
-                    android:id="@+id/iconAddPhoto"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/outline_add_24"
                     app:tint="@color/cian_botones" />
 
                 <TextView
-                    android:id="@+id/txtAddPhoto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Subir imagen o abrir cámara"
-                    android:textSize="13sp"
                     android:textColor="@color/cian_botones"
-                    android:fontFamily="@font/text_app"/>
-
-
+                    android:textSize="14sp"/>
             </LinearLayout>
 
-            <!-- Imagen real (oculta al inicio) -->
             <ImageView
                 android:id="@+id/imgMascota"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="170dp"
                 android:scaleType="centerCrop"
                 android:visibility="gone"/>
 
-            <!-- Nombre -->
-            <EditText
-                android:id="@+id/etNombre"
+            <!-- NOMBRE -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="Nombre de la mascota"
-                android:textSize="14sp"
-                android:fontFamily="@font/text_app"/>
+                android:layout_marginTop="12dp"
+                app:boxBackgroundMode="outline">
 
-            <!-- Teléfono -->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nombre de la mascota"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Estado -->
-            <EditText
-                android:id="@+id/etTelefono"
+            <!-- TELÉFONO -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/text_app"
-                android:hint="Teléfono de contacto"
-                android:inputType="phone"
-                android:textSize="14sp" />
+                android:layout_marginTop="12dp"
+                app:boxBackgroundMode="outline">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTelefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Teléfono de contacto"
+                    android:inputType="phone"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- ESTADO -->
             <TextView
-                android:layout_marginTop="10dp"
-                android:text="Estado del animal"
-                android:textStyle="bold"
-                android:textSize="13sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/text_titulos"/>
+                android:layout_marginTop="16dp"
+                android:text="Estado del animal"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
             <CheckBox
                 android:id="@+id/cbPerdido"
-                android:text="Perdido"
-                android:textSize="13sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/text_app"
-                android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
+                android:text="Perdido"/>
 
             <CheckBox
                 android:id="@+id/cbAdopcion"
-                android:text="En adopción"
-                android:textSize="13sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/text_app"
-                android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
+                android:text="En adopción"/>
 
-            <!-- Tipo -->
+            <!-- TIPO -->
             <TextView
-                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Tipo de mascota"
                 android:textStyle="bold"
-                android:textSize="13sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/text_titulos"/>
+                android:textSize="15sp"/>
 
             <CheckBox
                 android:id="@+id/cbPerro"
-                android:text="Perro"
-                android:textSize="13sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/text_app"
-                android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
+                android:text="Perro"/>
 
             <CheckBox
                 android:id="@+id/cbGato"
-                android:text="Gato"
-                android:textSize="13sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/text_app"
-                android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
+                android:text="Gato"/>
 
             <CheckBox
                 android:id="@+id/cbOtro"
-                android:text="Otro"
-                android:textSize="13sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/text_app"
-                android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
+                android:text="Otro"/>
 
-            <EditText
-                android:id="@+id/etOtroTipo"
+            <!-- OTRO -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilOtroTipo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Especificar otro tipo"
-                android:textSize="13sp"
                 android:visibility="gone"
-                android:fontFamily="@font/text_app"/>
+                android:layout_marginTop="8dp"
+                app:boxBackgroundMode="outline">
 
-            <!-- Edad -->
-            <EditText
-                android:id="@+id/etEdad"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etOtroTipo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Especificar otro tipo"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- EDAD -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="Edad aproximada"
-                android:textSize="14sp"
-                android:inputType="number"
-                android:fontFamily="@font/text_app"/>
+                android:layout_marginTop="12dp"
+                app:boxBackgroundMode="outline">
 
-            <!-- Chip -->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEdad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Edad aproximada"
+                    android:inputType="number"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Info adicional -->
-            <EditText
-                android:id="@+id/etChip"
+            <!-- CHIP -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/text_app"
-                android:hint="Número de chip (opcional)"
-                android:textSize="14sp" />
+                android:layout_marginTop="12dp"
+                app:boxBackgroundMode="outline">
 
-            <EditText
-                android:id="@+id/etInfoAdicional"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etChip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Número de chip (opcional)"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- INFO -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="Información adicional (opcional)"
-                android:textSize="14sp"
-                android:minLines="2"
-                android:inputType="textMultiLine"
-                android:fontFamily="@font/text_app"/>
+                android:layout_marginTop="12dp"
+                app:boxBackgroundMode="outline">
 
-            <!-- Checkbox legal -->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etInfoAdicional"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Información adicional (opcional)"
+                    android:minLines="3"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- LEGAL -->
             <CheckBox
                 android:id="@+id/checkLegal"
-                android:layout_marginTop="10dp"
-                android:text="Confirmo que la imagen es mía o tengo permiso para publicarla y que no contiene personas identificables"
-                android:textSize="12sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"/>
+                android:layout_marginTop="16dp"
+                android:text="Confirmo que la imagen es mía o tengo permiso para publicarla"/>
 
-            <!-- Publicar -->
-            <Button
+            <!-- BOTÓN -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnPublicar"
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="14dp"
-                android:enabled="false"
+                android:layout_height="50dp"
+                android:layout_marginTop="18dp"
                 android:text="Publicar"
-                android:textSize="14sp"
-                style="@style/BotonPetFect"/>
+                android:enabled="false"
+                app:cornerRadius="18dp"
+                app:backgroundTint="@color/cian_botones"/>
 
         </LinearLayout>
-
     </ScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

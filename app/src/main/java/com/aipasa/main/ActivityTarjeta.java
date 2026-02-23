@@ -5,10 +5,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.aipasa.R;
 import com.bumptech.glide.Glide;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ActivityTarjeta extends AppCompatActivity {
 
@@ -27,8 +28,8 @@ public class ActivityTarjeta extends AppCompatActivity {
         txtDescripcion = findViewById(R.id.txtDescripcion);
         btnVerMas = findViewById(R.id.btnVerMas);
 
-        // Obtener ID de la publicación
         String articuloId = getIntent().getStringExtra("ARTICULO_ID");
+
         if (articuloId == null || articuloId.isEmpty()) {
             Toast.makeText(this, "No se recibió la publicación", Toast.LENGTH_SHORT).show();
             finish();
@@ -39,10 +40,13 @@ public class ActivityTarjeta extends AppCompatActivity {
     }
 
     private void cargarMascota(String id) {
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
         db.collection("mascotas").document(id)
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
+
                     if (!documentSnapshot.exists()) {
                         Toast.makeText(this, "La publicación no existe", Toast.LENGTH_SHORT).show();
                         finish();
@@ -51,41 +55,70 @@ public class ActivityTarjeta extends AppCompatActivity {
 
                     DocumentSnapshot doc = documentSnapshot;
 
-                    // Cargar datos en la UI
-                    txtTitulo.setText(doc.getString("nombre"));
-                    txtFecha.setText(doc.getString("tipo") + " • " + doc.getString("estado"));
+                    //  DATOS BÁSICOS
 
-                    String descripcion = "Edad: " + doc.getString("edad") + "\n"
-                            + "Chip: " + doc.getString("chip") + "\n"
-                            + "Teléfono: " + doc.getString("telefono") + "\n"
-                            + "Info adicional: " + doc.getString("infoAdicional");
+                    String nombre = doc.getString("nombre");
+                    String tipo = doc.getString("tipo");
+                    String estado = doc.getString("estado");
+                    String edad = doc.getString("edad");
+                    String chip = doc.getString("chip");
+                    String telefono = doc.getString("telefono");
+                    String info = doc.getString("infoAdicional");
+                    String fotoUrl = doc.getString("fotoUrl");
+
+                    txtTitulo.setText(nombre != null ? nombre : "Sin nombre");
+
+                    // Tipo y estado formateados
+                    String tipoEstado = "";
+                    if (tipo != null && !tipo.isEmpty()) {
+                        tipoEstado += tipo.substring(0,1).toUpperCase() + tipo.substring(1);
+                    }
+                    if (estado != null && !estado.isEmpty()) {
+                        if (!tipoEstado.isEmpty()) tipoEstado += " • ";
+                        tipoEstado += estado.substring(0,1).toUpperCase() + estado.substring(1);
+                    }
+                    txtFecha.setText(tipoEstado);
+
+                    //  DESCRIPCIÓN
+
+                    String descripcion =
+                            "Edad: " + (edad != null ? edad : "No especificada") + "\n" +
+                                    "Chip: " + (chip != null ? chip : "No especificado") + "\n" +
+                                    "Teléfono: " + (telefono != null ? telefono : "No disponible") + "\n" +
+                                    "Info adicional: " + (info != null ? info : "Sin información");
+
                     txtDescripcion.setText(descripcion);
 
-                    // Imagen con Glide + placeholder
-                    String fotoUrl = doc.getString("fotoUrl");
+                    //  IMAGEN
                     if (fotoUrl != null && !fotoUrl.isEmpty()) {
                         Glide.with(this)
                                 .load(fotoUrl)
                                 .placeholder(R.drawable.logologin)
+                                .error(R.drawable.logologin)
+                                .centerCrop()
                                 .into(imgAccion);
                     } else {
                         imgAccion.setImageResource(R.drawable.logologin);
                     }
 
-                    // Botón de contacto
+                    // BOTÓN CONTACTO
+
                     btnVerMas.setOnClickListener(v -> {
-                        String telefono = doc.getString("telefono");
                         if (telefono != null && !telefono.isEmpty()) {
                             Intent intent = new Intent(Intent.ACTION_DIAL);
                             intent.setData(Uri.parse("tel:" + telefono));
                             startActivity(intent);
                         } else {
-                            Toast.makeText(this, "No hay número de contacto disponible", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this,
+                                    "No hay número de contacto disponible",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     });
 
                 })
                 .addOnFailureListener(e ->
-                        Toast.makeText(this, "Error al cargar la publicación", Toast.LENGTH_SHORT).show());
+                        Toast.makeText(this,
+                                "Error al cargar la publicación",
+                                Toast.LENGTH_SHORT).show());
     }
 }
