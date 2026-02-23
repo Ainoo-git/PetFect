@@ -11,13 +11,6 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.*;
 
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.android.gms.tasks.Task;
-import java.io.ByteArrayOutputStream;
-import java.util.UUID;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,11 +18,17 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.aipasa.R;
+import com.aipasa.firebase.SupabaseClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+
+import okhttp3.*;
 
 public class PublicacionActivity extends AppCompatActivity {
 
@@ -43,7 +42,7 @@ public class PublicacionActivity extends AppCompatActivity {
     private Button btnPublicar;
     private CheckBox checkLegal;
 
-    private EditText etNombre, etTelefono, etEdad, etChip, etInfoAdicional, etOtroTipo;
+    private EditText etNombre, etTelefono, etEdad, etChip, etInfoAdicional;
     private CheckBox cbPerdido, cbAdopcion, cbPerro, cbGato;
 
     private Uri imageUri;
@@ -64,7 +63,6 @@ public class PublicacionActivity extends AppCompatActivity {
         etEdad = findViewById(R.id.etEdad);
         etChip = findViewById(R.id.etChip);
         etInfoAdicional = findViewById(R.id.etInfoAdicional);
-        etOtroTipo = findViewById(R.id.etOtroTipo);
 
         cbPerdido = findViewById(R.id.cbPerdido);
         cbAdopcion = findViewById(R.id.cbAdopcion);
@@ -77,73 +75,48 @@ public class PublicacionActivity extends AppCompatActivity {
         layoutImagen.setOnClickListener(v -> mostrarOpcionesImagen());
 
         checkLegal.setOnCheckedChangeListener((buttonView, isChecked) ->
-                btnPublicar.setEnabled(isChecked)
-        );
+                btnPublicar.setEnabled(isChecked));
 
         btnPublicar.setOnClickListener(v -> guardarMascota());
     }
 
     private void mostrarOpcionesImagen() {
-
         String[] opciones = {"Hacer foto", "Elegir de galería"};
 
         new AlertDialog.Builder(this)
                 .setTitle("Añadir imagen")
                 .setItems(opciones, (dialog, which) -> {
-                    if (which == 0) {
-                        verificarPermisoCamara();
-                    } else {
-                        verificarPermisoGaleria();
-                    }
+                    if (which == 0) verificarPermisoCamara();
+                    else verificarPermisoGaleria();
                 })
                 .show();
     }
 
     private void verificarPermisoCamara() {
-
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
-
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.CAMERA},
                     CAMERA_PERMISSION_CODE);
-        } else {
-            abrirCamara();
-        }
+        } else abrirCamara();
     }
 
     private void verificarPermisoGaleria() {
-
-        String permiso;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            permiso = Manifest.permission.READ_MEDIA_IMAGES;
-        } else {
-            permiso = Manifest.permission.READ_EXTERNAL_STORAGE;
-        }
+        String permiso = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+                ? Manifest.permission.READ_MEDIA_IMAGES
+                : Manifest.permission.READ_EXTERNAL_STORAGE;
 
         if (ContextCompat.checkSelfPermission(this, permiso)
                 != PackageManager.PERMISSION_GRANTED) {
-
             ActivityCompat.requestPermissions(this,
                     new String[]{permiso},
                     STORAGE_PERMISSION_CODE);
-        } else {
-            abrirGaleria();
-        }
+        } else abrirGaleria();
     }
 
     private void abrirCamara() {
-
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        try {
-            startActivityForResult(intent, REQUEST_CAMERA);
-        } catch (Exception e) {
-            Toast.makeText(this,
-                    "El dispositivo no tiene aplicación de cámara instalada",
-                    Toast.LENGTH_LONG).show();
-        }
+        startActivityForResult(intent, REQUEST_CAMERA);
     }
 
     private void abrirGaleria() {
@@ -159,54 +132,18 @@ public class PublicacionActivity extends AppCompatActivity {
 
         if (resultCode != RESULT_OK) return;
 
-        if (requestCode == REQUEST_CAMERA) {
-
-            if (data != null && data.getExtras() != null) {
-
-                Object extra = data.getExtras().get("data");
-
-                if (extra instanceof Bitmap) {
-                    imageBitmap = (Bitmap) extra;
-                    imgMascota.setImageBitmap(imageBitmap);
-                    layoutImagen.setVisibility(View.GONE);
-                    imgMascota.setVisibility(View.VISIBLE);
-                }
-            }
-
-        } else if (requestCode == REQUEST_GALLERY) {
-
-            if (data != null && data.getData() != null) {
-                imageUri = data.getData();
-                imgMascota.setImageURI(imageUri);
-                layoutImagen.setVisibility(View.GONE);
-                imgMascota.setVisibility(View.VISIBLE);
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (grantResults.length == 0 ||
-                grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-
-            Toast.makeText(this,
-                    "Permiso denegado",
-                    Toast.LENGTH_SHORT).show();
-            return;
+        if (requestCode == REQUEST_CAMERA && data != null) {
+            imageBitmap = (Bitmap) data.getExtras().get("data");
+            imgMascota.setImageBitmap(imageBitmap);
         }
 
-        if (requestCode == CAMERA_PERMISSION_CODE) {
-            abrirCamara();
+        if (requestCode == REQUEST_GALLERY && data != null) {
+            imageUri = data.getData();
+            imgMascota.setImageURI(imageUri);
         }
 
-        if (requestCode == STORAGE_PERMISSION_CODE) {
-            abrirGaleria();
-        }
+        layoutImagen.setVisibility(View.GONE);
+        imgMascota.setVisibility(View.VISIBLE);
     }
 
     private void guardarMascota() {
@@ -235,68 +172,120 @@ public class PublicacionActivity extends AppCompatActivity {
             return;
         }
 
+        try {
+            byte[] imageBytes;
+
+            if (imageUri != null) {
+                InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                imageBytes = inputStream.readAllBytes();
+            } else {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+                imageBytes = baos.toByteArray();
+            }
+
+            subirImagenASupabase(imageBytes, nombre, tipo, estado,
+                    telefono, edad, chip, infoAdicional);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void subirImagenASupabase(byte[] bytes,
+                                      String nombre, String tipo, String estado,
+                                      String telefono, String edad,
+                                      String chip, String infoAdicional) {
+
+        String fileName = UUID.randomUUID().toString() + ".jpg";
+
+        RequestBody requestBody =
+                RequestBody.create(bytes, MediaType.parse("image/jpeg"));
+
+        Request request = new Request.Builder()
+                .url(SupabaseClient.SUPABASE_URL +
+                        "/storage/v1/object/" +
+                        SupabaseClient.BUCKET_NAME +
+                        "/" + fileName)
+                .addHeader("apikey", SupabaseClient.SUPABASE_KEY)
+                .addHeader("Authorization", "Bearer " + SupabaseClient.SUPABASE_KEY)
+                .addHeader("Content-Type", "image/jpeg")
+                .put(requestBody)
+                .build();
+
+        SupabaseClient.getClient().newCall(request)
+                .enqueue(new Callback() {
+
+                    @Override
+                    public void onFailure(Call call, java.io.IOException e) {
+                        runOnUiThread(() ->
+                                Toast.makeText(PublicacionActivity.this,
+                                        "Error subiendo imagen",
+                                        Toast.LENGTH_SHORT).show());
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) {
+
+                        if (response.isSuccessful()) {
+
+                            String publicUrl =
+                                    SupabaseClient.SUPABASE_URL +
+                                            "/storage/v1/object/public/" +
+                                            SupabaseClient.BUCKET_NAME +
+                                            "/" + fileName;
+
+                            guardarEnFirestore(publicUrl,
+                                    nombre, tipo, estado,
+                                    telefono, edad, chip, infoAdicional);
+
+                        } else {
+                            runOnUiThread(() ->
+                                    Toast.makeText(PublicacionActivity.this,
+                                            "Error Supabase: " + response.code(),
+                                            Toast.LENGTH_LONG).show());
+                        }
+                    }
+                });
+    }
+
+    private void guardarEnFirestore(String urlDescarga,
+                                    String nombre, String tipo, String estado,
+                                    String telefono, String edad,
+                                    String chip, String infoAdicional) {
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String id = db.collection("mascotas").document().getId();
 
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference imageRef =
-                storageRef.child("mascotas/" + UUID.randomUUID() + ".jpg");
+        Map<String, Object> mascota = new HashMap<>();
+        mascota.put("id", id);
+        mascota.put("nombre", nombre);
+        mascota.put("tipo", tipo);
+        mascota.put("estado", estado);
+        mascota.put("telefono", telefono);
+        mascota.put("edad", edad);
+        mascota.put("chip", chip);
+        mascota.put("infoAdicional", infoAdicional);
+        mascota.put("fotoUrl", urlDescarga);
+        mascota.put("fecha", System.currentTimeMillis());
 
-        Task<?> uploadTask;
-
-        //GALERÍA
-        if (imageUri != null) {
-            uploadTask = imageRef.putFile(imageUri);
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            mascota.put("userId",
+                    FirebaseAuth.getInstance().getCurrentUser().getUid());
         }
-        //CÁMARA
-        else {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
-            byte[] data = baos.toByteArray();
-            uploadTask = imageRef.putBytes(data);
-        }
 
-        uploadTask
-                .continueWithTask(task -> imageRef.getDownloadUrl())
-                .addOnSuccessListener(uri -> {
-
-                    String urlDescarga = uri.toString();
-
-                    Map<String, Object> mascota = new HashMap<>();
-                    mascota.put("id", id);
-                    mascota.put("nombre", nombre);
-                    mascota.put("tipo", tipo);
-                    mascota.put("estado", estado);
-                    mascota.put("telefono", telefono);
-                    mascota.put("edad", edad);
-                    mascota.put("chip", chip);
-                    mascota.put("infoAdicional", infoAdicional);
-                    mascota.put("fotoUrl", urlDescarga);
-                    mascota.put("fecha", System.currentTimeMillis());
-
-                    if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                        mascota.put("userId",
-                                FirebaseAuth.getInstance().getCurrentUser().getUid());
-                    }
-
-                    db.collection("mascotas")
-                            .document(id)
-                            .set(mascota)
-                            .addOnSuccessListener(unused -> {
-                                Toast.makeText(this,
-                                        "Mascota publicada",
-                                        Toast.LENGTH_SHORT).show();
-                                finish();
-                            })
-                            .addOnFailureListener(e ->
-                                    Toast.makeText(this,
-                                            "Error al publicar",
-                                            Toast.LENGTH_SHORT).show());
+        db.collection("mascotas")
+                .document(id)
+                .set(mascota)
+                .addOnSuccessListener(unused -> {
+                    Toast.makeText(this,
+                            "Mascota publicada",
+                            Toast.LENGTH_SHORT).show();
+                    finish();
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this,
-                                "Error al subir imagen",
+                                "Error al publicar",
                                 Toast.LENGTH_SHORT).show());
     }
-
 }
