@@ -5,145 +5,165 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Toolbar real con flecha atrás -->
+    <!-- Toolbar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/rosita_fondoss_tarjetas_alertaslev"
-        android:title="Profile"
+        android:title="Perfil"
         android:titleTextColor="@color/white"
-        app:navigationIcon="@drawable/outline_arrow_back_ios_24" />
+        app:navigationIcon="@drawable/outline_arrow_back_ios_24"
+        app:titleCentered="true"/>
 
-    <!-- Contenido del perfil -->
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:paddingTop="?attr/actionBarSize">
 
-        <!-- MENSAJE CUANDO NO HAY NADA -->
-        <FrameLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="294dp"
-            android:layout_marginTop="?attr/actionBarSize">
+            android:layout_height="wrap_content"
+            android:padding="16dp">
 
+            <!-- Imagen de perfil -->
+
+            <!-- Nombre -->
             <ImageView
                 android:id="@+id/profile_image"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_gravity="center_horizontal|top"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/baseline_person_24" />
+                android:src="@drawable/baseline_person_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/nombre2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="180dp"
-                android:fontFamily="@font/text_app"
-                android:gravity="center"
                 android:text="Nombre"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/profile_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"/>
 
+            <!-- Descripción -->
             <TextView
                 android:id="@+id/descripcion"
-                android:layout_width="280dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="230dp"
-                android:fontFamily="@font/text_app"
-                android:gravity="center"
                 android:text="@string/app_name"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
-
-        </FrameLayout>
-
-        <TextView
-            android:id="@+id/tvNadaSeleccionado"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:gravity="center"
-            android:text="No hay contenido disponible"
-            android:textSize="16sp"
-            android:visibility="gone" />
-
-        <!-- ====== SECCIÓN PERDIDOS ====== -->
-        <LinearLayout
-            android:id="@+id/sectionPerdidos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/text_app"
-                android:text="MASCOTAS"
                 android:textSize="16sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/nombre2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="4dp"/>
 
-        <!-- ====== SECCIÓN ADOPCIONES ====== -->
-        <LinearLayout
-            android:id="@+id/sectionAdopciones"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical">
+            <!-- Botones de acción: Editar Perfil / Configuración -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@id/descripcion"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-            <TextView
+
+
+
+            </LinearLayout>
+            <!-- Sección Mascotas Publicadas -->
+            <LinearLayout
+                android:id="@+id/sectionMascotas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@id/descripcion"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mascotas Publicadas"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:paddingBottom="8dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMascotas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+
+            <!-- Botones abajo -->
+            <LinearLayout
+                android:id="@+id/layoutBotones"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="32dp"
+                app:layout_constraintTop_toBottomOf="@id/sectionMascotas"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <Button
+                    android:id="@+id/btnEditarPerfil"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Editar Perfil"
+                    android:backgroundTint="@color/rosita_fondoss_tarjetas_alertaslev"
+                    android:textColor="@color/white"/>
+
+                <Button
+                    android:id="@+id/btnConfiguracion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Configuración"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="@color/rosita_fondoss_tarjetas_alertaslev"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+
+            <!-- Cerrar sesión al final -->
+            <Button
+                android:id="@+id/btnCerrarSesion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/text_app"
-                android:text="Configuración"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:onClick="openMapa"/>
-        </LinearLayout>
-
-        <!-- ====== SECCIÓN VETERINARIAS / MAPA ====== -->
-        <LinearLayout
-            android:id="@+id/sectionVeterinarias"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/text_app"
-                android:text="Información"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:onClick="openMapa"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/Salirse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/text_app"
+                android:layout_marginTop="24dp"
                 android:text="Cerrar sesión"
                 android:textColor="@color/coral_alertasimp_errores"
-                android:textSize="16sp"
+                android:backgroundTint="@color/white"
                 android:textStyle="bold"
-                android:onClick="openLogin2"/>
-        </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@id/layoutBotones"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-
-    </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
