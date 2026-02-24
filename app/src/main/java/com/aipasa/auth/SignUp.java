@@ -1,7 +1,6 @@
 package com.aipasa.auth;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -20,14 +19,11 @@ public class SignUp extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    private static final String PREFS = "petfect_prefs";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        // IMPORTANTE: usar los IDs reales del XML
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
 
@@ -61,9 +57,8 @@ public class SignUp extends AppCompatActivity {
                                 "Cuenta creada correctamente",
                                 Toast.LENGTH_SHORT).show();
 
-                        //  REDIRIGIR A PREFERENCIAS
-                        Intent intent = new Intent(SignUp.this, PreferenciasActivity.class);
-                        startActivity(intent);
+                        // Después de registrarse → ir a Preferencias
+                        startActivity(new Intent(SignUp.this, PreferenciasActivity.class));
                         finish();
 
                     } else {

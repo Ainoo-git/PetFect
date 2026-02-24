@@ -11,6 +11,8 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.*;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,14 +38,17 @@ public class PublicacionActivity extends AppCompatActivity {
     private static final int REQUEST_GALLERY = 2;
     private static final int CAMERA_PERMISSION_CODE = 200;
     private static final int STORAGE_PERMISSION_CODE = 300;
-
+    private ActivityResultLauncher<String> galeriaLauncher;
+    // ActivityResultLauncher, que es el métodoo actual recomendado.
+    //
+    //No necesita permisos.
     private LinearLayout layoutImagen;
     private ImageView imgMascota;
     private Button btnPublicar;
     private CheckBox checkLegal;
 
     private EditText etNombre, etTelefono, etEdad, etChip, etInfoAdicional;
-    private CheckBox cbPerdido, cbAdopcion, cbPerro, cbGato;
+    private RadioButton cbPerdido, cbAdopcion, cbPerro, cbGato;
 
     private Uri imageUri;
     private Bitmap imageBitmap;
@@ -64,10 +69,10 @@ public class PublicacionActivity extends AppCompatActivity {
         etChip = findViewById(R.id.etChip);
         etInfoAdicional = findViewById(R.id.etInfoAdicional);
 
-        cbPerdido = findViewById(R.id.cbPerdido);
-        cbAdopcion = findViewById(R.id.cbAdopcion);
-        cbPerro = findViewById(R.id.cbPerro);
-        cbGato = findViewById(R.id.cbGato);
+        cbPerdido = findViewById(R.id.rbPerdido);
+        cbAdopcion = findViewById(R.id.rbAdopcion);
+        cbPerro = findViewById(R.id.rbPerro);
+        cbGato = findViewById(R.id.rbGato);
 
         imgMascota.setVisibility(View.GONE);
         btnPublicar.setEnabled(false);
@@ -77,6 +82,19 @@ public class PublicacionActivity extends AppCompatActivity {
         checkLegal.setOnCheckedChangeListener((buttonView, isChecked) ->
                 btnPublicar.setEnabled(isChecked));
 
+        galeriaLauncher = registerForActivityResult(
+                new ActivityResultContracts.GetContent(),
+                uri -> {
+                    if (uri != null) {
+                        imageUri = uri;
+                        imageBitmap = null;
+
+                        imgMascota.setImageURI(uri);
+                        layoutImagen.setVisibility(View.GONE);
+                        imgMascota.setVisibility(View.VISIBLE);
+                    }
+                }
+        );
         btnPublicar.setOnClickListener(v -> guardarMascota());
     }
 
@@ -86,8 +104,11 @@ public class PublicacionActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle("Añadir imagen")
                 .setItems(opciones, (dialog, which) -> {
-                    if (which == 0) verificarPermisoCamara();
-                    else verificarPermisoGaleria();
+                    if (which == 0) {
+                        verificarPermisoCamara();
+                    } else {
+                        abrirGaleria(); // DIRECTO
+                    }
                 })
                 .show();
     }
@@ -120,9 +141,7 @@ public class PublicacionActivity extends AppCompatActivity {
     }
 
     private void abrirGaleria() {
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(galleryIntent, REQUEST_GALLERY);
+        galeriaLauncher.launch("image/*");
     }
 
     @Override
@@ -137,11 +156,12 @@ public class PublicacionActivity extends AppCompatActivity {
             imgMascota.setImageBitmap(imageBitmap);
         }
 
-        if (requestCode == REQUEST_GALLERY && data != null) {
+        if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK && data != null) {
             imageUri = data.getData();
+            imageBitmap = null;
+
             imgMascota.setImageURI(imageUri);
         }
-
         layoutImagen.setVisibility(View.GONE);
         imgMascota.setVisibility(View.VISIBLE);
     }
@@ -176,9 +196,22 @@ public class PublicacionActivity extends AppCompatActivity {
             byte[] imageBytes;
 
             if (imageUri != null) {
+
                 InputStream inputStream = getContentResolver().openInputStream(imageUri);
-                imageBytes = inputStream.readAllBytes();
-            } else {
+                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+
+                int nRead;
+                byte[] data = new byte[16384];
+
+                while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+                    buffer.write(data, 0, nRead);
+                }
+
+                buffer.flush();
+                imageBytes = buffer.toByteArray();
+
+                inputStream.close();
+            }else {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 imageBitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
                 imageBytes = baos.toByteArray();

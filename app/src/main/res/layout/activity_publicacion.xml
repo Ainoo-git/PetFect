@@ -89,17 +89,24 @@
                 android:textStyle="bold"
                 android:textSize="15sp"/>
 
-            <CheckBox
-                android:id="@+id/cbPerdido"
+            <RadioGroup
+                android:id="@+id/rgEstado"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Perdido"/>
+                android:layout_height="wrap_content">
 
-            <CheckBox
-                android:id="@+id/cbAdopcion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="En adopción"/>
+                <RadioButton
+                    android:id="@+id/rbPerdido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Perdido"/>
+
+                <RadioButton
+                    android:id="@+id/rbAdopcion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="En adopción"/>
+
+            </RadioGroup>
 
             <!-- TIPO -->
             <TextView
@@ -110,23 +117,30 @@
                 android:textStyle="bold"
                 android:textSize="15sp"/>
 
-            <CheckBox
-                android:id="@+id/cbPerro"
+            <RadioGroup
+                android:id="@+id/rgTipo"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Perro"/>
+                android:layout_height="wrap_content">
 
-            <CheckBox
-                android:id="@+id/cbGato"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gato"/>
+                <RadioButton
+                    android:id="@+id/rbPerro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Perro"/>
 
-            <CheckBox
-                android:id="@+id/cbOtro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Otro"/>
+                <RadioButton
+                    android:id="@+id/rbGato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gato"/>
+
+                <RadioButton
+                    android:id="@+id/rbOtro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Otro"/>
+
+            </RadioGroup>
 
             <!-- OTRO -->
             <com.google.android.material.textfield.TextInputLayout
