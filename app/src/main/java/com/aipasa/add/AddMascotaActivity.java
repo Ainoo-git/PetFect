@@ -36,8 +36,9 @@ public class AddMascotaActivity extends AppCompatActivity {
     private LinearLayout layoutImagen;
     private ImageView imgMascota;
 
+    private CheckBox checkLegal;
     private TextInputEditText etNombre, etTelefono, etEdad, etChip, etInfoAdicional, etOtroTipo;
-    private RadioButton cbPerdido, cbAdopcion, cbPerro, cbGato, cbOtro, checkLegal;
+    private RadioButton cbPerdido, cbAdopcion, cbPerro, cbGato, cbOtro;
     private MaterialButton btnPublicar;
 
     private Uri imageUri;
@@ -131,8 +132,9 @@ public class AddMascotaActivity extends AppCompatActivity {
                         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         cameraLauncher.launch(cameraIntent);
                     } else {
-                        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        Intent galleryIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                        galleryIntent.setType("image/*");
+                        galleryIntent.addCategory(Intent.CATEGORY_OPENABLE);
                         galleryLauncher.launch(galleryIntent);
                     }
                 })
