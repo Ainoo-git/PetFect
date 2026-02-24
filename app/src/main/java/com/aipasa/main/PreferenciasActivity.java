@@ -34,9 +34,12 @@ public class PreferenciasActivity extends AppCompatActivity {
         btnGuardar.setOnClickListener(v -> {
             guardarPreferencias();
             Toast.makeText(this, "Preferencias guardadas", Toast.LENGTH_SHORT).show();
+
+            // Ir a Main después de configurar
             Intent intent = new Intent(PreferenciasActivity.this, MainActivity.class);
             startActivity(intent);
-            finish();
+
+            finish(); // cerramos Preferencias
         });
     }
 

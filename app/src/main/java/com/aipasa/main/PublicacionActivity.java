@@ -43,7 +43,7 @@ public class PublicacionActivity extends AppCompatActivity {
     private CheckBox checkLegal;
 
     private EditText etNombre, etTelefono, etEdad, etChip, etInfoAdicional;
-    private CheckBox cbPerdido, cbAdopcion, cbPerro, cbGato;
+    private RadioButton cbPerdido, cbAdopcion, cbPerro, cbGato;
 
     private Uri imageUri;
     private Bitmap imageBitmap;
@@ -64,10 +64,10 @@ public class PublicacionActivity extends AppCompatActivity {
         etChip = findViewById(R.id.etChip);
         etInfoAdicional = findViewById(R.id.etInfoAdicional);
 
-        cbPerdido = findViewById(R.id.cbPerdido);
-        cbAdopcion = findViewById(R.id.cbAdopcion);
-        cbPerro = findViewById(R.id.cbPerro);
-        cbGato = findViewById(R.id.cbGato);
+        cbPerdido = findViewById(R.id.rbPerdido);
+        cbAdopcion = findViewById(R.id.rbAdopcion);
+        cbPerro = findViewById(R.id.rbPerro);
+        cbGato = findViewById(R.id.rbGato);
 
         imgMascota.setVisibility(View.GONE);
         btnPublicar.setEnabled(false);

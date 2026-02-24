@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -36,7 +37,7 @@ public class AddMascotaActivity extends AppCompatActivity {
     private ImageView imgMascota;
 
     private TextInputEditText etNombre, etTelefono, etEdad, etChip, etInfoAdicional, etOtroTipo;
-    private CheckBox cbPerdido, cbAdopcion, cbPerro, cbGato, cbOtro, checkLegal;
+    private RadioButton cbPerdido, cbAdopcion, cbPerro, cbGato, cbOtro, checkLegal;
     private MaterialButton btnPublicar;
 
     private Uri imageUri;
@@ -90,11 +91,11 @@ public class AddMascotaActivity extends AppCompatActivity {
         etChip = findViewById(R.id.etChip);
         etInfoAdicional = findViewById(R.id.etInfoAdicional);
         etOtroTipo = findViewById(R.id.etOtroTipo);
-        cbPerdido = findViewById(R.id.cbPerdido);
-        cbAdopcion = findViewById(R.id.cbAdopcion);
-        cbPerro = findViewById(R.id.cbPerro);
-        cbGato = findViewById(R.id.cbGato);
-        cbOtro = findViewById(R.id.cbOtro);
+        cbPerdido = findViewById(R.id.rbPerdido);
+        cbAdopcion = findViewById(R.id.rbAdopcion);
+        cbPerro = findViewById(R.id.rbPerro);
+        cbGato = findViewById(R.id.rbGato);
+        cbOtro = findViewById(R.id.rbOtro);
         checkLegal = findViewById(R.id.checkLegal);
         btnPublicar = findViewById(R.id.btnPublicar);
 

@@ -1,7 +1,6 @@
 package com.aipasa.auth;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -11,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.MainBab;
 import com.aipasa.R;
-import com.aipasa.main.MainActivity;
-import com.aipasa.main.PreferenciasActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -34,7 +31,6 @@ public class Login extends AppCompatActivity {
     private GoogleSignInClient googleSignInClient;
 
     private static final int RC_SIGN_IN = 100;
-    private static final String PREFS = "petfect_prefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +42,12 @@ public class Login extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        // Si ya está logueado, verificar si ya configuró preferencias
+        // Si ya está logueado → directo a Main
         if (mAuth.getCurrentUser() != null) {
-            verificarPreferenciasYRedirigir();
+            startActivity(new Intent(this, MainBab.class));
+            finish();
         }
 
-        // Configuración Google Sign-In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -89,53 +85,22 @@ public class Login extends AppCompatActivity {
                                 "Inicio de sesión correcto",
                                 Toast.LENGTH_SHORT).show();
 
-                        //  VERIFICAR PREFERENCIAS ANTES DE IR A MAIN
-                        verificarPreferenciasYRedirigir();
+                        startActivity(new Intent(this, MainBab.class));
+                        finish();
 
                     } else {
 
-                        Exception exception = task.getException();
-
-                        if (exception != null &&
-                                exception.getMessage() != null &&
-                                exception.getMessage().contains("There is no user record")) {
-
-                            Toast.makeText(this,
-                                    "Usuario no registrado",
-                                    Toast.LENGTH_SHORT).show();
-
-                        } else if (exception != null &&
-                                exception.getMessage() != null &&
-                                exception.getMessage().contains("password is invalid")) {
-
-                            Toast.makeText(this,
-                                    "Contraseña incorrecta",
-                                    Toast.LENGTH_SHORT).show();
-
-                        } else if (exception != null &&
-                                exception.getMessage() != null &&
-                                exception.getMessage().contains("Google")) {
-
-                            Toast.makeText(this,
-                                    "Esta cuenta está registrada con Google. Usa el botón Google.",
-                                    Toast.LENGTH_LONG).show();
-
-                        } else {
-
-                            Toast.makeText(this,
-                                    "Error de autenticación",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                        Toast.makeText(this,
+                                "Error de autenticación",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
-    // BOTÓN SIGN UP
     public void OpenSignup(View view) {
         startActivity(new Intent(this, SignUp.class));
     }
 
-    // RESULTADO GOOGLE
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -167,8 +132,8 @@ public class Login extends AppCompatActivity {
 
                     if (task.isSuccessful()) {
 
-                        // 👉 VERIFICAR PREFERENCIAS ANTES DE IR A MAIN
-                        verificarPreferenciasYRedirigir();
+                        startActivity(new Intent(this, MainBab.class));
+                        finish();
 
                     } else {
 
@@ -177,20 +142,5 @@ public class Login extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
-    }
-
-    //NUEVO MÉTODO PARA VERIFICAR PREFERENCIAS
-    private void verificarPreferenciasYRedirigir() {
-        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
-        boolean preferenciasConfiguradas = prefs.getBoolean("preferencias_configuradas", false);
-
-        if (preferenciasConfiguradas) {
-            // Ya configuró preferencias, va directo al Main
-            startActivity(new Intent(this, MainBab.class));
-        } else {
-            // No ha configurado preferencias, va a PreferenciasActivity
-            startActivity(new Intent(this, PreferenciasActivity.class));
-        }
-        finish();
     }
 }
