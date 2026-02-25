@@ -76,27 +76,33 @@ La aplicación conecta usuarios mediante publicaciones dinámicas, permitiendo r
 ## Capturas de Pantalla
 
 ## Pantallas Principales
+### Pantallas Principales
 
 | Splash | Login | Registro |
 |--------|--------|----------|
-| ![IMG-20260225-WA0037](https://github.com/user-attachments/assets/a0b5ac40-3f4d-42e9-9817-664bba802920)
- | ![IMG-20260225-WA0039](https://github.com/user-attachments/assets/c7ffad0d-9086-4f3f-9aa1-6daf80e0468e)
-| ![IMG-20260225-WA0038](https://github.com/user-attachments/assets/6f379b6c-03ba-417b-8a5e-8ed9b4be4fb6)
- |
+| <img src="https://github.com/user-attachments/assets/a0b5ac40-3f4d-42e9-9817-664bba802920" width="250"> | <img src="https://github.com/user-attachments/assets/c7ffad0d-9086-4f3f-9aa1-6daf80e0468e" width="250"> | <img src="https://github.com/user-attachments/assets/6f379b6c-03ba-417b-8a5e-8ed9b4be4fb6" width="250"> |
 
 ---
 
 ### Navegación Principal
 
-| Home | Detalle | Publicar |
-|------|---------|----------|
-| <img width="250" src="AQUI_TU_IMAGEN_HOME" /> | <img width="250" src="AQUI_TU_IMAGEN_DETALLE" /> | <img width="250" src="AQUI_TU_IMAGEN_PUBLICACION" /> |
+| Home | Detalle |
+|------|---------|
+| <img src="https://github.com/user-attachments/assets/44698d40-babe-41ad-b78e-fae9bda97bca" width="250"> | <img src="https://github.com/user-attachments/assets/567757cf-5cad-49b1-9e82-543b55291a9e" width="250"> |
+
 
 <br>
 
-| Perfil | Mapa |
+| Busqueda | Mapa |
 |--------|------|
-| <img width="250" src="AQUI_TU_IMAGEN_PERFIL" /> | <img width="250" src="AQUI_TU_IMAGEN_MAPA" />
+|![IMG-20260225-WA0032](https://github.com/user-attachments/assets/22d42854-aea9-4495-977b-eee1c01fb3f7)
+![IMG-20260225-WA0033](https://github.com/user-attachments/assets/db71bf33-b332-49d8-9c59-5658a3bf1a65) |
+
+| Modo Oscuro | 
+|--------|
+|![IMG-20260225-WA0040](https://github.com/user-attachments/assets/192ca139-fbd8-4d4e-a90c-6743a2956c73)
+
+
 
 ---
 
