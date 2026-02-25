@@ -79,7 +79,10 @@ La aplicación conecta usuarios mediante publicaciones dinámicas, permitiendo r
 
 | Splash | Login | Registro |
 |--------|--------|----------|
-| <img width="250" src="AQUI_TU_IMAGEN_SPLASH" /> | <img width="250" src="https://github.com/user-attachments/assets/b39e7266-8319-498e-bc84-1868e63a578d" /> | <img width="250" src="https://github.com/user-attachments/assets/d5cd5c2e-c4df-4d54-a6db-8d4d9e50967d" /> |
+| ![IMG-20260225-WA0037](https://github.com/user-attachments/assets/a0b5ac40-3f4d-42e9-9817-664bba802920)
+ | ![IMG-20260225-WA0039](https://github.com/user-attachments/assets/c7ffad0d-9086-4f3f-9aa1-6daf80e0468e)
+| ![IMG-20260225-WA0038](https://github.com/user-attachments/assets/6f379b6c-03ba-417b-8a5e-8ed9b4be4fb6)
+ |
 
 ---
 
