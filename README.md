@@ -90,16 +90,14 @@ La aplicación conecta usuarios mediante publicaciones dinámicas, permitiendo r
 
 | Home | Detalle |
 |------|---------|
-| <img src="https://github.com/user-attachments/assets/44698d40-babe-41ad-b78e-fae9bda97bca" width="250"> 
-| <img src="https://github.com/user-attachments/assets/567757cf-5cad-49b1-9e82-543b55291a9e" width="250"> |
+| <img src="https://github.com/user-attachments/assets/44698d40-babe-41ad-b78e-fae9bda97bca" width="250"> | <img src="https://github.com/user-attachments/assets/567757cf-5cad-49b1-9e82-543b55291a9e" width="250"> |
 
 
 <br>
 
 | Busqueda | Mapa |
 |--------|------|
-|![IMG-20260225-WA0032](https://github.com/user-attachments/assets/22d42854-aea9-4495-977b-eee1c01fb3f7)
-![IMG-20260225-WA0033](https://github.com/user-attachments/assets/db71bf33-b332-49d8-9c59-5658a3bf1a65) |
+|![IMG-20260225-WA0032](https://github.com/user-attachments/assets/22d42854-aea9-4495-977b-eee1c01fb3f7)|![IMG-20260225-WA0033](https://github.com/user-attachments/assets/db71bf33-b332-49d8-9c59-5658a3bf1a65) |
 
 | Modo Oscuro | 
 |--------|
