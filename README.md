@@ -76,18 +76,24 @@ La aplicación conecta usuarios mediante publicaciones dinámicas, permitiendo r
 ## Capturas de Pantalla
 
 ## Pantallas Principales
-Pantalla	Vista
-Splash	
-Login	<img width="250" src="https://github.com/user-attachments/assets/b39e7266-8319-498e-bc84-1868e63a578d" />
-Registro	<img width="250" src="https://github.com/user-attachments/assets/d5cd5c2e-c4df-4d54-a6db-8d4d9e50967d" />
 
-## Navegación Principal
-Pantalla	Vista
-Home (Listado mascotas)	<img width="250" src="AQUI_TU_IMAGEN_HOME" />
-Detalle Mascota	<img width="250" src="AQUI_TU_IMAGEN_DETALLE" />
-Publicar Mascota	<img width="250" src="AQUI_TU_IMAGEN_PUBLICACION" />
-Perfil Usuario	<img width="250" src="AQUI_TU_IMAGEN_PERFIL" />
-Mapa	<img width="250" src="AQUI_TU_IMAGEN_MAPA" />
+| Splash | Login | Registro |
+|--------|--------|----------|
+| <img width="250" src="AQUI_TU_IMAGEN_SPLASH" /> | <img width="250" src="https://github.com/user-attachments/assets/b39e7266-8319-498e-bc84-1868e63a578d" /> | <img width="250" src="https://github.com/user-attachments/assets/d5cd5c2e-c4df-4d54-a6db-8d4d9e50967d" /> |
+
+---
+
+### Navegación Principal
+
+| Home | Detalle | Publicar |
+|------|---------|----------|
+| <img width="250" src="AQUI_TU_IMAGEN_HOME" /> | <img width="250" src="AQUI_TU_IMAGEN_DETALLE" /> | <img width="250" src="AQUI_TU_IMAGEN_PUBLICACION" /> |
+
+<br>
+
+| Perfil | Mapa |
+|--------|------|
+| <img width="250" src="AQUI_TU_IMAGEN_PERFIL" /> | <img width="250" src="AQUI_TU_IMAGEN_MAPA" />
 
 ---
 
