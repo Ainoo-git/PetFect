@@ -85,7 +85,7 @@ La aplicación conecta usuarios mediante publicaciones dinámicas, permitiendo r
 
 ###  Navegación Principal
 
-| Home | Detalle |
+| Home | Formulario |
 |------|---------|
 | <img src="https://github.com/user-attachments/assets/44698d40-babe-41ad-b78e-fae9bda97bca" width="250"> | <img src="https://github.com/user-attachments/assets/567757cf-5cad-49b1-9e82-543b55291a9e" width="250"> |
 
