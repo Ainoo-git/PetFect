@@ -157,6 +157,7 @@ PetFect/
 - Notificaciones avanzadas en tiempo real
 - Filtros de búsqueda personalizados
 - Panel de administración para refugios
+- Poder añadir a favoritos un animal que está en adopción
 
 ---
 
