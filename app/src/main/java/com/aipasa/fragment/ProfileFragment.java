@@ -1,13 +1,17 @@
 package com.aipasa.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,12 +20,22 @@ import androidx.fragment.app.Fragment;
 import com.aipasa.R;
 import com.aipasa.auth.Login;
 import com.aipasa.main.MapaActivity;
+import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class ProfileFragment extends Fragment {
 
     private TextView tvNombre;
+    private static final int PICK_IMAGE_REQUEST = 1001;
+    private ImageView profileImage;
+    private FirebaseUser currentUser;
+    private FirebaseFirestore db;
+    private StorageReference storageRef;
 
     @Nullable
     @Override
@@ -42,40 +56,107 @@ public class ProfileFragment extends Fragment {
         String username = prefs.getString("username", "Nombre");
         tvNombre.setText(username);
 
+        // Inicializar Firebase
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+        storageRef = FirebaseStorage.getInstance().getReference("profile_images");
+
+        // Imagen de perfil
+        profileImage = view.findViewById(R.id.profile_image);
+        cargarImagenPerfil();
+        profileImage.setOnClickListener(v -> abrirGaleria());
+
         // Botón Cerrar sesión
         Button btnCerrarSesion = view.findViewById(R.id.btnCerrarSesion);
         btnCerrarSesion.setOnClickListener(this::openLogin);
 
         // Botón Configuración
         Button btnConfiguracion = view.findViewById(R.id.btnConfiguracion);
-        btnConfiguracion.setOnClickListener(this::openMapa);
+        btnConfiguracion.setOnClickListener(v -> openMapa());
 
-        // Botón Editar perfil (si quieres agregar funcionalidad más adelante)
+        // Botón Editar perfil
         Button btnEditarPerfil = view.findViewById(R.id.btnEditarPerfil);
         btnEditarPerfil.setOnClickListener(v -> {
-            // Aquí puedes abrir un Activity o Fragment de edición de perfil
+            // Aquí puedes abrir un Activity o Fragment de edición de perfil más adelante
         });
 
         return view;
     }
 
-    private void openLogin(View view) {
-        // Cierra sesión en Firebase
-        FirebaseAuth.getInstance().signOut();
+    // Abre galería para elegir foto
+    private void abrirGaleria() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
 
-        // Limpia SharedPreferences
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+            Uri imageUri = data.getData();
+            subirImagenFirebase(imageUri);
+        }
+    }
+
+    // Subir imagen a Firebase Storage y guardar URL en Firestore
+    private void subirImagenFirebase(Uri imageUri) {
+        if (currentUser == null) return;
+
+        StorageReference fileRef = storageRef.child(currentUser.getUid() + ".jpg");
+        fileRef.putFile(imageUri)
+                .addOnSuccessListener(taskSnapshot -> fileRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                    db.collection("usuarios")
+                            .document(currentUser.getUid())
+                            .update("fotoPerfil", uri.toString())
+                            .addOnSuccessListener(aVoid -> {
+                                Glide.with(requireContext())
+                                        .load(uri)
+                                        .centerCrop()
+                                        .placeholder(R.drawable.baseline_person_24)
+                                        .into(profileImage);
+                                Toast.makeText(requireContext(), "Foto de perfil actualizada", Toast.LENGTH_SHORT).show();
+                            })
+                            .addOnFailureListener(e -> Toast.makeText(requireContext(), "Error guardando URL", Toast.LENGTH_SHORT).show());
+                }))
+                .addOnFailureListener(e -> Toast.makeText(requireContext(), "Error subiendo imagen", Toast.LENGTH_SHORT).show());
+    }
+
+    // Cargar imagen de perfil si ya existe
+    private void cargarImagenPerfil() {
+        if (currentUser == null) return;
+
+        db.collection("usuarios")
+                .document(currentUser.getUid())
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String url = documentSnapshot.getString("fotoPerfil");
+                        if (url != null && !url.isEmpty()) {
+                            Glide.with(requireContext())
+                                    .load(url)
+                                    .centerCrop()
+                                    .placeholder(R.drawable.baseline_person_24)
+                                    .into(profileImage);
+                        }
+                    }
+                });
+    }
+
+    // Abrir Login y cerrar sesión
+    private void openLogin(View view) {
+        FirebaseAuth.getInstance().signOut();
         SharedPreferences prefs = requireContext().getSharedPreferences("petfect_prefs", getContext().MODE_PRIVATE);
         prefs.edit().clear().apply();
 
-        // Abre la Activity de Login y cierra la actual
         Intent intent = new Intent(requireContext(), Login.class);
         startActivity(intent);
         requireActivity().finish();
     }
 
-    private void openMapa(View view) {
-        // Abre el Activity de mapa
-        Intent intent = new Intent(requireContext(), MapaActivity.class);
-        startActivity(intent);
+    // Abrir MapaActivity
+    private void openMapa() {
+        startActivity(new Intent(requireContext(), MapaActivity.class));
     }
 }
