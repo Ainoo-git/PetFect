@@ -19,6 +19,7 @@ import com.aipasa.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+// ANTIGUOO
 public class MainActivity extends AppCompatActivity {
 
     // Secciones de la pantalla principal

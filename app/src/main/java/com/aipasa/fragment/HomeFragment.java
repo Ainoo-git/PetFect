@@ -106,7 +106,7 @@ public class HomeFragment extends Fragment {
         btnAdopciones.setOnClickListener(v -> mostrarSecciones(false, true, false));
         btnPerdidos.setOnClickListener(v -> mostrarSecciones(true, false, false));
         btnMapa.setOnClickListener(v -> {
-            // Puedes mostrar un mensaje o abrir MapFragment mediante la actividad si quieres
+
             Toast.makeText(requireContext(), "Abre sección Mapa", Toast.LENGTH_SHORT).show();
         });
 
