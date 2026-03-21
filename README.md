@@ -36,22 +36,24 @@ La aplicación conecta usuarios mediante publicaciones dinámicas, permitiendo r
   - Galería
 - Campos opcionales editables (chip, información adicional)
 - Almacenamiento en Firebase Firestore
-- Imágenes almacenadas en Firebase Storage
+- Imágenes almacenadas en Supabase Storage
 
 ### Visualización de Mascotas
 - Listado dinámico mediante RecyclerView
+- Actualización en tiempo real con SnapshotListener
 - Visualización detallada de cada publicación
 - Contacto directo vía llamada telefónica
 
 ### Perfil de Usuario
 - Visualización de datos del usuario
 - Cambio de imagen de perfil
+- Subida de imagen a Supabase
 - Cierre de sesión seguro
 
 ### Interfaz y Experiencia
 - Material Design 3
-- BottomAppBar con FloatingActionButton
-- Navegación clara e intuitiva
+- BottomAppBar con FloatingActionButton central 
+- Navegación mediante Fragments
 - Soporte para modo claro y oscuro
 
 ---
@@ -62,22 +64,39 @@ La aplicación conecta usuarios mediante publicaciones dinámicas, permitiendo r
 |-----------|------------|
 | Plataforma | Android |
 | Lenguaje | Java |
-| Backend | Firebase |
+| Backend | Firebase Auth|
 | Base de datos | Firestore |
 | Almacenamiento | Firebase Storage |
 | Autenticación | Firebase Auth |
 | UI | Material Design 3 |
-| Librerías | Glide |
+| Librerías | Glide, OkHttp |
 
 ---
 
 ## Capturas de Pantalla
 
-| Pantalla | Vista |
-|----------|-------|
-| Splash | ![Splash](https://github.com/user-attachments/assets/fe8cc27f-e294-4c66-8a1d-c7fb9501b668) |
-| Login | <img width="250" src="https://github.com/user-attachments/assets/b39e7266-8319-498e-bc84-1868e63a578d" /> |
-| Registro | <img width="250" src="https://github.com/user-attachments/assets/d5cd5c2e-c4df-4d54-a6db-8d4d9e50967d" /> |
+## Pantallas Principales
+
+| Splash | Login | Registro |
+|--------|-------|----------|
+| <img src="https://github.com/user-attachments/assets/a0b5ac40-3f4d-42e9-9817-664bba802920" width="250"> | <img src="https://github.com/user-attachments/assets/c7ffad0d-9086-4f3f-9aa1-6daf80e0468e" width="250"> | <img src="https://github.com/user-attachments/assets/6f379b6c-03ba-417b-8a5e-8ed9b4be4fb6" width="250"> |
+
+---
+
+###  Navegación Principal
+
+| Home | Formulario |
+|------|---------|
+| <img src="https://github.com/user-attachments/assets/44698d40-babe-41ad-b78e-fae9bda97bca" width="250"> | <img src="https://github.com/user-attachments/assets/567757cf-5cad-49b1-9e82-543b55291a9e" width="250"> |
+
+| Búsqueda | Mapa |
+|----------|------|
+| <img src="https://github.com/user-attachments/assets/22d42854-aea9-4495-977b-eee1c01fb3f7" width="250"> | <img src="https://github.com/user-attachments/assets/db71bf33-b332-49d8-9c59-5658a3bf1a65" width="250"> |
+
+| Modo Oscuro |
+|-------------|
+| <img src="https://github.com/user-attachments/assets/192ca139-fbd8-4d4e-a90c-6743a2956c73" width="250"> |
+
 
 ---
 
@@ -88,10 +107,11 @@ PetFect/
 │   ├── src/
 │   │   └── main/
 │   │       ├── java/com/aipasa/
-│   │       │   ├── main/
 │   │       │   ├── auth/
+│   │       │   ├── fragment/
+│   │       │   ├── main/
 │   │       │   ├── firebase/
-│   │       │   └── repository/
+│   │       │   └── model/
 │   │       │
 │   │       ├── res/
 │   │       │   ├── layout/
@@ -108,7 +128,6 @@ PetFect/
 ├── settings.gradle.kts
 └── gradle/
 ```
-
 
 ---
 
@@ -138,6 +157,7 @@ PetFect/
 - Notificaciones avanzadas en tiempo real
 - Filtros de búsqueda personalizados
 - Panel de administración para refugios
+- Poder añadir a favoritos un animal que está en adopción
 
 ---
 

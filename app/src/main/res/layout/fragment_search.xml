@@ -1,13 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_search"
-        android:contentDescription="@drawable/ic_search"/>
-</FrameLayout>
+    <!-- Toolbar opcional, si quieres una barra superior -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBarSearch"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+        android:title="Buscar Mascotas"
+        android:titleTextColor="@android:color/white"
+        app:titleCentered="true"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- SearchView -->
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:queryHint="Buscar por nombre o tipo"/>
+
+            <!-- Sección Perdidos -->
+            <TextView
+                android:id="@+id/tvTituloPerdidosSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mascotas Perdidas"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerPerdidosSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"/>
+
+            <!-- Sección Adopciones -->
+            <TextView
+                android:id="@+id/tvTituloAdopcionesSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mascotas en Adopción"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="24dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerAdopcionesSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
