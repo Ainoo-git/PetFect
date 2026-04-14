@@ -25,7 +25,7 @@ public class MainBab extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
         FloatingActionButton fab = findViewById(R.id.fab_central);
 
-        // 🔹 Cargar fragment inicial
+        // Cargar fragment inicial
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
@@ -33,7 +33,7 @@ public class MainBab extends AppCompatActivity {
                     .commit();
         }
 
-        // 🔹 Navegación inferior
+        // Navegación inferior
         bottomNav.setOnItemSelectedListener(item -> {
 
             Fragment selectedFragment = null;
@@ -63,7 +63,7 @@ public class MainBab extends AppCompatActivity {
             return true;
         });
 
-        // 🔹 FAB central
+        // FAB central
         fab.setOnClickListener(v -> {
             Intent intent = new Intent(MainBab.this, PublicacionActivity.class);
             startActivity(intent);

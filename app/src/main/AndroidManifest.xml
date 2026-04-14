@@ -64,7 +64,9 @@
         <activity
             android:name=".main.ActivityTarjeta"
             android:exported="false" />
-
+        <activity
+            android:name=".creditos.Creditos"
+            android:exported="false"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

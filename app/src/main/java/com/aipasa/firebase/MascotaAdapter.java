@@ -1,6 +1,5 @@
 package com.aipasa.firebase;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +8,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aipasa.R;
-import com.aipasa.main.ActivityTarjeta;
+import com.aipasa.main.TarjetaFragment;
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -98,11 +98,25 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
         }
 
         // --- CLICK PARA ABRIR ActivityTarjeta ---
+//        holder.itemView.setOnClickListener(v -> {
+//            if (id != null && !id.isEmpty()) {
+//                Intent intent = new Intent(holder.itemView.getContext(), ActivityTarjeta.class);
+//                intent.putExtra("ARTICULO_ID", id);
+//                holder.itemView.getContext().startActivity(intent);
+//            } else {
+//                Toast.makeText(holder.itemView.getContext(), "No se puede abrir la publicación", Toast.LENGTH_SHORT).show();
+//            }
+//        });
         holder.itemView.setOnClickListener(v -> {
-            if (id != null && !id.isEmpty()) {
-                Intent intent = new Intent(holder.itemView.getContext(), ActivityTarjeta.class);
-                intent.putExtra("ARTICULO_ID", id);
-                holder.itemView.getContext().startActivity(intent);
+            if (id != null && !id.isEmpty() && holder.itemView.getContext() instanceof AppCompatActivity) {
+                AppCompatActivity activity = (AppCompatActivity) holder.itemView.getContext();
+                TarjetaFragment fragment = TarjetaFragment.newInstance(id);
+
+                activity.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_container, fragment)
+                        .addToBackStack(null) // permite volver atrás
+                        .commit();
             } else {
                 Toast.makeText(holder.itemView.getContext(), "No se puede abrir la publicación", Toast.LENGTH_SHORT).show();
             }
