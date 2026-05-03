@@ -18,9 +18,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetFect">
         <activity
-            android:name=".main.MapaActivity"
+            android:name=".configuracion.ConfiguracionActivity"
             android:exported="false" />
-        <!-- Splash -->
+<!--        <activity-->
+<!--            android:name=".main.MapaActivity"-->
+<!--            android:exported="false" /> &lt;!&ndash; Splash &ndash;&gt;-->
         <activity
             android:name=".splash.Splash"
             android:exported="true">
@@ -35,11 +37,7 @@
             android:exported="false" />
         <activity
             android:name=".MainBab"
-            android:exported="false">
-
-
-        </activity>
-
+            android:exported="false"></activity>
         <activity
             android:name=".auth.SignUp"
             android:exported="false" /> <!-- Main -->

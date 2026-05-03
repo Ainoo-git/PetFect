@@ -19,8 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.aipasa.R;
 import com.aipasa.auth.Login;
-import com.aipasa.configuracion.ConfiguracionFragment;
-import com.aipasa.main.MapaActivity;
+import com.aipasa.configuracion.ConfiguracionActivity;
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -198,6 +197,6 @@ public class ProfileFragment extends Fragment {
 
     // Ir al mapa
     private void openConfig() {
-        startActivity(new Intent(requireContext(), ConfiguracionFragment.class));
+        startActivity(new Intent(requireContext(), ConfiguracionActivity.class));
     }
 }
