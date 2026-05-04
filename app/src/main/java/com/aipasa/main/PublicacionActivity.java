@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat;
 
 import com.aipasa.R;
 import com.aipasa.firebase.SupabaseClient;
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -53,6 +54,9 @@ public class PublicacionActivity extends AppCompatActivity {
     private Uri imageUri;
     private Bitmap imageBitmap;
 
+    private String modo;
+    private String idMascota;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +81,7 @@ public class PublicacionActivity extends AppCompatActivity {
         imgMascota.setVisibility(View.GONE);
         btnPublicar.setEnabled(false);
 
+
         layoutImagen.setOnClickListener(v -> mostrarOpcionesImagen());
 
         checkLegal.setOnCheckedChangeListener((buttonView, isChecked) ->
@@ -96,6 +101,13 @@ public class PublicacionActivity extends AppCompatActivity {
                 }
         );
         btnPublicar.setOnClickListener(v -> guardarMascota());
+
+        modo = getIntent().getStringExtra("modo");
+        idMascota = getIntent().getStringExtra("idMascota");
+
+        if ("editar".equals(modo) && idMascota != null) {
+            cargarDatosMascota(idMascota);
+        }
     }
 
     private void mostrarOpcionesImagen() {
@@ -186,7 +198,7 @@ public class PublicacionActivity extends AppCompatActivity {
             return;
         }
 
-        if (imageUri == null && imageBitmap == null) {
+        if (imageUri == null && imageBitmap == null && !"editar".equals(modo)) {
             Toast.makeText(this, "Selecciona una imagen",
                     Toast.LENGTH_SHORT).show();
             return;
@@ -288,7 +300,13 @@ public class PublicacionActivity extends AppCompatActivity {
                                     String chip, String infoAdicional) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String id = db.collection("mascotas").document().getId();
+
+        String id;
+        if ("editar".equals(modo) && idMascota != null) {
+            id = idMascota;
+        } else {
+            id = db.collection("mascotas").document().getId();
+        }
 
         Map<String, Object> mascota = new HashMap<>();
         mascota.put("id", id);
@@ -311,14 +329,47 @@ public class PublicacionActivity extends AppCompatActivity {
                 .document(id)
                 .set(mascota)
                 .addOnSuccessListener(unused -> {
-                    Toast.makeText(this,
-                            "Mascota publicada",
-                            Toast.LENGTH_SHORT).show();
+                    if ("editar".equals(modo)) {
+                        Toast.makeText(this, "Mascota actualizada", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Mascota publicada", Toast.LENGTH_SHORT).show();
+                    }
                     finish();
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this,
                                 "Error al publicar",
                                 Toast.LENGTH_SHORT).show());
+    }
+
+    private void cargarDatosMascota(String id) {
+
+        FirebaseFirestore.getInstance()
+                .collection("mascotas")
+                .document(id)
+                .get()
+                .addOnSuccessListener(doc -> {
+
+                    if (!doc.exists()) return;
+
+                    etNombre.setText(doc.getString("nombre"));
+                    etTelefono.setText(doc.getString("telefono"));
+                    etEdad.setText(doc.getString("edad"));
+                    etChip.setText(doc.getString("chip"));
+                    etInfoAdicional.setText(doc.getString("infoAdicional"));
+
+                    String estado = doc.getString("estado");
+                    if ("perdido".equals(estado)) cbPerdido.setChecked(true);
+                    if ("adopcion".equals(estado)) cbAdopcion.setChecked(true);
+
+                    String tipo = doc.getString("tipo");
+                    if ("perro".equals(tipo)) cbPerro.setChecked(true);
+                    if ("gato".equals(tipo)) cbGato.setChecked(true);
+
+                    String fotoUrl = doc.getString("fotoUrl");
+                    if (fotoUrl != null) {
+                        Glide.with(this).load(fotoUrl).into(imgMascota);
+                    }
+                });
     }
 }
