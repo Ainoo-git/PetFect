@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -29,7 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aipasa.R;
 import com.aipasa.auth.Login;
-import com.aipasa.firebase.MascotaAdapter;
+import com.aipasa.firebase.MascotaAdapter; // ✅ USAMOS EL MISMO QUE HOME
 import com.aipasa.firebase.SupabaseClient;
 import com.aipasa.main.MapaActivity;
 import com.bumptech.glide.Glide;
@@ -61,6 +60,8 @@ public class ProfileFragment extends Fragment {
 
     private Uri imageUri;
     private Bitmap imageBitmap;
+
+    //  RECYCLER
     private RecyclerView rvMascotas;
     private MascotaAdapter adapter;
     private List<DocumentSnapshot> listaMascotas = new ArrayList<>();
@@ -112,13 +113,10 @@ public class ProfileFragment extends Fragment {
         Button btnConfiguracion = view.findViewById(R.id.btnConfiguracion);
         btnConfiguracion.setOnClickListener(v -> openMapa());
 
-        //  RECYCLER
+        // RECYCLER
         rvMascotas = view.findViewById(R.id.rvMascotas);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
-        layoutManager.setAutoMeasureEnabled(true);
-
-        rvMascotas.setLayoutManager(layoutManager);
+        rvMascotas.setLayoutManager(new LinearLayoutManager(requireContext()));
         rvMascotas.setNestedScrollingEnabled(false);
 
         adapter = new MascotaAdapter(listaMascotas);
@@ -129,6 +127,7 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    // SOLO MASCOTAS DEL USUARIO
     private void cargarMisMascotas() {
 
         if (currentUser == null) return;
@@ -149,18 +148,14 @@ public class ProfileFragment extends Fragment {
     }
 
 
-
     private void mostrarOpcionesImagen() {
         String[] opciones = {"Hacer foto", "Elegir de galería"};
 
         new AlertDialog.Builder(requireContext())
                 .setTitle("Cambiar foto de perfil")
                 .setItems(opciones, (dialog, which) -> {
-                    if (which == 0) {
-                        verificarPermisoCamara();
-                    } else {
-                        abrirGaleria();
-                    }
+                    if (which == 0) verificarPermisoCamara();
+                    else abrirGaleria();
                 })
                 .show();
     }
@@ -191,8 +186,6 @@ public class ProfileFragment extends Fragment {
 
         if (requestCode == 101 && data != null) {
             imageBitmap = (Bitmap) data.getExtras().get("data");
-            imageUri = null;
-
             profileImage.setImageBitmap(imageBitmap);
             procesarYSubirImagenPerfil(null, imageBitmap);
         }
@@ -209,13 +202,13 @@ public class ProfileFragment extends Fragment {
                 int nRead;
                 byte[] data = new byte[16384];
 
-                while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+                while ((nRead = inputStream.read(data)) != -1) {
                     buffer.write(data, 0, nRead);
                 }
 
-                buffer.flush();
                 imageBytes = buffer.toByteArray();
                 inputStream.close();
+
             } else {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 imageBitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
@@ -233,56 +226,39 @@ public class ProfileFragment extends Fragment {
 
         String fileName = "perfiles/" + currentUser.getUid() + ".jpg";
 
-        RequestBody requestBody =
-                RequestBody.create(bytes, MediaType.parse("image/jpeg"));
+        RequestBody requestBody = RequestBody.create(bytes, MediaType.parse("image/jpeg"));
 
         Request request = new Request.Builder()
-                .url(SupabaseClient.SUPABASE_URL +
-                        "/storage/v1/object/" +
-                        SupabaseClient.BUCKET_NAME +
-                        "/" + fileName)
+                .url(SupabaseClient.SUPABASE_URL + "/storage/v1/object/" +
+                        SupabaseClient.BUCKET_NAME + "/" + fileName)
                 .addHeader("apikey", SupabaseClient.SUPABASE_KEY)
                 .addHeader("Authorization", "Bearer " + SupabaseClient.SUPABASE_KEY)
-                .addHeader("Content-Type", "image/jpeg")
                 .put(requestBody)
                 .build();
 
-        SupabaseClient.getClient().newCall(request)
-                .enqueue(new Callback() {
+        SupabaseClient.getClient().newCall(request).enqueue(new Callback() {
+            @Override public void onFailure(Call call, java.io.IOException e) {}
 
-                    @Override
-                    public void onFailure(Call call, java.io.IOException e) {
-                        requireActivity().runOnUiThread(() ->
-                                Toast.makeText(requireContext(),
-                                        "Error subiendo imagen",
-                                        Toast.LENGTH_SHORT).show());
-                    }
+            @Override
+            public void onResponse(Call call, Response response) {
+                if (response.isSuccessful()) {
 
-                    @Override
-                    public void onResponse(Call call, Response response) {
+                    String publicUrl = SupabaseClient.SUPABASE_URL +
+                            "/storage/v1/object/public/" +
+                            SupabaseClient.BUCKET_NAME + "/" + fileName;
 
-                        if (response.isSuccessful()) {
+                    Map<String, Object> data = new HashMap<>();
+                    data.put("fotoPerfil", publicUrl);
 
-                            String publicUrl =
-                                    SupabaseClient.SUPABASE_URL +
-                                            "/storage/v1/object/public/" +
-                                            SupabaseClient.BUCKET_NAME +
-                                            "/" + fileName;
+                    db.collection("usuarios")
+                            .document(currentUser.getUid())
+                            .set(data, SetOptions.merge());
 
-                            Map<String, Object> data = new HashMap<>();
-                            data.put("fotoPerfil", publicUrl);
-
-                            db.collection("usuarios")
-                                    .document(currentUser.getUid())
-                                    .set(data, SetOptions.merge());
-
-                            requireActivity().runOnUiThread(() ->
-                                    Glide.with(requireContext())
-                                            .load(publicUrl)
-                                            .into(profileImage));
-                        }
-                    }
-                });
+                    requireActivity().runOnUiThread(() ->
+                            Glide.with(requireContext()).load(publicUrl).into(profileImage));
+                }
+            }
+        });
     }
 
     private void cargarImagenPerfil() {
@@ -291,33 +267,23 @@ public class ProfileFragment extends Fragment {
         db.collection("usuarios")
                 .document(currentUser.getUid())
                 .get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        String url = documentSnapshot.getString("fotoPerfil");
-                        if (url != null && !url.isEmpty()) {
-                            Glide.with(requireContext())
-                                    .load(url)
-                                    .centerCrop()
-                                    .placeholder(R.drawable.baseline_person_24)
-                                    .into(profileImage);
-                        }
+                .addOnSuccessListener(doc -> {
+                    String url = doc.getString("fotoPerfil");
+                    if (url != null) {
+                        Glide.with(requireContext()).load(url).into(profileImage);
                     }
                 });
     }
 
+
+
     private void openLogin(View view) {
         FirebaseAuth.getInstance().signOut();
-
-        SharedPreferences prefs = requireContext().getSharedPreferences("petfect_prefs", getContext().MODE_PRIVATE);
-        prefs.edit().clear().apply();
-
-        Intent intent = new Intent(requireContext(), Login.class);
-        startActivity(intent);
+        startActivity(new Intent(requireContext(), Login.class));
         requireActivity().finish();
     }
 
     private void openMapa() {
-        Intent intent = new Intent(requireContext(), MapaActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(requireContext(), MapaActivity.class));
     }
 }
