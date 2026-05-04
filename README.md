@@ -2,8 +2,6 @@
 
 <div align="center">
 
-Aplicación Android diseñada para facilitar la gestión de mascotas perdidas y promover la adopción responsable.
-
 [![Android](https://img.shields.io/badge/Platform-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/)
 [![Java](https://img.shields.io/badge/Language-Java-blue?style=for-the-badge&logo=java&logoColor=white)]()
 [![Firebase](https://img.shields.io/badge/Backend-Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)]()
@@ -14,68 +12,75 @@ Aplicación Android diseñada para facilitar la gestión de mascotas perdidas y 
 
 ---
 
-## Descripción
+## Sobre el Proyecto
 
-PetFect es una aplicación móvil desarrollada para ayudar a encontrar mascotas perdidas y facilitar procesos de adopción de forma organizada y accesible.
+**PetFect** es una aplicación Android orientada a la localización de mascotas perdidas y a la promoción de la adopción responsable mediante una plataforma centralizada de publicaciones.
 
-La aplicación conecta usuarios mediante publicaciones dinámicas, permitiendo registrar animales, añadir imágenes y contactar directamente con los responsables.
+La aplicación permite a los usuarios registrar mascotas perdidas o en adopción, adjuntar imágenes, consultar publicaciones actualizadas en tiempo real y contactar directamente con los responsables.
+
+### Objetivos principales
+
+- Facilitar la localización de mascotas desaparecidas
+- Impulsar procesos de adopción responsable
+- Centralizar publicaciones en una plataforma accesible
+- Mejorar la comunicación entre usuarios
+- Ofrecer una experiencia rápida, intuitiva y eficiente
+  
+El sistema permite crear publicaciones detalladas, adjuntar imágenes, consultar mascotas disponibles y contactar directamente con los responsables.
 
 ---
 
-## Funcionalidades Actuales
+## Características Principales
 
 ### Autenticación
-- Registro con email y contraseña
+- Registro mediante email y contraseña
 - Inicio de sesión con Google
-- Persistencia de sesión (no se solicita login si el usuario ya ha iniciado sesión)
+- Persistencia automática de sesión
 
-### Publicación de Mascotas
-- Creación de publicaciones para mascotas perdidas o en adopción
-- Subida de imagen desde:
-  - Cámara
-  - Galería
-- Campos opcionales editables (chip, información adicional)
-- Almacenamiento en Firebase Firestore
-- Imágenes almacenadas en Supabase Storage
+### Gestión de Publicaciones
+- Alta de mascotas perdidas o en adopción
+- Subida de imágenes desde cámara o galería
+- Información editable y ampliable
+- Almacenamiento en Firestore
 
-### Visualización de Mascotas
-- Listado dinámico mediante RecyclerView
-- Actualización en tiempo real con SnapshotListener
-- Visualización detallada de cada publicación
-- Contacto directo vía llamada telefónica
+### Visualización Dinámica
+- Feed actualizado en tiempo real
+- RecyclerView optimizado
+- Vista detallada por publicación
+- Contacto telefónico directo
 
 ### Perfil de Usuario
-- Visualización de datos del usuario
+- Gestión de datos personales
 - Cambio de imagen de perfil
-- Subida de imagen a Supabase
 - Cierre de sesión seguro
 
-### Interfaz y Experiencia
+### Experiencia de Usuario
 - Material Design 3
-- BottomAppBar con FloatingActionButton central 
 - Navegación mediante Fragments
+- BottomAppBar personalizada
 - Soporte para modo claro y oscuro
 
 ---
 
-## Tecnologías Utilizadas
+## Arquitectura Tecnológica
 
-| Categoría | Tecnología |
+| Componente | Tecnología |
 |-----------|------------|
-| Plataforma | Android |
+| Plataforma | Android Native |
 | Lenguaje | Java |
-| Backend | Firebase Auth|
-| Base de datos | Firestore |
-| Almacenamiento | Firebase Storage |
-| Autenticación | Firebase Auth |
+| Arquitectura | Fragments + Adapter Pattern |
+| Backend | Firebase |
+| Base de datos | Cloud Firestore |
+| Almacenamiento multimedia | Supabase Storage |
+| Autenticación | Firebase Authentication |
 | UI | Material Design 3 |
-| Librerías | Glide, OkHttp |
+| Librerías | Glide · OkHttp |
 
 ---
 
-## Capturas de Pantalla
+## Vista Previa
 
-## Pantallas Principales
+### Pantallas Principales
 
 | Splash | Login | Registro |
 |--------|-------|----------|
@@ -151,17 +156,28 @@ PetFect/
 
 ---
 
-## Próximas Mejoras
+## Roadmap
 
-- Sistema completo de geolocalización
-- Notificaciones avanzadas en tiempo real
-- Filtros de búsqueda personalizados
-- Panel de administración para refugios
-- Poder añadir a favoritos un animal que está en adopción
+- [ ] Geolocalización avanzada
+- [ ] Sistema de favoritos
+- [ ] Notificaciones push
+- [ ] Filtros inteligentes
+- [ ] Panel para refugios
+- [ ] Historial de publicaciones
+
+---
+
+## Objetivo Académico
+
+Proyecto desarrollado como solución tecnológica enfocada al bienestar animal, aplicando conocimientos de:
+
+- Desarrollo Android nativo
+- Integración de servicios cloud
+- Diseño UI/UX
+- Gestión de datos en tiempo real
 
 ---
 
 ## Licencia
 
-Este proyecto está bajo la licencia  
-**Creative Commons BY-SA 4.0**
+Distribuido bajo licencia **MIT**.
