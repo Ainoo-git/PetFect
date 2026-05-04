@@ -98,9 +98,9 @@ El sistema permite crear publicaciones detalladas, adjuntar imágenes, consultar
 |----------|------|
 | <img src="https://github.com/user-attachments/assets/22d42854-aea9-4495-977b-eee1c01fb3f7" width="250"> | <img src="https://github.com/user-attachments/assets/db71bf33-b332-49d8-9c59-5658a3bf1a65" width="250"> |
 
-| Modo Oscuro |
-|-------------|
-| <img src="https://github.com/user-attachments/assets/192ca139-fbd8-4d4e-a90c-6743a2956c73" width="250"> |
+| Modo Oscuro | Perfil |
+|-------------|------|
+| <img src="https://github.com/user-attachments/assets/192ca139-fbd8-4d4e-a90c-6743a2956c73" width="250"> | <img src="https://github.com/user-attachments/assets/db71bf33-b332-49d8-9c59-5658a3bf1a65" width="250"> |
 
 
 ---
