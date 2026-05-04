@@ -1,17 +1,17 @@
+Código distribuido bajo **Apache License 2.0**  
+Consulta el archivo `LICENSE` para más información.
+
 # 🐾 PetFect – “Ayuda y Encuentra”
 
 <div align="center">
   
 [![Android](https://img.shields.io/badge/Platform-Android-0F5052?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/)
-
 [![Java](https://img.shields.io/badge/Language-Java-3ACAAE?style=for-the-badge&logo=java&logoColor=white)]()
 [![Estado](https://img.shields.io/badge/Estado-En%20Desarrollo-3ACAAE?style=for-the-badge)]()
-
 [![Firebase](https://img.shields.io/badge/Backend-Firebase-C3FFFC?style=for-the-badge&logo=firebase&logoColor=black)]()
 [![Supabase](https://img.shields.io/badge/Backend-Supabase-FFC3C3?style=for-the-badge&logo=firebase&logoColor=black)]()
-
-
 [![Material Design](https://img.shields.io/badge/UI-Material%203-FF8C8C?style=for-the-badge&logo=material-design&logoColor=white)]()
+
 </div>
 
 ---
@@ -26,7 +26,7 @@
 - [Instalación](#instalación)
 - [Roadmap](#roadmap)
 - [Licencia](#licencia)
-
+- [Documentación Legal](#documentación-legal)
 ---
 
 ## Sobre el Proyecto
@@ -203,4 +203,24 @@ Proyecto desarrollado como solución tecnológica enfocada al bienestar animal, 
 
 ## Licencia
 
-Distribuido bajo licencia **MIT**.
+El código fuente de PetFect está distribuido bajo la licencia **Apache License 2.0**.
+
+Esto permite su uso, modificación y distribución siempre que se respeten los términos establecidos en dicha licencia.
+
+Consulta el archivo `LICENSE` para más información.
+
+---
+
+## Protección de Marca e Identidad Visual
+
+El nombre **PetFect**, su logotipo, identidad visual, paleta de colores, diseño de interfaz y demás elementos gráficos asociados son propiedad de sus autores.
+
+Estos elementos no podrán ser reutilizados, reproducidos ni distribuidos sin autorización expresa por escrito.
+
+---
+
+## Documentación Legal
+
+- Política de Privacidad → `PRIVACY_POLICY.md`
+- Términos y Condiciones → `TERMS_AND_CONDITIONS.md`
+- Atribuciones de terceros → `ATTRIBUTIONS.md`
