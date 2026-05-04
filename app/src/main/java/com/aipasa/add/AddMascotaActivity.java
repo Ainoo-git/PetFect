@@ -69,10 +69,12 @@ public class AddMascotaActivity extends AppCompatActivity {
                 }
             });
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicacion);
+
 
         // Inicializar Firebase
         storage = FirebaseStorage.getInstance();

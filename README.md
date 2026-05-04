@@ -1,81 +1,109 @@
+Código distribuido bajo **Apache License 2.0**  
+Consulta el archivo `LICENSE` para más información.
+
 # 🐾 PetFect – “Ayuda y Encuentra”
 
 <div align="center">
-
-Aplicación Android diseñada para facilitar la gestión de mascotas perdidas y promover la adopción responsable.
-
-[![Android](https://img.shields.io/badge/Platform-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/)
-[![Java](https://img.shields.io/badge/Language-Java-blue?style=for-the-badge&logo=java&logoColor=white)]()
-[![Firebase](https://img.shields.io/badge/Backend-Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)]()
-[![Material Design](https://img.shields.io/badge/UI-Material%203-0081CB?style=for-the-badge&logo=material-design&logoColor=white)]()
-[![Estado](https://img.shields.io/badge/Estado-En%20Desarrollo-success?style=for-the-badge)]()
+  
+[![Android](https://img.shields.io/badge/Platform-Android-0F5052?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/)
+[![Java](https://img.shields.io/badge/Language-Java-3ACAAE?style=for-the-badge&logo=java&logoColor=white)]()
+[![Estado](https://img.shields.io/badge/Estado-En%20Desarrollo-3ACAAE?style=for-the-badge)]()
+[![Firebase](https://img.shields.io/badge/Backend-Firebase-C3FFFC?style=for-the-badge&logo=firebase&logoColor=black)]()
+[![Supabase](https://img.shields.io/badge/Backend-Supabase-FFC3C3?style=for-the-badge&logo=firebase&logoColor=black)]()
+[![Material Design](https://img.shields.io/badge/UI-Material%203-FF8C8C?style=for-the-badge&logo=material-design&logoColor=white)]()
 
 </div>
 
 ---
 
-## Descripción
+## Contenido
 
-PetFect es una aplicación móvil desarrollada para ayudar a encontrar mascotas perdidas y facilitar procesos de adopción de forma organizada y accesible.
+- [Sobre el Proyecto](#sobre-el-proyecto)
+- [Demo](#-demo)
+- [Características](#características-principales)
+- [Arquitectura](#arquitectura-tecnológica)
+- [Capturas](#vista-previa)
+- [Instalación](#instalación)
+- [Roadmap](#roadmap)
+- [Licencia](#licencia)
+- [Documentación Legal](#documentación-legal)
+---
 
-La aplicación conecta usuarios mediante publicaciones dinámicas, permitiendo registrar animales, añadir imágenes y contactar directamente con los responsables.
+## Sobre el Proyecto
+
+**PetFect** es una aplicación Android orientada a la localización de mascotas perdidas y a la promoción de la adopción responsable mediante una plataforma centralizada de publicaciones.
+
+La aplicación permite a los usuarios registrar mascotas perdidas o en adopción, adjuntar imágenes, consultar publicaciones actualizadas en tiempo real y contactar directamente con los responsables.
+
+### Objetivos principales
+
+- Facilitar la localización de mascotas desaparecidas
+- Impulsar procesos de adopción responsable
+- Centralizar publicaciones en una plataforma accesible
+- Mejorar la comunicación entre usuarios
+- Ofrecer una experiencia rápida, intuitiva y eficiente
+  
+El sistema permite crear publicaciones detalladas, adjuntar imágenes, consultar mascotas disponibles y contactar directamente con los responsables.
 
 ---
 
-## Funcionalidades Actuales
+## 🎥 Demo
+
+[Ver vídeo en YouTube](https://youtu.be/lzR7Zqn5gJ4)
+
+---
+
+## Características Principales
 
 ### Autenticación
-- Registro con email y contraseña
+- Registro mediante email y contraseña
 - Inicio de sesión con Google
-- Persistencia de sesión (no se solicita login si el usuario ya ha iniciado sesión)
+- Persistencia automática de sesión
 
-### Publicación de Mascotas
-- Creación de publicaciones para mascotas perdidas o en adopción
-- Subida de imagen desde:
-  - Cámara
-  - Galería
-- Campos opcionales editables (chip, información adicional)
-- Almacenamiento en Firebase Firestore
-- Imágenes almacenadas en Supabase Storage
+### Gestión de Publicaciones
+- Alta de mascotas perdidas o en adopción
+- Subida de imágenes desde cámara o galería
+- Información editable y ampliable
+- Almacenamiento en Firestore
 
-### Visualización de Mascotas
-- Listado dinámico mediante RecyclerView
-- Actualización en tiempo real con SnapshotListener
-- Visualización detallada de cada publicación
-- Contacto directo vía llamada telefónica
+### Visualización Dinámica
+- Feed actualizado en tiempo real
+- RecyclerView optimizado
+- Vista detallada por publicación
+- Contacto telefónico directo
 
 ### Perfil de Usuario
-- Visualización de datos del usuario
+- Gestión de datos personales
 - Cambio de imagen de perfil
-- Subida de imagen a Supabase
 - Cierre de sesión seguro
 
-### Interfaz y Experiencia
+### Experiencia de Usuario
 - Material Design 3
-- BottomAppBar con FloatingActionButton central 
 - Navegación mediante Fragments
+- BottomAppBar personalizada
 - Soporte para modo claro y oscuro
 
 ---
 
-## Tecnologías Utilizadas
+## Arquitectura Tecnológica
 
-| Categoría | Tecnología |
+| Componente | Tecnología |
 |-----------|------------|
-| Plataforma | Android |
+| Plataforma | Android Native |
 | Lenguaje | Java |
-| Backend | Firebase Auth|
-| Base de datos | Firestore |
-| Almacenamiento | Firebase Storage |
-| Autenticación | Firebase Auth |
+| Arquitectura | Fragments + Adapter Pattern |
+| Backend | Firebase |
+| Base de datos | Cloud Firestore |
+| Almacenamiento multimedia | Supabase Storage |
+| Autenticación | Firebase Authentication |
 | UI | Material Design 3 |
-| Librerías | Glide, OkHttp |
+| Librerías | Glide · OkHttp |
 
 ---
 
-## Capturas de Pantalla
+## Vista Previa
 
-## Pantallas Principales
+### Pantallas Principales
 
 | Splash | Login | Registro |
 |--------|-------|----------|
@@ -93,9 +121,9 @@ La aplicación conecta usuarios mediante publicaciones dinámicas, permitiendo r
 |----------|------|
 | <img src="https://github.com/user-attachments/assets/22d42854-aea9-4495-977b-eee1c01fb3f7" width="250"> | <img src="https://github.com/user-attachments/assets/db71bf33-b332-49d8-9c59-5658a3bf1a65" width="250"> |
 
-| Modo Oscuro |
-|-------------|
-| <img src="https://github.com/user-attachments/assets/192ca139-fbd8-4d4e-a90c-6743a2956c73" width="250"> |
+| Modo Oscuro | Perfil |
+|-------------|--------|
+| <img src="https://github.com/user-attachments/assets/192ca139-fbd8-4d4e-a90c-6743a2956c73" width="250"> | <img src="https://github.com/user-attachments/assets/db71bf33-b332-49d8-9c59-5658a3bf1a65" width="250"> |
 
 
 ---
@@ -151,17 +179,48 @@ PetFect/
 
 ---
 
-## Próximas Mejoras
+## Roadmap
 
-- Sistema completo de geolocalización
-- Notificaciones avanzadas en tiempo real
-- Filtros de búsqueda personalizados
-- Panel de administración para refugios
-- Poder añadir a favoritos un animal que está en adopción
+- [ ] Geolocalización avanzada
+- [ ] Sistema de favoritos
+- [ ] Notificaciones push
+- [ ] Filtros inteligentes
+- [ ] Panel para refugios
+- [ ] Historial de publicaciones
+
+---
+
+## Objetivo Académico
+
+Proyecto desarrollado como solución tecnológica enfocada al bienestar animal, aplicando conocimientos de:
+
+- Desarrollo Android nativo
+- Integración de servicios cloud
+- Diseño UI/UX
+- Gestión de datos en tiempo real
 
 ---
 
 ## Licencia
 
-Este proyecto está bajo la licencia  
-**Creative Commons BY-SA 4.0**
+El código fuente de PetFect está distribuido bajo la licencia **Apache License 2.0**.
+
+Esto permite su uso, modificación y distribución siempre que se respeten los términos establecidos en dicha licencia.
+
+Consulta el archivo `LICENSE` para más información.
+
+---
+
+## Protección de Marca e Identidad Visual
+
+El nombre **PetFect**, su logotipo, identidad visual, paleta de colores, diseño de interfaz y demás elementos gráficos asociados son propiedad de sus autores.
+
+Estos elementos no podrán ser reutilizados, reproducidos ni distribuidos sin autorización expresa por escrito.
+
+---
+
+## Documentación Legal
+
+- Política de Privacidad → `PRIVACY_POLICY.md`
+- Términos y Condiciones → `TERMS_AND_CONDITIONS.md`
+- Atribuciones de terceros → `ATTRIBUTIONS.md`

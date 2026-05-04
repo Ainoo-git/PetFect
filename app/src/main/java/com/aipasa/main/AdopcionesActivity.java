@@ -14,7 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// ANTIGUOO
 public class AdopcionesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
