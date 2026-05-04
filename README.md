@@ -1,32 +1,15 @@
-Código distribuido bajo **Apache License 2.0**  
-Consulta el archivo `LICENSE` para más información.
-
 # 🐾 PetFect – “Ayuda y Encuentra”
 
 <div align="center">
-  
-[![Android](https://img.shields.io/badge/Platform-Android-0F5052?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/)
-[![Java](https://img.shields.io/badge/Language-Java-3ACAAE?style=for-the-badge&logo=java&logoColor=white)]()
-[![Estado](https://img.shields.io/badge/Estado-En%20Desarrollo-3ACAAE?style=for-the-badge)]()
-[![Firebase](https://img.shields.io/badge/Backend-Firebase-C3FFFC?style=for-the-badge&logo=firebase&logoColor=black)]()
-[![Supabase](https://img.shields.io/badge/Backend-Supabase-FFC3C3?style=for-the-badge&logo=firebase&logoColor=black)]()
-[![Material Design](https://img.shields.io/badge/UI-Material%203-FF8C8C?style=for-the-badge&logo=material-design&logoColor=white)]()
+
+[![Android](https://img.shields.io/badge/Platform-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/)
+[![Java](https://img.shields.io/badge/Language-Java-blue?style=for-the-badge&logo=java&logoColor=white)]()
+[![Firebase](https://img.shields.io/badge/Backend-Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)]()
+[![Material Design](https://img.shields.io/badge/UI-Material%203-0081CB?style=for-the-badge&logo=material-design&logoColor=white)]()
+[![Estado](https://img.shields.io/badge/Estado-En%20Desarrollo-success?style=for-the-badge)]()
 
 </div>
 
----
-
-## Contenido
-
-- [Sobre el Proyecto](#sobre-el-proyecto)
-- [Demo](#-demo)
-- [Características](#características-principales)
-- [Arquitectura](#arquitectura-tecnológica)
-- [Capturas](#vista-previa)
-- [Instalación](#instalación)
-- [Roadmap](#roadmap)
-- [Licencia](#licencia)
-- [Documentación Legal](#documentación-legal)
 ---
 
 ## Sobre el Proyecto
@@ -44,12 +27,6 @@ La aplicación permite a los usuarios registrar mascotas perdidas o en adopción
 - Ofrecer una experiencia rápida, intuitiva y eficiente
   
 El sistema permite crear publicaciones detalladas, adjuntar imágenes, consultar mascotas disponibles y contactar directamente con los responsables.
-
----
-
-## 🎥 Demo
-
-[Ver vídeo en YouTube](https://youtu.be/lzR7Zqn5gJ4)
 
 ---
 
@@ -121,9 +98,9 @@ El sistema permite crear publicaciones detalladas, adjuntar imágenes, consultar
 |----------|------|
 | <img src="https://github.com/user-attachments/assets/22d42854-aea9-4495-977b-eee1c01fb3f7" width="250"> | <img src="https://github.com/user-attachments/assets/db71bf33-b332-49d8-9c59-5658a3bf1a65" width="250"> |
 
-| Modo Oscuro | Perfil |
-|-------------|--------|
-| <img src="https://github.com/user-attachments/assets/192ca139-fbd8-4d4e-a90c-6743a2956c73" width="250"> | <img src="https://github.com/user-attachments/assets/db71bf33-b332-49d8-9c59-5658a3bf1a65" width="250"> |
+| Modo Oscuro |
+|-------------|
+| <img src="https://github.com/user-attachments/assets/192ca139-fbd8-4d4e-a90c-6743a2956c73" width="250"> |
 
 
 ---
@@ -203,24 +180,4 @@ Proyecto desarrollado como solución tecnológica enfocada al bienestar animal, 
 
 ## Licencia
 
-El código fuente de PetFect está distribuido bajo la licencia **Apache License 2.0**.
-
-Esto permite su uso, modificación y distribución siempre que se respeten los términos establecidos en dicha licencia.
-
-Consulta el archivo `LICENSE` para más información.
-
----
-
-## Protección de Marca e Identidad Visual
-
-El nombre **PetFect**, su logotipo, identidad visual, paleta de colores, diseño de interfaz y demás elementos gráficos asociados son propiedad de sus autores.
-
-Estos elementos no podrán ser reutilizados, reproducidos ni distribuidos sin autorización expresa por escrito.
-
----
-
-## Documentación Legal
-
-- Política de Privacidad → `PRIVACY_POLICY.md`
-- Términos y Condiciones → `TERMS_AND_CONDITIONS.md`
-- Atribuciones de terceros → `ATTRIBUTIONS.md`
+Distribuido bajo licencia **MIT**.
