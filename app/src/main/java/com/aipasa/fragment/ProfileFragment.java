@@ -28,7 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aipasa.R;
 import com.aipasa.auth.Login;
-import com.aipasa.firebase.MascotaAdapter; // ✅ USAMOS EL MISMO QUE HOME
+import com.aipasa.firebase.MascotaAdapter;
 import com.aipasa.firebase.SupabaseClient;
 import com.aipasa.main.MapaActivity;
 import com.bumptech.glide.Glide;
