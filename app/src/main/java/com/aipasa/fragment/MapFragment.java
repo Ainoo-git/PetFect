@@ -1,24 +1,37 @@
 package com.aipasa.fragment;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.result.*;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.*;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.aipasa.R;
-import com.google.android.gms.location.*;
-import com.google.android.gms.maps.*;
-import com.google.android.gms.maps.model.*;
-import com.google.firebase.database.*;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,15 +42,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private FusedLocationProviderClient fusedLocationClient;
     private DatabaseReference databaseRef;
 
-    private final ActivityResultLauncher<String[]> requestPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), perms -> {
-                Boolean fineLocationGranted = perms.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false);
-                if (fineLocationGranted != null && fineLocationGranted) {
-                    enableMyLocation();
-                } else {
-                    Toast.makeText(requireContext(), "Permiso denegado", Toast.LENGTH_SHORT).show();
-                }
-            });
+    private ActivityResultLauncher<String[]> requestPermissionLauncher;
+
+    public MapFragment() {
+        // Constructor vacío obligatorio
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,18 +54,32 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
         databaseRef = FirebaseDatabase.getInstance().getReference("pines_mascotas");
 
-        SupportMapFragment mapFragment = (SupportMapFragment)
-                getChildFragmentManager().findFragmentById(R.id.map);
+        // Permisos
+        requestPermissionLauncher =
+                registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), perms -> {
+                    Boolean fineLocationGranted = perms.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false);
+                    if (fineLocationGranted != null && fineLocationGranted) {
+                        enableMyLocation();
+                    } else {
+                        Toast.makeText(requireContext(), "Permiso de ubicación denegado", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
-        }
+        // Crear el mapa dentro del fragment
+        SupportMapFragment mapFragment = new SupportMapFragment();
+
+        getChildFragmentManager()
+                .beginTransaction()
+                .replace(R.id.map_container, mapFragment)
+                .commit();
+
+        mapFragment.getMapAsync(this);
     }
 
     @Override
@@ -85,25 +108,30 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
             mMap.setMyLocationEnabled(true);
 
-            fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
+            fusedLocationClient.getLastLocation().addOnSuccessListener(requireActivity(), location -> {
                 if (location != null) {
-                    LatLng user = new LatLng(location.getLatitude(), location.getLongitude());
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(user, 15f));
+                    LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 15f));
                 }
             });
         }
     }
 
     private void showAddPinDialog(LatLng latLng) {
-        EditText input = new EditText(requireContext());
+        final EditText input = new EditText(requireContext());
+        input.setHint("Ej: Perro perdido, Parque canino...");
+        input.setPadding(48, 32, 48, 32);
 
         new AlertDialog.Builder(requireContext())
                 .setTitle("Nuevo pin")
+                .setMessage("Escribe un título para este marcador:")
                 .setView(input)
-                .setPositiveButton("Guardar", (d, w) -> {
+                .setPositiveButton("Guardar", (dialog, which) -> {
                     String titulo = input.getText().toString().trim();
                     if (!titulo.isEmpty()) {
                         savePinToFirebase(latLng, titulo);
+                    } else {
+                        Toast.makeText(requireContext(), "El título no puede estar vacío", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton("Cancelar", null)
@@ -111,27 +139,30 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void savePinToFirebase(LatLng latLng, String titulo) {
-        String id = databaseRef.push().getKey();
-        if (id == null) return;
+        String pinId = databaseRef.push().getKey();
+        if (pinId == null) return;
 
-        Map<String, Object> data = new HashMap<>();
-        data.put("lat", latLng.latitude);
-        data.put("lng", latLng.longitude);
-        data.put("titulo", titulo);
+        Map<String, Object> pinData = new HashMap<>();
+        pinData.put("lat", latLng.latitude);
+        pinData.put("lng", latLng.longitude);
+        pinData.put("titulo", titulo);
 
-        databaseRef.child(id).setValue(data);
+        databaseRef.child(pinId).setValue(pinData)
+                .addOnSuccessListener(aVoid -> Toast.makeText(requireContext(), "Pin guardado", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(requireContext(), "Error al guardar el pin", Toast.LENGTH_SHORT).show());
     }
 
     private void listenForPins() {
         databaseRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, String s) {
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 addMarkerFromSnapshot(snapshot);
             }
-            public void onChildChanged(@NonNull DataSnapshot snapshot, String s) {}
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {}
-            public void onChildMoved(@NonNull DataSnapshot snapshot, String s) {}
-            public void onCancelled(@NonNull DatabaseError error) {}
+
+            @Override public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
+            @Override public void onChildRemoved(@NonNull DataSnapshot snapshot) {}
+            @Override public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
+            @Override public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
 
@@ -140,11 +171,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         Double lng = snapshot.child("lng").getValue(Double.class);
         String titulo = snapshot.child("titulo").getValue(String.class);
 
-        if (lat != null && lng != null && mMap != null) {
+        if (lat != null && lng != null) {
             if (titulo == null) titulo = "Sin título";
-            mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(lat, lng))
-                    .title(titulo));
+            mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title(titulo));
         }
     }
 }

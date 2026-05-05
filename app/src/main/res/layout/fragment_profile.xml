@@ -13,7 +13,7 @@
         android:background="@color/rosita_fondoss_tarjetas_alertaslev"
         android:title="Perfil"
         android:titleTextColor="@color/white"
-        app:navigationIcon="@drawable/outline_arrow_back_ios_24"
+        app:navigationIcon="@drawable/outline_arrow"
         app:titleCentered="true"/>
 
     <androidx.core.widget.NestedScrollView

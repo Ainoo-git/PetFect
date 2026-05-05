@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -18,8 +19,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetFect">
         <activity
-            android:name=".main.MapaActivity"
+            android:name=".configuracion.ConfiguracionActivity"
             android:exported="false" />
+        <!--<activity
+            android:name=".main.MapaActivity"
+            android:exported="false" />  Splash -->
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyB782JpfbeNrzMS2igviCaPWLLuFlymHAM" />
         <!-- Splash -->
         <activity
             android:name=".splash.Splash"
@@ -35,20 +43,13 @@
             android:exported="false" />
         <activity
             android:name=".MainBab"
-            android:exported="false">
-
-
-        </activity>
-
+            android:exported="false" />
         <activity
             android:name=".auth.SignUp"
             android:exported="false" /> <!-- Main -->
         <activity
             android:name=".main.MainActivity"
             android:exported="false" /> <!-- Perfil -->
-        <activity
-            android:name=".main.Profile"
-            android:exported="false" /> <!-- Preferencias -->
         <activity
             android:name=".main.PreferenciasActivity"
             android:exported="false" /> <!-- Preferencias -->
