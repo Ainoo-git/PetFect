@@ -111,8 +111,11 @@ public class HomeFragment extends Fragment {
         });
 
         view.findViewById(R.id.imgPerfil).setOnClickListener(v -> {
-            // abrir perfil
-            startActivity(new android.content.Intent(requireContext(), com.aipasa.main.Profile.class));
+            if (getActivity() != null) {
+                ((com.google.android.material.bottomnavigation.BottomNavigationView)
+                        getActivity().findViewById(R.id.bottom_nav))
+                        .setSelectedItemId(R.id.profile);
+            }
         });
     }
 
