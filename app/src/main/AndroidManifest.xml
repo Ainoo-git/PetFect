@@ -64,9 +64,9 @@
         <activity
             android:name=".main.PublicacionActivity"
             android:exported="false" />
-        <activity
+      <!--  <activity
             android:name=".main.ActivityTarjeta"
-            android:exported="false" />
+            android:exported="false" /> -->
         <activity
             android:name=".creditos.Creditos"
             android:exported="false"/>

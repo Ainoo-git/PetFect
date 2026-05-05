@@ -28,6 +28,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aipasa.R;
 import com.aipasa.auth.Login;
+import com.aipasa.configuracion.ConfiguracionActivity;
+import com.aipasa.firebase.SupabaseClient; // 🔥 NUEVO
 import com.aipasa.firebase.MascotaAdapter;
 import com.aipasa.firebase.SupabaseClient;
 import com.aipasa.main.MapaActivity;
@@ -51,6 +53,7 @@ import okhttp3.*;
 public class ProfileFragment extends Fragment {
 
     private TextView tvNombre;
+    private static final int PICK_IMAGE_REQUEST = 1001;
     private ImageView profileImage;
 
     private FirebaseUser currentUser;
@@ -233,6 +236,7 @@ public class ProfileFragment extends Fragment {
                         SupabaseClient.BUCKET_NAME + "/" + fileName)
                 .addHeader("apikey", SupabaseClient.SUPABASE_KEY)
                 .addHeader("Authorization", "Bearer " + SupabaseClient.SUPABASE_KEY)
+                .addHeader("Content-Type", "image/jpeg")
                 .put(requestBody)
                 .build();
 

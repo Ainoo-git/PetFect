@@ -140,10 +140,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //abrir pestaña mapa
-    public void openMapa(View view) {
-        Intent intent = new Intent(this, MapaActivity.class);
-        startActivity(intent);
-    }
+//    public void openMapa(View view) {
+//        Intent intent = new Intent(this, MapaActivity.class);
+//        startActivity(intent);
+//    }
 
     // Cargar preferencias del usuario
     private void cargarPreferencias() {
