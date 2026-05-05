@@ -114,7 +114,7 @@ public class ProfileFragment extends Fragment {
         btnCerrarSesion.setOnClickListener(this::openLogin);
 
         Button btnConfiguracion = view.findViewById(R.id.btnConfiguracion);
-        btnConfiguracion.setOnClickListener(v -> openMapa());
+        btnConfiguracion.setOnClickListener(v -> openConfig());
 
         // RECYCLER
         rvMascotas = view.findViewById(R.id.rvMascotas);
@@ -287,7 +287,7 @@ public class ProfileFragment extends Fragment {
         requireActivity().finish();
     }
 
-    private void openMapa() {
-        startActivity(new Intent(requireContext(), MapaActivity.class));
+    private void openConfig() {
+        startActivity(new Intent(requireContext(), ConfiguracionActivity.class));
     }
 }
