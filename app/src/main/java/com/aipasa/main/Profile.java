@@ -1,4 +1,4 @@
-package com.aipasa.main; // Cambia esto si tu paquete es distinto
+package com.aipasa.main;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
