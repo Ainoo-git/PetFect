@@ -43,11 +43,10 @@
 
             <!-- Notificaciones -->
             <LinearLayout
-                android:id="@+id/menu_notificaciones"
+                android:id="@+id/notificaciones"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:clickable="true"
-                android:foreground="?attr/selectableItemBackground"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingHorizontal="16dp">
@@ -88,11 +87,10 @@
             <!-- Idioma -->
 
             <LinearLayout
-                android:id="@+id/menu_language"
+                android:id="@+id/idioma"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:foreground="?attr/selectableItemBackground"
                 android:gravity="center_vertical"
                 android:minHeight="56dp"
                 android:orientation="horizontal"
@@ -120,7 +118,7 @@
 
             <!-- Política de privacidad -->
             <LinearLayout
-                android:id="@+id/menu_privacity"
+                android:id="@+id/p_privacidad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -149,9 +147,9 @@
                     android:src="@drawable/flecha_derecha"
                     app:tint="@color/black" />
             </LinearLayout>
-            <!-- Acerca de -->
+            <!-- Licencias -->
             <LinearLayout
-                android:id="@+id/menu_acerca"
+                android:id="@+id/Licencias"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
