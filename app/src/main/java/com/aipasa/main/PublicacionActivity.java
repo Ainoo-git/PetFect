@@ -49,7 +49,8 @@ public class PublicacionActivity extends AppCompatActivity {
     private CheckBox checkLegal;
 
     private EditText etNombre, etTelefono, etEdad, etChip, etInfoAdicional;
-    private RadioButton cbPerdido, cbAdopcion, cbPerro, cbGato;
+
+    private RadioButton cbPerdido, cbAdopcion, cbPerro, cbGato, cbOtro;
 
     private Uri imageUri;
     private Bitmap imageBitmap;
@@ -77,6 +78,7 @@ public class PublicacionActivity extends AppCompatActivity {
         cbAdopcion = findViewById(R.id.rbAdopcion);
         cbPerro = findViewById(R.id.rbPerro);
         cbGato = findViewById(R.id.rbGato);
+        cbOtro = findViewById(R.id.rbOtro);
 
         imgMascota.setVisibility(View.GONE);
         btnPublicar.setEnabled(false);
@@ -190,7 +192,8 @@ public class PublicacionActivity extends AppCompatActivity {
                 cbAdopcion.isChecked() ? "adopcion" : null;
 
         final String tipo = cbPerro.isChecked() ? "perro" :
-                cbGato.isChecked() ? "gato" : null;
+                cbGato.isChecked() ? "gato" :
+                        cbOtro.isChecked() ? "otro" : null;
 
         if (nombre.isEmpty() || estado == null || tipo == null) {
             Toast.makeText(this, "Completa los campos obligatorios",

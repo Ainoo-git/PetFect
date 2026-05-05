@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -21,10 +20,6 @@
         <activity
             android:name=".main.MapaActivity"
             android:exported="false" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB782JpfbeNrzMS2igviCaPWLLuFlymHAM" />
         <!-- Splash -->
         <activity
             android:name=".splash.Splash"
@@ -41,6 +36,8 @@
         <activity
             android:name=".MainBab"
             android:exported="false">
+
+
         </activity>
 
         <activity
@@ -64,9 +61,9 @@
         <activity
             android:name=".main.PublicacionActivity"
             android:exported="false" />
-      <!--  <activity
+        <activity
             android:name=".main.ActivityTarjeta"
-            android:exported="false" /> -->
+            android:exported="false" />
         <activity
             android:name=".creditos.Creditos"
             android:exported="false"/>
