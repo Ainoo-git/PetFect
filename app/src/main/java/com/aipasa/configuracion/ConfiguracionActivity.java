@@ -14,6 +14,11 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        topAppBar.setNavigationOnClickListener(v -> {
+            requireActivity().onBackPressed();
+        });
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_configuracion); // 👈 CLAVE

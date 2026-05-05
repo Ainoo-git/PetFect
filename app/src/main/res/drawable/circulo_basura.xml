@@ -1,0 +1,9 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <path
+      android:fillColor="@color/coral_alertasimp_errores"
+      android:pathData="m12,0C5.383,0 0,5.383 0,12s5.383,12 12,12 12,-5.383 12,-12S18.617,0 12,0ZM12,22c-5.514,0 -10,-4.486 -10,-10S6.486,2 12,2s10,4.486 10,10 -4.486,10 -10,10ZM15,7c0,-1.103 -0.897,-2 -2,-2h-2c-1.103,0 -2,0.897 -2,2v1h-3v2h1v6c0,1.654 1.346,3 3,3h4c1.654,0 3,-1.346 3,-3v-6h1v-2h-3v-1ZM11,7h2v1h-2v-1ZM15,16c0,0.551 -0.448,1 -1,1h-4c-0.552,0 -1,-0.449 -1,-1v-6h6v6Z"/>
+</vector>
