@@ -31,8 +31,6 @@ import com.aipasa.auth.Login;
 import com.aipasa.configuracion.ConfiguracionActivity;
 import com.aipasa.firebase.SupabaseClient; // 🔥 NUEVO
 import com.aipasa.firebase.MascotaAdapter;
-import com.aipasa.firebase.SupabaseClient;
-import com.aipasa.main.MapaActivity;
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;

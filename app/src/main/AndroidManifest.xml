@@ -21,9 +21,9 @@
         <activity
             android:name=".configuracion.ConfiguracionActivity"
             android:exported="false" />
-        <activity
+        <!--<activity
             android:name=".main.MapaActivity"
-            android:exported="false" /> <!-- Splash -->
+            android:exported="false" />  Splash -->
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -50,9 +50,6 @@
         <activity
             android:name=".main.MainActivity"
             android:exported="false" /> <!-- Perfil -->
-        <activity
-            android:name=".main.Profile"
-            android:exported="false" /> <!-- Preferencias -->
         <activity
             android:name=".main.PreferenciasActivity"
             android:exported="false" /> <!-- Preferencias -->
