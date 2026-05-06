@@ -101,7 +101,7 @@ public class Profile extends AppCompatActivity {
     }
 
     public void openMapa(android.view.View view) {
-        Intent intent = new Intent(this, MapaActivity.class);
-        startActivity(intent);
+       // Intent intent = new Intent(this, MapaActivity.class);
+        //startActivity(intent);
     }
 }
