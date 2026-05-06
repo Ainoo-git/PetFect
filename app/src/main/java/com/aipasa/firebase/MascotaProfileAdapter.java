@@ -59,16 +59,56 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
                     .into(holder.imgAccion);
         }
 
-        //  BOTÓN EDITAR
-        holder.btnEditar.setOnClickListener(v -> {
-            Toast.makeText(context, "Editar (luego lo conectamos)", Toast.LENGTH_SHORT).show();
+
+        holder.itemView.setOnClickListener(v -> {
+
+            View dialogView = LayoutInflater.from(v.getContext())
+                    .inflate(R.layout.fragment_tarjeta_perfil_mascota, null);
+
+            ImageView img = dialogView.findViewById(R.id.imgAccion);
+            TextView titulo = dialogView.findViewById(R.id.txtTitulo);
+            TextView fecha = dialogView.findViewById(R.id.txtFecha);
+            TextView descripcion = dialogView.findViewById(R.id.txtDescripcion);
+            Button btnEditar = dialogView.findViewById(R.id.btnEditar);
+            Button btnEliminar = dialogView.findViewById(R.id.btnEliminar);
+
+            titulo.setText(nombre != null ? nombre : "Sin nombre");
+            fecha.setText(tipoEstado);
+
+            descripcion.setText(
+                    "Edad: " + doc.getString("edad") +
+                            "\nChip: " + doc.getString("chip") +
+                            "\nTeléfono: " + doc.getString("telefono") +
+                            "\nInfo: " + doc.getString("infoAdicional")
+            );
+
+            if (fotoUrl != null) {
+                Glide.with(v.getContext()).load(fotoUrl).into(img);
+            }
+
+            android.app.AlertDialog dialog = new android.app.AlertDialog.Builder(v.getContext())
+                    .setView(dialogView)
+                    .create();
+
+            dialog.show();
+
+            btnEditar.setOnClickListener(v2 -> {
+                dialog.dismiss();
+                abrirEditar(doc);
+            });
+
+            btnEliminar.setOnClickListener(v2 -> {
+                dialog.dismiss();
+                confirmarEliminar(doc);
+            });
+
         });
 
-        //  BOTÓN ELIMINAR
-        holder.btnEliminar.setOnClickListener(v -> {
-            doc.getReference().delete();
-            Toast.makeText(context, "Mascota eliminada", Toast.LENGTH_SHORT).show();
-        });
+        // BOTÓN EDITAR
+        holder.btnEditar.setOnClickListener(v -> abrirEditar(doc));
+
+        // BOTÓN ELIMINAR
+        holder.btnEliminar.setOnClickListener(v -> confirmarEliminar(doc));
     }
 
     @Override
@@ -91,5 +131,31 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
             btnEditar = itemView.findViewById(R.id.btnEditar);
             btnEliminar = itemView.findViewById(R.id.btnEliminar);
         }
+    }
+
+    private void abrirEditar(DocumentSnapshot doc) {
+        android.content.Intent intent =
+                new android.content.Intent(context, com.aipasa.main.PublicacionActivity.class);
+
+        intent.putExtra("modo", "editar");
+        intent.putExtra("idMascota", doc.getId());
+
+        context.startActivity(intent);
+    }
+
+    private void confirmarEliminar(DocumentSnapshot doc) {
+
+        new android.app.AlertDialog.Builder(context)
+                .setTitle("Eliminar mascota")
+                .setMessage("¿Seguro que quieres eliminarla?")
+                .setPositiveButton("Sí", (dialog, which) -> {
+
+                    doc.getReference().delete();
+
+                    Toast.makeText(context, "Mascota eliminada", Toast.LENGTH_SHORT).show();
+
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }
