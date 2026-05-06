@@ -15,8 +15,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 
 import com.aipasa.R;
+import com.google.android.material.appbar.MaterialToolbar;
 
 public class ConfiguracionActivity extends AppCompatActivity {
 
@@ -30,6 +32,17 @@ public class ConfiguracionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion);
 
+        // TOOLBAR
+        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        // CLICK BOTÓN ATRÁS (IMPORTANTE)
+        toolbar.setNavigationOnClickListener(v -> finish());
+
         // =====================
         // VISTAS
         // =====================
@@ -39,6 +52,18 @@ public class ConfiguracionActivity extends AppCompatActivity {
         overlay = findViewById(R.id.overlayEliminarCuenta);
         card = findViewById(R.id.cardEliminarCuenta);
         email = findViewById(R.id.tvEmailSoporte);
+
+        // ATRIBUCIONES
+        findViewById(R.id.atribuciones).setOnClickListener(v -> {
+            openAtribuciones();
+        });
+        findViewById(R.id.licencias).setOnClickListener(v -> {
+            openLicencia();
+        });
+
+        findViewById(R.id.terminos_condiciones).setOnClickListener(v -> {
+            openTerminosYcondiciones();
+        });
 
         // =====================
         // MODO OSCURO
@@ -55,7 +80,6 @@ public class ConfiguracionActivity extends AppCompatActivity {
         }
 
         switchModo.setOnCheckedChangeListener((buttonView, isChecked) -> {
-
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             } else {
@@ -97,5 +121,17 @@ public class ConfiguracionActivity extends AppCompatActivity {
             Toast.makeText(this, "Correo copiado", Toast.LENGTH_SHORT).show();
             return true;
         });
+    }
+
+    // 👉 ESTE MÉTODO VA FUERA de onCreate
+    private void openAtribuciones() {
+        startActivity(new Intent(ConfiguracionActivity.this, AtribucionesActivity.class));
+    }
+
+    private void openLicencia() {
+        startActivity(new Intent(ConfiguracionActivity.this, LicenciaActivity.class));
+    }
+    private void openTerminosYcondiciones() {
+        startActivity(new Intent(ConfiguracionActivity.this, TerminosCondicionesActivity.class));
     }
 }

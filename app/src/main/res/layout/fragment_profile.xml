@@ -13,7 +13,6 @@
         android:background="@color/rosita_fondoss_tarjetas_alertaslev"
         android:title="Perfil"
         android:titleTextColor="@color/white"
-        app:navigationIcon="@drawable/outline_arrow"
         app:titleCentered="true"/>
 
     <androidx.core.widget.NestedScrollView
@@ -103,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
-                    android:text="Mascotas Publicadas"
+                    android:text="Publicaciones"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 

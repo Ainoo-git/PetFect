@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- APPBAR -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:title="Términos y Condiciones"
+            android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+            android:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/outline_arrow"
+            app:titleCentered="true"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- CONTENIDO -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- TÍTULO -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Términos y Condiciones – PetFect"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:paddingBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Última actualización: mayo 2026"
+                android:paddingBottom="16dp"/>
+
+            <!-- SECCIONES -->
+            <TextView style="@style/TituloLegal" android:text="1. Naturaleza del servicio"/>
+            <TextView style="@style/TextLegal"
+                android:text="PetFect es una aplicación móvil orientada a la localización de mascotas perdidas y adopción responsable. Es una plataforma informativa y comunitaria."/>
+
+            <TextView style="@style/TituloLegal" android:text="2. Registro de usuarios"/>
+            <TextView style="@style/TextLegal"
+                android:text="El usuario es responsable de la veracidad de los datos proporcionados y de la seguridad de su cuenta."/>
+
+            <TextView style="@style/TituloLegal" android:text="3. Contenido publicado"/>
+            <TextView style="@style/TextLegal"
+                android:text="Los usuarios son responsables del contenido que publican. No se permite contenido ilegal, ofensivo, violento o suplantación de identidad. PetFect puede eliminar contenido sin previo aviso."/>
+
+            <TextView style="@style/TituloLegal" android:text="4. Uso de la aplicación"/>
+            <TextView style="@style/TextLegal"
+                android:text="El usuario se compromete a utilizar la aplicación de forma responsable."/>
+
+            <TextView style="@style/TituloLegal" android:text="5. Responsabilidad"/>
+            <TextView style="@style/TextLegal"
+                android:text="PetFect actúa como intermediario y no se responsabiliza de acuerdos entre usuarios."/>
+
+            <TextView style="@style/TituloLegal" android:text="6. Modificaciones"/>
+            <TextView style="@style/TextLegal"
+                android:text="Estos términos pueden modificarse en cualquier momento."/>
+
+            <TextView style="@style/TituloLegal" android:text="7. Aceptación"/>
+            <TextView style="@style/TextLegal"
+                android:text="El uso de la aplicación implica la aceptación de estos términos."/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -20,13 +20,13 @@
                 android:id="@+id/topAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:title="Configuración"
+                android:title="Configuracion"
                 android:background="@color/rosita_fondoss_tarjetas_alertaslev"
                 android:titleTextColor="@color/white"
                 app:navigationIcon="@drawable/outline_arrow"
-                app:titleCentered="true"
-                android:onClick="onBackClicked"/>
+                app:titleCentered="true"/>
         </com.google.android.material.appbar.AppBarLayout>
+
 
         <ScrollView
             android:layout_width="match_parent"
