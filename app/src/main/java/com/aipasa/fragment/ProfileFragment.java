@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.aipasa.R;
 import com.aipasa.auth.Login;
 import com.aipasa.configuracion.ConfiguracionActivity;
+import com.aipasa.editar.EditarPerfilActivity;
 import com.aipasa.firebase.SupabaseClient;
 import com.aipasa.firebase.MascotaAdapter;
 import com.bumptech.glide.Glide;
@@ -90,12 +91,10 @@ public class ProfileFragment extends Fragment {
         // Nombre usuario
         tvNombre = view.findViewById(R.id.nombre2);
 
-        SharedPreferences prefs = requireContext()
-                .getSharedPreferences("petfect_prefs", getContext().MODE_PRIVATE);
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseFirestore.getInstance();
 
-        String username = prefs.getString("username", "Nombre");
-
-        tvNombre.setText(username);
+        cargarNombreUsuario();
 
         // Firebase
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -126,8 +125,10 @@ public class ProfileFragment extends Fragment {
         btnCerrarSesion.setOnClickListener(this::openLogin);
 
         Button btnConfiguracion = view.findViewById(R.id.btnConfiguracion);
+        Button btnEditPerfil = view.findViewById(R.id.btnEditarPerfil);
 
         btnConfiguracion.setOnClickListener(v -> openConfig());
+        btnEditPerfil.setOnClickListener(v -> openEditPerfil());
 
         // RECYCLER
         rvMascotas = view.findViewById(R.id.rvMascotas);
@@ -341,7 +342,35 @@ public class ProfileFragment extends Fragment {
     }
 
     private void openConfig() {
-
         startActivity(new Intent(requireContext(), ConfiguracionActivity.class));
+    }
+
+    private void openEditPerfil() {
+        startActivity(new Intent(requireContext(), EditarPerfilActivity.class));
+    }
+
+    private void cargarNombreUsuario() {
+
+        if (currentUser == null) return;
+
+        db.collection("usuarios")
+                .document(currentUser.getUid())
+                .get()
+                .addOnSuccessListener(doc -> {
+
+                    if (doc.exists()) {
+
+                        String username = doc.getString("username");
+
+                        if (username != null && !username.isEmpty()) {
+
+                            tvNombre.setText(username);
+
+                        } else {
+
+                            tvNombre.setText("Usuario");
+                        }
+                    }
+                });
     }
 }

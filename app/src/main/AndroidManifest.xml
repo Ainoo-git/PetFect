@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetFect">
         <activity
+            android:name=".editar.EditarPerfilActivity"
+            android:exported="false" />
+        <activity
             android:name=".configuracion.PoliticaPrivacidadActivity"
             android:exported="false" />
         <activity
