@@ -1,13 +1,21 @@
 package com.aipasa.fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.app.Dialog;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -246,5 +254,49 @@ public class HomeFragment extends Fragment {
         if (mascotasListener != null) {
             mascotasListener.remove();
         }
+    }
+
+    private void showTermsDialog() {
+
+        Dialog dialog = new Dialog(requireContext());
+        dialog.setContentView(R.layout.dialog_terms);
+        dialog.setCancelable(false);
+
+        Button btnAccept = dialog.findViewById(R.id.btnAccept);
+        Button btnCancel = dialog.findViewById(R.id.btnCancel);
+        CheckBox check = dialog.findViewById(R.id.checkAccept);
+        ScrollView scrollView = dialog.findViewById(R.id.scrollView);
+
+        final boolean[] scrolled = {false};
+        final boolean[] checked = {false};
+
+        scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+            View view = scrollView.getChildAt(0);
+            int diff = view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY());
+
+            if (diff == 0) scrolled[0] = true;
+
+            btnAccept.setEnabled(scrolled[0] && checked[0]);
+        });
+
+        check.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            checked[0] = isChecked;
+            btnAccept.setEnabled(scrolled[0] && checked[0]);
+        });
+
+        btnAccept.setOnClickListener(v -> {
+            requireContext()
+                    .getSharedPreferences("petfect", Context.MODE_PRIVATE)
+                    .edit()
+                    .putBoolean("terms_accepted", true)
+                    .apply();
+
+            dialog.dismiss();
+        });
+
+        btnCancel.setOnClickListener(v -> requireActivity().finish());
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 }

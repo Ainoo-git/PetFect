@@ -30,8 +30,8 @@ import com.aipasa.R;
 import com.aipasa.auth.Login;
 import com.aipasa.configuracion.ConfiguracionActivity;
 import com.aipasa.editar.EditarPerfilActivity;
+import com.aipasa.firebase.MascotaProfileAdapter;
 import com.aipasa.firebase.SupabaseClient;
-import com.aipasa.firebase.MascotaAdapter;
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -66,7 +66,7 @@ public class ProfileFragment extends Fragment {
 
     // RECYCLER
     private RecyclerView rvMascotas;
-    private MascotaAdapter adapter;
+    private MascotaProfileAdapter adapter;
     private List<DocumentSnapshot> listaMascotas = new ArrayList<>();
 
     @Nullable
@@ -137,7 +137,7 @@ public class ProfileFragment extends Fragment {
 
         rvMascotas.setNestedScrollingEnabled(false);
 
-        adapter = new MascotaAdapter(listaMascotas);
+        adapter = new MascotaProfileAdapter(requireContext(), listaMascotas);
 
         rvMascotas.setAdapter(adapter);
 
