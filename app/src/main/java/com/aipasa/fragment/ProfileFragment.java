@@ -29,10 +29,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.aipasa.R;
 import com.aipasa.auth.Login;
 import com.aipasa.configuracion.ConfiguracionActivity;
-import com.aipasa.firebase.SupabaseClient; // 🔥 NUEVO
+import com.aipasa.firebase.SupabaseClient;
 import com.aipasa.firebase.MascotaAdapter;
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -62,7 +63,7 @@ public class ProfileFragment extends Fragment {
     private Uri imageUri;
     private Bitmap imageBitmap;
 
-    //  RECYCLER
+    // RECYCLER
     private RecyclerView rvMascotas;
     private MascotaAdapter adapter;
     private List<DocumentSnapshot> listaMascotas = new ArrayList<>();
@@ -77,12 +78,23 @@ public class ProfileFragment extends Fragment {
 
         // Toolbar
         MaterialToolbar toolbar = view.findViewById(R.id.topAppBar);
-        toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
+
+        toolbar.setNavigationOnClickListener(v -> {
+
+            ((BottomNavigationView)
+                    requireActivity().findViewById(R.id.bottom_nav))
+                    .setSelectedItemId(R.id.home);
+
+        });
 
         // Nombre usuario
         tvNombre = view.findViewById(R.id.nombre2);
-        SharedPreferences prefs = requireContext().getSharedPreferences("petfect_prefs", getContext().MODE_PRIVATE);
+
+        SharedPreferences prefs = requireContext()
+                .getSharedPreferences("petfect_prefs", getContext().MODE_PRIVATE);
+
         String username = prefs.getString("username", "Nombre");
+
         tvNombre.setText(username);
 
         // Firebase
@@ -105,22 +117,27 @@ public class ProfileFragment extends Fragment {
         );
 
         cargarImagenPerfil();
+
         profileImage.setOnClickListener(v -> mostrarOpcionesImagen());
 
         // Botones
         Button btnCerrarSesion = view.findViewById(R.id.btnCerrarSesion);
+
         btnCerrarSesion.setOnClickListener(this::openLogin);
 
         Button btnConfiguracion = view.findViewById(R.id.btnConfiguracion);
+
         btnConfiguracion.setOnClickListener(v -> openConfig());
 
         // RECYCLER
         rvMascotas = view.findViewById(R.id.rvMascotas);
 
         rvMascotas.setLayoutManager(new LinearLayoutManager(requireContext()));
+
         rvMascotas.setNestedScrollingEnabled(false);
 
         adapter = new MascotaAdapter(listaMascotas);
+
         rvMascotas.setAdapter(adapter);
 
         cargarMisMascotas();
@@ -148,59 +165,78 @@ public class ProfileFragment extends Fragment {
                 });
     }
 
-
     private void mostrarOpcionesImagen() {
+
         String[] opciones = {"Hacer foto", "Elegir de galería"};
 
         new AlertDialog.Builder(requireContext())
                 .setTitle("Cambiar foto de perfil")
                 .setItems(opciones, (dialog, which) -> {
+
                     if (which == 0) verificarPermisoCamara();
                     else abrirGaleria();
+
                 })
                 .show();
     }
 
     private void verificarPermisoCamara() {
+
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
+
             requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
+
         } else {
+
             abrirCamara();
         }
     }
 
     private void abrirCamara() {
+
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
         startActivityForResult(intent, 101);
     }
 
     private void abrirGaleria() {
+
         galeriaLauncher.launch("image/*");
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode != Activity.RESULT_OK) return;
 
         if (requestCode == 101 && data != null) {
+
             imageBitmap = (Bitmap) data.getExtras().get("data");
+
             profileImage.setImageBitmap(imageBitmap);
+
             procesarYSubirImagenPerfil(null, imageBitmap);
         }
     }
 
     private void procesarYSubirImagenPerfil(Uri imageUri, Bitmap imageBitmap) {
+
         try {
+
             byte[] imageBytes;
 
             if (imageUri != null) {
-                InputStream inputStream = requireContext().getContentResolver().openInputStream(imageUri);
+
+                InputStream inputStream =
+                        requireContext().getContentResolver().openInputStream(imageUri);
+
                 ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
                 int nRead;
+
                 byte[] data = new byte[16384];
 
                 while ((nRead = inputStream.read(data)) != -1) {
@@ -208,17 +244,22 @@ public class ProfileFragment extends Fragment {
                 }
 
                 imageBytes = buffer.toByteArray();
+
                 inputStream.close();
 
             } else {
+
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
                 imageBitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+
                 imageBytes = baos.toByteArray();
             }
 
             subirImagenPerfilASupabase(imageBytes);
 
         } catch (Exception e) {
+
             e.printStackTrace();
         }
     }
@@ -227,7 +268,8 @@ public class ProfileFragment extends Fragment {
 
         String fileName = "perfiles/" + currentUser.getUid() + ".jpg";
 
-        RequestBody requestBody = RequestBody.create(bytes, MediaType.parse("image/jpeg"));
+        RequestBody requestBody =
+                RequestBody.create(bytes, MediaType.parse("image/jpeg"));
 
         Request request = new Request.Builder()
                 .url(SupabaseClient.SUPABASE_URL + "/storage/v1/object/" +
@@ -239,10 +281,13 @@ public class ProfileFragment extends Fragment {
                 .build();
 
         SupabaseClient.getClient().newCall(request).enqueue(new Callback() {
-            @Override public void onFailure(Call call, java.io.IOException e) {}
+
+            @Override
+            public void onFailure(Call call, java.io.IOException e) {}
 
             @Override
             public void onResponse(Call call, Response response) {
+
                 if (response.isSuccessful()) {
 
                     String publicUrl = SupabaseClient.SUPABASE_URL +
@@ -250,6 +295,7 @@ public class ProfileFragment extends Fragment {
                             SupabaseClient.BUCKET_NAME + "/" + fileName;
 
                     Map<String, Object> data = new HashMap<>();
+
                     data.put("fotoPerfil", publicUrl);
 
                     db.collection("usuarios")
@@ -257,35 +303,45 @@ public class ProfileFragment extends Fragment {
                             .set(data, SetOptions.merge());
 
                     requireActivity().runOnUiThread(() ->
-                            Glide.with(requireContext()).load(publicUrl).into(profileImage));
+                            Glide.with(requireContext())
+                                    .load(publicUrl)
+                                    .into(profileImage));
                 }
             }
         });
     }
 
     private void cargarImagenPerfil() {
+
         if (currentUser == null) return;
 
         db.collection("usuarios")
                 .document(currentUser.getUid())
                 .get()
                 .addOnSuccessListener(doc -> {
+
                     String url = doc.getString("fotoPerfil");
+
                     if (url != null) {
-                        Glide.with(requireContext()).load(url).into(profileImage);
+
+                        Glide.with(requireContext())
+                                .load(url)
+                                .into(profileImage);
                     }
                 });
     }
 
-
-
     private void openLogin(View view) {
+
         FirebaseAuth.getInstance().signOut();
+
         startActivity(new Intent(requireContext(), Login.class));
+
         requireActivity().finish();
     }
 
     private void openConfig() {
+
         startActivity(new Intent(requireContext(), ConfiguracionActivity.class));
     }
 }
