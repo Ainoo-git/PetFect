@@ -121,12 +121,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-    // Abrir perfil del usuario
-//    public void OpenProfile(View view) {
-//        Intent intent = new Intent(this, Profile.class);
-//        startActivity(intent);
-//    }
     //abrir pestaña animales perdidos
     public void openPerdidos(View view) {
         Intent intent = new Intent(this, PerdidosActivity.class);
@@ -140,10 +134,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //abrir pestaña mapa
-    public void openMapa(View view) {
-        Intent intent = new Intent(this, MapaActivity.class);
-        startActivity(intent);
-    }
+//    public void openMapa(View view) {
+//        Intent intent = new Intent(this, MapaActivity.class);
+//        startActivity(intent);
+//    }
 
     // Cargar preferencias del usuario
     private void cargarPreferencias() {
