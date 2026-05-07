@@ -21,13 +21,10 @@ public class AtribucionesActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.topAppBar);
         setSupportActionBar(toolbar);
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // flecha atrás
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // flecha atrás
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 

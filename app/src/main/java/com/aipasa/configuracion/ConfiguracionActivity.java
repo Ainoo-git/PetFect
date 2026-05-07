@@ -32,8 +32,8 @@ public class ConfiguracionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion);
 
-        // TOOLBAR
         MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
@@ -42,17 +42,6 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
         // CLICK BOTÓN ATRÁS (IMPORTANTE)
         toolbar.setNavigationOnClickListener(v -> finish());
-
-        // =====================
-        // TOOLBAR
-        // =====================
-        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
-
-        setSupportActionBar(toolbar);
-
-        toolbar.setNavigationOnClickListener(v -> {
-            onBackPressed();
-        });
 
         // =====================
         // VISTAS
@@ -74,6 +63,12 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
         findViewById(R.id.terminos_condiciones).setOnClickListener(v -> {
             openTerminosYcondiciones();
+        });
+        findViewById(R.id.permisos_dispositivo).setOnClickListener(v -> {
+            openPermisos();
+        });
+        findViewById(R.id.politica_privacidad).setOnClickListener(v -> {
+            openPrivacidad();
         });
 
         // =====================
@@ -145,4 +140,14 @@ public class ConfiguracionActivity extends AppCompatActivity {
     private void openTerminosYcondiciones() {
         startActivity(new Intent(ConfiguracionActivity.this, TerminosCondicionesActivity.class));
     }
+
+    private void openPermisos() {
+        startActivity(new Intent(ConfiguracionActivity.this, PermisosDispositivoActivity.class));
+    }
+
+    private void openPrivacidad() {
+        startActivity(new Intent(ConfiguracionActivity.this, PoliticaPrivacidadActivity.class));
+    }
+
+
 }

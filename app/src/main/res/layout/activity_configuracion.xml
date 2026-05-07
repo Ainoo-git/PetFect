@@ -190,7 +190,7 @@
 
                 <!-- PRIVACIDAD -->
                 <LinearLayout
-                    android:id="@+id/p_privacidad"
+                    android:id="@+id/politica_privacidad"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:clickable="true"
