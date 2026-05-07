@@ -31,6 +31,7 @@
             android:layout_height="44dp"
             android:src="@drawable/baseline_person_24"
             android:clickable="true"
+            android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 

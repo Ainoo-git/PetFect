@@ -44,6 +44,17 @@ public class ConfiguracionActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> finish());
 
         // =====================
+        // TOOLBAR
+        // =====================
+        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed();
+        });
+
+        // =====================
         // VISTAS
         // =====================
         Switch switchModo = findViewById(R.id.switchModoOscuro);

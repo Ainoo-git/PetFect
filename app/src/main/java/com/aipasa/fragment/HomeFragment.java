@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +26,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
-
+import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,8 @@ public class HomeFragment extends Fragment {
     private boolean prefPerdidos, prefAdopciones, prefVeterinarias;
     private static final String PREFS = "petfect_prefs";
 
+    private ImageView imgPerfil;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -73,11 +76,14 @@ public class HomeFragment extends Fragment {
         recyclerPerdidos = view.findViewById(R.id.recyclerPerdidos);
         recyclerAdopciones = view.findViewById(R.id.recyclerAdopciones);
 
+        imgPerfil = view.findViewById(R.id.imgPerfil);
+
         configurarRecyclerViews();
         mostrarNombreUsuario();
         cargarPreferencias();
         configurarFab(view);
         configurarBotonesFiltrado(view);
+        cargarFotoPerfil();
 
         cargarMascotas();
 
@@ -95,6 +101,26 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    private void cargarFotoPerfil() {
+
+        if (currentUser == null) return;
+
+        db.collection("usuarios")
+                .document(currentUser.getUid())
+                .get()
+                .addOnSuccessListener(doc -> {
+
+                    String url = doc.getString("fotoPerfil");
+
+                    if (url != null && getContext() != null) {
+
+                        Glide.with(requireContext())
+                                .load(url)
+                                .circleCrop()
+                                .into(imgPerfil);
+                    }
+                });
+    }
     // Botones filtrarán secciones dentro del HomeFragment
     private void configurarBotonesFiltrado(View view) {
         Button btnAll = view.findViewById(R.id.btnAll);
