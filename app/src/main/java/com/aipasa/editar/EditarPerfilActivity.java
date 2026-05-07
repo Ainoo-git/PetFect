@@ -40,6 +40,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
         // TOOLBAR
         MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
@@ -52,95 +53,147 @@ public class EditarPerfilActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
+
         btnGuardar = findViewById(R.id.btnGuardar);
 
-        // =========================
+
         // CARGAR EMAIL (FIREBASE AUTH)
-        // =========================
+
         if (user != null) {
+
             currentEmail = user.getEmail();
+
             etEmail.setText(currentEmail);
         }
 
-        // =========================
+
         // CARGAR USERNAME (FIRESTORE)
-        // =========================
+
         if (user != null) {
-            db.collection("users")
+
+            db.collection("usuarios")
                     .document(user.getUid())
                     .get()
                     .addOnSuccessListener(documentSnapshot -> {
 
                         if (documentSnapshot.exists()) {
-                            currentUsername = documentSnapshot.getString("username");
 
-                            // 👇 ESTO ES LO IMPORTANTE
+                            currentUsername =
+                                    documentSnapshot.getString("username");
+
                             etUsername.setText(currentUsername);
                         }
                     })
                     .addOnFailureListener(e ->
-                            Toast.makeText(this, "Error cargando usuario", Toast.LENGTH_SHORT).show()
+
+                            Toast.makeText(
+                                    this,
+                                    "Error cargando usuario",
+                                    Toast.LENGTH_SHORT
+                            ).show()
                     );
         }
 
-        // =========================
         // GUARDAR CAMBIOS
-        // =========================
+
         btnGuardar.setOnClickListener(v -> {
 
             if (user == null) return;
 
-            String newUsername = etUsername.getText().toString().trim();
-            String newEmail = etEmail.getText().toString().trim();
-            String newPassword = etPassword.getText().toString().trim();
+            String newUsername =
+                    etUsername.getText().toString().trim();
 
-            // =========================
-            // USERNAME (SOLO SI CAMBIA)
-            // =========================
-            if (!newUsername.isEmpty() && !newUsername.equals(currentUsername)) {
+            String newEmail =
+                    etEmail.getText().toString().trim();
+
+            String newPassword =
+                    etPassword.getText().toString().trim();
+
+
+
+            if (!newUsername.isEmpty()
+                    && !newUsername.equals(currentUsername)) {
 
                 Map<String, Object> map = new HashMap<>();
+
                 map.put("username", newUsername);
 
-                db.collection("users")
+                db.collection("usuarios")
                         .document(user.getUid())
                         .update(map);
 
                 currentUsername = newUsername;
             }
 
-            // =========================
-            // EMAIL (SOLO SI CAMBIA)
-            // =========================
-            if (!newEmail.isEmpty() && !newEmail.equals(currentEmail)) {
+
+            // EMAIL
+
+            if (!newEmail.isEmpty()
+                    && !newEmail.equals(currentEmail)) {
 
                 user.updateEmail(newEmail)
+
                         .addOnSuccessListener(unused ->
-                                Toast.makeText(this, "Email actualizado", Toast.LENGTH_SHORT).show()
+
+                                Toast.makeText(
+                                        this,
+                                        "Email actualizado",
+                                        Toast.LENGTH_SHORT
+                                ).show()
                         )
+
                         .addOnFailureListener(e ->
-                                Toast.makeText(this, "Error email: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+
+                                Toast.makeText(
+                                        this,
+                                        "Error email: " + e.getMessage(),
+                                        Toast.LENGTH_SHORT
+                                ).show()
                         );
 
                 currentEmail = newEmail;
             }
 
-            // =========================
-            // PASSWORD (SOLO SI NO ESTÁ VACÍO)
-            // =========================
+
+            // PASSWORD
+
             if (!newPassword.isEmpty()) {
 
                 user.updatePassword(newPassword)
+
                         .addOnSuccessListener(unused ->
-                                Toast.makeText(this, "Contraseña actualizada", Toast.LENGTH_SHORT).show()
+
+                                Toast.makeText(
+                                        this,
+                                        "Contraseña actualizada",
+                                        Toast.LENGTH_SHORT
+                                ).show()
                         )
+
                         .addOnFailureListener(e ->
-                                Toast.makeText(this, "Error password: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+
+                                Toast.makeText(
+                                        this,
+                                        "Error password: " + e.getMessage(),
+                                        Toast.LENGTH_SHORT
+                                ).show()
                         );
             }
 
-            Toast.makeText(this, "Perfil actualizado", Toast.LENGTH_SHORT).show();
-            finish();
+
+            // FINAL
+
+            btnGuardar.postDelayed(() -> {
+
+                Toast.makeText(
+                        this,
+                        "Perfil actualizado",
+                        Toast.LENGTH_SHORT
+                ).show();
+
+                finish();
+
+            }, 1000);
         });
     }
 }

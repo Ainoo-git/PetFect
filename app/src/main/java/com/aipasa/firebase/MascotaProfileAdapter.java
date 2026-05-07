@@ -31,10 +31,8 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.fragment_tarjeta_perfil_mascota, parent, false);
-
+                .inflate(R.layout.item_mascota, parent, false);
         return new ViewHolder(view);
     }
 
@@ -46,69 +44,67 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
         String nombre = doc.getString("nombre");
         String tipo = doc.getString("tipo");
         String estado = doc.getString("estado");
+        String infoAdicional = doc.getString("infoAdicional");
         String fotoUrl = doc.getString("fotoUrl");
 
-        holder.txtTitulo.setText(nombre != null ? nombre : "Sin nombre");
-
-        String tipoEstado = (tipo != null ? tipo : "") + " • " + (estado != null ? estado : "");
-        holder.txtFecha.setText(tipoEstado);
+        holder.txtNombre.setText(nombre != null ? nombre : "Sin nombre");
+        holder.txtTipoEstado.setText((tipo != null ? tipo : "") + " • " + (estado != null ? estado : ""));
+        holder.txtInfoAdicional.setText(infoAdicional != null ? infoAdicional : "");
 
         if (fotoUrl != null) {
-            Glide.with(context)
-                    .load(fotoUrl)
-                    .into(holder.imgAccion);
+            Glide.with(context).load(fotoUrl).into(holder.imgMascota);
         }
 
+        // Al pulsar la tarjetita abre el dialog grande
+        holder.itemView.setOnClickListener(v -> abrirDialog(v, doc));
+    }
 
-        holder.itemView.setOnClickListener(v -> {
+    private void abrirDialog(View v, DocumentSnapshot doc) {
 
-            View dialogView = LayoutInflater.from(v.getContext())
-                    .inflate(R.layout.fragment_tarjeta_perfil_mascota, null);
+        String nombre = doc.getString("nombre");
+        String tipo = doc.getString("tipo");
+        String estado = doc.getString("estado");
+        String fotoUrl = doc.getString("fotoUrl");
+        String tipoEstado = (tipo != null ? tipo : "") + " • " + (estado != null ? estado : "");
 
-            ImageView img = dialogView.findViewById(R.id.imgAccion);
-            TextView titulo = dialogView.findViewById(R.id.txtTitulo);
-            TextView fecha = dialogView.findViewById(R.id.txtFecha);
-            TextView descripcion = dialogView.findViewById(R.id.txtDescripcion);
-            Button btnEditar = dialogView.findViewById(R.id.btnEditar);
-            Button btnEliminar = dialogView.findViewById(R.id.btnEliminar);
+        View dialogView = LayoutInflater.from(v.getContext())
+                .inflate(R.layout.fragment_tarjeta_perfil_mascota, null);
 
-            titulo.setText(nombre != null ? nombre : "Sin nombre");
-            fecha.setText(tipoEstado);
+        ImageView img = dialogView.findViewById(R.id.imgAccion);
+        TextView txtTitulo = dialogView.findViewById(R.id.txtTitulo);
+        TextView txtFecha = dialogView.findViewById(R.id.txtFecha);
+        TextView txtDescripcion = dialogView.findViewById(R.id.txtDescripcion);
+        Button btnEditar = dialogView.findViewById(R.id.btnEditar);
+        Button btnEliminar = dialogView.findViewById(R.id.btnEliminar);
 
-            descripcion.setText(
-                    "Edad: " + doc.getString("edad") +
-                            "\nChip: " + doc.getString("chip") +
-                            "\nTeléfono: " + doc.getString("telefono") +
-                            "\nInfo: " + doc.getString("infoAdicional")
-            );
+        txtTitulo.setText(nombre != null ? nombre : "Sin nombre");
+        txtFecha.setText(tipoEstado);
+        txtDescripcion.setText(
+                "Edad: " + doc.getString("edad") +
+                        "\nChip: " + doc.getString("chip") +
+                        "\nTeléfono: " + doc.getString("telefono") +
+                        "\nInfo: " + doc.getString("infoAdicional")
+        );
 
-            if (fotoUrl != null) {
-                Glide.with(v.getContext()).load(fotoUrl).into(img);
-            }
+        if (fotoUrl != null) {
+            Glide.with(v.getContext()).load(fotoUrl).into(img);
+        }
 
-            android.app.AlertDialog dialog = new android.app.AlertDialog.Builder(v.getContext())
-                    .setView(dialogView)
-                    .create();
+        android.app.AlertDialog dialog = new android.app.AlertDialog.Builder(v.getContext())
+                .setView(dialogView)
+                .create();
 
-            dialog.show();
+        dialog.show();
 
-            btnEditar.setOnClickListener(v2 -> {
-                dialog.dismiss();
-                abrirEditar(doc);
-            });
-
-            btnEliminar.setOnClickListener(v2 -> {
-                dialog.dismiss();
-                confirmarEliminar(doc);
-            });
-
+        btnEditar.setOnClickListener(v2 -> {
+            dialog.dismiss();
+            abrirEditar(doc);
         });
 
-        // BOTÓN EDITAR
-        holder.btnEditar.setOnClickListener(v -> abrirEditar(doc));
-
-        // BOTÓN ELIMINAR
-        holder.btnEliminar.setOnClickListener(v -> confirmarEliminar(doc));
+        btnEliminar.setOnClickListener(v2 -> {
+            dialog.dismiss();
+            confirmarEliminar(doc);
+        });
     }
 
     @Override
@@ -118,42 +114,34 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView imgAccion;
-        TextView txtTitulo, txtFecha;
-        Button btnEditar, btnEliminar;
+        ImageView imgMascota;
+        TextView txtNombre, txtTipoEstado, txtInfoAdicional, txtFecha;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            imgAccion = itemView.findViewById(R.id.imgAccion);
-            txtTitulo = itemView.findViewById(R.id.txtTitulo);
+            imgMascota = itemView.findViewById(R.id.imgMascota);
+            txtNombre = itemView.findViewById(R.id.txtNombre);
+            txtTipoEstado = itemView.findViewById(R.id.txtTipoEstado);
+            txtInfoAdicional = itemView.findViewById(R.id.txtInfoAdicional);
             txtFecha = itemView.findViewById(R.id.txtFecha);
-            btnEditar = itemView.findViewById(R.id.btnEditar);
-            btnEliminar = itemView.findViewById(R.id.btnEliminar);
         }
     }
 
     private void abrirEditar(DocumentSnapshot doc) {
         android.content.Intent intent =
                 new android.content.Intent(context, com.aipasa.main.PublicacionActivity.class);
-
         intent.putExtra("modo", "editar");
         intent.putExtra("idMascota", doc.getId());
-
         context.startActivity(intent);
     }
 
     private void confirmarEliminar(DocumentSnapshot doc) {
-
         new android.app.AlertDialog.Builder(context)
                 .setTitle("Eliminar mascota")
                 .setMessage("¿Seguro que quieres eliminarla?")
                 .setPositiveButton("Sí", (dialog, which) -> {
-
                     doc.getReference().delete();
-
                     Toast.makeText(context, "Mascota eliminada", Toast.LENGTH_SHORT).show();
-
                 })
                 .setNegativeButton("No", null)
                 .show();
