@@ -71,10 +71,26 @@ public class Splash extends AppCompatActivity {
         CheckBox check = dialog.findViewById(R.id.checkAccept);
         ScrollView scrollView = dialog.findViewById(R.id.scrollView);
 
+        TextView tvTerminos = dialog.findViewById(R.id.tvTerminos);
+        TextView tvPrivacidad = dialog.findViewById(R.id.tvPrivacidad);
+
         final boolean[] scrolled = {false};
         final boolean[] checked = {false};
 
+        // Abrir términos
+        tvTerminos.setOnClickListener(v -> {
+            Intent intent = new Intent(Splash.this, TerminosActivity.class);
+            startActivity(intent);
+        });
+
+        // Abrir privacidad
+        tvPrivacidad.setOnClickListener(v -> {
+            Intent intent = new Intent(Splash.this, PrivacidadActivity.class);
+            startActivity(intent);
+        });
+
         scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+
             View content = scrollView.getChildAt(0);
 
             int diff = content.getBottom()
@@ -93,6 +109,7 @@ public class Splash extends AppCompatActivity {
         });
 
         btnAccept.setOnClickListener(v -> {
+
             getSharedPreferences("petfect", Context.MODE_PRIVATE)
                     .edit()
                     .putBoolean("terms_accepted", true)

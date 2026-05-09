@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#80FFC3C3">
@@ -12,86 +9,93 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="24dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp"
-        app:cardBackgroundColor="#FFFFFF">
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:orientation="vertical">
 
-            <!-- TITULO -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Términos y Políticas de Privacidad"
+                android:text="Términos y Políticas"
                 android:textColor="#FF8C8C"
-                android:textStyle="bold"
-                android:textSize="18sp"/>
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-            <!-- LINK -->
+            <!-- BOTONES -->
             <TextView
-                android:id="@+id/tvLink"
+                android:id="@+id/tvTerminos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ver documento completo"
+                android:layout_marginTop="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Ver Términos y Condiciones"
                 android:textColor="#FF8C8C"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp"/>
+                android:textStyle="bold" />
 
-            <!-- SCROLL -->
+            <TextView
+                android:id="@+id/tvPrivacidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Ver Política de Privacidad"
+                android:textColor="#FF8C8C"
+                android:textStyle="bold" />
+
             <ScrollView
                 android:id="@+id/scrollView"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="12dp">
+                android:layout_height="180dp"
+                android:layout_marginTop="16dp">
 
                 <TextView
                     android:id="@+id/tvTerms"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Lee los documentos antes de aceptar."
                     android:textColor="#000000"
-                    android:textSize="14sp"
-                    android:lineSpacingExtra="4dp"
-                    android:text="(Aquí van los términos completos)" />
+                    android:textSize="16sp" />
 
             </ScrollView>
 
-            <!-- CHECK -->
             <CheckBox
                 android:id="@+id/checkAccept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:text="He leído y acepto"
-                android:textColor="#000000"
-                android:layout_marginTop="14dp"/>
+                android:textColor="#000000" />
 
-            <!-- BOTONES -->
+            <!-- BOTONES ABAJO -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:gravity="end"
-                android:layout_marginTop="16dp">
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnCancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:background="@android:color/transparent"
                     android:text="Cancelar"
-                    android:textColor="#FF8C8C"
-                    android:background="@android:color/transparent"/>
+                    android:textColor="#FF8C8C" />
 
                 <Button
                     android:id="@+id/btnAccept"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Aceptar"
-                    android:textColor="#FFFFFF"
-                    android:enabled="false"
                     android:backgroundTint="#FF8C8C"
-                    android:layout_marginStart="8dp"/>
+                    android:enabled="false"
+                    android:text="Aceptar"
+                    android:textColor="#FFFFFF" />
 
             </LinearLayout>
 
