@@ -14,11 +14,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.R;
 import com.aipasa.auth.Login;
+import com.aipasa.configuracion.PoliticaPrivacidadActivity;
+import com.aipasa.configuracion.TerminosCondicionesActivity;
 
 public class Splash extends AppCompatActivity {
 
@@ -79,13 +82,13 @@ public class Splash extends AppCompatActivity {
 
         // Abrir términos
         tvTerminos.setOnClickListener(v -> {
-            Intent intent = new Intent(Splash.this, TerminosActivity.class);
+            Intent intent = new Intent(Splash.this, TerminosCondicionesActivity.class);
             startActivity(intent);
         });
 
         // Abrir privacidad
         tvPrivacidad.setOnClickListener(v -> {
-            Intent intent = new Intent(Splash.this, PrivacidadActivity.class);
+            Intent intent = new Intent(Splash.this, PoliticaPrivacidadActivity.class);
             startActivity(intent);
         });
 
