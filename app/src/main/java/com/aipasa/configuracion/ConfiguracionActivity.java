@@ -70,7 +70,9 @@ public class ConfiguracionActivity extends AppCompatActivity {
         findViewById(R.id.politica_privacidad).setOnClickListener(v -> {
             openPrivacidad();
         });
-
+        findViewById(R.id.guardados).setOnClickListener(v -> {
+            openGuardados();
+        });
         // =====================
         // MODO OSCURO
         // =====================
@@ -148,6 +150,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
     private void openPrivacidad() {
         startActivity(new Intent(ConfiguracionActivity.this, PoliticaPrivacidadActivity.class));
     }
-
-
+    private void openGuardados() {
+        startActivity(new Intent(ConfiguracionActivity.this, GuaradarMascotasActivity.class));
+    }
 }
