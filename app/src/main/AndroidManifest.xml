@@ -84,7 +84,7 @@
         <!--   <activity
              android:name=".main.ActivityTarjeta"
              android:exported="false" /> -->
-        <activity android:name=".configuracion.GuardarMascota"/>
+        <activity android:name=".configuracion.GuaradarMascotaActivity"/>
          <activity
              android:name=".creditos.Creditos"
              android:exported="false" />

@@ -10,10 +10,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_margin="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:cardBackgroundColor="@android:color/white">
@@ -22,30 +19,54 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:orientation="vertical">
 
-            <!-- Imagen principal -->
-            <ImageView
-                android:id="@+id/imgAccion"
+            <!-- IMAGEN -->
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="Foto de la mascota"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="12dp">
 
-            <!-- Nombre -->
-            <TextView
-                android:id="@+id/txtTitulo"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/imgAccion"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Foto de la mascota" />
+
+            </FrameLayout>
+
+            <!-- TITULO + BOTÓN GUARDAR -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nombre Mascota"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="8dp" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
 
-            <!-- Tipo y estado -->
+                <TextView
+                    android:id="@+id/txtTitulo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Nombre Mascota"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black" />
+
+                <ImageButton
+                    android:id="@+id/btnGuardar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/marcador_vacio"
+                    android:contentDescription="Guardar mascota"
+                    android:padding="6dp"
+                    android:elevation="6dp" />
+
+            </LinearLayout>
+
+            <!-- TIPO Y ESTADO -->
             <TextView
                 android:id="@+id/txtFecha"
                 android:layout_width="wrap_content"
@@ -55,7 +76,7 @@
                 android:textColor="#666666"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Descripción -->
+            <!-- DESCRIPCIÓN -->
             <TextView
                 android:id="@+id/txtDescripcion"
                 android:layout_width="match_parent"
@@ -66,7 +87,7 @@
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="24dp" />
 
-            <!-- Botón -->
+            <!-- BOTÓN CONTACTO -->
             <Button
                 android:id="@+id/btnVerMas"
                 android:layout_width="match_parent"

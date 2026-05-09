@@ -13,11 +13,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.aipasa.configuracion.GuardarMascota;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
 
 import com.aipasa.R;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -72,7 +69,9 @@ public class ConfiguracionActivity extends AppCompatActivity {
         findViewById(R.id.politica_privacidad).setOnClickListener(v -> {
             openPrivacidad();
         });
-
+        findViewById(R.id.guardados).setOnClickListener(v -> {
+            openGuardados();
+        });
         // =====================
         // MODO OSCURO
         // =====================
@@ -134,7 +133,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
             Intent intent = new Intent(
                     ConfiguracionActivity.this,
-                    GuardarMascota.class
+                    GuaradarMascotaActivity.class
             );
 
             startActivity(intent);
@@ -160,6 +159,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
     private void openPrivacidad() {
         startActivity(new Intent(ConfiguracionActivity.this, PoliticaPrivacidadActivity.class));
     }
-
-
+    private void openGuardados() {
+        startActivity(new Intent(ConfiguracionActivity.this, GuaradarMascotaActivity.class));
+    }
 }
