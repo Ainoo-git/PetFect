@@ -95,6 +95,15 @@ public class HomeFragment extends Fragment {
 
         cargarMascotas();
 
+        SharedPreferences prefs = requireContext()
+                .getSharedPreferences("petfect", Context.MODE_PRIVATE);
+
+        boolean accepted = prefs.getBoolean("terms_accepted", false);
+
+        if (!accepted) {
+            showTermsDialog();
+        }
+
         return view;
     }
 

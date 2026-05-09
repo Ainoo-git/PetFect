@@ -72,45 +72,42 @@ public class Splash extends AppCompatActivity {
         Button btnAccept = dialog.findViewById(R.id.btnAccept);
         Button btnCancel = dialog.findViewById(R.id.btnCancel);
         CheckBox check = dialog.findViewById(R.id.checkAccept);
-        ScrollView scrollView = dialog.findViewById(R.id.scrollView);
 
         TextView tvTerminos = dialog.findViewById(R.id.tvTerminos);
         TextView tvPrivacidad = dialog.findViewById(R.id.tvPrivacidad);
 
-        final boolean[] scrolled = {false};
-        final boolean[] checked = {false};
+        // Desactivar aceptar al inicio
+        btnAccept.setEnabled(false);
 
-        // Abrir términos
+        // Abrir términos y condiciones
         tvTerminos.setOnClickListener(v -> {
-            Intent intent = new Intent(Splash.this, TerminosCondicionesActivity.class);
+
+            Intent intent = new Intent(
+                    Splash.this,
+                    TerminosCondicionesActivity.class
+            );
+
             startActivity(intent);
         });
 
-        // Abrir privacidad
+        // Abrir política de privacidad
         tvPrivacidad.setOnClickListener(v -> {
-            Intent intent = new Intent(Splash.this, PoliticaPrivacidadActivity.class);
+
+            Intent intent = new Intent(
+                    Splash.this,
+                    PoliticaPrivacidadActivity.class
+            );
+
             startActivity(intent);
         });
 
-        scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
-
-            View content = scrollView.getChildAt(0);
-
-            int diff = content.getBottom()
-                    - (scrollView.getHeight() + scrollView.getScrollY());
-
-            if (diff <= 0) {
-                scrolled[0] = true;
-            }
-
-            btnAccept.setEnabled(scrolled[0] && checked[0]);
-        });
-
+        // Activar botón al marcar checkbox
         check.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            checked[0] = isChecked;
-            btnAccept.setEnabled(scrolled[0] && checked[0]);
+
+            btnAccept.setEnabled(isChecked);
         });
 
+        // Aceptar términos
         btnAccept.setOnClickListener(v -> {
 
             getSharedPreferences("petfect", Context.MODE_PRIVATE)
@@ -119,12 +116,19 @@ public class Splash extends AppCompatActivity {
                     .apply();
 
             dialog.dismiss();
+
             goToApp();
         });
 
-        btnCancel.setOnClickListener(v -> finish());
+        // Cancelar
+        btnCancel.setOnClickListener(v -> {
 
+            finish();
+        });
+
+        // Fondo transparente
         if (dialog.getWindow() != null) {
+
             dialog.getWindow().setBackgroundDrawable(
                     new ColorDrawable(Color.TRANSPARENT)
             );
