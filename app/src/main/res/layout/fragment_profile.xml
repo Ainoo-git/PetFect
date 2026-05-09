@@ -33,16 +33,20 @@
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_marginTop="16dp"
-                android:clipToOutline="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/baseline_person_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:clickable="true"
-                android:focusable="true"/>
 
+                android:src="@drawable/baseline_person_24"
+
+                android:background="@drawable/bg_circle_profile"
+                android:clipToOutline="true"
+
+                android:scaleType="centerCrop"
+
+                android:clickable="true"
+                android:focusable="true"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
             <TextView
                 android:id="@+id/nombre2"
                 android:layout_width="0dp"
