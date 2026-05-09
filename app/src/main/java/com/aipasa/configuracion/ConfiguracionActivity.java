@@ -13,6 +13,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aipasa.configuracion.GuardarMascota;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
@@ -127,9 +129,19 @@ public class ConfiguracionActivity extends AppCompatActivity {
             Toast.makeText(this, "Correo copiado", Toast.LENGTH_SHORT).show();
             return true;
         });
+
+        findViewById(R.id.guardados).setOnClickListener(v -> {
+
+            Intent intent = new Intent(
+                    ConfiguracionActivity.this,
+                    GuardarMascota.class
+            );
+
+            startActivity(intent);
+        });
     }
 
-    // 👉 ESTE MÉTODO VA FUERA de onCreate
+
     private void openAtribuciones() {
         startActivity(new Intent(ConfiguracionActivity.this, AtribucionesActivity.class));
     }
