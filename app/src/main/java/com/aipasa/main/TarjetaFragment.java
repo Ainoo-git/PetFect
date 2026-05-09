@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,8 +26,10 @@ public class TarjetaFragment extends Fragment {
     private ImageView imgAccion;
     private TextView txtTitulo, txtFecha, txtDescripcion;
     private Button btnVerMas;
+    private ImageButton btnGuardar;
 
     private static final String ARG_ARTICULO_ID = "ARTICULO_ID";
+
     public static TarjetaFragment newInstance(String articuloId) {
         TarjetaFragment fragment = new TarjetaFragment();
         Bundle args = new Bundle();
@@ -41,17 +44,16 @@ public class TarjetaFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        // Inflamos el layout del fragment
         View view = inflater.inflate(R.layout.fragment_tarjeta, container, false);
 
-        // Referencias de los elementos UI
+        // 🔥 REFERENCIAS
         imgAccion = view.findViewById(R.id.imgAccion);
         txtTitulo = view.findViewById(R.id.txtTitulo);
         txtFecha = view.findViewById(R.id.txtFecha);
         txtDescripcion = view.findViewById(R.id.txtDescripcion);
         btnVerMas = view.findViewById(R.id.btnVerMas);
+        btnGuardar = view.findViewById(R.id.btnGuardar);
 
-        // Obtenemos el ID del artículo desde los argumentos
         String articuloId = null;
         if (getArguments() != null) {
             articuloId = getArguments().getString(ARG_ARTICULO_ID);
@@ -66,6 +68,7 @@ public class TarjetaFragment extends Fragment {
 
         return view;
     }
+
     private void cargarMascota(String id) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -100,6 +103,7 @@ public class TarjetaFragment extends Fragment {
                         if (!tipoEstado.isEmpty()) tipoEstado += " • ";
                         tipoEstado += estado.substring(0,1).toUpperCase() + estado.substring(1);
                     }
+
                     txtFecha.setText(tipoEstado);
 
                     String descripcion =
@@ -110,6 +114,7 @@ public class TarjetaFragment extends Fragment {
 
                     txtDescripcion.setText(descripcion);
 
+                    // 🔥 IMAGEN
                     if (fotoUrl != null && !fotoUrl.isEmpty()) {
                         Glide.with(this)
                                 .load(fotoUrl)
@@ -121,6 +126,14 @@ public class TarjetaFragment extends Fragment {
                         imgAccion.setImageResource(R.drawable.logologin);
                     }
 
+                    // 🔥 BOTÓN GUARDAR ENCIMA
+                    btnGuardar.bringToFront();
+
+                    btnGuardar.setOnClickListener(v -> {
+                        Toast.makeText(getContext(), "Guardado", Toast.LENGTH_SHORT).show();
+                    });
+
+                    // 🔥 CONTACTO
                     btnVerMas.setOnClickListener(v -> {
                         if (telefono != null && !telefono.isEmpty()) {
                             Intent intent = new Intent(Intent.ACTION_DIAL);
