@@ -1,11 +1,12 @@
 package com.aipasa.configuracion;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import com.aipasa.R;
-import com.google.android.material.appbar.MaterialToolbar;
 
 public class PoliticaPrivacidadActivity extends AppCompatActivity {
 
@@ -13,17 +14,18 @@ public class PoliticaPrivacidadActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_politica_privacidad);
+//
+//        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+//
+//        toolbar.setNavigationOnClickListener(v -> finish());
 
-        // TOOLBAR
-        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+        findViewById(R.id.topAppBar).setOnClickListener(v -> {
+            openConfig();
+        });
+    }
 
-        setSupportActionBar(toolbar);
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
-
-        toolbar.setNavigationOnClickListener(v -> finish());
+    private void openConfig() {
+        startActivity(new Intent(PoliticaPrivacidadActivity.this, ConfiguracionActivity.class));
     }
 }
