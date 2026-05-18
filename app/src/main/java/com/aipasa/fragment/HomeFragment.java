@@ -162,7 +162,6 @@ public class HomeFragment extends Fragment {
         Button btnAll = view.findViewById(R.id.btnAll);
         Button btnAdopciones = view.findViewById(R.id.btnAdopciones);
         Button btnPerdidos = view.findViewById(R.id.btnPerdidos);
-        Button btnMapa = view.findViewById(R.id.btnMapa);
 
         btnAll.setOnClickListener(v ->
                 mostrarSecciones(true, true, prefVeterinarias));
@@ -172,15 +171,6 @@ public class HomeFragment extends Fragment {
 
         btnPerdidos.setOnClickListener(v ->
                 mostrarSecciones(true, false, false));
-
-        btnMapa.setOnClickListener(v -> {
-
-            Toast.makeText(
-                    requireContext(),
-                    "Abre sección Mapa",
-                    Toast.LENGTH_SHORT
-            ).show();
-        });
 
         view.findViewById(R.id.imgPerfil).setOnClickListener(v -> {
 
