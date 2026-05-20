@@ -5,16 +5,11 @@
 Aplicación Android para la localización de mascotas perdidas y la promoción de la adopción responsable.
 
 [![Android](https://img.shields.io/badge/Platform-Android-0F5052?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/)
-
-[![Java](https://img.shields.io/badge/Language-Java-3ACAAE?style=for-the-badge&logo=java&logoColor=white)](#)
-
-[![Firebase](https://img.shields.io/badge/Backend-Firebase-FFC3C3?style=for-the-badge&logo=firebase&logoColor=black)](#)
-
+[![Java](https://img.shields.io/badge/Language-Java-3ACAAE?style=for-the-badge&logo=java&logoColor=white)]()
+[![Firebase](https://img.shields.io/badge/Backend-Firebase-C3FFFC?style=for-the-badge&logo=firebase&logoColor=black)]()
 [![Supabase](https://img.shields.io/badge/Database-Supabase-C3FFFC?style=for-the-badge&logo=supabase&logoColor=black)](https://supabase.com/)
-
-[![Material Design](https://img.shields.io/badge/UI-Material%203-FF8C8C?style=for-the-badge&logo=material-design&logoColor=white)](#)
-
-[![Estado](https://img.shields.io/badge/Estado-En%20Desarrollo-3ACAAE?style=for-the-badge&logoColor=white)](#)
+[![Material Design](https://img.shields.io/badge/UI-Material%203-FFC3C3?style=for-the-badge&logo=material-design&logoColor=white)]()
+[![Estado](https://img.shields.io/badge/Estado-En%20Desarrollo-FF8C8C?style=for-the-badge&logoColor=black)]()
 
 </div>
 
@@ -57,7 +52,7 @@ El sistema permite crear publicaciones detalladas, adjuntar imágenes, consultar
 
 <div align="center">
 
-[▶ Ver vídeo promocional de PetFect](https://youtu.be/lzR7Zqn5gJ4?si=AUesscdH2lUIxQCj)
+[Ver vídeo promocional de PetFect](https://youtu.be/lzR7Zqn5gJ4?si=AUesscdH2lUIxQCj)
 
 </div>
 
