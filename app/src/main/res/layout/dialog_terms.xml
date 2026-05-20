@@ -1,77 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#80FFC3C3">
+    android:background="#80000000"
+    android:padding="12dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="24dp"
-        android:padding="16dp">
+        android:layout_margin="4dp"
+        card_view:cardCornerRadius="24dp"
+        card_view:cardElevation="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="18dp">
 
+            <!-- TITULO -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Términos y Políticas"
                 android:textColor="#FF8C8C"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textStyle="bold" />
 
-            <!-- BOTONES -->
+            <!-- SUBTEXTO -->
             <TextView
-                android:id="@+id/tvTerminos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:text="Ver Términos y Condiciones"
-                android:textColor="#FF8C8C"
-                android:textStyle="bold" />
+                android:layout_marginTop="4dp"
+                android:text="Lee la información antes de continuar."
+                android:textColor="#777777"
+                android:textSize="13sp" />
 
-            <TextView
-                android:id="@+id/tvPrivacidad"
-                android:layout_width="wrap_content"
+            <!-- BOTONES TEXTO -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:text="Ver Política de Privacidad"
-                android:textColor="#FF8C8C"
-                android:textStyle="bold" />
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/tvTerminos"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#FFF1F1"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Términos"
+                    android:textColor="#FF8C8C"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tvPrivacidad"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#FFF1F1"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Privacidad"
+                    android:textColor="#FF8C8C"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- SCROLL -->
             <ScrollView
                 android:id="@+id/scrollView"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_marginTop="16dp">
+                android:layout_height="420dp"
+                android:layout_marginTop="14dp"
+                android:background="#FAFAFA"
+                android:fillViewport="true">
 
                 <TextView
                     android:id="@+id/tvTerms"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lee los documentos antes de aceptar."
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
+                    android:padding="14dp"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Bienvenido/a a PetFect 🐾
+
+Antes de utilizar la aplicación, te recomendamos leer atentamente nuestros Términos y Condiciones y la Política de Privacidad. Estos documentos explican cómo funciona la plataforma, cómo protegemos tu información y cuáles son las normas de uso de la comunidad.
+
+Al continuar y aceptar, confirmas que has leído y aceptado esta información.
+
+PetFect es una aplicación diseñada para ayudar en la búsqueda de mascotas perdidas, facilitar adopciones responsables y conectar a usuarios, refugios y veterinarias de forma segura y sencilla.
+
+────────────────────────────
+
+TÉRMINOS Y CONDICIONES DE USO
+
+1. Aceptación de los términos
+
+Al descargar, instalar o utilizar PetFect, aceptas cumplir estos términos y condiciones, así como nuestra Política de Privacidad.
+
+Si no estás de acuerdo con alguno de estos términos, por favor no utilices la aplicación.
+
+2. Uso permitido
+
+PetFect está destinada exclusivamente a fines relacionados con el bienestar animal, adopciones y localización de mascotas.
+
+No está permitido:
+• Publicar información falsa
+• Suplantar identidades
+• Utilizar la aplicación para actividades ilegales
+• Publicar contenido ofensivo o inapropiado
+
+3. Privacidad y datos
+
+PetFect puede recopilar determinados datos necesarios para el funcionamiento de la aplicación, como ubicación aproximada, correo electrónico y datos técnicos del dispositivo.
+
+Tus datos serán tratados conforme al RGPD y nunca serán vendidos a terceros sin consentimiento.
+
+4. Responsabilidad
+
+PetFect actúa como plataforma intermediaria entre usuarios. No garantizamos el resultado de adopciones, búsquedas o publicaciones realizadas dentro de la aplicación.
+
+5. Modificaciones
+
+PetFect puede actualizar estos términos cuando sea necesario para mejorar el servicio o adaptarse a cambios legales.
+
+────────────────────────────
+
+POLÍTICA DE PRIVACIDAD
+
+PetFect recopila únicamente la información necesaria para ofrecer correctamente sus servicios.
+
+Los datos pueden utilizarse para:
+• Gestión de cuentas
+• Alertas y notificaciones
+• Mejorar la experiencia de usuario
+• Localización de mascotas cercanas
+
+El usuario puede solicitar la modificación o eliminación de sus datos en cualquier momento contactando con soporte.
+
+Gracias por formar parte de PetFect "
+                    android:textColor="#333333"
+                    android:textSize="15sp" />
 
             </ScrollView>
 
+            <!-- CHECK -->
             <CheckBox
                 android:id="@+id/checkAccept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="14dp"
                 android:text="He leído y acepto"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:textSize="14sp" />
 
-            <!-- BOTONES ABAJO -->
+            <!-- BOTONES -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,9 +175,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:background="@android:color/transparent"
+                    android:backgroundTint="#DDDDDD"
                     android:text="Cancelar"
-                    android:textColor="#FF8C8C" />
+                    android:textColor="#444444" />
 
                 <Button
                     android:id="@+id/btnAccept"
