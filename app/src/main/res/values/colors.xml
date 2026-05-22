@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="gris_icono_inactivo">#9E9E9E</color>
     <color name="white">#FFFFFFFF</color>
     <color name="cian_oscuro_iconos">#0F5052</color>
     <color name="cian_botones">#3ACAAE</color>

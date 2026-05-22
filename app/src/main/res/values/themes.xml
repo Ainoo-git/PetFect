@@ -3,7 +3,8 @@
     <!-- BASE THEME -->
     <style name="Base.Theme.PetFect" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Colores globales si quieres -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/cian_botones</item>
+        <item name="colorSecondary">@color/cian_oscuro_iconos</item>
     </style>
 
     <!-- TU TEMA PRINCIPAL -->

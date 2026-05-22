@@ -20,8 +20,8 @@
         android:layout_height="92dp"
         android:layout_gravity="bottom"
         android:background="@color/cian_oscuro_iconos"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/bottom_nav_colors"
+        app:itemTextColor="@color/bottom_nav_colors"
         app:menu="@menu/bottom_nav_menu" />
 
     <!-- BOTÓN CENTRAL -->
