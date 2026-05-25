@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- ICONO SELECCIONADO -->
-    <item android:color="@color/cian_oscuro_iconos" android:state_checked="true"/>
+    <item android:color="@color/white" android:state_checked="true"/>
 
     <!-- ICONO NO SELECCIONADO -->
     <item android:color="@color/gris_icono_inactivo"/>

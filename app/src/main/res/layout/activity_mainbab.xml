@@ -21,6 +21,7 @@
         android:layout_gravity="bottom"
         android:background="@color/cian_oscuro_iconos"
         app:itemIconTint="@color/bottom_nav_colors"
+        app:itemActiveIndicatorStyle="@null"
         app:itemTextColor="@color/bottom_nav_colors"
         app:menu="@menu/bottom_nav_menu" />
 
