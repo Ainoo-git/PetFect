@@ -58,6 +58,8 @@ public class PublicacionActivity extends AppCompatActivity {
 
     private String modo;
     private String idMascota;
+    private String fotoUrlActual = null;
+    private boolean usuarioCambioImagen = false;
 
     private FusedLocationProviderClient fusedLocationClient;
 
@@ -90,6 +92,7 @@ public class PublicacionActivity extends AppCompatActivity {
         btnPublicar.setEnabled(false);
 
         layoutImagen.setOnClickListener(v -> mostrarOpcionesImagen());
+        imgMascota.setOnClickListener(v -> mostrarOpcionesImagen());
 
         checkLegal.setOnCheckedChangeListener((buttonView, isChecked) ->
                 btnPublicar.setEnabled(isChecked));
@@ -98,10 +101,14 @@ public class PublicacionActivity extends AppCompatActivity {
                 new ActivityResultContracts.GetContent(),
                 uri -> {
                     if (uri != null) {
+                        usuarioCambioImagen = true;
                         imageUri = uri;
                         imageBitmap = null;
 
+                        Glide.with(this).clear(imgMascota);
+                        imgMascota.setImageDrawable(null);
                         imgMascota.setImageURI(uri);
+
                         layoutImagen.setVisibility(View.GONE);
                         imgMascota.setVisibility(View.VISIBLE);
                     }
@@ -114,6 +121,7 @@ public class PublicacionActivity extends AppCompatActivity {
         idMascota = getIntent().getStringExtra("idMascota");
 
         if ("editar".equals(modo) && idMascota != null) {
+            btnPublicar.setText("Guardar cambios");
             cargarDatosMascota(idMascota);
         }
     }
@@ -177,9 +185,17 @@ public class PublicacionActivity extends AppCompatActivity {
 
         if (resultCode != RESULT_OK) return;
 
-        if (requestCode == REQUEST_CAMERA && data != null) {
-            imageBitmap = (Bitmap) data.getExtras().get("data");
-            imgMascota.setImageBitmap(imageBitmap);
+        if (requestCode == REQUEST_GALLERY &&
+                resultCode == RESULT_OK &&
+                data != null) {
+
+            usuarioCambioImagen = true;
+            imageUri = data.getData();
+            imageBitmap = null;
+
+            Glide.with(this).clear(imgMascota);
+            imgMascota.setImageDrawable(null);
+            imgMascota.setImageURI(imageUri);
         }
 
         if (requestCode == REQUEST_GALLERY &&
@@ -261,6 +277,27 @@ public class PublicacionActivity extends AppCompatActivity {
             return;
         }
 
+        if ("editar".equals(modo)
+                && imageUri == null
+                && imageBitmap == null
+                && fotoUrlActual != null) {
+
+            guardarEnFirestore(
+                    fotoUrlActual,
+                    nombre,
+                    tipo,
+                    estado,
+                    telefono,
+                    edad,
+                    chip,
+                    infoAdicional,
+                    latitud,
+                    longitud
+            );
+
+            return;
+        }
+
         try {
 
             byte[] imageBytes;
@@ -276,9 +313,7 @@ public class PublicacionActivity extends AppCompatActivity {
                 int nRead;
                 byte[] data = new byte[16384];
 
-                while ((nRead = inputStream.read(data, 0,
-                        data.length)) != -1) {
-
+                while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
                     buffer.write(data, 0, nRead);
                 }
 
@@ -287,7 +322,7 @@ public class PublicacionActivity extends AppCompatActivity {
 
                 inputStream.close();
 
-            } else {
+            } else if (imageBitmap != null) {
 
                 ByteArrayOutputStream baos =
                         new ByteArrayOutputStream();
@@ -299,6 +334,13 @@ public class PublicacionActivity extends AppCompatActivity {
                 );
 
                 imageBytes = baos.toByteArray();
+
+            } else {
+
+                Toast.makeText(this,
+                        "Selecciona una imagen",
+                        Toast.LENGTH_SHORT).show();
+                return;
             }
 
             subirImagenASupabase(
@@ -316,6 +358,9 @@ public class PublicacionActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
+            Toast.makeText(this,
+                    "Error procesando la imagen",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -521,20 +566,26 @@ public class PublicacionActivity extends AppCompatActivity {
 
                     String tipo = doc.getString("tipo");
 
-                    if ("perro".equals(tipo))
+                    if ("perro".equals(tipo)) {
                         cbPerro.setChecked(true);
-
-                    if ("gato".equals(tipo))
+                    } else if ("gato".equals(tipo)) {
                         cbGato.setChecked(true);
+                    } else if ("otro".equals(tipo)) {
+                        cbOtro.setChecked(true);
+                    }
 
-                    String fotoUrl =
-                            doc.getString("fotoUrl");
+                    fotoUrlActual = doc.getString("fotoUrl");
 
-                    if (fotoUrl != null) {
+                    if (fotoUrlActual != null && !fotoUrlActual.isEmpty()) {
 
-                        Glide.with(this)
-                                .load(fotoUrl)
-                                .into(imgMascota);
+                        layoutImagen.setVisibility(View.GONE);
+                        imgMascota.setVisibility(View.VISIBLE);
+
+                        if (!usuarioCambioImagen) {
+                            Glide.with(this)
+                                    .load(fotoUrlActual)
+                                    .into(imgMascota);
+                        }
                     }
                 });
     }
