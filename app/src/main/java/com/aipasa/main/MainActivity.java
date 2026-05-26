@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.google.firebase.messaging.FirebaseMessaging;
 import android.content.pm.PackageManager;
 
 import androidx.annotation.Nullable;
@@ -76,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, PerdidosActivity.class);
             startActivity(intent);
         });
+        //Sistema notificaciones todos los usuarios
+        FirebaseMessaging.getInstance().subscribeToTopic("allUsers");
 
     }
 

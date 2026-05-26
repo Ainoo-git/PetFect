@@ -89,6 +89,8 @@
              android:name=".creditos.Creditos"
              android:exported="false" />
 
+        <activity android:name=".main.NotificacionesActivity" />
+
          <meta-data
              android:name="preloaded_fonts"
              android:resource="@array/preloaded_fonts" />
