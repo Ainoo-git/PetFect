@@ -1,12 +1,14 @@
 package com.aipasa.firebase;
 
+import com.google.firebase.Timestamp;
+
 public class NotificacionModel {
 
     private String id;
     private String nombreMascota;
     private String tipo;
     private String imagenUrl;
-    private long fecha;
+    private Timestamp fecha;
     private boolean leido;
 
     public NotificacionModel() {
@@ -45,11 +47,11 @@ public class NotificacionModel {
         this.imagenUrl = imagenUrl;
     }
 
-    public long getFecha() {
+    public Timestamp getFecha() {
         return fecha;
     }
 
-    public void setFecha(long fecha) {
+    public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
 

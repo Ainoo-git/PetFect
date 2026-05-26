@@ -19,55 +19,48 @@ import com.aipasa.firebase.NotificacionModel;
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Date;
 import java.util.List;
 
-public class NotificacionesAdapter extends
-        RecyclerView.Adapter<NotificacionesAdapter.ViewHolder> {
+public class NotificacionesAdapter extends RecyclerView.Adapter<NotificacionesAdapter.ViewHolder> {
 
     private Context context;
     private List<NotificacionModel> lista;
 
-    public NotificacionesAdapter(Context context,
-                                 List<NotificacionModel> lista) {
-
+    public NotificacionesAdapter(Context context, List<NotificacionModel> lista) {
         this.context = context;
         this.lista = lista;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(
-            @NonNull ViewGroup parent,
-            int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.item_mascota,
-                        parent,
-                        false);
+                .inflate(R.layout.item_mascota, parent, false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(
-            @NonNull ViewHolder holder,
-            int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        NotificacionModel notif =
-                lista.get(position);
+        NotificacionModel notif = lista.get(position);
 
-        holder.txtNombre.setText(
-                notif.getNombreMascota());
+        holder.txtNombre.setText(notif.getNombreMascota());
 
-        holder.txtTipoEstado.setText(
-                notif.getTipo());
+        holder.txtTipoEstado.setText(notif.getTipo());
 
-        holder.txtFecha.setText(
-                DateFormat.format(
-                        "dd/MM/yyyy HH:mm",
-                        notif.getFecha()
-                )
-        );
+        // ✅ FIX TIMESTAMP → DATE
+        String fechaFormateada = "";
+        if (notif.getFecha() != null) {
+            Date fecha = notif.getFecha().toDate();
+            fechaFormateada = DateFormat.format("dd/MM/yyyy HH:mm",
+                    notif.getFecha().toDate()
+            ).toString();
+        }
+
+        holder.txtFecha.setText(fechaFormateada);
 
         // 🖼️ Imagen
         Glide.with(context)
@@ -76,19 +69,14 @@ public class NotificacionesAdapter extends
 
         // 🔥 COLOR SEGÚN LEÍDO
         if (!notif.isLeido()) {
-
             holder.cardView.setCardBackgroundColor(
                     ContextCompat.getColor(
                             context,
                             R.color.coral_alertasimp_errores
                     )
             );
-
         } else {
-
-            holder.cardView.setCardBackgroundColor(
-                    Color.WHITE
-            );
+            holder.cardView.setCardBackgroundColor(Color.WHITE);
         }
 
         // 👁️ MARCAR COMO LEÍDO
@@ -100,7 +88,6 @@ public class NotificacionesAdapter extends
                     .update("leido", true);
 
             notif.setLeido(true);
-
             notifyItemChanged(position);
         });
     }
@@ -110,36 +97,23 @@ public class NotificacionesAdapter extends
         return lista.size();
     }
 
-    public static class ViewHolder
-            extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgMascota;
-
-        TextView txtNombre,
-                txtTipoEstado,
-                txtFecha;
-
+        TextView txtNombre, txtTipoEstado, txtFecha;
         CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imgMascota =
-                    itemView.findViewById(R.id.imgMascota);
+            imgMascota = itemView.findViewById(R.id.imgMascota);
+            txtNombre = itemView.findViewById(R.id.txtNombre);
+            txtTipoEstado = itemView.findViewById(R.id.txtTipoEstado);
+            txtFecha = itemView.findViewById(R.id.txtFecha);
 
-            txtNombre =
-                    itemView.findViewById(R.id.txtNombre);
-
-            txtTipoEstado =
-                    itemView.findViewById(R.id.txtTipoEstado);
-
-            txtFecha =
-                    itemView.findViewById(R.id.txtFecha);
-
-            cardView =
-                    itemView.findViewById(
-                            R.id.recyclerNotificaciones
-                    );
+            // ⚠️ FIX IMPORTANTE:
+            // antes tenías recyclerNotificaciones (eso está mal)
+            cardView = itemView.findViewById(R.id.recyclerNotificaciones);
         }
     }
 }

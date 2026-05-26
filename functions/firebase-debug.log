@@ -84,3 +84,41 @@
 
 Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
  
+[debug] [2026-05-26T13:24:06.950Z] File C:\Users\saiel\AndroidStudioProjects\PetFect\functions\index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\saiel\\AndroidStudioProjects\\PetFect\\functions\\index.js changed, reloading triggers"}}
+[debug] [2026-05-26T13:24:08.044Z] Validating nodejs source
+[debug] [2026-05-26T13:24:09.494Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "24"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^13.6.0",
+    "firebase-functions": "^7.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.4.1"
+  },
+  "private": true
+}
+[debug] [2026-05-26T13:24:09.495Z] Building nodejs source
+[debug] [2026-05-26T13:24:09.497Z] Failed to find version of module node: reached end of search path C:\Users\saiel\AndroidStudioProjects\PetFect\functions\node_modules
+[info] +  functions: Using node@24 from host. 
+[debug] [2026-05-26T13:24:09.518Z] Could not find functions.yaml. Must use http discovery
+[debug] [2026-05-26T13:24:09.548Z] Found firebase-functions binary at 'C:\Users\saiel\AndroidStudioProjects\PetFect\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8036
+
+[debug] [2026-05-26T13:24:10.281Z] Got response from /__/functions.yaml {"endpoints":{"onMascotaCreated":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.created","eventFilters":{"database":"(default)","namespace":"(default)"},"eventFilterPathPatterns":{"document":"mascotas/{mascotaId}"},"retry":false},"entryPoint":"onMascotaCreated"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[info] +  functions: Loaded functions definitions from source: onMascotaCreated. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: onMascotaCreated."}}
+[info] i  functions[us-central1-onMascotaCreated]: function ignored because the firestore emulator does not exist or is not running. {"metadata":{"emulator":{"name":"functions"},"message":"function ignored because the firestore emulator does not exist or is not running."}}
