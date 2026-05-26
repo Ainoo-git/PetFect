@@ -467,6 +467,22 @@ public class PublicacionActivity extends AppCompatActivity {
                 .set(mascota)
                 .addOnSuccessListener(unused -> {
 
+                    // 🔔 CREAR NOTIFICACIÓN
+                    Map<String, Object> notificacion =
+                            new HashMap<>();
+
+                    notificacion.put("nombreMascota", nombre);
+                    notificacion.put("tipo", estado);
+                    notificacion.put("imagenUrl", urlDescarga);
+                    notificacion.put("fecha",
+                            System.currentTimeMillis());
+
+                    notificacion.put("leido", false);
+
+                    db.collection("notificaciones")
+                            .add(notificacion);
+
+                    // ✅ MENSAJE
                     if ("editar".equals(modo)) {
 
                         Toast.makeText(
