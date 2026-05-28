@@ -22,87 +22,78 @@ import com.google.android.material.appbar.MaterialToolbar;
 
 public class ConfiguracionActivity extends AppCompatActivity {
 
-    LinearLayout eliminarCuenta;
-    View overlay;
-    View card;
-    TextView email;
+    private LinearLayout eliminarCuenta;
+    private View overlay;
+    private View card;
+    private TextView email;
+
+    private static final String PREFS_SETTINGS = "settings";
+    private static final String PREF_MODO_OSCURO = "modoOscuro";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion);
 
-        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+        SharedPreferences prefs = getSharedPreferences(PREFS_SETTINGS, Context.MODE_PRIVATE);
 
+        configurarToolbar();
+        inicializarVistas();
+        configurarClicks();
+        configurarModoOscuro(prefs);
+        configurarEliminarCuenta();
+    }
+
+    private void configurarToolbar() {
+        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        // CLICK BOTÓN ATRÁS (IMPORTANTE)
         toolbar.setNavigationOnClickListener(v -> finish());
+    }
 
-        // =====================
-        // VISTAS
-        // =====================
-        Switch switchModo = findViewById(R.id.switchModoOscuro);
-
+    private void inicializarVistas() {
         eliminarCuenta = findViewById(R.id.eliminar_cuenta);
         overlay = findViewById(R.id.overlayEliminarCuenta);
         card = findViewById(R.id.cardEliminarCuenta);
         email = findViewById(R.id.tvEmailSoporte);
+    }
 
-        // ATRIBUCIONES
-        findViewById(R.id.atribuciones).setOnClickListener(v -> {
-            openAtribuciones();
-        });
-        findViewById(R.id.licencias).setOnClickListener(v -> {
-            openLicencia();
-        });
+    private void configurarClicks() {
+        findViewById(R.id.atribuciones).setOnClickListener(v -> openAtribuciones());
+        findViewById(R.id.licencias).setOnClickListener(v -> openLicencia());
+        findViewById(R.id.terminos_condiciones).setOnClickListener(v -> openTerminosYcondiciones());
+        findViewById(R.id.permisos_dispositivo).setOnClickListener(v -> openPermisos());
+        findViewById(R.id.politica_privacidad).setOnClickListener(v -> openPrivacidad());
+        findViewById(R.id.guardados).setOnClickListener(v -> openGuardados());
+        findViewById(R.id.notificaciones).setOnClickListener(v -> openNotificaciones());
 
-        findViewById(R.id.terminos_condiciones).setOnClickListener(v -> {
-            openTerminosYcondiciones();
-        });
-        findViewById(R.id.permisos_dispositivo).setOnClickListener(v -> {
-            openPermisos();
-        });
-        findViewById(R.id.politica_privacidad).setOnClickListener(v -> {
-            openPrivacidad();
-        });
-        findViewById(R.id.guardados).setOnClickListener(v -> {
-            openGuardados();
-        });
-        findViewById(R.id.notificaciones).setOnClickListener(v -> {
-            openNotificaciones();
-        });
-        // =====================
-        // MODO OSCURO
-        // =====================
-        SharedPreferences prefs = getSharedPreferences("settings", Context.MODE_PRIVATE);
+        findViewById(R.id.idioma).setOnClickListener(v -> openIdioma());
+    }
 
-        boolean oscuroActivo = prefs.getBoolean("modoOscuro", false);
+    private void configurarModoOscuro(SharedPreferences prefs) {
+        Switch switchModo = findViewById(R.id.switchModoOscuro);
+
+        boolean oscuroActivo = prefs.getBoolean(PREF_MODO_OSCURO, false);
         switchModo.setChecked(oscuroActivo);
 
-        if (oscuroActivo) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
-
         switchModo.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            prefs.edit()
+                    .putBoolean(PREF_MODO_OSCURO, isChecked)
+                    .apply();
+
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
-
-            prefs.edit().putBoolean("modoOscuro", isChecked).apply();
         });
+    }
 
-        // =====================
-        // POPUP ELIMINAR CUENTA
-        // =====================
+    private void configurarEliminarCuenta() {
         eliminarCuenta.setOnClickListener(v -> {
             overlay.setVisibility(View.VISIBLE);
             card.setVisibility(View.VISIBLE);
@@ -113,9 +104,6 @@ public class ConfiguracionActivity extends AppCompatActivity {
             card.setVisibility(View.GONE);
         });
 
-        // =====================
-        // EMAIL SOPORTE
-        // =====================
         email.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
             intent.setData(Uri.parse("mailto:petfect26@gmail.com"));
@@ -129,21 +117,15 @@ public class ConfiguracionActivity extends AppCompatActivity {
             ClipData clip = ClipData.newPlainText("email", "petfect26@gmail.com");
             clipboard.setPrimaryClip(clip);
 
-            Toast.makeText(this, "Correo copiado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(
+                    this,
+                    getString(R.string.correo_copiado),
+                    Toast.LENGTH_SHORT
+            ).show();
+
             return true;
         });
-
-        findViewById(R.id.guardados).setOnClickListener(v -> {
-
-            Intent intent = new Intent(
-                    ConfiguracionActivity.this,
-                    GuaradarMascotaActivity.class
-            );
-
-            startActivity(intent);
-        });
     }
-
 
     private void openAtribuciones() {
         startActivity(new Intent(ConfiguracionActivity.this, AtribucionesActivity.class));
@@ -152,6 +134,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
     private void openLicencia() {
         startActivity(new Intent(ConfiguracionActivity.this, LicenciaActivity.class));
     }
+
     private void openTerminosYcondiciones() {
         startActivity(new Intent(ConfiguracionActivity.this, TerminosCondicionesActivity.class));
     }
@@ -163,10 +146,16 @@ public class ConfiguracionActivity extends AppCompatActivity {
     private void openPrivacidad() {
         startActivity(new Intent(ConfiguracionActivity.this, PoliticaPrivacidadActivity.class));
     }
+
     private void openGuardados() {
         startActivity(new Intent(ConfiguracionActivity.this, GuaradarMascotaActivity.class));
     }
+
     private void openNotificaciones() {
         startActivity(new Intent(ConfiguracionActivity.this, NotificacionesActivity.class));
+    }
+
+    private void openIdioma() {
+        startActivity(new Intent(ConfiguracionActivity.this, IdiomaActivity.class));
     }
 }

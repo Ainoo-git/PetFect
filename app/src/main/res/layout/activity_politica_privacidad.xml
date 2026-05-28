@@ -1,216 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <!-- TOOLBAR -->
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:title="Permisos"
-            android:background="@color/rosita_fondoss_tarjetas_alertaslev"
-            android:titleTextColor="@color/white"
-            app:navigationIcon="@drawable/outline_arrow"
-            app:titleCentered="true"/>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent">
+    <!--  TOOLBAR  -->
+    <com.google.android.material.appbar.AppBarLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+        <com.google.android.material.appbar.MaterialToolbar android:id="@+id/topAppBar" android:layout_width="match_parent" android:layout_height="?attr/actionBarSize" android:title="@string/permisos_dispositivo" android:background="@color/rosita_fondoss_tarjetas_alertaslev" android:titleTextColor="@color/white" app:navigationIcon="@drawable/outline_arrow" app:titleCentered="true"/>
     </com.google.android.material.appbar.AppBarLayout>
-
-    <!-- CONTENIDO -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="?attr/actionBarSize">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <!-- TITULO -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Política de privacidad"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:paddingBottom="6dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Última actualización: 2026"
-                android:textSize="12sp"
-                android:textColor="#8A8A8A"
-                android:paddingBottom="20dp"/>
-
-            <!-- INTRO -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="En PetFect valoramos tu privacidad y trabajamos para proteger tu información personal de manera transparente y segura. Esta Política de Privacidad explica qué datos recopilamos, cómo los usamos y cuáles son tus derechos."
-                android:textSize="14sp"
-                android:textColor="#5F5E5A"
-                android:lineSpacingMultiplier="1.6"
-                android:paddingBottom="20dp"/>
-
-            <!-- SECCIONES -->
-            <TextView
-                android:text="1. Responsable del tratamiento"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:textColor="#534AB7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:text="Equipo de desarrollo PetFect\nCorreo: petfect26@gmail.com"
-                android:textSize="14sp"
-                android:textColor="#5F5E5A"
-                android:paddingTop="8dp"
-                android:paddingBottom="20dp"
-                android:lineSpacingMultiplier="1.5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:text="2. Información que recopilamos"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:textColor="#534AB7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:text="• Nombre y correo electrónico.\n• Información opcional como número de teléfono.\n• Datos relacionados con mascotas.\n• Información técnica del dispositivo.\n• Datos de uso y errores de la aplicación."
-                android:textSize="14sp"
-                android:textColor="#5F5E5A"
-                android:paddingTop="8dp"
-                android:paddingBottom="20dp"
-                android:lineSpacingMultiplier="1.6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:text="3. Cómo utilizamos tu información"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:textColor="#534AB7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:text="Utilizamos tus datos para crear y gestionar tu cuenta, ofrecer las funcionalidades de la aplicación, almacenar información sobre mascotas, mejorar el servicio y detectar problemas técnicos."
-                android:textSize="14sp"
-                android:textColor="#5F5E5A"
-                android:paddingTop="8dp"
-                android:paddingBottom="20dp"
-                android:lineSpacingMultiplier="1.6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:text="4. Servicios de terceros"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:textColor="#534AB7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:text="PetFect utiliza servicios externos como Firebase y Supabase para almacenar y procesar información. Estos proveedores aplican medidas de seguridad adecuadas para proteger tus datos."
-                android:textSize="14sp"
-                android:textColor="#5F5E5A"
-                android:paddingTop="8dp"
-                android:paddingBottom="20dp"
-                android:lineSpacingMultiplier="1.6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:text="5. Tus derechos"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:textColor="#534AB7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:text="Puedes acceder, modificar o solicitar la eliminación de tus datos personales en cualquier momento escribiendo a nuestro correo de soporte."
-                android:textSize="14sp"
-                android:textColor="#5F5E5A"
-                android:paddingTop="8dp"
-                android:paddingBottom="20dp"
-                android:lineSpacingMultiplier="1.6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:text="6. Seguridad"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:textColor="#534AB7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:text="Aplicamos medidas razonables de seguridad para proteger tu información. Sin embargo, ningún sistema puede garantizar una seguridad absoluta."
-                android:textSize="14sp"
-                android:textColor="#5F5E5A"
-                android:paddingTop="8dp"
-                android:paddingBottom="20dp"
-                android:lineSpacingMultiplier="1.6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:text="7. Cambios en esta política"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:textColor="#534AB7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:text="Podemos actualizar esta Política de Privacidad ocasionalmente. Los cambios importantes serán comunicados dentro de la aplicación."
-                android:textSize="14sp"
-                android:textColor="#5F5E5A"
-                android:paddingTop="8dp"
-                android:paddingBottom="20dp"
-                android:lineSpacingMultiplier="1.6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <!-- CAJA FINAL -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="#F6F4FF"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Contacto"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#534AB7"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="📧 petfect26@gmail.com"
-                    android:textSize="14sp"
-                    android:textColor="#5F5E5A"
-                    android:paddingTop="8dp"/>
+    <!--  CONTENIDO  -->
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent" android:paddingTop="?attr/actionBarSize">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+            <!--  TITULO  -->
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/politica_privacidad" android:textSize="26sp" android:textStyle="bold" android:textColor="@color/black" android:paddingBottom="6dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/ultima_actualizacion_2026" android:textSize="12sp" android:textColor="#8A8A8A" android:paddingBottom="20dp"/>
+            <!--  INTRO  -->
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/en_petfect_valoramos_tu_privacidad_y_trabajamos_pa" android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:paddingBottom="20dp"/>
+            <!--  SECCIONES  -->
+            <TextView android:text="@string/activity_politica_privacidad_1_responsable_del_tra" android:textStyle="bold" android:textSize="18sp" android:textColor="#534AB7" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:text="@string/equipo_de_desarrollo_petfect_correo_petfect26_gmai" android:textSize="14sp" android:textColor="#5F5E5A" android:paddingTop="8dp" android:paddingBottom="20dp" android:lineSpacingMultiplier="1.5" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+            <TextView android:text="@string/activity_politica_privacidad_2_informacion_que_rec" android:textStyle="bold" android:textSize="18sp" android:textColor="#534AB7" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:text="@string/nombre_y_correo_electronico_informacion_opcional_c" android:textSize="14sp" android:textColor="#5F5E5A" android:paddingTop="8dp" android:paddingBottom="20dp" android:lineSpacingMultiplier="1.6" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+            <TextView android:text="@string/activity_politica_privacidad_3_como_utilizamos_tu" android:textStyle="bold" android:textSize="18sp" android:textColor="#534AB7" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:text="@string/utilizamos_tus_datos_para_crear_y_gestionar_tu_cue" android:textSize="14sp" android:textColor="#5F5E5A" android:paddingTop="8dp" android:paddingBottom="20dp" android:lineSpacingMultiplier="1.6" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+            <TextView android:text="@string/activity_politica_privacidad_4_servicios_de_tercer" android:textStyle="bold" android:textSize="18sp" android:textColor="#534AB7" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:text="@string/petfect_utiliza_servicios_externos_como_firebase_y" android:textSize="14sp" android:textColor="#5F5E5A" android:paddingTop="8dp" android:paddingBottom="20dp" android:lineSpacingMultiplier="1.6" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+            <TextView android:text="@string/activity_politica_privacidad_5_tus_derechos" android:textStyle="bold" android:textSize="18sp" android:textColor="#534AB7" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:text="@string/puedes_acceder_modificar_o_solicitar_la_eliminacio" android:textSize="14sp" android:textColor="#5F5E5A" android:paddingTop="8dp" android:paddingBottom="20dp" android:lineSpacingMultiplier="1.6" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+            <TextView android:text="@string/activity_politica_privacidad_6_seguridad" android:textStyle="bold" android:textSize="18sp" android:textColor="#534AB7" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:text="@string/aplicamos_medidas_razonables_de_seguridad_para_pro" android:textSize="14sp" android:textColor="#5F5E5A" android:paddingTop="8dp" android:paddingBottom="20dp" android:lineSpacingMultiplier="1.6" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+            <TextView android:text="@string/activity_politica_privacidad_7_cambios_en_esta_pol" android:textStyle="bold" android:textSize="18sp" android:textColor="#534AB7" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:text="@string/podemos_actualizar_esta_politica_de_privacidad_oca" android:textSize="14sp" android:textColor="#5F5E5A" android:paddingTop="8dp" android:paddingBottom="20dp" android:lineSpacingMultiplier="1.6" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+            <!--  CAJA FINAL  -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="#F6F4FF" android:padding="16dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/contacto" android:textStyle="bold" android:textSize="16sp" android:textColor="#534AB7"/>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/petfect26_gmail_com" android:textSize="14sp" android:textColor="#5F5E5A" android:paddingTop="8dp"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

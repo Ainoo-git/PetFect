@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBarIdioma"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+                android:title="@string/idioma"
+                android:titleTextColor="@color/white"
+                app:navigationIcon="@drawable/outline_arrow"
+                app:titleCentered="true" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="?attr/actionBarSize"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp">
+
+            <RadioGroup
+                android:id="@+id/radioGroupIdioma"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/radioEspanol"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:buttonTint="@color/coral_alertasimp_errores"
+                    android:gravity="center_vertical"
+                    android:text="Español"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/radioIngles"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:buttonTint="@color/coral_alertasimp_errores"
+                    android:gravity="center_vertical"
+                    android:text="English"
+                    android:textSize="18sp" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</FrameLayout>

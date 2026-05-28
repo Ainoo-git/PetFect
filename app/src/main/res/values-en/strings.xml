@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PetFect</string>
-
-    <!-- General -->
+    <string name="app_name" translatable="false">PetFect</string>
+    <string name="create_account">CREATE ACCOUNT</string>
     <string name="aceptar">Accept</string>
     <string name="cancelar">Cancel</string>
     <string name="si">Yes</string>
@@ -21,8 +19,6 @@
     <string name="no_especificado">Not specified</string>
     <string name="no_especificada">Not specified</string>
     <string name="no_disponible">Not available</string>
-
-    <!-- Settings -->
     <string name="configuracion">Settings</string>
     <string name="modo_vista">Display mode</string>
     <string name="modo_vista_descripcion">Switch to dark theme</string>
@@ -40,8 +36,6 @@
     <string name="texto_eliminar_cuenta">If you want to delete your account, please contact support using the following email:</string>
     <string name="correo_soporte">petfect26@gmail.com</string>
     <string name="correo_copiado">Email copied</string>
-
-    <!-- Login / Sign up -->
     <string name="login">LOGIN</string>
     <string name="sign_up">SIGN UP</string>
     <string name="email">Email</string>
@@ -54,8 +48,6 @@
     <string name="error_autenticando_google">Error authenticating with Google</string>
     <string name="password_minimo">Password must be at least 6 characters long</string>
     <string name="cuenta_creada_correctamente">Account created successfully</string>
-
-    <!-- Preferences -->
     <string name="preferencias_titulo">How can we help you?</string>
     <string name="preferencias_subtitulo">Select your preferences to show more relevant content.</string>
     <string name="ver_mascotas_perdidas">Show lost pets</string>
@@ -64,8 +56,6 @@
     <string name="recibir_notificaciones">Receive notifications</string>
     <string name="siguiente">Next</string>
     <string name="preferencias_guardadas">Preferences saved</string>
-
-    <!-- Home / Search / Profile -->
     <string name="comunidad_petfect">PetFect Community</string>
     <string name="all">All</string>
     <string name="adopciones">Adoptions</string>
@@ -88,8 +78,6 @@
     <string name="cerrar_sesion">Log out</string>
     <string name="confirmar_cerrar_sesion">Do you want to log out?</string>
     <string name="si_cerrar_sesion">Yes, log out</string>
-
-    <!-- Publication -->
     <string name="subir_imagen_camara">Upload image or open camera</string>
     <string name="estado_animal">Pet status</string>
     <string name="perdido">Lost</string>
@@ -116,8 +104,6 @@
     <string name="mascota_actualizada">Pet updated</string>
     <string name="mascota_publicada">Pet published</string>
     <string name="error_al_publicar">Error publishing</string>
-
-    <!-- Cards / Pets -->
     <string name="nombre_mascota_demo">Pet Name</string>
     <string name="tipo_estado_demo">Type • Status</string>
     <string name="detalle_mascota_demo">Age: X\nChip: Y\nPhone: Z\nAdditional info: ...</string>
@@ -138,8 +124,6 @@
     <string name="error_cargar_publicacion">Error loading post</string>
     <string name="no_hay_mascotas_adopcion">There are no pets for adoption</string>
     <string name="no_hay_mascotas_perdidas">There are no lost pets</string>
-
-    <!-- Profile -->
     <string name="nombre">Name</string>
     <string name="nombre_usuario">Username</string>
     <string name="correo_electronico">Email address</string>
@@ -153,8 +137,6 @@
     <string name="perfil_actualizado">Profile updated</string>
     <string name="cambiar_foto_perfil">Change profile picture</string>
     <string name="usuario">User</string>
-
-    <!-- Map / permissions -->
     <string name="permiso_ubicacion_denegado">Location permission denied</string>
     <string name="error_firestore">Firestore error</string>
     <string name="permisos_usados_petfect">Permissions used by PetFect</string>
@@ -166,12 +148,93 @@
     <string name="galeria_descripcion">Allows you to select images from your gallery.</string>
     <string name="ubicacion_descripcion">Allows you to show nearby pets and location-based alerts.</string>
     <string name="permiso_camara_denegado">Camera permission denied</string>
-
-    <!-- Initial terms dialog -->
     <string name="terminos_politicas">Terms and Policies</string>
     <string name="lee_info_continuar">Read the information before continuing.</string>
     <string name="terminos">Terms</string>
     <string name="privacidad">Privacy</string>
     <string name="bienvenida_petfect">Welcome to PetFect 🐾\n\nBefore using the app, we recommend reading our terms and privacy policy carefully.</string>
     <string name="he_leido_acepto">I have read and accept</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="equipo_desarrollo">Development team</string>
+    <string name="credito_ainoha">Ainoha Yubero Timón\nGitHub: @Ainoo-git</string>
+    <string name="credito_patricia">Patricia Paun\nGitHub: @PatriGit06</string>
+    <string name="credito_sara">Sara Ulgazi\nGitHub: @Sayelyag</string>
+    <string name="creditos_ainoha">Ainoha Yubero Timón\nGitHub: @Ainoo-git</string>
+    <string name="creditos_patricia">Patricia Paun\nGitHub: @PatriGit06</string>
+    <string name="creditos_sara">Sara Ulgazi\nGitHub: @Sayelyag</string>
+    <string name="apache_license_2">Apache License 2.0</string>
+    <string name="apache_license_2_0">Apache License 2.0</string>
+    <string name="licencia_resumen_1">This application uses the Apache License 2.0, a free and permissive software license.</string>
+    <string name="licencia_resumen_2">It allows you to use, modify, and distribute the software, even for commercial purposes, as long as the copyright and license notices are preserved.</string>
+    <string name="licencia_resumen_3">It also includes a patent grant and a disclaimer of liability.</string>
+    <string name="licencia_link_apache">View full license: http://www.apache.org/licenses/LICENSE-2.0</string>
+    <string name="licencia_texto_1">This application uses the Apache License 2.0, a free and permissive software license.</string>
+    <string name="licencia_texto_2">It allows the software to be used, modified and distributed, even for commercial purposes, as long as copyright and license notices are preserved.</string>
+    <string name="licencia_texto_3">It also includes a patent grant and a disclaimer of liability.</string>
+    <string name="licencia_texto_4">View full license: http://www.apache.org/licenses/LICENSE-2.0</string>
+    <string name="recursos_graficos">Graphic resources</string>
+    <string name="iconos">Icons</string>
+    <string name="contenido_audiovisual">Audiovisual content</string>
+    <string name="plataforma_flaticon">Platform: Flaticon</string>
+    <string name="autores">Authors: Freepik, Pixel perfect, Smashicons and other Flaticon authors</string>
+    <string name="fuente_flaticon">Source: https://www.flaticon.es/</string>
+    <string name="licencia_flaticon">License: According to Flaticon terms of use with attribution</string>
+    <string name="guion_asistencia_textual">Script and text assistance</string>
+    <string name="audio_video_ia">The promotional video audio was generated using AI</string>
+    <string name="herramienta_chatgpt">Tool: ChatGPT</string>
+    <string name="proveedor_openai">Provider: OpenAI</string>
+    <string name="fuente_chatgpt">Source: https://chatgpt.com/</string>
+    <string name="ultima_actualizacion_2026">Last updated: 2026</string>
+    <string name="en_petfect_valoramos_tu_privacidad_y_trabajamos_pa">At PetFect, we value your privacy and work to protect your personal information in a transparent and secure way. This Privacy Policy explains what data we collect, how we use it and what your rights are.</string>
+    <string name="activity_politica_privacidad_1_responsable_del_tra">1. Data controller</string>
+    <string name="equipo_de_desarrollo_petfect_correo_petfect26_gmai">PetFect development team\nEmail: petfect26@gmail.com</string>
+    <string name="activity_politica_privacidad_2_informacion_que_rec">2. Information we collect</string>
+    <string name="nombre_y_correo_electronico_informacion_opcional_c">• Name and email address.\n• Optional information such as phone number.\n• Data related to pets.\n• Technical device information.\n• App usage and error data.</string>
+    <string name="activity_politica_privacidad_3_como_utilizamos_tu">3. How we use your information</string>
+    <string name="utilizamos_tus_datos_para_crear_y_gestionar_tu_cue">We use your data to create and manage your account, provide the app’s features, store pet information, improve the service and detect technical issues.</string>
+    <string name="activity_politica_privacidad_4_servicios_de_tercer">4. Third-party services</string>
+    <string name="petfect_utiliza_servicios_externos_como_firebase_y">PetFect uses external services such as Firebase and Supabase to store and process information. These providers apply appropriate security measures to protect your data.</string>
+    <string name="activity_politica_privacidad_5_tus_derechos">5. Your rights</string>
+    <string name="puedes_acceder_modificar_o_solicitar_la_eliminacio">You can access, modify or request the deletion of your personal data at any time by contacting our support email.</string>
+    <string name="activity_politica_privacidad_6_seguridad">6. Security</string>
+    <string name="aplicamos_medidas_razonables_de_seguridad_para_pro">We apply reasonable security measures to protect your information. However, no system can guarantee absolute security.</string>
+    <string name="activity_politica_privacidad_7_cambios_en_esta_pol">7. Changes to this policy</string>
+    <string name="podemos_actualizar_esta_politica_de_privacidad_oca">We may update this Privacy Policy from time to time. Important changes will be communicated within the app.</string>
+    <string name="petfect26_gmail_com">📧 petfect26@gmail.com</string>
+    <string name="terminos_y_condiciones">Terms and Conditions</string>
+    <string name="terminos_y_condiciones_version_1_0">Terms and Conditions · Version 1.0</string>
+    <string name="ultima_actualizacion_mayo_2026_efectivos_desde_el">Last updated: May 2026 · Effective from registration</string>
+    <string name="activity_terminos_condiciones_1_aceptacion_de_los">1. Acceptance of the terms</string>
+    <string name="al_descargar_instalar_o_usar_la_aplicacion_petfect">By downloading, installing or using the PetFect application, available on iOS and Android, as well as its web platform, you agree to be bound by these Terms and Conditions, together with our Privacy Policy and any additional rules published in the app.\n\nIf you do not agree with any of these terms, please do not use PetFect. Continued use of the application after changes have been published implies acceptance of those changes.</string>
+    <string name="estos_terminos_constituyen_un_acuerdo_legalmente_v">⚠️ These terms constitute a legally binding agreement between you and PetFect S.L., located in Pozuelo de Alarcón, Madrid, Spain.</string>
+    <string name="activity_terminos_condiciones_2_quien_puede_usar_p">2. Who can use PetFect</string>
+    <string name="petfect_esta_dirigida_a_cualquier_persona_mayor_de">PetFect is intended for anyone over the age of 14. Users under 18 must have the express consent of a parent or legal guardian to register and use paid services.\n\nInstitutions such as shelters, animal protection organizations and veterinary clinics must prove their activity during the institutional verification process before accessing the Professional Plan.\n\nRecognized user types:\n\n • Adopters: people looking to adopt or put pets up for adoption.\n • Owners: owners of lost or found pets.\n • Institutions: shelters, animal protection organizations, veterinary clinics and associations.\n • General community: animal lovers interested in animal welfare.</string>
+    <string name="activity_terminos_condiciones_3_cuentas_y_registro">3. Accounts and registration</string>
+    <string name="para_acceder_a_todas_las_funciones_de_petfect_es_n">To access all PetFect features, you must create an account. By registering, you agree to:\n\n • Provide truthful, accurate and up-to-date information.\n • Keep your password confidential.\n • Not share your account with third parties.\n • Notify us immediately of any unauthorized access.\n\nYou can register with email or through Google Sign-In. Each person may only have one active personal account.</string>
+    <string name="petfect_nunca_te_pedira_tu_contrasena_por_email_sm">🔒 PetFect will never ask for your password by email, SMS or internal messaging. If you receive such a request, report it to support.</string>
+    <string name="activity_terminos_condiciones_4_uso_permitido_y_co">4. Permitted use and conduct</string>
+    <string name="petfect_es_una_plataforma_orientada_al_bienestar_a">PetFect is a platform focused on animal welfare. All use of the app must respect this purpose and the laws in force in Spain and the European Union.\n\nIt is prohibited to:\n\n • Publish false information about adoptions or lost pets.\n • Use the app for the commercial buying and selling of animals.\n • Publish content that encourages animal abuse, abandonment or illegal animal trading.\n • Impersonate another person or institution.\n • Send unsolicited communications, spam, to other users.\n • Attempt to access systems, accounts or third-party data without authorization.\n • Use bots, scrapers or automated tools to interact with the platform.</string>
+    <string name="el_incumplimiento_de_estas_normas_puede_derivar_en">🚫 Failure to comply with these rules may result in temporary or permanent account suspension, without the right to a refund for contracted premium services.</string>
+    <string name="activity_terminos_condiciones_5_publicaciones_de_a">5. Adoption and lost pet posts</string>
+    <string name="petfect_actua_como_intermediaria_entre_usuarios_no">PetFect acts as an intermediary between users. We are not responsible for the accuracy of posts or for the outcome of adoption or search processes, although we apply mixed verification mechanisms, automatic and human review.\n\nBy posting, the user agrees that:\n\n • The published pet exists and the information is real and up to date.\n • The same animal will not be published in multiple active posts at the same time.\n • The post will be updated or deleted when the pet has been found or adopted.\n • No money will be requested or accepted in exchange for pet adoption, as this is prohibited by law in Spain.\n\nPetFect reserves the right to remove posts that violate these rules without prior notice.</string>
+    <string name="las_alertas_geolocalizadas_se_comparten_con_otros">📍 Geolocated alerts are shared with other users within a configurable radius. By enabling them, you accept that your approximate location may be visible to other app users at that time.</string>
+    <string name="activity_terminos_condiciones_6_datos_personales_y">6. Personal data and privacy</string>
+    <string name="el_tratamiento_de_tus_datos_personales_se_rige_por">The processing of your personal data is governed by the General Data Protection Regulation, GDPR, EU 2016/679, and Spanish Organic Law 3/2018 on Personal Data Protection and guarantee of digital rights, LOPDGDD.\n\nData we collect and its purpose:\n\n • Name and email → Account management and communication.\n • Geolocation → Generation of nearby pet alerts.\n • Device and operating system → Technical improvement of the app.\n • Notification token → Sending push notifications.\n • Payment data → Processed by Google Play / App Store. PetFect does not store it.\n\nPetFect does not sell or transfer your data to third parties for advertising purposes without your consent. You can exercise your rights of access, rectification, deletion and portability by writing to:\n\nprivacidad@petfect.app</string>
+    <string name="activity_terminos_condiciones_7_servicios_premium">7. Premium services and payments</string>
+    <string name="petfect_ofrece_servicios_de_pago_opcionales_los_pr">PetFect offers optional paid services. Prices are in euros and include applicable VAT.\n\nAvailable plans:\n\n • Free version → Free, with ads.\n • Individual Premium → €5.99 / month.\n • Featured post or urgent alert → €2.99, one-time payment.\n • Professional plan, shelters and veterinary clinics → from €29.99 / month.\n\nCancellation and refund policy:\n\nMonthly subscriptions can be cancelled at any time. Cancellation takes effect at the end of the current billing period. No prorated refunds are made except in cases provided by EU consumer regulations, 14 days from the first purchase if the service has not been used.\n\nPayments are managed by Google Play or App Store. PetFect does not store bank or card details.</string>
+    <string name="activity_terminos_condiciones_8_propiedad_intelect">8. Intellectual property</string>
+    <string name="todos_los_elementos_de_petfect_nombre_logotipo_dis">All PetFect elements — name, logo, design, source code, texts and interface — are the property of PetFect S.L. or its licensors and are protected by Spanish and European intellectual property law.\n\nBy publishing content on PetFect, such as photos or descriptions, you retain ownership of your rights, but grant us a non-exclusive, free and worldwide license to display, distribute and adapt that content within the platform and in our marketing communications, solely for the purpose of operating and promoting the service.</string>
+    <string name="solo_publica_fotos_y_contenido_del_que_seas_titula">📷 Only publish photos and content that you own or have permission to use. Do not publish images of third parties without their consent.</string>
+    <string name="activity_terminos_condiciones_9_limitacion_de_resp">9. Limitation of liability</string>
+    <string name="petfect_actua_como_plataforma_de_intermediacion_no">PetFect acts as an intermediary platform. We do not guarantee the outcome of any adoption, search or reunion process, nor the accuracy of information published by users.\n\nTo the fullest extent permitted by applicable law, PetFect shall not be liable for indirect, incidental, special or consequential damages arising from the use or inability to use the service.\n\nPetFect’s total accumulated liability to a user shall not exceed the amount paid by that user in the 12 months prior to the event giving rise to the claim.</string>
+    <string name="petfect_implementa_medidas_de_seguridad_tecnicas_y">PetFect implements technical and organizational security measures in accordance with the GDPR, but no system is 100% infallible. We will notify any security breach affecting your data within the legal period of 72 hours.</string>
+    <string name="activity_terminos_condiciones_10_modificaciones_su">10. Changes, suspension and contact</string>
+    <string name="petfect_puede_modificar_estos_terminos_en_cualquie">PetFect may modify these Terms at any time. We will notify you of significant changes by push notification or email at least 15 days in advance. Continued use of the service after that period implies acceptance of the new terms.\n\nWe may suspend or cancel your account if you breach these terms, if we detect fraudulent activity, or if required by applicable law.\n\nLaw and jurisdiction:\n\nThese Terms are governed by Spanish law. For any dispute, both parties submit to the courts and tribunals of Madrid, unless applicable consumer regulations establish another jurisdiction.</string>
+    <string name="soporte_general_soporte_petfect_app_privacidad_y_d">📧 General support: soporte@petfect.app\n🔒 Privacy and data: privacidad@petfect.app\n📍 Address: Vía de las Dos Castillas 33-E,\n Pozuelo de Alarcón, Madrid</string>
+    <string name="activity_terminos_condiciones_2026_petfect_s_l_tod">© 2026 PetFect S.L. All rights reserved.</string>
+    <string name="bienvenido_a_a_petfect_antes_de_utilizar_la_aplica">Welcome to PetFect 🐾 Before using the application, we recommend carefully reading our Terms and Conditions and Privacy Policy. These documents explain how the platform works, how we protect your information and what the community rules are. By continuing and accepting, you confirm that you have read and accepted this information. PetFect is an application designed to help search for lost pets, support responsible adoptions and connect users, shelters and veterinary clinics in a safe and simple way. ──────────────────────────── TERMS AND CONDITIONS OF USE 1. Acceptance of the terms By downloading, installing or using PetFect, you agree to comply with these terms and conditions, as well as our Privacy Policy. If you do not agree with any of these terms, please do not use the application. 2. Permitted use PetFect is intended exclusively for purposes related to animal welfare, adoptions and locating pets. It is not allowed to: • Publish false information • Impersonate identities • Use the application for illegal activities • Publish offensive or inappropriate content 3. Privacy and data PetFect may collect certain data necessary for the operation of the application, such as approximate location, email address and technical device data. Your data will be processed in accordance with the GDPR and will never be sold to third parties without consent. 4. Responsibility PetFect acts as an intermediary platform between users. We do not guarantee the outcome of adoptions, searches or posts made within the application. 5. Changes PetFect may update these terms when necessary to improve the service or adapt to legal changes. ──────────────────────────── PRIVACY POLICY PetFect only collects the information necessary to properly provide its services. Data may be used for: • Account management • Alerts and notifications • Improving the user experience • Locating nearby pets The user may request the modification or deletion of their data at any time by contacting support. Thank you for being part of PetFect.</string>
+    <string name="espanol">Español</string>
+    <string name="ingles">English</string>
+    <string name="foto_mascota">Pet photo</string>
+    <string name="guardar_mascota">Save pet</string>
 </resources>
