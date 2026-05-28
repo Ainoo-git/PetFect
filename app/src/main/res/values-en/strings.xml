@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PetFect</string>
+
+    <!-- General -->
+    <string name="aceptar">Accept</string>
+    <string name="cancelar">Cancel</string>
+    <string name="si">Yes</string>
+    <string name="no">No</string>
+    <string name="guardar_cambios">Save changes</string>
+    <string name="editar">Edit</string>
+    <string name="eliminar">Delete</string>
+    <string name="contacto">Contact</string>
+    <string name="publicar">Publish</string>
+    <string name="publicando">Publishing...</string>
+    <string name="cargando">Loading...</string>
+    <string name="error_al_cargar">Error loading</string>
+    <string name="sin_nombre">No name</string>
+    <string name="sin_informacion">No information</string>
+    <string name="sin_informacion_adicional">No additional information</string>
+    <string name="no_especificado">Not specified</string>
+    <string name="no_especificada">Not specified</string>
+    <string name="no_disponible">Not available</string>
+
+    <!-- Settings -->
+    <string name="configuracion">Settings</string>
+    <string name="modo_vista">Display mode</string>
+    <string name="modo_vista_descripcion">Switch to dark theme</string>
+    <string name="guardados">Saved pets</string>
+    <string name="notificaciones">Notifications</string>
+    <string name="idioma">Language</string>
+    <string name="seleccionar_idioma">Select language</string>
+    <string name="permisos_dispositivo">Device permissions</string>
+    <string name="politica_privacidad">Privacy policy</string>
+    <string name="terminos_condiciones">Terms and conditions</string>
+    <string name="licencias">Licenses</string>
+    <string name="atribuciones">Attributions</string>
+    <string name="soporte">Support</string>
+    <string name="eliminar_cuenta">Delete account</string>
+    <string name="texto_eliminar_cuenta">If you want to delete your account, please contact support using the following email:</string>
+    <string name="correo_soporte">petfect26@gmail.com</string>
+    <string name="correo_copiado">Email copied</string>
+
+    <!-- Login / Sign up -->
+    <string name="login">LOGIN</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="completa_todos_los_campos">Complete all fields</string>
+    <string name="inicio_sesion_correcto">Login successful</string>
+    <string name="error_autenticacion">Authentication error</string>
+    <string name="error_google_sign_in">Google Sign-In error</string>
+    <string name="error_autenticando_google">Error authenticating with Google</string>
+    <string name="password_minimo">Password must be at least 6 characters long</string>
+    <string name="cuenta_creada_correctamente">Account created successfully</string>
+
+    <!-- Preferences -->
+    <string name="preferencias_titulo">How can we help you?</string>
+    <string name="preferencias_subtitulo">Select your preferences to show more relevant content.</string>
+    <string name="ver_mascotas_perdidas">Show lost pets</string>
+    <string name="ver_animales_adopcion">Show pets for adoption</string>
+    <string name="mostrar_veterinarias">Show nearby vets</string>
+    <string name="recibir_notificaciones">Receive notifications</string>
+    <string name="siguiente">Next</string>
+    <string name="preferencias_guardadas">Preferences saved</string>
+
+    <!-- Home / Search / Profile -->
+    <string name="comunidad_petfect">PetFect Community</string>
+    <string name="all">All</string>
+    <string name="adopciones">Adoptions</string>
+    <string name="perdidos">Lost</string>
+    <string name="mapa">Map</string>
+    <string name="perfil">Profile</string>
+    <string name="buscar_mascotas">Search pets</string>
+    <string name="mascotas_perdidas">Lost Pets</string>
+    <string name="mascotas_adopcion">Pets for Adoption</string>
+    <string name="veterinarias">Vets</string>
+    <string name="proximamente">Coming soon...</string>
+    <string name="no_hay_contenido">No content available</string>
+    <string name="no_hay_mascotas_publicadas">No pets have been published</string>
+    <string name="no_hay_contenido_preferencias">No visible content according to your preferences</string>
+    <string name="hola_invitado">Hello, Guest!</string>
+    <string name="hola_usuario">Hello, User!</string>
+    <string name="hola_nombre">Hello, %1$s!</string>
+    <string name="publicaciones">Posts</string>
+    <string name="editar_perfil">Edit profile</string>
+    <string name="cerrar_sesion">Log out</string>
+    <string name="confirmar_cerrar_sesion">Do you want to log out?</string>
+    <string name="si_cerrar_sesion">Yes, log out</string>
+
+    <!-- Publication -->
+    <string name="subir_imagen_camara">Upload image or open camera</string>
+    <string name="estado_animal">Pet status</string>
+    <string name="perdido">Lost</string>
+    <string name="en_adopcion">For adoption</string>
+    <string name="tipo_mascota">Pet type</string>
+    <string name="perro">Dog</string>
+    <string name="gato">Cat</string>
+    <string name="otro">Other</string>
+    <string name="confirmo_imagen">I confirm that the image is mine or I have permission to publish it</string>
+    <string name="nombre_mascota">Pet name</string>
+    <string name="telefono_contacto">Contact phone</string>
+    <string name="especificar_otro_tipo">Specify other type</string>
+    <string name="edad_aproximada">Approximate age</string>
+    <string name="numero_chip_opcional">Chip number (optional)</string>
+    <string name="info_adicional_opcional">Additional information (optional)</string>
+    <string name="hacer_foto">Take photo</string>
+    <string name="elegir_galeria">Choose from gallery</string>
+    <string name="anadir_imagen">Add image</string>
+    <string name="no_se_pudo_obtener_ubicacion">Could not get location</string>
+    <string name="completa_campos_obligatorios">Complete the required fields</string>
+    <string name="selecciona_imagen">Select an image</string>
+    <string name="error_procesando_imagen">Error processing image</string>
+    <string name="error_subiendo_imagen">Error uploading image</string>
+    <string name="mascota_actualizada">Pet updated</string>
+    <string name="mascota_publicada">Pet published</string>
+    <string name="error_al_publicar">Error publishing</string>
+
+    <!-- Cards / Pets -->
+    <string name="nombre_mascota_demo">Pet Name</string>
+    <string name="tipo_estado_demo">Type • Status</string>
+    <string name="detalle_mascota_demo">Age: X\nChip: Y\nPhone: Z\nAdditional info: ...</string>
+    <string name="edad_label">Age: %1$s</string>
+    <string name="publicado_label">Published: %1$s</string>
+    <string name="chip_label">Chip: %1$s</string>
+    <string name="telefono_label">Phone: %1$s</string>
+    <string name="info_label">Info: %1$s</string>
+    <string name="info_adicional_label">Additional info: %1$s</string>
+    <string name="eliminar_mascota">Delete pet</string>
+    <string name="seguro_eliminar_mascota">Are you sure you want to delete it?</string>
+    <string name="mascota_eliminada">Pet deleted</string>
+    <string name="no_se_puede_abrir_publicacion">The post cannot be opened</string>
+    <string name="no_se_recibio_publicacion">The post was not received</string>
+    <string name="publicacion_no_existe">The post does not exist</string>
+    <string name="guardado">Saved</string>
+    <string name="no_hay_numero_contacto">No contact number available</string>
+    <string name="error_cargar_publicacion">Error loading post</string>
+    <string name="no_hay_mascotas_adopcion">There are no pets for adoption</string>
+    <string name="no_hay_mascotas_perdidas">There are no lost pets</string>
+
+    <!-- Profile -->
+    <string name="nombre">Name</string>
+    <string name="nombre_usuario">Username</string>
+    <string name="correo_electronico">Email address</string>
+    <string name="contrasena">Password</string>
+    <string name="introduce_nombre_usuario">Enter your username</string>
+    <string name="introduce_correo">Enter your email</string>
+    <string name="nueva_contrasena">New password</string>
+    <string name="error_cargando_usuario">Error loading user</string>
+    <string name="email_actualizado">Email updated</string>
+    <string name="contrasena_actualizada">Password updated</string>
+    <string name="perfil_actualizado">Profile updated</string>
+    <string name="cambiar_foto_perfil">Change profile picture</string>
+    <string name="usuario">User</string>
+
+    <!-- Map / permissions -->
+    <string name="permiso_ubicacion_denegado">Location permission denied</string>
+    <string name="error_firestore">Firestore error</string>
+    <string name="permisos_usados_petfect">Permissions used by PetFect</string>
+    <string name="permisos_descripcion">Tap a permission to manage access from Android settings.</string>
+    <string name="camara">Camera</string>
+    <string name="galeria">Gallery</string>
+    <string name="ubicacion">Location</string>
+    <string name="camara_descripcion">Allows you to take pet photos from the app.</string>
+    <string name="galeria_descripcion">Allows you to select images from your gallery.</string>
+    <string name="ubicacion_descripcion">Allows you to show nearby pets and location-based alerts.</string>
+    <string name="permiso_camara_denegado">Camera permission denied</string>
+
+    <!-- Initial terms dialog -->
+    <string name="terminos_politicas">Terms and Policies</string>
+    <string name="lee_info_continuar">Read the information before continuing.</string>
+    <string name="terminos">Terms</string>
+    <string name="privacidad">Privacy</string>
+    <string name="bienvenida_petfect">Welcome to PetFect 🐾\n\nBefore using the app, we recommend reading our terms and privacy policy carefully.</string>
+    <string name="he_leido_acepto">I have read and accept</string>
+</resources>
