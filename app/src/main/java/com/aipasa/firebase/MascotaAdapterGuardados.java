@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.aipasa.R;
 import com.aipasa.main.TarjetaFragment;
 import com.bumptech.glide.Glide;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -142,6 +143,7 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
         }
 
         // FIREBASE
+        //Notificaciones
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
