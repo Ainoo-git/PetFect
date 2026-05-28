@@ -1,11 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <!-- APPBAR -->
+    <!--  APPBAR  -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -14,14 +11,13 @@
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:title="Atribuciones"
             android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+            android:title="@string/atribuciones"
             android:titleTextColor="@color/white"
             app:navigationIcon="@drawable/outline_arrow"
-            app:titleCentered="true"/>
+            app:titleCentered="true" />
     </com.google.android.material.appbar.AppBarLayout>
-
-    <!-- CONTENIDO SCROLL -->
+    <!--  CONTENIDO SCROLL  -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,101 +28,94 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <!--  TÍTULO  -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                android:text="@string/atribuciones"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+            <!--  RECURSOS GRÁFICOS  -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:text="@string/recursos_graficos"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <!-- TÍTULO -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Atribuciones"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:paddingBottom="16dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:text="@string/iconos" />
 
-        <!-- RECURSOS GRÁFICOS -->
-        <TextView
-            android:text="Recursos gráficos"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:paddingTop="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:text="@string/plataforma_flaticon" />
 
-        <TextView
-            android:text="Iconos"
-            android:paddingTop="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:text="@string/autores" />
 
-        <TextView
-            android:text="Plataforma: Flaticon"
-            android:paddingTop="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/linkFlaticon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:text="@string/fuente_flaticon"
+                android:textColor="@color/coral_alertasimp_errores" />
 
-        <TextView
-            android:text="Autores:"
-            android:paddingTop="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:text="@string/licencia_flaticon" />
+            <!--  CONTENIDO AUDIOVISUAL  -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:text="@string/contenido_audiovisual"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/linkFlaticon"
-            android:text="Fuente: https://www.flaticon.es/"
-            android:textColor="@color/coral_alertasimp_errores"
-            android:paddingTop="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:text="@string/guion_asistencia_textual" />
 
-        <TextView
-            android:text="Licencia: Según términos de uso de Flaticon con atribución"
-            android:paddingTop="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:text="@string/audio_video_ia" />
+            <!--  IA  -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:text="@string/herramienta_chatgpt" />
 
-        <!-- CONTENIDO AUDIOVISUAL -->
-        <TextView
-            android:text="Contenido audiovisual"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:paddingTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:text="@string/proveedor_openai" />
 
-        <TextView
-            android:text="Guion y asistencia textual"
-            android:paddingTop="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="El audio del video promocional fue generado mediante IA"
-            android:paddingTop="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <!-- IA -->
-        <TextView
-            android:text="Herramienta: ChatGPT"
-            android:paddingTop="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="Proveedor: OpenAI"
-            android:paddingTop="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/linkChatGPT"
-            android:text="Fuente: https://chatgpt.com/"
-            android:textColor="@color/coral_alertasimp_errores"
-            android:paddingTop="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
+            <TextView
+                android:id="@+id/linkChatGPT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:text="@string/fuente_chatgpt"
+                android:textColor="@color/coral_alertasimp_errores" />
+        </LinearLayout>
     </ScrollView>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

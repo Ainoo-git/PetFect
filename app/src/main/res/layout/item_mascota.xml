@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -18,48 +16,48 @@
             android:id="@+id/imgMascota"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp"
             android:contentDescription="Foto de la mascota"
-            android:layout_marginBottom="16dp"/>
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="12dp">
+            android:layout_marginStart="12dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtTipoEstado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:layout_marginTop="2dp"
                 android:textColor="@color/cian_oscuro_iconos"
-                android:layout_marginTop="2dp"/>
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/txtInfoAdicional"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:maxLines="2"
+                android:layout_marginTop="4dp"
                 android:ellipsize="end"
-                android:layout_marginTop="4dp"/>
+                android:maxLines="2"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/txtFecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:layout_marginTop="4dp"
                 android:textColor="@android:color/darker_gray"
-                android:layout_marginTop="4dp"/>
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

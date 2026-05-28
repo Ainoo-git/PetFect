@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,18 +14,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
-
-            <!-- IMAGEN -->
+            <!--  IMAGEN  -->
             <LinearLayout
                 android:id="@+id/layoutImagen"
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/bg_dashed"
-                android:gravity="center"
-                android:orientation="vertical"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="40dp"
@@ -39,9 +36,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Subir imagen o abrir cámara"
+                    android:text="@string/subir_imagen_camara"
                     android:textColor="@color/cian_botones"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <ImageView
@@ -49,9 +46,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
                 android:scaleType="centerCrop"
-                android:visibility="gone"/>
-
-            <!-- NOMBRE -->
+                android:visibility="gone" />
+            <!--  NOMBRE  -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,10 +58,9 @@
                     android:id="@+id/etNombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nombre de la mascota"/>
+                    android:hint="@string/nombre_mascota" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- TELÉFONO -->
+            <!--  TELÉFONO  -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,18 +71,17 @@
                     android:id="@+id/etTelefono"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Teléfono de contacto"
-                    android:inputType="phone"/>
+                    android:hint="@string/telefono_contacto"
+                    android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- ESTADO -->
+            <!--  ESTADO  -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Estado del animal"
-                android:textStyle="bold"
-                android:textSize="15sp"/>
+                android:text="@string/estado_animal"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <RadioGroup
                 android:id="@+id/rgEstado"
@@ -98,24 +92,22 @@
                     android:id="@+id/rbPerdido"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Perdido"/>
+                    android:text="@string/perdido" />
 
                 <RadioButton
                     android:id="@+id/rbAdopcion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="En adopción"/>
-
+                    android:text="@string/en_adopcion" />
             </RadioGroup>
-
-            <!-- TIPO -->
+            <!--  TIPO  -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Tipo de mascota"
-                android:textStyle="bold"
-                android:textSize="15sp"/>
+                android:text="@string/tipo_mascota"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <RadioGroup
                 android:id="@+id/rgTipo"
@@ -126,39 +118,36 @@
                     android:id="@+id/rbPerro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Perro"/>
+                    android:text="@string/perro" />
 
                 <RadioButton
                     android:id="@+id/rbGato"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gato"/>
+                    android:text="@string/gato" />
 
                 <RadioButton
                     android:id="@+id/rbOtro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Otro"/>
-
+                    android:text="@string/otro" />
             </RadioGroup>
-
-            <!-- OTRO -->
+            <!--  OTRO  -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilOtroTipo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:layout_marginTop="8dp"
+                android:visibility="gone"
                 app:boxBackgroundMode="outline">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etOtroTipo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Especificar otro tipo"/>
+                    android:hint="@string/especificar_otro_tipo" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- EDAD -->
+            <!--  EDAD  -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -169,11 +158,10 @@
                     android:id="@+id/etEdad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Edad aproximada"
-                    android:inputType="number"/>
+                    android:hint="@string/edad_aproximada"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- CHIP -->
+            <!--  CHIP  -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -184,10 +172,9 @@
                     android:id="@+id/etChip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Número de chip (opcional)"/>
+                    android:hint="@string/numero_chip_opcional" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- INFO -->
+            <!--  INFO  -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -198,32 +185,28 @@
                     android:id="@+id/etInfoAdicional"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Información adicional (opcional)"
-                    android:minLines="3"
                     android:gravity="top"
-                    android:inputType="textMultiLine"/>
+                    android:hint="@string/info_adicional_opcional"
+                    android:inputType="textMultiLine"
+                    android:minLines="3" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- LEGAL -->
+            <!--  LEGAL  -->
             <CheckBox
                 android:id="@+id/checkLegal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Confirmo que la imagen es mía o tengo permiso para publicarla"/>
-
-            <!-- BOTÓN -->
+                android:text="@string/confirmo_imagen" />
+            <!--  BOTÓN  -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnPublicar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="18dp"
-                android:text="Publicar"
                 android:enabled="false"
-                app:cornerRadius="18dp"
-                app:backgroundTint="@color/cian_botones"/>
-
+                android:text="@string/publicar"
+                app:backgroundTint="@color/cian_botones"
+                app:cornerRadius="18dp" />
         </LinearLayout>
     </ScrollView>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

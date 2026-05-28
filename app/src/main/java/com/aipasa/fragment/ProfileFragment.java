@@ -122,7 +122,7 @@ public class ProfileFragment extends Fragment {
         // Botones
         Button btnCerrarSesion = view.findViewById(R.id.btnCerrarSesion);
 
-        btnCerrarSesion.setOnClickListener(this::openLogin);
+        btnCerrarSesion.setOnClickListener(v -> mostrarConfirmacionCerrarSesion());
 
         Button btnConfiguracion = view.findViewById(R.id.btnConfiguracion);
         Button btnEditPerfil = view.findViewById(R.id.btnEditarPerfil);
@@ -332,13 +332,22 @@ public class ProfileFragment extends Fragment {
                 });
     }
 
-    private void openLogin(View view) {
+    private void mostrarConfirmacionCerrarSesion() {
 
-        FirebaseAuth.getInstance().signOut();
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Cerrar sesión")
+                .setMessage("¿Quieres cerrar sesión?")
+                .setPositiveButton("Sí, cerrar sesión", (dialog, which) -> {
+                    FirebaseAuth.getInstance().signOut();
 
-        startActivity(new Intent(requireContext(), Login.class));
+                    Intent intent = new Intent(requireContext(), Login.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-        requireActivity().finish();
+                    startActivity(intent);
+                    requireActivity().finish();
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 
     private void openConfig() {

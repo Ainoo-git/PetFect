@@ -1,12 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
-
-    <!-- APPBARrr -->
+    <!--  APPBARrr  -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -15,15 +12,13 @@
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:title="Términos y Condiciones"
             android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+            android:title="@string/terminos_y_condiciones"
             android:titleTextColor="@color/white"
             app:navigationIcon="@drawable/outline_arrow"
-            app:titleCentered="true"/>
-
+            app:titleCentered="true" />
     </com.google.android.material.appbar.AppBarLayout>
-
-    <!-- CONTENIDO -->
+    <!--  CONTENIDO  -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,20 +31,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp">
-
-            <!-- CABECERA -->
+            <!--  CABECERA  -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginBottom="4dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="4dp">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/logologin"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/logologin" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -60,208 +54,405 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="PetFect"
+                        android:text="@string/app_name"
+                        android:textColor="#534AB7"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="#534AB7"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Términos y Condiciones · Versión 1.0"
-                        android:textSize="12sp"
-                        android:textColor="#888780"/>
-
+                        android:text="@string/terminos_y_condiciones_version_1_0"
+                        android:textColor="#888780"
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Última actualización: mayo 2026 · Efectivos desde el registro"
-                android:textSize="11sp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/ultima_actualizacion_mayo_2026_efectivos_desde_el"
                 android:textColor="#B4B2A9"
-                android:layout_marginBottom="20dp"/>
+                android:textSize="11sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#E8E6F0"
-                android:layout_marginBottom="20dp"/>
-
-            <!-- SECCIÓN 1 -->
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
+            <!--  SECCIÓN 1  -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1. Aceptación de los términos"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_1_aceptacion_de_los"
                 android:textColor="#534AB7"
-                android:layout_marginBottom="8dp"/>
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Al descargar, instalar o usar la aplicación PetFect (disponible en iOS y Android), así como su plataforma web, aceptas quedar vinculado/a por estos Términos y Condiciones, junto con nuestra Política de Privacidad y cualquier norma adicional publicada en la app.\n\nSi no estás de acuerdo con alguno de estos términos, por favor no uses PetFect. El uso continuado de la aplicación tras la publicación de cambios implica la aceptación de los mismos."
-                android:textSize="14sp"
-                android:textColor="#5F5E5A"
+                android:layout_marginBottom="10dp"
                 android:lineSpacingMultiplier="1.6"
-                android:layout_marginBottom="10dp"/>
-
-            <!-- Caja aviso -->
+                android:text="@string/al_descargar_instalar_o_usar_la_aplicacion_petfect"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+            <!--  Caja aviso  -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginBottom="20dp"
                 android:background="#FFF3CD"
-                android:padding="12dp"
-                android:layout_marginBottom="20dp">
+                android:orientation="horizontal"
+                android:padding="12dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="⚠️ Estos términos constituyen un acuerdo legalmente vinculante entre tú y PetFect S.L., con domicilio en Pozuelo de Alarcón, Madrid (España)."
-                    android:textSize="13sp"
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="@string/estos_terminos_constituyen_un_acuerdo_legalmente_v"
                     android:textColor="#444441"
-                    android:lineSpacingMultiplier="1.5"/>
-
+                    android:textSize="13sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#E8E6F0"
-                android:layout_marginBottom="20dp"/>
-        <!--  SECCIÓN 2  -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2. Quién puede usar PetFect"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="#534AB7"
-            android:layout_marginBottom="8dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="PetFect está dirigida a cualquier persona mayor de 14 años. Los menores de 18 años deben contar con el consentimiento expreso de su padre, madre o tutor legal para registrarse y usar los servicios de pago.\n\nLas instituciones (refugios, protectoras, veterinarias) deben acreditar su actividad durante el proceso de verificación institucional antes de acceder al Plan Profesional.\n\nTipos de usuarios reconocidos:\n\n • Adoptantes: personas que buscan adoptar o dar en adopción mascotas.\n • Propietarios: dueños de mascotas perdidas o encontradas.\n • Instituciones: refugios, protectoras, veterinarias y asociaciones.\n • Comunidad general: amantes de los animales interesados en el bienestar animal."
-            android:textSize="14sp"
-            android:textColor="#5F5E5A"
-            android:lineSpacingMultiplier="1.6"
-            android:layout_marginBottom="20dp"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#E8E6F0"
-            android:layout_marginBottom="20dp"/>
-        <!--  SECCIÓN 3  -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3. Cuentas y registro"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="#534AB7"
-            android:layout_marginBottom="8dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Para acceder a todas las funciones de PetFect es necesario crear una cuenta. Al registrarte, te comprometes a:\n\n • Proporcionar información veraz, precisa y actualizada.\n • Mantener la confidencialidad de tu contraseña.\n • No compartir tu cuenta con terceros.\n • Notificarnos inmediatamente ante cualquier acceso no autorizado.\n\nPuedes registrarte con correo electrónico o mediante inicio de sesión con Google. Cada persona puede tener una sola cuenta personal activa."
-            android:textSize="14sp"
-            android:textColor="#5F5E5A"
-            android:lineSpacingMultiplier="1.6"
-            android:layout_marginBottom="10dp"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="#E6F1FB"
-            android:padding="12dp"
-            android:layout_marginBottom="20dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="🔒 PetFect nunca te pedirá tu contraseña por email, SMS o mensajería interna. Si recibes una solicitud de este tipo, repórtala en soporte."
-                android:textSize="13sp"
-                android:textColor="#185FA5"
-                android:lineSpacingMultiplier="1.5"/>
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#E8E6F0"
-            android:layout_marginBottom="20dp"/>
-        <!--  SECCIÓN 4  -->
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4. Uso permitido y conducta" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="PetFect es una plataforma orientada al bienestar animal. Todo uso de la app debe respetar este propósito y las leyes vigentes en España y la Unión Europea.\n\nEstá prohibido:\n\n • Publicar información falsa sobre adopciones o mascotas perdidas.\n • Usar la app para compraventa comercial de animales.\n • Publicar contenido que incite al maltrato, abandono o comercialización ilegal de animales.\n • Suplantar la identidad de otra persona o institución.\n • Enviar comunicaciones no solicitadas (spam) a otros usuarios.\n • Intentar acceder a sistemas, cuentas o datos de terceros sin autorización.\n • Utilizar bots, scrapers o herramientas automatizadas para interactuar con la plataforma." android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="10dp"/>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="#FFF3CD" android:padding="12dp" android:layout_marginBottom="20dp">
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="🚫 El incumplimiento de estas normas puede derivar en la suspensión temporal o permanente de la cuenta, sin derecho a reembolso de los servicios premium contratados." android:textSize="13sp" android:textColor="#444441" android:lineSpacingMultiplier="1.5"/>
-        </LinearLayout>
-        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E6F0" android:layout_marginBottom="20dp"/>
-        <!--  SECCIÓN 5  -->
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="5. Publicaciones de adopción y mascotas perdidas" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="PetFect actúa como intermediaria entre usuarios. No somos responsables de la veracidad de las publicaciones ni del resultado de los procesos de adopción o búsqueda, pero aplicamos mecanismos de verificación mixtos (automáticos + revisión humana).\n\nAl publicar, el usuario se compromete a:\n\n • Que la mascota publicada existe y la información es real y actual.\n • No publicar el mismo animal en múltiples publicaciones activas simultáneas.\n • Actualizar o eliminar la publicación cuando la mascota haya sido encontrada o adoptada.\n • No solicitar ni aceptar dinero a cambio de la adopción de una mascota (está prohibido por ley en España).\n\nPetFect se reserva el derecho de eliminar publicaciones que infrinjan estas normas, sin previo aviso." android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="10dp"/>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="#E6F1FB" android:padding="12dp" android:layout_marginBottom="20dp">
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="📍 Las alertas geolocalizadas se comparten con otros usuarios en un radio configurable. Al activarlas, aceptas que tu ubicación aproximada sea visible para otros usuarios de la app en ese momento." android:textSize="13sp" android:textColor="#185FA5" android:lineSpacingMultiplier="1.5"/>
-        </LinearLayout>
-        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E6F0" android:layout_marginBottom="20dp"/>
-        <!--  SECCIÓN 6  -->
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="6. Datos personales y privacidad" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="El tratamiento de tus datos personales se rige por el Reglamento General de Protección de Datos (RGPD, UE 2016/679) y la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD).\n\nDatos que recopilamos y su finalidad:\n\n • Nombre y email → Gestión de cuenta y comunicación.\n • Geolocalización → Generación de alertas de mascotas cercanas.\n • Dispositivo y sistema operativo → Mejora técnica de la app.\n • Token de notificaciones → Envío de avisos push.\n • Datos de pago → Procesados por Google Play / App Store (PetFect no los almacena).\n\nPetFect no vende ni cede tus datos a terceros con fines publicitarios sin tu consentimiento. Puedes ejercer tus derechos de acceso, rectificación, supresión y portabilidad escribiendo a:\n\nprivacidad@petfect.app" android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="20dp"/>
-        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E6F0" android:layout_marginBottom="20dp"/>
-        <!--  SECCIÓN 7  -->
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="7. Servicios premium y pagos" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="PetFect ofrece servicios de pago opcionales. Los precios son en euros e incluyen el IVA aplicable.\n\nPlanes disponibles:\n\n • Versión gratuita → Gratis, con publicidad.\n • Premium particular → 5,99 € / mes.\n • Publicación destacada o alerta urgente → 2,99 € (pago único).\n • Plan profesional (refugios y veterinarias) → desde 29,99 € / mes.\n\nPolítica de cancelación y reembolso:\n\nLas suscripciones mensuales pueden cancelarse en cualquier momento. La cancelación surte efecto al final del período de facturación en curso. No se realizan reembolsos prorrateados salvo en los casos previstos por la normativa de consumo de la UE (14 días desde la primera contratación si no se ha hecho uso del servicio).\n\nLos pagos son gestionados por Google Play o App Store. PetFect no almacena datos bancarios ni de tarjeta." android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="20dp"/>
-        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E6F0" android:layout_marginBottom="20dp"/>
-        <!--  SECCIÓN 8  -->
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="8. Propiedad intelectual" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Todos los elementos de PetFect —nombre, logotipo, diseño, código fuente, textos e interfaz— son propiedad de PetFect S.L. o de sus licenciantes y están protegidos por la legislación española y europea de propiedad intelectual.\n\nAl publicar contenido en PetFect (fotos, descripciones, etc.), conservas la titularidad de tus derechos, pero nos otorgas una licencia no exclusiva, gratuita y mundial para mostrar, distribuir y adaptar dicho contenido dentro de la plataforma y en nuestras comunicaciones de marketing, con el único fin de operar y promocionar el servicio." android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="10dp"/>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="#FFF3CD" android:padding="12dp" android:layout_marginBottom="20dp">
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="📷 Solo publica fotos y contenido del que seas titular o tengas permiso para usar. No publiques imágenes de terceros sin su consentimiento." android:textSize="13sp" android:textColor="#444441" android:lineSpacingMultiplier="1.5"/>
-        </LinearLayout>
-        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E6F0" android:layout_marginBottom="20dp"/>
-        <!--  SECCIÓN 9  -->
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="9. Limitación de responsabilidad" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="PetFect actúa como plataforma de intermediación. No garantizamos el resultado de ningún proceso de adopción, búsqueda o reencuentro, ni la veracidad de la información publicada por los usuarios.\n\nEn la máxima medida permitida por la ley aplicable, PetFect no será responsable de daños indirectos, incidentales, especiales o consecuentes derivados del uso o la imposibilidad de uso del servicio.\n\nLa responsabilidad total acumulada de PetFect frente a un usuario no superará el importe abonado por dicho usuario en los 12 meses anteriores al hecho causante." android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="10dp"/>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="#E6F1FB" android:padding="12dp" android:layout_marginBottom="20dp">
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text=" PetFect implementa medidas de seguridad técnicas y organizativas conforme al RGPD, pero ningún sistema es 100% infalible. Notificaremos cualquier brecha de seguridad que afecte a tus datos en el plazo legal de 72 horas." android:textSize="13sp" android:textColor="#185FA5" android:lineSpacingMultiplier="1.5"/>
-        </LinearLayout>
-        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E6F0" android:layout_marginBottom="20dp"/>
-        <!--  SECCIÓN 10  -->
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="10. Modificaciones, suspensión y contacto" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="PetFect puede modificar estos Términos en cualquier momento. Te notificaremos cambios significativos mediante notificación push o correo electrónico con al menos 15 días de antelación. El uso continuado del servicio tras dicho período implica la aceptación de los nuevos términos.\n\nPodemos suspender o cancelar tu cuenta si incumples estos términos, si detectamos actividad fraudulenta, o si así lo exige la legislación aplicable.\n\nLegislación y jurisdicción:\n\nEstos Términos se rigen por la ley española. Para cualquier controversia, ambas partes se someten a los juzgados y tribunales de Madrid, salvo que la normativa de consumo aplicable establezca otro fuero." android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="16dp"/>
-        <!--  Caja contacto  -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#EEEDFE"
-            android:padding="16dp"
-            android:layout_marginBottom="8dp">
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
+            <!--   SECCIÓN 2   -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contacto"
-                android:textSize="14sp"
-                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_2_quien_puede_usar_p"
                 android:textColor="#534AB7"
-                android:layout_marginBottom="8dp"/>
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="📧 Soporte general: soporte@petfect.app\n🔒 Privacidad y datos: privacidad@petfect.app\n📍 Dirección: Vía de las Dos Castillas 33-E,\n Pozuelo de Alarcón, Madrid"
-                android:textSize="13sp"
-                android:textColor="#444441"
-                android:lineSpacingMultiplier="1.7"/>
+                android:layout_marginBottom="20dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/petfect_esta_dirigida_a_cualquier_persona_mayor_de"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
+            <!--   SECCIÓN 3   -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_3_cuentas_y_registro"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/para_acceder_a_todas_las_funciones_de_petfect_es_n"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="#E6F1FB"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="@string/petfect_nunca_te_pedira_tu_contrasena_por_email_sm"
+                    android:textColor="#185FA5"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
+            <!--   SECCIÓN 4   -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_4_uso_permitido_y_co"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/petfect_es_una_plataforma_orientada_al_bienestar_a"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="#FFF3CD"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="@string/el_incumplimiento_de_estas_normas_puede_derivar_en"
+                    android:textColor="#444441"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
+            <!--   SECCIÓN 5   -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_5_publicaciones_de_a"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/petfect_actua_como_intermediaria_entre_usuarios_no"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="#E6F1FB"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="@string/las_alertas_geolocalizadas_se_comparten_con_otros"
+                    android:textColor="#185FA5"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
+            <!--   SECCIÓN 6   -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_6_datos_personales_y"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/el_tratamiento_de_tus_datos_personales_se_rige_por"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
+            <!--   SECCIÓN 7   -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_7_servicios_premium"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/petfect_ofrece_servicios_de_pago_opcionales_los_pr"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
+            <!--   SECCIÓN 8   -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_8_propiedad_intelect"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/todos_los_elementos_de_petfect_nombre_logotipo_dis"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="#FFF3CD"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="@string/solo_publica_fotos_y_contenido_del_que_seas_titula"
+                    android:textColor="#444441"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
+            <!--   SECCIÓN 9   -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_9_limitacion_de_resp"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/petfect_actua_como_plataforma_de_intermediacion_no"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="#E6F1FB"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="@string/petfect_implementa_medidas_de_seguridad_tecnicas_y"
+                    android:textColor="#185FA5"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
+            <!--   SECCIÓN 10   -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_10_modificaciones_su"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/petfect_puede_modificar_estos_terminos_en_cualquie"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+            <!--   Caja contacto   -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="#EEEDFE"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/contacto"
+                    android:textColor="#534AB7"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="1.7"
+                    android:text="@string/soporte_general_soporte_petfect_app_privacidad_y_d"
+                    android:textColor="#444441"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_2026_petfect_s_l_tod"
+                android:textColor="#B4B2A9"
+                android:textSize="11sp" />
         </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="© 2026 PetFect S.L. Todos los derechos reservados."
-            android:textSize="11sp"
-            android:textColor="#B4B2A9"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="8dp"/>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

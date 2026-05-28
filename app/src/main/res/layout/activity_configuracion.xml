@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <!-- CONTENIDO PRINCIPAL -->
+    <!--  CONTENIDO PRINCIPAL  -->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <!-- AppBar -->
+        <!--  AppBar  -->
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -19,13 +15,12 @@
                 android:id="@+id/topAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:title="Configuracion"
                 android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+                android:title="@string/configuracion"
                 android:titleTextColor="@color/white"
                 app:navigationIcon="@drawable/outline_arrow"
-                app:titleCentered="true"/>
+                app:titleCentered="true" />
         </com.google.android.material.appbar.AppBarLayout>
-
 
         <ScrollView
             android:layout_width="match_parent"
@@ -37,24 +32,22 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp">
-
-                <!-- Modo de vista -->
+                <!--  Modo de vista  -->
                 <Switch
                     android:id="@+id/switchModoOscuro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/modo_vista"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:text="Modo de vista" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Se cambiara al tema oscuro"
+                    android:text="@string/modo_vista_descripcion"
                     android:textSize="10sp"
                     android:textStyle="bold" />
-
-                <!-- GUARDADOS -->
+                <!--  GUARDADOS  -->
                 <LinearLayout
                     android:id="@+id/guardados"
                     android:layout_width="match_parent"
@@ -75,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Guardados"
+                        android:text="@string/guardados"
                         android:textSize="18sp" />
 
                     <ImageView
@@ -84,8 +77,7 @@
                         android:src="@drawable/flecha_derecha"
                         app:tint="@color/black" />
                 </LinearLayout>
-
-                <!-- NOTIFICACIONES -->
+                <!--  NOTIFICACIONES  -->
                 <LinearLayout
                     android:id="@+id/notificaciones"
                     android:layout_width="match_parent"
@@ -106,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Notificaciones"
+                        android:text="@string/notificaciones"
                         android:textSize="18sp" />
 
                     <TextView
@@ -125,8 +117,7 @@
                         android:src="@drawable/flecha_derecha"
                         app:tint="@color/black" />
                 </LinearLayout>
-
-                <!-- IDIOMA -->
+                <!--  IDIOMA  -->
                 <LinearLayout
                     android:id="@+id/idioma"
                     android:layout_width="match_parent"
@@ -147,7 +138,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Idioma"
+                        android:text="@string/idioma"
                         android:textSize="18sp" />
 
                     <ImageView
@@ -156,8 +147,7 @@
                         android:src="@drawable/flecha_derecha"
                         app:tint="@color/black" />
                 </LinearLayout>
-
-                <!-- PERMISOS DEL DISPOSITIVO -->
+                <!--  PERMISOS DEL DISPOSITIVO  -->
                 <LinearLayout
                     android:id="@+id/permisos_dispositivo"
                     android:layout_width="match_parent"
@@ -178,7 +168,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Permisos del dispositivo"
+                        android:text="@string/permisos_dispositivo"
                         android:textSize="18sp" />
 
                     <ImageView
@@ -187,8 +177,7 @@
                         android:src="@drawable/flecha_derecha"
                         app:tint="@color/black" />
                 </LinearLayout>
-
-                <!-- PRIVACIDAD -->
+                <!--  PRIVACIDAD  -->
                 <LinearLayout
                     android:id="@+id/politica_privacidad"
                     android:layout_width="match_parent"
@@ -209,7 +198,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Política de privacidad"
+                        android:text="@string/politica_privacidad"
                         android:textSize="18sp" />
 
                     <ImageView
@@ -218,8 +207,7 @@
                         android:src="@drawable/flecha_derecha"
                         app:tint="@color/black" />
                 </LinearLayout>
-
-                <!-- TERMINOS -->
+                <!--  TERMINOS  -->
                 <LinearLayout
                     android:id="@+id/terminos_condiciones"
                     android:layout_width="match_parent"
@@ -240,7 +228,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Términos y condiciones"
+                        android:text="@string/terminos_condiciones"
                         android:textSize="18sp" />
 
                     <ImageView
@@ -249,8 +237,7 @@
                         android:src="@drawable/flecha_derecha"
                         app:tint="@color/black" />
                 </LinearLayout>
-
-                <!-- LICENCIAS -->
+                <!--  LICENCIAS  -->
                 <LinearLayout
                     android:id="@+id/licencias"
                     android:layout_width="match_parent"
@@ -271,7 +258,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Licencias"
+                        android:text="@string/licencias"
                         android:textSize="18sp" />
 
                     <ImageView
@@ -280,8 +267,7 @@
                         android:src="@drawable/flecha_derecha"
                         app:tint="@color/black" />
                 </LinearLayout>
-
-                <!-- ATRIBUCIONES -->
+                <!--  ATRIBUCIONES  -->
                 <LinearLayout
                     android:id="@+id/atribuciones"
                     android:layout_width="match_parent"
@@ -302,7 +288,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Atribuciones"
+                        android:text="@string/atribuciones"
                         android:textSize="18sp" />
 
                     <ImageView
@@ -311,8 +297,7 @@
                         android:src="@drawable/flecha_derecha"
                         app:tint="@color/black" />
                 </LinearLayout>
-
-                <!-- ELIMINAR CUENTA -->
+                <!--  ELIMINAR CUENTA  -->
                 <LinearLayout
                     android:id="@+id/eliminar_cuenta"
                     android:layout_width="match_parent"
@@ -333,34 +318,30 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Eliminar cuenta"
-                        android:textSize="18sp"
-                        android:textColor="@color/coral_alertasimp_errores" />
+                        android:text="@string/eliminar_cuenta"
+                        android:textColor="@color/coral_alertasimp_errores"
+                        android:textSize="18sp" />
                 </LinearLayout>
-
             </LinearLayout>
         </ScrollView>
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <!-- OVERLAY (FONDO OSCURO) -->
+    <!--  OVERLAY (FONDO OSCURO)  -->
     <View
         android:id="@+id/overlayEliminarCuenta"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#80000000"
-        android:visibility="gone"
-        android:elevation="5dp"/>
-
-    <!-- TARJETA POPUP -->
+        android:elevation="5dp"
+        android:visibility="gone" />
+    <!--  TARJETA POPUP  -->
     <LinearLayout
         android:id="@+id/cardEliminarCuenta"
-        android:elevation="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="32dp"
         android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+        android:elevation="12dp"
         android:orientation="vertical"
         android:padding="20dp"
         android:visibility="gone">
@@ -368,19 +349,18 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Si deseas eliminar tu cuenta, por favor ponte en contacto con soporte mediante el siguiente correo:"
-            android:textSize="16sp"
+            android:paddingBottom="12dp"
+            android:text="@string/texto_eliminar_cuenta"
             android:textColor="@color/black"
-            android:paddingBottom="12dp"/>
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tvEmailSoporte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="correoejemplo@gmail.com"
+            android:text="@string/correo_soporte"
+            android:textColor="@color/coral_alertasimp_errores"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/coral_alertasimp_errores"/>
+            android:textStyle="bold" />
     </LinearLayout>
-
 </FrameLayout>

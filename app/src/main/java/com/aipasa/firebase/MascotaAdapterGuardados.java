@@ -214,8 +214,7 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
                 holder.btnFavorito.setTag(true);
             }
         });
-
-        // CLICK TARJETA
+    // CLICK TARJETA
         holder.itemView.setOnClickListener(v -> {
 
             if (id != null
@@ -230,14 +229,10 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
                 TarjetaFragment fragment =
                         TarjetaFragment.newInstance(id);
 
-                activity.getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(
-                                R.id.content_container,
-                                fragment
-                        )
-                        .addToBackStack(null)
-                        .commit();
+                fragment.show(
+                        activity.getSupportFragmentManager(),
+                        "tarjeta"
+                );
 
             } else {
 

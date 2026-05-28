@@ -1,70 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/signup_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/imgfondo">
-
-    <!-- Overlay translúcido -->
+    <!--  Overlay translúcido  -->
     <ImageView
         android:id="@+id/overlay_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/imgfondo"
-        android:scaleType="centerCrop"
         android:alpha="0.35"
-        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/imgfondo"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <!-- Guidelines para márgenes -->
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--  Guidelines para márgenes  -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_start"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.24"/>
+        app:layout_constraintGuide_percent="0.24" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_end"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.77"/>
-
+        app:layout_constraintGuide_percent="0.77" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_top"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="83dp"/>
-
+        app:layout_constraintGuide_begin="83dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_bottom"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9"/>
-
-
-    <!-- Icono principal -->
+        app:layout_constraintGuide_percent="0.9" />
+    <!--  Icono principal  -->
     <ImageView
         android:id="@+id/icon_signup"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="45dp"
-        android:src="@drawable/logologin"
         android:contentDescription="Icono registro"
-        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/logologin"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <!-- Username -->
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--  Username  -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilUsername"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -72,23 +63,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="#80FFFFFF"
-        android:hint="Username"
         android:fontFamily="@font/text_app"
-        app:startIconDrawable="@drawable/personita"
+        android:hint="@string/username"
         app:boxStrokeColor="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@id/icon_signup"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end">
+        app:layout_constraintTop_toBottomOf="@id/icon_signup"
+        app:startIconDrawable="@drawable/personita">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="48dp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- Password -->
+    <!--  Password  -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilPassword"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -96,24 +86,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:background="#80FFFFFF"
-        android:hint="Password"
         android:fontFamily="@font/text_app"
-        app:startIconDrawable="@drawable/llavecita"
+        android:hint="@string/password"
         app:endIconMode="password_toggle"
-        app:layout_constraintTop_toBottomOf="@id/tilUsername"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end">
+        app:layout_constraintTop_toBottomOf="@id/tilUsername"
+        app:startIconDrawable="@drawable/llavecita">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="48dp"
             android:inputType="textPassword"
-            android:textColor="@color/black"/>
+            android:paddingStart="48dp"
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- Email -->
+    <!--  Email  -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -121,50 +110,47 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:background="#80FFFFFF"
-        android:hint="Email"
         android:fontFamily="@font/text_app"
-        app:startIconDrawable="@drawable/email"
-        app:layout_constraintTop_toBottomOf="@id/tilPassword"
+        android:hint="@string/email"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end">
+        app:layout_constraintTop_toBottomOf="@id/tilPassword"
+        app:startIconDrawable="@drawable/email">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="48dp"
             android:inputType="textEmailAddress"
-            android:textColor="@color/black"/>
+            android:paddingStart="48dp"
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- Botón Crear cuenta -->
+    <!--  Botón Crear cuenta  -->
     <Button
         android:id="@+id/btnRegister"
         style="@style/BotonPetFect"
-        android:onClick="crearCuenta"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/cian_botones"
+        android:onClick="crearCuenta"
         android:text="@string/create_account"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/tilEmail"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"/>
-
-    <!-- Botón Login -->
+        app:layout_constraintTop_toBottomOf="@id/tilEmail" />
+    <!--  Botón Login  -->
     <Button
         android:id="@+id/btnGoToLogin"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_2"
+        android:onClick="openLogin"
         android:text="@string/login"
         android:textColor="@color/black"
-        android:onClick="openLogin"
-        android:fontFamily="@font/baloo_2"
-        app:layout_constraintTop_toBottomOf="@id/btnRegister"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"/>
-
+        app:layout_constraintTop_toBottomOf="@id/btnRegister" />
 </androidx.constraintlayout.widget.ConstraintLayout>

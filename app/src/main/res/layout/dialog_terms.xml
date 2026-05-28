@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -19,26 +18,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="18dp">
-
-            <!-- TITULO -->
+            <!--  TITULO  -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Términos y Políticas"
+                android:text="@string/terminos_politicas"
                 android:textColor="#FF8C8C"
                 android:textSize="22sp"
                 android:textStyle="bold" />
-
-            <!-- SUBTEXTO -->
+            <!--  SUBTEXTO  -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Lee la información antes de continuar."
+                android:text="@string/lee_info_continuar"
                 android:textColor="#777777"
                 android:textSize="13sp" />
-
-            <!-- BOTONES TEXTO -->
+            <!--  BOTONES TEXTO  -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,7 +49,7 @@
                     android:background="#FFF1F1"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="Términos"
+                    android:text="@string/terminos"
                     android:textColor="#FF8C8C"
                     android:textStyle="bold" />
 
@@ -69,13 +65,11 @@
                     android:background="#FFF1F1"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="Privacidad"
+                    android:text="@string/privacidad"
                     android:textColor="#FF8C8C"
                     android:textStyle="bold" />
-
             </LinearLayout>
-
-            <!-- SCROLL -->
+            <!--  SCROLL  -->
             <ScrollView
                 android:id="@+id/scrollView"
                 android:layout_width="match_parent"
@@ -88,81 +82,22 @@
                     android:id="@+id/tvTerms"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="14dp"
                     android:lineSpacingExtra="5dp"
-                    android:text="Bienvenido/a a PetFect 🐾
-
-Antes de utilizar la aplicación, te recomendamos leer atentamente nuestros Términos y Condiciones y la Política de Privacidad. Estos documentos explican cómo funciona la plataforma, cómo protegemos tu información y cuáles son las normas de uso de la comunidad.
-
-Al continuar y aceptar, confirmas que has leído y aceptado esta información.
-
-PetFect es una aplicación diseñada para ayudar en la búsqueda de mascotas perdidas, facilitar adopciones responsables y conectar a usuarios, refugios y veterinarias de forma segura y sencilla.
-
-────────────────────────────
-
-TÉRMINOS Y CONDICIONES DE USO
-
-1. Aceptación de los términos
-
-Al descargar, instalar o utilizar PetFect, aceptas cumplir estos términos y condiciones, así como nuestra Política de Privacidad.
-
-Si no estás de acuerdo con alguno de estos términos, por favor no utilices la aplicación.
-
-2. Uso permitido
-
-PetFect está destinada exclusivamente a fines relacionados con el bienestar animal, adopciones y localización de mascotas.
-
-No está permitido:
-• Publicar información falsa
-• Suplantar identidades
-• Utilizar la aplicación para actividades ilegales
-• Publicar contenido ofensivo o inapropiado
-
-3. Privacidad y datos
-
-PetFect puede recopilar determinados datos necesarios para el funcionamiento de la aplicación, como ubicación aproximada, correo electrónico y datos técnicos del dispositivo.
-
-Tus datos serán tratados conforme al RGPD y nunca serán vendidos a terceros sin consentimiento.
-
-4. Responsabilidad
-
-PetFect actúa como plataforma intermediaria entre usuarios. No garantizamos el resultado de adopciones, búsquedas o publicaciones realizadas dentro de la aplicación.
-
-5. Modificaciones
-
-PetFect puede actualizar estos términos cuando sea necesario para mejorar el servicio o adaptarse a cambios legales.
-
-────────────────────────────
-
-POLÍTICA DE PRIVACIDAD
-
-PetFect recopila únicamente la información necesaria para ofrecer correctamente sus servicios.
-
-Los datos pueden utilizarse para:
-• Gestión de cuentas
-• Alertas y notificaciones
-• Mejorar la experiencia de usuario
-• Localización de mascotas cercanas
-
-El usuario puede solicitar la modificación o eliminación de sus datos en cualquier momento contactando con soporte.
-
-Gracias por formar parte de PetFect "
+                    android:padding="14dp"
+                    android:text="@string/bienvenido_a_a_petfect_antes_de_utilizar_la_aplica"
                     android:textColor="#333333"
                     android:textSize="15sp" />
-
             </ScrollView>
-
-            <!-- CHECK -->
+            <!--  CHECK  -->
             <CheckBox
                 android:id="@+id/checkAccept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:text="He leído y acepto"
+                android:text="@string/he_leido_acepto"
                 android:textColor="#000000"
                 android:textSize="14sp" />
-
-            <!-- BOTONES -->
+            <!--  BOTONES  -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -176,7 +111,7 @@ Gracias por formar parte de PetFect "
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:backgroundTint="#DDDDDD"
-                    android:text="Cancelar"
+                    android:text="@string/cancelar"
                     android:textColor="#444444" />
 
                 <Button
@@ -185,13 +120,9 @@ Gracias por formar parte de PetFect "
                     android:layout_height="wrap_content"
                     android:backgroundTint="#FF8C8C"
                     android:enabled="false"
-                    android:text="Aceptar"
+                    android:text="@string/aceptar"
                     android:textColor="#FFFFFF" />
-
             </LinearLayout>
-
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
-
 </FrameLayout>

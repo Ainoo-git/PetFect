@@ -21,16 +21,18 @@ public class TerminosCondicionesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // flecha atrás
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 
     // BOTÓN ATRÁS TOOLBAR
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish(); // vuelve atrás
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

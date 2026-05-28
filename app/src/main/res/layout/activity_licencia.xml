@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -14,11 +13,11 @@
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:title="Licencia"
             android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+            android:title=""
             android:titleTextColor="@color/white"
             app:navigationIcon="@drawable/outline_arrow"
-            app:titleCentered="true"/>
+            app:titleCentered="true" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- CONTENIDO -->
@@ -37,38 +36,38 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Apache License 2.0"
+                android:paddingBottom="12dp"
+                android:text="@string/apache_license_2"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:paddingBottom="12dp"/>
+                android:textStyle="bold" />
 
             <!-- RESUMEN -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Esta aplicación utiliza la licencia Apache License 2.0, una licencia de software libre y permisiva."
-                android:paddingBottom="12dp"/>
+                android:paddingBottom="12dp"
+                android:text="@string/licencia_resumen_1" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Permite usar, modificar y distribuir el software incluso con fines comerciales, siempre que se mantengan los avisos de copyright y licencia."
-                android:paddingBottom="12dp"/>
+                android:paddingBottom="12dp"
+                android:text="@string/licencia_resumen_2" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Incluye también una concesión de patente y una cláusula de exención de responsabilidad."
-                android:paddingBottom="16dp"/>
+                android:paddingBottom="16dp"
+                android:text="@string/licencia_resumen_3" />
 
             <!-- LINK -->
             <TextView
                 android:id="@+id/linkApache"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ver licencia completa: http://www.apache.org/licenses/LICENSE-2.0"
-                android:textColor="@color/coral_alertasimp_errores"
-                android:paddingTop="8dp"/>
+                android:paddingTop="8dp"
+                android:text="@string/licencia_link_apache"
+                android:textColor="@color/coral_alertasimp_errores" />
 
         </LinearLayout>
 

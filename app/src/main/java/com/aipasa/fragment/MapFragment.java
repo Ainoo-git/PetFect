@@ -183,13 +183,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
 
-                    Toast.makeText(
-                            requireContext(),
-                            "Mascotas encontradas: "
-                                    + queryDocumentSnapshots.size(),
-                            Toast.LENGTH_LONG
-                    ).show();
-
                     for (QueryDocumentSnapshot document :
                             queryDocumentSnapshots) {
 
@@ -224,11 +217,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
                                 marker.setTag(idMascota);
 
-                                Toast.makeText(
-                                        requireContext(),
-                                        "Marker añadido: " + nombre,
-                                        Toast.LENGTH_SHORT
-                                ).show();
                             }
                         }
                     }

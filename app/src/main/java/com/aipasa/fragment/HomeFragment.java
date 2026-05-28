@@ -233,20 +233,27 @@ public class HomeFragment extends Fragment {
 
     private void mostrarNombreUsuario() {
 
-        if (currentUser != null) {
-
-            String email = currentUser.getEmail();
-
-            String nombre = email != null
-                    ? email.split("@")[0]
-                    : "Usuario";
-
-            tvNombreUsuario.setText("¡Hola, " + nombre + "!");
-
-        } else {
-
+        if (currentUser == null) {
             tvNombreUsuario.setText("¡Hola, Invitado!");
+            return;
         }
+
+        db.collection("usuarios")
+                .document(currentUser.getUid())
+                .get()
+                .addOnSuccessListener(doc -> {
+
+                    String username = doc.getString("username");
+
+                    if (username != null && !username.trim().isEmpty()) {
+                        tvNombreUsuario.setText("¡Hola, " + username + "!");
+                    } else {
+                        tvNombreUsuario.setText("¡Hola, Usuario!");
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    tvNombreUsuario.setText("¡Hola, Usuario!");
+                });
     }
 
     private void cargarPreferencias() {
@@ -361,6 +368,9 @@ public class HomeFragment extends Fragment {
         super.onResume();
 
         cargarPreferencias();
+
+        mostrarNombreUsuario();
+        cargarFotoPerfil();
 
         mostrarSecciones(
                 prefPerdidos,
