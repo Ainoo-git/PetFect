@@ -1,42 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- CONTENIDO PRINCIPAL -->
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <!-- BARRA SUPERIOR -->
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <!-- APPBAR -->
-        <com.google.android.material.appbar.AppBarLayout
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+            android:title="Guardados"
+            android:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/outline_arrow" />
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:title="Guardados"
-                android:background="@color/rosita_fondoss_tarjetas_alertaslev"
-                android:titleTextColor="@color/white"
-                app:navigationIcon="@drawable/outline_arrow"/>
+    </com.google.android.material.appbar.AppBarLayout>
 
-        </com.google.android.material.appbar.AppBarLayout>
+    <!-- LISTA DE MASCOTAS GUARDADAS -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerGuardados"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="12dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <!-- RECYCLER -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerGuardados"
-            android:layout_width="match_parent"
-            android:layout_height="443dp"
-            android:layout_marginTop="75dp"
-            android:clipToPadding="false"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="12dp" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-</FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

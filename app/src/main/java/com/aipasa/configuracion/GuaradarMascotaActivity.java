@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aipasa.R;
 import com.aipasa.firebase.MascotaAdapterGuardados;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -16,17 +17,16 @@ import java.util.ArrayList;
 public class GuaradarMascotaActivity extends AppCompatActivity {
 
     private RecyclerView recyclerGuardados;
-
     private MascotaAdapterGuardados adapter;
-
     private FirebaseFirestore db;
-
     private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_guardar_mascota);
+
+        configurarToolbar();
 
         recyclerGuardados = findViewById(R.id.recyclerGuardados);
 
@@ -44,6 +44,17 @@ public class GuaradarMascotaActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         cargarGuardados();
+    }
+
+    private void configurarToolbar() {
+        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 
     private void cargarGuardados() {
