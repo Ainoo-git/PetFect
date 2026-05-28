@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aipasa.R;
 import com.aipasa.firebase.Notificacion;
-import com.aipasa.firebase.NotificacionAdapter;
+import com.aipasa.firebase.NotificacionesAdapter;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.List;
 public class NotificacionActivity extends AppCompatActivity {
 
     private RecyclerView recycler;
-    private NotificacionAdapter adapter;
+    private NotificacionesAdapter adapter;
     private List<Notificacion> lista;
 
     @Override
@@ -29,7 +29,9 @@ public class NotificacionActivity extends AppCompatActivity {
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
         lista = new ArrayList<>();
-        adapter = new NotificacionAdapter(lista, this);
+
+        adapter = new NotificacionesAdapter(this, lista);
+
         recycler.setAdapter(adapter);
 
         cargarNotificaciones();
@@ -50,10 +52,13 @@ public class NotificacionActivity extends AppCompatActivity {
                     for (var doc : value.getDocuments()) {
 
                         Notificacion n = doc.toObject(Notificacion.class);
-                        lista.add(n);
+
+                        if (n != null) {
+                            lista.add(n);
+                        }
                     }
 
-                    adapter.actualizar(lista);
+                    adapter.notifyDataSetChanged();
                 });
     }
 }
