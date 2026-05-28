@@ -56,23 +56,11 @@
     <string name="recibir_notificaciones">Receive notifications</string>
     <string name="siguiente">Next</string>
     <string name="preferencias_guardadas">Preferences saved</string>
-    <string name="comunidad_petfect">PetFect Community</string>
-    <string name="all">All</string>
-    <string name="adopciones">Adoptions</string>
-    <string name="perdidos">Lost</string>
     <string name="mapa">Map</string>
     <string name="perfil">Profile</string>
     <string name="buscar_mascotas">Search pets</string>
-    <string name="mascotas_perdidas">Lost Pets</string>
-    <string name="mascotas_adopcion">Pets for Adoption</string>
-    <string name="veterinarias">Vets</string>
-    <string name="proximamente">Coming soon...</string>
-    <string name="no_hay_contenido">No content available</string>
     <string name="no_hay_mascotas_publicadas">No pets have been published</string>
     <string name="no_hay_contenido_preferencias">No visible content according to your preferences</string>
-    <string name="hola_invitado">Hello, Guest!</string>
-    <string name="hola_usuario">Hello, User!</string>
-    <string name="hola_nombre">Hello, %1$s!</string>
     <string name="publicaciones">Posts</string>
     <string name="editar_perfil">Edit profile</string>
     <string name="cerrar_sesion">Log out</string>
@@ -237,4 +225,17 @@
     <string name="ingles">English</string>
     <string name="foto_mascota">Pet photo</string>
     <string name="guardar_mascota">Save pet</string>
+    <!-- Home -->
+    <string name="comunidad_petfect">PetFect Community</string>
+    <string name="all">All</string>
+    <string name="adopciones">Adoptions</string>
+    <string name="perdidos">Lost</string>
+    <string name="mascotas_perdidas">Lost pets</string>
+    <string name="mascotas_adopcion">Pets for adoption</string>
+    <string name="veterinarias">Vets</string>
+    <string name="proximamente">Coming soon...</string>
+    <string name="no_hay_contenido">No content available</string>
+    <string name="hola_invitado">Hello, guest!</string>
+    <string name="hola_usuario">Hello, user!</string>
+    <string name="hola_nombre">Hello, %1$s!</string>
 </resources>

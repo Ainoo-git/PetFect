@@ -1,37 +1,176 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent">
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <!--  TOOLBAR  -->
-    <com.google.android.material.appbar.AppBarLayout android:layout_width="match_parent" android:layout_height="wrap_content">
-        <com.google.android.material.appbar.MaterialToolbar android:id="@+id/topAppBar" android:layout_width="match_parent" android:layout_height="?attr/actionBarSize" android:title="@string/permisos_dispositivo" android:background="@color/rosita_fondoss_tarjetas_alertaslev" android:titleTextColor="@color/white" app:navigationIcon="@drawable/outline_arrow" app:titleCentered="true"/>
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+            android:title="@string/permisos_dispositivo"
+            android:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/outline_arrow"
+            app:titleCentered="true" />
     </com.google.android.material.appbar.AppBarLayout>
     <!--  CONTENIDO  -->
-    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent" android:paddingTop="?attr/actionBarSize">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
             <!--  TITULO  -->
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/permisos_usados_petfect" android:textSize="24sp" android:textStyle="bold" android:textColor="@color/black" android:paddingBottom="20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:text="@string/permisos_usados_petfect"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
             <!--  TEXTO  -->
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/permisos_descripcion" android:textSize="14sp" android:textColor="#777777" android:paddingBottom="20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:text="@string/permisos_descripcion"
+                android:textColor="#777777"
+                android:textSize="14sp" />
             <!--  CAMARA  -->
-            <LinearLayout android:id="@+id/permisoCamara" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="16dp" android:background="@color/rosita_fondoss_tarjetas_alertaslev" android:layout_marginBottom="16dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackground">
-                <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/camara"/>
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:paddingStart="16dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/camara" android:textStyle="bold" android:textSize="18sp" android:textColor="#534AB7"/>
-                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/camara_descripcion" android:textSize="14sp" android:textColor="#5F5E5A" android:paddingTop="6dp"/>
+            <LinearLayout
+                android:id="@+id/permisoCamara"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/camara" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingStart="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/camara"
+                        android:textColor="#534AB7"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="6dp"
+                        android:text="@string/camara_descripcion"
+                        android:textColor="#5F5E5A"
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
             <!--  GALERIA  -->
-            <LinearLayout android:id="@+id/permisoGaleria" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="16dp" android:background="@color/rosita_fondoss_tarjetas_alertaslev" android:layout_marginBottom="16dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackground">
-                <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/foto"/>
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:paddingStart="16dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/galeria" android:textStyle="bold" android:textSize="18sp" android:textColor="#534AB7"/>
-                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/galeria_descripcion" android:textSize="14sp" android:textColor="#5F5E5A" android:paddingTop="6dp"/>
+            <LinearLayout
+                android:id="@+id/permisoGaleria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/foto" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingStart="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/galeria"
+                        android:textColor="#534AB7"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="6dp"
+                        android:text="@string/galeria_descripcion"
+                        android:textColor="#5F5E5A"
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
             <!--  UBICACION  -->
-            <LinearLayout android:id="@+id/permisoUbicacion" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="16dp" android:background="@color/rosita_fondoss_tarjetas_alertaslev" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackground">
-                <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/ic_map"/>
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:paddingStart="16dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/ubicacion" android:textStyle="bold" android:textSize="18sp" android:textColor="#534AB7"/>
-                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/ubicacion_descripcion" android:textSize="14sp" android:textColor="#5F5E5A" android:paddingTop="6dp"/>
+            <LinearLayout
+                android:id="@+id/permisoUbicacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_map" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingStart="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ubicacion"
+                        android:textColor="#534AB7"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="6dp"
+                        android:text="@string/ubicacion_descripcion"
+                        android:textColor="#5F5E5A"
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -11,7 +10,7 @@
         android:id="@+id/content_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="72dp"/>
+        android:layout_marginBottom="72dp" />
 
     <!-- BARRA INFERIOR -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -20,8 +19,8 @@
         android:layout_height="92dp"
         android:layout_gravity="bottom"
         android:background="@color/cian_oscuro_iconos"
-        app:itemIconTint="@color/bottom_nav_colors"
         app:itemActiveIndicatorStyle="@null"
+        app:itemIconTint="@color/bottom_nav_colors"
         app:itemTextColor="@color/bottom_nav_colors"
         app:menu="@menu/bottom_nav_menu" />
 
@@ -32,9 +31,9 @@
         android:layout_height="58dp"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="50dp"
-        app:srcCompat="@drawable/camara"
+        app:backgroundTint="@color/cian_clarito_bordes"
         app:maxImageSize="35dp"
-        app:tint="@color/cian_oscuro_iconos"
-        app:backgroundTint="@color/cian_clarito_bordes" />
+        app:srcCompat="@drawable/camara"
+        app:tint="@color/cian_oscuro_iconos" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

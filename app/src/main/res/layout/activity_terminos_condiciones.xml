@@ -1,85 +1,458 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:fitsSystemWindows="true">
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
     <!--  APPBARrr  -->
-    <com.google.android.material.appbar.AppBarLayout android:layout_width="match_parent" android:layout_height="wrap_content">
-        <com.google.android.material.appbar.MaterialToolbar android:id="@+id/topAppBar" android:layout_width="match_parent" android:layout_height="?attr/actionBarSize" android:title="@string/terminos_y_condiciones" android:background="@color/rosita_fondoss_tarjetas_alertaslev" android:titleTextColor="@color/white" app:navigationIcon="@drawable/outline_arrow" app:titleCentered="true"/>
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+            android:title="@string/terminos_y_condiciones"
+            android:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/outline_arrow"
+            app:titleCentered="true" />
     </com.google.android.material.appbar.AppBarLayout>
     <!--  CONTENIDO  -->
-    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent" android:background="#FFFFFF" android:fillViewport="true" app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
             <!--  CABECERA  -->
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="4dp">
-                <ImageView android:layout_width="80dp" android:layout_height="50dp" android:src="@drawable/logologin" android:layout_marginEnd="10dp"/>
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/app_name" android:textSize="18sp" android:textStyle="bold" android:textColor="#534AB7"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/terminos_y_condiciones_version_1_0" android:textSize="12sp" android:textColor="#888780"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/logologin" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"
+                        android:textColor="#534AB7"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/terminos_y_condiciones_version_1_0"
+                        android:textColor="#888780"
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/ultima_actualizacion_mayo_2026_efectivos_desde_el" android:textSize="11sp" android:textColor="#B4B2A9" android:layout_marginBottom="20dp"/>
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E6F0" android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/ultima_actualizacion_mayo_2026_efectivos_desde_el"
+                android:textColor="#B4B2A9"
+                android:textSize="11sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
             <!--  SECCIÓN 1  -->
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/activity_terminos_condiciones_1_aceptacion_de_los" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/al_descargar_instalar_o_usar_la_aplicacion_petfect" android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_1_aceptacion_de_los"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/al_descargar_instalar_o_usar_la_aplicacion_petfect"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
             <!--  Caja aviso  -->
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="#FFF3CD" android:padding="12dp" android:layout_marginBottom="20dp">
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/estos_terminos_constituyen_un_acuerdo_legalmente_v" android:textSize="13sp" android:textColor="#444441" android:lineSpacingMultiplier="1.5"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="#FFF3CD"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="@string/estos_terminos_constituyen_un_acuerdo_legalmente_v"
+                    android:textColor="#444441"
+                    android:textSize="13sp" />
             </LinearLayout>
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E6F0" android:layout_marginBottom="20dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
             <!--   SECCIÓN 2   -->
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/activity_terminos_condiciones_2_quien_puede_usar_p" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/petfect_esta_dirigida_a_cualquier_persona_mayor_de" android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="20dp"/>
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E6F0" android:layout_marginBottom="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_2_quien_puede_usar_p"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/petfect_esta_dirigida_a_cualquier_persona_mayor_de"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
             <!--   SECCIÓN 3   -->
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/activity_terminos_condiciones_3_cuentas_y_registro" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/para_acceder_a_todas_las_funciones_de_petfect_es_n" android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="10dp"/>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="#E6F1FB" android:padding="12dp" android:layout_marginBottom="20dp">
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/petfect_nunca_te_pedira_tu_contrasena_por_email_sm" android:textSize="13sp" android:textColor="#185FA5" android:lineSpacingMultiplier="1.5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_3_cuentas_y_registro"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/para_acceder_a_todas_las_funciones_de_petfect_es_n"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="#E6F1FB"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="@string/petfect_nunca_te_pedira_tu_contrasena_por_email_sm"
+                    android:textColor="#185FA5"
+                    android:textSize="13sp" />
             </LinearLayout>
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E6F0" android:layout_marginBottom="20dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
             <!--   SECCIÓN 4   -->
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/activity_terminos_condiciones_4_uso_permitido_y_co" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/petfect_es_una_plataforma_orientada_al_bienestar_a" android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="10dp"/>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="#FFF3CD" android:padding="12dp" android:layout_marginBottom="20dp">
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/el_incumplimiento_de_estas_normas_puede_derivar_en" android:textSize="13sp" android:textColor="#444441" android:lineSpacingMultiplier="1.5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_4_uso_permitido_y_co"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/petfect_es_una_plataforma_orientada_al_bienestar_a"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="#FFF3CD"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="@string/el_incumplimiento_de_estas_normas_puede_derivar_en"
+                    android:textColor="#444441"
+                    android:textSize="13sp" />
             </LinearLayout>
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E6F0" android:layout_marginBottom="20dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
             <!--   SECCIÓN 5   -->
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/activity_terminos_condiciones_5_publicaciones_de_a" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/petfect_actua_como_intermediaria_entre_usuarios_no" android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="10dp"/>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="#E6F1FB" android:padding="12dp" android:layout_marginBottom="20dp">
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/las_alertas_geolocalizadas_se_comparten_con_otros" android:textSize="13sp" android:textColor="#185FA5" android:lineSpacingMultiplier="1.5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_5_publicaciones_de_a"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/petfect_actua_como_intermediaria_entre_usuarios_no"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="#E6F1FB"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="@string/las_alertas_geolocalizadas_se_comparten_con_otros"
+                    android:textColor="#185FA5"
+                    android:textSize="13sp" />
             </LinearLayout>
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E6F0" android:layout_marginBottom="20dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
             <!--   SECCIÓN 6   -->
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/activity_terminos_condiciones_6_datos_personales_y" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/el_tratamiento_de_tus_datos_personales_se_rige_por" android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="20dp"/>
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E6F0" android:layout_marginBottom="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_6_datos_personales_y"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/el_tratamiento_de_tus_datos_personales_se_rige_por"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
             <!--   SECCIÓN 7   -->
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/activity_terminos_condiciones_7_servicios_premium" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/petfect_ofrece_servicios_de_pago_opcionales_los_pr" android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="20dp"/>
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E6F0" android:layout_marginBottom="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_7_servicios_premium"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/petfect_ofrece_servicios_de_pago_opcionales_los_pr"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
             <!--   SECCIÓN 8   -->
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/activity_terminos_condiciones_8_propiedad_intelect" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/todos_los_elementos_de_petfect_nombre_logotipo_dis" android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="10dp"/>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="#FFF3CD" android:padding="12dp" android:layout_marginBottom="20dp">
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/solo_publica_fotos_y_contenido_del_que_seas_titula" android:textSize="13sp" android:textColor="#444441" android:lineSpacingMultiplier="1.5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_8_propiedad_intelect"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/todos_los_elementos_de_petfect_nombre_logotipo_dis"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="#FFF3CD"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="@string/solo_publica_fotos_y_contenido_del_que_seas_titula"
+                    android:textColor="#444441"
+                    android:textSize="13sp" />
             </LinearLayout>
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E6F0" android:layout_marginBottom="20dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
             <!--   SECCIÓN 9   -->
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/activity_terminos_condiciones_9_limitacion_de_resp" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/petfect_actua_como_plataforma_de_intermediacion_no" android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="10dp"/>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="#E6F1FB" android:padding="12dp" android:layout_marginBottom="20dp">
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/petfect_implementa_medidas_de_seguridad_tecnicas_y" android:textSize="13sp" android:textColor="#185FA5" android:lineSpacingMultiplier="1.5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_9_limitacion_de_resp"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/petfect_actua_como_plataforma_de_intermediacion_no"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="#E6F1FB"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="@string/petfect_implementa_medidas_de_seguridad_tecnicas_y"
+                    android:textColor="#185FA5"
+                    android:textSize="13sp" />
             </LinearLayout>
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E6F0" android:layout_marginBottom="20dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E6F0" />
             <!--   SECCIÓN 10   -->
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/activity_terminos_condiciones_10_modificaciones_su" android:textSize="16sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/petfect_puede_modificar_estos_terminos_en_cualquie" android:textSize="14sp" android:textColor="#5F5E5A" android:lineSpacingMultiplier="1.6" android:layout_marginBottom="16dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_10_modificaciones_su"
+                android:textColor="#534AB7"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/petfect_puede_modificar_estos_terminos_en_cualquie"
+                android:textColor="#5F5E5A"
+                android:textSize="14sp" />
             <!--   Caja contacto   -->
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="#EEEDFE" android:padding="16dp" android:layout_marginBottom="8dp">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/contacto" android:textSize="14sp" android:textStyle="bold" android:textColor="#534AB7" android:layout_marginBottom="8dp"/>
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/soporte_general_soporte_petfect_app_privacidad_y_d" android:textSize="13sp" android:textColor="#444441" android:lineSpacingMultiplier="1.7"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="#EEEDFE"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/contacto"
+                    android:textColor="#534AB7"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="1.7"
+                    android:text="@string/soporte_general_soporte_petfect_app_privacidad_y_d"
+                    android:textColor="#444441"
+                    android:textSize="13sp" />
             </LinearLayout>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/activity_terminos_condiciones_2026_petfect_s_l_tod" android:textSize="11sp" android:textColor="#B4B2A9" android:layout_gravity="center_horizontal" android:layout_marginTop="12dp" android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/activity_terminos_condiciones_2026_petfect_s_l_tod"
+                android:textColor="#B4B2A9"
+                android:textSize="11sp" />
         </LinearLayout>
     </ScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
