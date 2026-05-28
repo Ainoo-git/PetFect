@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.aipasa.R;
+import com.aipasa.configuracion.NotificacionesActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 
 public class ConfiguracionActivity extends AppCompatActivity {
@@ -71,6 +72,9 @@ public class ConfiguracionActivity extends AppCompatActivity {
         });
         findViewById(R.id.guardados).setOnClickListener(v -> {
             openGuardados();
+        });
+        findViewById(R.id.notificaciones).setOnClickListener(v -> {
+            openNotificaciones();
         });
         // =====================
         // MODO OSCURO
@@ -161,5 +165,8 @@ public class ConfiguracionActivity extends AppCompatActivity {
     }
     private void openGuardados() {
         startActivity(new Intent(ConfiguracionActivity.this, GuaradarMascotaActivity.class));
+    }
+    private void openNotificaciones() {
+        startActivity(new Intent(ConfiguracionActivity.this, NotificacionesActivity.class));
     }
 }

@@ -42,15 +42,13 @@
         <activity
             android:name=".configuracion.ConfiguracionActivity"
             android:exported="false" />
-        <!--
-<activity
+        <!-- <activity
             android:name=".main.MapaActivity"
             android:exported="false" />  Splash
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBabGwoDgx7BYIkf6YPWpdEJi3M573ZXNQ" />
-
         <activity
             android:name=".splash.Splash"
             android:exported="true">
@@ -84,19 +82,19 @@
         <activity
             android:name=".main.PublicacionActivity"
             android:exported="false" />
-        <!--
-   <activity
+        <!--<activity
              android:name=".main.ActivityTarjeta"
+             android:exported="false" /> -->
+        <activity android:name=".configuracion.GuaradarMascotaActivity"/>
+         <activity
+             android:name=".creditos.Creditos"
              android:exported="false" />
-        -->
-        <activity android:name=".configuracion.GuaradarMascotaActivity" />
-        <activity
-            android:name=".creditos.Creditos"
-            android:exported="false" />
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-    </application>
+        <activity android:name=".main.NotificacionesActivity" />
 
-</manifest>
+         <meta-data
+             android:name="preloaded_fonts"
+             android:resource="@array/preloaded_fonts" />
+     </application>
+
+ </manifest>
