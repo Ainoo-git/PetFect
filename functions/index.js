@@ -8,20 +8,21 @@ exports.onMascotaCreated = onDocumentCreated(
   async (event) => {
 
     const mascota = event.data.data();
+    const mascotaId = event.params.mascotaId;
 
     const nombre = mascota.nombre || "Una mascota";
     const estado = mascota.estado || "";
     const tipo = mascota.tipo || "mascota";
 
     let titulo = "🐾 Nueva publicación en PetFect";
-    let cuerpo = `${nombre} ha sido publicada`;
+    let cuerpo = `${nombre} ha sido publicada en PetFect`;
 
     if (estado === "perdido") {
-      titulo = "🚨 Mascota perdida";
-      cuerpo = `${nombre} se ha perdido`;
+      titulo = "🚨 Mascota perdida 🚨";
+      cuerpo = `${nombre} se ha perdido. ¿Puedes ayudar?`;
     } else if (estado === "adopcion") {
-      titulo = "🏡 En adopción";
-      cuerpo = `${nombre} busca hogar`;
+      titulo = "🏡 Mascota en adopción 🏡";
+      cuerpo = `${nombre} busca un nuevo hogar`;
     }
 
     const message = {
@@ -30,15 +31,16 @@ exports.onMascotaCreated = onDocumentCreated(
         body: cuerpo
       },
       data: {
-        nombre,
-        estado,
-        tipo
+        mascotaId: mascotaId,
+        nombre: nombre,
+        estado: estado,
+        tipo: tipo
       },
       topic: "allUsers"
     };
 
     await admin.messaging().send(message);
 
-    console.log("✔ Notificación enviada:", nombre);
+    console.log("Notificación enviada:", nombre);
   }
 );

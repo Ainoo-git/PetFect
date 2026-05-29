@@ -1,19 +1,16 @@
 package com.aipasa.main;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.*;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -24,6 +21,7 @@ import com.aipasa.firebase.SupabaseClient;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -33,25 +31,38 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import okhttp3.*;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class PublicacionActivity extends AppCompatActivity {
 
-    private static final int REQUEST_CAMERA = 1;
-    private static final int REQUEST_GALLERY = 2;
     private static final int CAMERA_PERMISSION_CODE = 200;
     private static final int STORAGE_PERMISSION_CODE = 300;
+    private static final int LOCATION_PERMISSION_CODE = 400;
 
     private ActivityResultLauncher<String> galeriaLauncher;
+    private ActivityResultLauncher<Void> camaraLauncher;
 
     private LinearLayout layoutImagen;
     private ImageView imgMascota;
     private Button btnPublicar;
     private CheckBox checkLegal;
 
-    private EditText etNombre, etTelefono, etEdad, etChip, etInfoAdicional;
+    private EditText etNombre;
+    private EditText etTelefono;
+    private EditText etEdad;
+    private EditText etChip;
+    private EditText etInfoAdicional;
 
-    private RadioButton cbPerdido, cbAdopcion, cbPerro, cbGato, cbOtro;
+    private RadioButton cbPerdido;
+    private RadioButton cbAdopcion;
+    private RadioButton cbPerro;
+    private RadioButton cbGato;
+    private RadioButton cbOtro;
 
     private Uri imageUri;
     private Bitmap imageBitmap;
@@ -68,8 +79,7 @@ public class PublicacionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicacion);
 
-        fusedLocationClient =
-                LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         layoutImagen = findViewById(R.id.layoutImagen);
         imgMascota = findViewById(R.id.imgMascota);
@@ -95,7 +105,8 @@ public class PublicacionActivity extends AppCompatActivity {
         imgMascota.setOnClickListener(v -> mostrarOpcionesImagen());
 
         checkLegal.setOnCheckedChangeListener((buttonView, isChecked) ->
-                btnPublicar.setEnabled(isChecked));
+                btnPublicar.setEnabled(isChecked)
+        );
 
         galeriaLauncher = registerForActivityResult(
                 new ActivityResultContracts.GetContent(),
@@ -108,6 +119,24 @@ public class PublicacionActivity extends AppCompatActivity {
                         Glide.with(this).clear(imgMascota);
                         imgMascota.setImageDrawable(null);
                         imgMascota.setImageURI(uri);
+
+                        layoutImagen.setVisibility(View.GONE);
+                        imgMascota.setVisibility(View.VISIBLE);
+                    }
+                }
+        );
+
+        camaraLauncher = registerForActivityResult(
+                new ActivityResultContracts.TakePicturePreview(),
+                bitmap -> {
+                    if (bitmap != null) {
+                        usuarioCambioImagen = true;
+                        imageBitmap = bitmap;
+                        imageUri = null;
+
+                        Glide.with(this).clear(imgMascota);
+                        imgMascota.setImageDrawable(null);
+                        imgMascota.setImageBitmap(bitmap);
 
                         layoutImagen.setVisibility(View.GONE);
                         imgMascota.setVisibility(View.VISIBLE);
@@ -135,7 +164,7 @@ public class PublicacionActivity extends AppCompatActivity {
                     if (which == 0) {
                         verificarPermisoCamara();
                     } else {
-                        abrirGaleria();
+                        verificarPermisoGaleria();
                     }
                 })
                 .show();
@@ -145,32 +174,53 @@ public class PublicacionActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(this,
+            ActivityCompat.requestPermissions(
+                    this,
                     new String[]{Manifest.permission.CAMERA},
-                    CAMERA_PERMISSION_CODE);
+                    CAMERA_PERMISSION_CODE
+            );
 
-        } else abrirCamara();
+        } else {
+            abrirCamara();
+        }
     }
 
     private void verificarPermisoGaleria() {
 
-        String permiso = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
-                ? Manifest.permission.READ_MEDIA_IMAGES
-                : Manifest.permission.READ_EXTERNAL_STORAGE;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 
-        if (ContextCompat.checkSelfPermission(this, permiso)
-                != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
+                    != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(this,
-                    new String[]{permiso},
-                    STORAGE_PERMISSION_CODE);
+                ActivityCompat.requestPermissions(
+                        this,
+                        new String[]{Manifest.permission.READ_MEDIA_IMAGES},
+                        STORAGE_PERMISSION_CODE
+                );
 
-        } else abrirGaleria();
+            } else {
+                abrirGaleria();
+            }
+
+        } else {
+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(
+                        this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        STORAGE_PERMISSION_CODE
+                );
+
+            } else {
+                abrirGaleria();
+            }
+        }
     }
 
     private void abrirCamara() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, REQUEST_CAMERA);
+        camaraLauncher.launch(null);
     }
 
     private void abrirGaleria() {
@@ -178,50 +228,72 @@ public class PublicacionActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    @Nullable Intent data) {
+    public void onRequestPermissionsResult(
+            int requestCode,
+            String[] permissions,
+            int[] grantResults
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAMERA_PERMISSION_CODE) {
 
-        if (resultCode != RESULT_OK) return;
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-        if (requestCode == REQUEST_GALLERY &&
-                resultCode == RESULT_OK &&
-                data != null) {
+                abrirCamara();
 
-            usuarioCambioImagen = true;
-            imageUri = data.getData();
-            imageBitmap = null;
-
-            Glide.with(this).clear(imgMascota);
-            imgMascota.setImageDrawable(null);
-            imgMascota.setImageURI(imageUri);
+            } else {
+                Toast.makeText(
+                        this,
+                        "Permiso de cámara denegado",
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
         }
 
-        if (requestCode == REQUEST_GALLERY &&
-                resultCode == RESULT_OK &&
-                data != null) {
+        if (requestCode == STORAGE_PERMISSION_CODE) {
 
-            imageUri = data.getData();
-            imageBitmap = null;
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-            imgMascota.setImageURI(imageUri);
+                abrirGaleria();
+
+            } else {
+                Toast.makeText(
+                        this,
+                        "Permiso de galería denegado",
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
         }
 
-        layoutImagen.setVisibility(View.GONE);
-        imgMascota.setVisibility(View.VISIBLE);
+        if (requestCode == LOCATION_PERMISSION_CODE) {
+
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                obtenerUbicacionYGuardar();
+
+            } else {
+                Toast.makeText(
+                        this,
+                        "Permiso de ubicación denegado",
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
+        }
     }
 
     private void obtenerUbicacionYGuardar() {
 
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(
                     this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    1);
+                    LOCATION_PERMISSION_CODE
+            );
 
             return;
         }
@@ -238,9 +310,11 @@ public class PublicacionActivity extends AppCompatActivity {
 
                     } else {
 
-                        Toast.makeText(this,
+                        Toast.makeText(
+                                this,
                                 "No se pudo obtener ubicación",
-                                Toast.LENGTH_SHORT).show();
+                                Toast.LENGTH_SHORT
+                        ).show();
                     }
                 });
     }
@@ -261,19 +335,20 @@ public class PublicacionActivity extends AppCompatActivity {
                         cbOtro.isChecked() ? "otro" : null;
 
         if (nombre.isEmpty() || estado == null || tipo == null) {
-            Toast.makeText(this,
+            Toast.makeText(
+                    this,
                     "Completa los campos obligatorios",
-                    Toast.LENGTH_SHORT).show();
+                    Toast.LENGTH_SHORT
+            ).show();
             return;
         }
 
-        if (imageUri == null &&
-                imageBitmap == null &&
-                !"editar".equals(modo)) {
-
-            Toast.makeText(this,
+        if (imageUri == null && imageBitmap == null && !"editar".equals(modo)) {
+            Toast.makeText(
+                    this,
                     "Selecciona una imagen",
-                    Toast.LENGTH_SHORT).show();
+                    Toast.LENGTH_SHORT
+            ).show();
             return;
         }
 
@@ -304,11 +379,18 @@ public class PublicacionActivity extends AppCompatActivity {
 
             if (imageUri != null) {
 
-                InputStream inputStream =
-                        getContentResolver().openInputStream(imageUri);
+                InputStream inputStream = getContentResolver().openInputStream(imageUri);
 
-                ByteArrayOutputStream buffer =
-                        new ByteArrayOutputStream();
+                if (inputStream == null) {
+                    Toast.makeText(
+                            this,
+                            "No se pudo leer la imagen",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    return;
+                }
+
+                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
                 int nRead;
                 byte[] data = new byte[16384];
@@ -324,8 +406,7 @@ public class PublicacionActivity extends AppCompatActivity {
 
             } else if (imageBitmap != null) {
 
-                ByteArrayOutputStream baos =
-                        new ByteArrayOutputStream();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
                 imageBitmap.compress(
                         Bitmap.CompressFormat.JPEG,
@@ -337,9 +418,11 @@ public class PublicacionActivity extends AppCompatActivity {
 
             } else {
 
-                Toast.makeText(this,
+                Toast.makeText(
+                        this,
                         "Selecciona una imagen",
-                        Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_SHORT
+                ).show();
                 return;
             }
 
@@ -358,41 +441,44 @@ public class PublicacionActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this,
+
+            Toast.makeText(
+                    this,
                     "Error procesando la imagen",
-                    Toast.LENGTH_SHORT).show();
+                    Toast.LENGTH_SHORT
+            ).show();
         }
     }
 
-    private void subirImagenASupabase(byte[] bytes,
-                                      String nombre,
-                                      String tipo,
-                                      String estado,
-                                      String telefono,
-                                      String edad,
-                                      String chip,
-                                      String infoAdicional,
-                                      double latitud,
-                                      double longitud) {
+    private void subirImagenASupabase(
+            byte[] bytes,
+            String nombre,
+            String tipo,
+            String estado,
+            String telefono,
+            String edad,
+            String chip,
+            String infoAdicional,
+            double latitud,
+            double longitud
+    ) {
 
         String fileName = UUID.randomUUID().toString() + ".jpg";
 
-        RequestBody requestBody =
-                RequestBody.create(bytes,
-                        MediaType.parse("image/jpeg"));
+        RequestBody requestBody = RequestBody.create(
+                bytes,
+                MediaType.parse("image/jpeg")
+        );
 
         Request request = new Request.Builder()
-                .url(SupabaseClient.SUPABASE_URL +
-                        "/storage/v1/object/" +
-                        SupabaseClient.BUCKET_NAME +
-                        "/" + fileName)
-                .addHeader("apikey",
-                        SupabaseClient.SUPABASE_KEY)
-                .addHeader("Authorization",
-                        "Bearer " +
-                                SupabaseClient.SUPABASE_KEY)
-                .addHeader("Content-Type",
-                        "image/jpeg")
+                .url(SupabaseClient.SUPABASE_URL
+                        + "/storage/v1/object/"
+                        + SupabaseClient.BUCKET_NAME
+                        + "/"
+                        + fileName)
+                .addHeader("apikey", SupabaseClient.SUPABASE_KEY)
+                .addHeader("Authorization", "Bearer " + SupabaseClient.SUPABASE_KEY)
+                .addHeader("Content-Type", "image/jpeg")
                 .put(requestBody)
                 .build();
 
@@ -401,28 +487,26 @@ public class PublicacionActivity extends AppCompatActivity {
                 .enqueue(new Callback() {
 
                     @Override
-                    public void onFailure(Call call,
-                                          java.io.IOException e) {
-
+                    public void onFailure(Call call, java.io.IOException e) {
                         runOnUiThread(() ->
                                 Toast.makeText(
                                         PublicacionActivity.this,
                                         "Error subiendo imagen",
                                         Toast.LENGTH_SHORT
-                                ).show());
+                                ).show()
+                        );
                     }
 
                     @Override
-                    public void onResponse(Call call,
-                                           Response response) {
+                    public void onResponse(Call call, Response response) {
 
                         if (response.isSuccessful()) {
 
-                            String publicUrl =
-                                    SupabaseClient.SUPABASE_URL +
-                                            "/storage/v1/object/public/" +
-                                            SupabaseClient.BUCKET_NAME +
-                                            "/" + fileName;
+                            String publicUrl = SupabaseClient.SUPABASE_URL
+                                    + "/storage/v1/object/public/"
+                                    + SupabaseClient.BUCKET_NAME
+                                    + "/"
+                                    + fileName;
 
                             guardarEnFirestore(
                                     publicUrl,
@@ -442,45 +526,43 @@ public class PublicacionActivity extends AppCompatActivity {
                             runOnUiThread(() ->
                                     Toast.makeText(
                                             PublicacionActivity.this,
-                                            "Error Supabase: "
-                                                    + response.code(),
+                                            "Error Supabase: " + response.code(),
                                             Toast.LENGTH_LONG
-                                    ).show());
+                                    ).show()
+                            );
                         }
+
+                        response.close();
                     }
                 });
     }
 
-    private void guardarEnFirestore(String urlDescarga,
-                                    String nombre,
-                                    String tipo,
-                                    String estado,
-                                    String telefono,
-                                    String edad,
-                                    String chip,
-                                    String infoAdicional,
-                                    double latitud,
-                                    double longitud) {
+    private void guardarEnFirestore(
+            String urlDescarga,
+            String nombre,
+            String tipo,
+            String estado,
+            String telefono,
+            String edad,
+            String chip,
+            String infoAdicional,
+            double latitud,
+            double longitud
+    ) {
 
-        FirebaseFirestore db =
-                FirebaseFirestore.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         String id;
 
-        if ("editar".equals(modo) &&
-                idMascota != null) {
-
+        if ("editar".equals(modo) && idMascota != null) {
             id = idMascota;
-
         } else {
-
             id = db.collection("mascotas")
                     .document()
                     .getId();
         }
 
-        Map<String, Object> mascota =
-                new HashMap<>();
+        Map<String, Object> mascota = new HashMap<>();
 
         mascota.put("id", id);
         mascota.put("nombre", nombre);
@@ -492,13 +574,10 @@ public class PublicacionActivity extends AppCompatActivity {
         mascota.put("infoAdicional", infoAdicional);
         mascota.put("fotoUrl", urlDescarga);
         mascota.put("fecha", System.currentTimeMillis());
-
         mascota.put("latitud", latitud);
         mascota.put("longitud", longitud);
 
-        if (FirebaseAuth.getInstance()
-                .getCurrentUser() != null) {
-
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             mascota.put(
                     "userId",
                     FirebaseAuth.getInstance()
@@ -512,22 +591,16 @@ public class PublicacionActivity extends AppCompatActivity {
                 .set(mascota)
                 .addOnSuccessListener(unused -> {
 
-                    // 🔔 CREAR NOTIFICACIÓN
-                    Map<String, Object> notificacion =
-                            new HashMap<>();
+                    if (!"editar".equals(modo)) {
+                        crearNotificacion(
+                                db,
+                                id,
+                                nombre,
+                                estado,
+                                urlDescarga
+                        );
+                    }
 
-                    notificacion.put("nombreMascota", nombre);
-                    notificacion.put("tipo", estado);
-                    notificacion.put("imagenUrl", urlDescarga);
-                    notificacion.put("fecha",
-                            System.currentTimeMillis());
-
-                    notificacion.put("leido", false);
-
-                    db.collection("notificaciones")
-                            .add(notificacion);
-
-                    // ✅ MENSAJE
                     if ("editar".equals(modo)) {
 
                         Toast.makeText(
@@ -547,13 +620,43 @@ public class PublicacionActivity extends AppCompatActivity {
 
                     finish();
                 })
-
                 .addOnFailureListener(e ->
                         Toast.makeText(
                                 this,
                                 "Error al publicar",
                                 Toast.LENGTH_SHORT
-                        ).show());
+                        ).show()
+                );
+    }
+
+    private void crearNotificacion(
+            FirebaseFirestore db,
+            String idMascota,
+            String nombre,
+            String estado,
+            String urlDescarga
+    ) {
+
+        String uidActual = null;
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            uidActual = FirebaseAuth.getInstance()
+                    .getCurrentUser()
+                    .getUid();
+        }
+
+        Map<String, Object> notificacion = new HashMap<>();
+
+        notificacion.put("idUsuario", uidActual);
+        notificacion.put("idMascota", idMascota);
+        notificacion.put("nombreMascota", nombre);
+        notificacion.put("tipo", estado);
+        notificacion.put("imagenUrl", urlDescarga);
+        notificacion.put("fecha", Timestamp.now());
+        notificacion.put("leido", false);
+
+        db.collection("notificaciones")
+                .add(notificacion);
     }
 
     private void cargarDatosMascota(String id) {
@@ -574,11 +677,13 @@ public class PublicacionActivity extends AppCompatActivity {
 
                     String estado = doc.getString("estado");
 
-                    if ("perdido".equals(estado))
+                    if ("perdido".equals(estado)) {
                         cbPerdido.setChecked(true);
+                    }
 
-                    if ("adopcion".equals(estado))
+                    if ("adopcion".equals(estado)) {
                         cbAdopcion.setChecked(true);
+                    }
 
                     String tipo = doc.getString("tipo");
 

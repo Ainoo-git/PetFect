@@ -148,6 +148,11 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
+        if (auth.getCurrentUser() == null) {
+            holder.btnFavorito.setVisibility(View.GONE);
+            return;
+        }
+
         String uid = auth.getCurrentUser().getUid();
 
         // COMPROBAR SI ESTÁ GUARDADO

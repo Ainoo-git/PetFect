@@ -238,4 +238,5 @@
     <string name="hola_invitado">Hello, guest!</string>
     <string name="hola_usuario">Hello, user!</string>
     <string name="hola_nombre">Hello, %1$s!</string>
+    <string name="notificaciones_descripcion">Enable notifications to receive alerts when a lost pet or a pet for adoption is published.</string>
 </resources>
