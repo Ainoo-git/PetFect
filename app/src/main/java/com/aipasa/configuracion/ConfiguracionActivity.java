@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.aipasa.R;
-import com.aipasa.main.NotificacionesActivity;
+import com.aipasa.configuracion.NotificacionesActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 
 public class ConfiguracionActivity extends AppCompatActivity {
