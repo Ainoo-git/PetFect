@@ -194,6 +194,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         String estado = document.getString("estado");
                         String idMascota = document.getString("id");
 
+                        if (idMascota == null || idMascota.isEmpty()) {
+                            idMascota = document.getId();
+                        }
+
+                        if (nombre == null || nombre.isEmpty()) {
+                            nombre = "Mascota";
+                        }
+
+                        if (estado == null || estado.isEmpty()) {
+                            estado = "Sin estado";
+                        }
+
                         if (lat != null && lng != null && lat != 0 && lng != 0) {
 
                             LatLng posicion = new LatLng(lat, lng);
@@ -251,7 +263,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             return BitmapDescriptorFactory.defaultMarker();
         }
 
-        Bitmap imagenPequena = Bitmap.createScaledBitmap(imagen, 150, 150, false);
+        Bitmap imagenPequena = Bitmap.createScaledBitmap(imagen, 170, 170, false);
 
         return BitmapDescriptorFactory.fromBitmap(imagenPequena);
     }

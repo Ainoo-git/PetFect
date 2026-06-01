@@ -12,6 +12,7 @@ import android.widget.*;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,8 @@ import androidx.core.content.ContextCompat;
 import com.aipasa.R;
 import com.aipasa.firebase.SupabaseClient;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -41,6 +44,7 @@ public class PublicacionActivity extends AppCompatActivity {
 
     private static final int REQUEST_CAMERA = 1;
     private static final int CAMERA_PERMISSION_CODE = 200;
+    private static final int LOCATION_PERMISSION_CODE = 400;
 
     private ActivityResultLauncher<String> galeriaLauncher;
 
@@ -60,10 +64,14 @@ public class PublicacionActivity extends AppCompatActivity {
     private String idMascota;
     private String fotoUrlActual;
 
+    private FusedLocationProviderClient fusedLocationClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicacion);
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         layoutImagen = findViewById(R.id.layoutImagen);
         imgMascota = findViewById(R.id.imgMascota);
@@ -112,7 +120,7 @@ public class PublicacionActivity extends AppCompatActivity {
                 }
         );
 
-        btnPublicar.setOnClickListener(v -> guardarMascota());
+        btnPublicar.setOnClickListener(v -> obtenerUbicacionYGuardar());
 
         if ("editar".equals(modo) && idMascota != null) {
             cargarDatosMascota(idMascota);
@@ -177,7 +185,41 @@ public class PublicacionActivity extends AppCompatActivity {
         }
     }
 
-    private void guardarMascota() {
+    private void obtenerUbicacionYGuardar() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(
+                    this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_CODE
+            );
+
+            return;
+        }
+
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(location -> {
+                    if (location != null) {
+                        guardarMascota(location.getLatitude(), location.getLongitude());
+                    } else {
+                        Toast.makeText(
+                                this,
+                                "No se pudo obtener ubicación",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                    }
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(
+                                this,
+                                "Error obteniendo ubicación",
+                                Toast.LENGTH_SHORT
+                        ).show()
+                );
+    }
+
+    private void guardarMascota(double latitud, double longitud) {
 
         String nombre = etNombre.getText().toString().trim();
         String telefono = etTelefono.getText().toString().trim();
@@ -208,7 +250,9 @@ public class PublicacionActivity extends AppCompatActivity {
                         telefono,
                         edad,
                         chip,
-                        infoAdicional
+                        infoAdicional,
+                        latitud,
+                        longitud
                 );
             } else {
                 Toast.makeText(this, "Selecciona una imagen", Toast.LENGTH_SHORT).show();
@@ -222,6 +266,12 @@ public class PublicacionActivity extends AppCompatActivity {
 
             if (imageUri != null) {
                 InputStream inputStream = getContentResolver().openInputStream(imageUri);
+
+                if (inputStream == null) {
+                    Toast.makeText(this, "No se pudo leer la imagen", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
                 int nRead;
@@ -250,7 +300,9 @@ public class PublicacionActivity extends AppCompatActivity {
                     telefono,
                     edad,
                     chip,
-                    infoAdicional
+                    infoAdicional,
+                    latitud,
+                    longitud
             );
 
         } catch (Exception e) {
@@ -266,7 +318,9 @@ public class PublicacionActivity extends AppCompatActivity {
                                       String telefono,
                                       String edad,
                                       String chip,
-                                      String infoAdicional) {
+                                      String infoAdicional,
+                                      double latitud,
+                                      double longitud) {
 
         String fileName = UUID.randomUUID().toString() + ".jpg";
 
@@ -317,7 +371,9 @@ public class PublicacionActivity extends AppCompatActivity {
                                     telefono,
                                     edad,
                                     chip,
-                                    infoAdicional
+                                    infoAdicional,
+                                    latitud,
+                                    longitud
                             );
 
                         } else {
@@ -342,7 +398,9 @@ public class PublicacionActivity extends AppCompatActivity {
                                     String telefono,
                                     String edad,
                                     String chip,
-                                    String infoAdicional) {
+                                    String infoAdicional,
+                                    double latitud,
+                                    double longitud) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -365,6 +423,8 @@ public class PublicacionActivity extends AppCompatActivity {
         mascota.put("infoAdicional", infoAdicional);
         mascota.put("fotoUrl", urlDescarga);
         mascota.put("fecha", System.currentTimeMillis());
+        mascota.put("latitud", latitud);
+        mascota.put("longitud", longitud);
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             mascota.put("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -446,5 +506,29 @@ public class PublicacionActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT
                         ).show()
                 );
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                abrirCamara();
+            } else {
+                Toast.makeText(this, "Permiso de cámara denegado", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        if (requestCode == LOCATION_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                obtenerUbicacionYGuardar();
+            } else {
+                Toast.makeText(this, "Permiso de ubicación denegado", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
