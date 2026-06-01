@@ -253,7 +253,7 @@ La interfaz de PetFect mantiene una estética suave, cercana y relacionada con e
 
 | Notificaciones | Detalle Publicación | Editar Perfil |
 |----------------|---------------------|---------------|
-| <img width="1080" height="2400" alt="Screenshot_2026-06-01-10-52-51-781_com miui home" src="https://github.com/user-attachments/assets/f04e00be-d16c-4e92-b955-63dfd1cef1e9" /> | <!-- Añadir captura detalle --> | <!-- Añadir captura editar perfil --> |
+| <img src="https://github.com/user-attachments/assets/f04e00be-d16c-4e92-b955-63dfd1cef1e9" width="250" /> | <!-- Añadir captura detalle --> | <!-- Añadir captura editar perfil --> |
 
 ---
 
