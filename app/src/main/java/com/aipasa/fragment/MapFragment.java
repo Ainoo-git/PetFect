@@ -2,6 +2,8 @@ package com.aipasa.fragment;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -36,15 +39,11 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-
     private FusedLocationProviderClient fusedLocationClient;
-
     private FirebaseFirestore db;
-
     private ActivityResultLauncher<String[]> requestPermissionLauncher;
 
     public MapFragment() {
-        // Constructor vacío obligatorio
     }
 
     @Override
@@ -74,9 +73,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         requestPermissionLauncher =
                 registerForActivityResult(
-                        new ActivityResultContracts
-                                .RequestMultiplePermissions(),
-
+                        new ActivityResultContracts.RequestMultiplePermissions(),
                         perms -> {
 
                             Boolean fineLocationGranted =
@@ -85,8 +82,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                             false
                                     );
 
-                            if (fineLocationGranted != null &&
-                                    fineLocationGranted) {
+                            if (fineLocationGranted != null && fineLocationGranted) {
 
                                 enableMyLocation();
 
@@ -98,7 +94,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                         Toast.LENGTH_SHORT
                                 ).show();
                             }
-                        });
+                        }
+                );
 
         SupportMapFragment mapFragment =
                 new SupportMapFragment();
@@ -125,9 +122,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION)
-
-                == PackageManager.PERMISSION_GRANTED) {
+                Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED) {
 
             enableMyLocation();
 
@@ -137,7 +133,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     new String[]{
                             Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.ACCESS_COARSE_LOCATION
-                    });
+                    }
+            );
         }
     }
 
@@ -147,9 +144,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION)
-
-                == PackageManager.PERMISSION_GRANTED) {
+                Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED) {
 
             mMap.setMyLocationEnabled(true);
 
@@ -157,7 +153,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     .getLastLocation()
                     .addOnSuccessListener(
                             requireActivity(),
-
                             location -> {
 
                                 if (location != null) {
@@ -169,14 +164,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                             );
 
                                     mMap.animateCamera(
-                                            CameraUpdateFactory
-                                                    .newLatLngZoom(
-                                                            userLatLng,
-                                                            15f
-                                                    )
+                                            CameraUpdateFactory.newLatLngZoom(
+                                                    userLatLng,
+                                                    15f
+                                            )
                                     );
                                 }
-                            });
+                            }
+                    );
         }
     }
 
@@ -190,31 +185,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
                     mMap.clear();
 
-                    for (QueryDocumentSnapshot document :
-                            queryDocumentSnapshots) {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
 
-                        Double lat =
-                                document.getDouble("latitud");
+                        Double lat = document.getDouble("latitud");
+                        Double lng = document.getDouble("longitud");
 
-                        Double lng =
-                                document.getDouble("longitud");
+                        String nombre = document.getString("nombre");
+                        String estado = document.getString("estado");
+                        String idMascota = document.getString("id");
 
-                        String nombre =
-                                document.getString("nombre");
+                        if (lat != null && lng != null && lat != 0 && lng != 0) {
 
-                        String estado =
-                                document.getString("estado");
-
-                        String idMascota =
-                                document.getString("id");
-
-                        if (lat != null &&
-                                lng != null &&
-                                lat != 0 &&
-                                lng != 0) {
-
-                            LatLng posicion =
-                                    new LatLng(lat, lng);
+                            LatLng posicion = new LatLng(lat, lng);
 
                             int icono = obtenerIconoPorEstado(estado);
 
@@ -224,28 +206,24 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                                     .position(posicion)
                                                     .title(nombre)
                                                     .snippet(estado)
-                                                    .icon(BitmapDescriptorFactory.fromResource(icono))
+                                                    .icon(crearIconoPequeno(icono))
                                     );
 
                             if (marker != null) {
-
                                 marker.setTag(idMascota);
-
                             }
                         }
                     }
 
                     activarClicksMarkers();
                 })
-
-                .addOnFailureListener(e -> {
-
-                    Toast.makeText(
-                            requireContext(),
-                            "Error Firestore",
-                            Toast.LENGTH_LONG
-                    ).show();
-                });
+                .addOnFailureListener(e ->
+                        Toast.makeText(
+                                requireContext(),
+                                "Error Firestore",
+                                Toast.LENGTH_LONG
+                        ).show()
+                );
     }
 
     private int obtenerIconoPorEstado(String estado) {
@@ -258,7 +236,24 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             return R.drawable.puntero_adopcion;
         }
 
-        return R.drawable.puntero_default;
+        return 0;
+    }
+
+    private BitmapDescriptor crearIconoPequeno(int drawableId) {
+
+        if (drawableId == 0) {
+            return BitmapDescriptorFactory.defaultMarker();
+        }
+
+        Bitmap imagen = BitmapFactory.decodeResource(getResources(), drawableId);
+
+        if (imagen == null) {
+            return BitmapDescriptorFactory.defaultMarker();
+        }
+
+        Bitmap imagenPequena = Bitmap.createScaledBitmap(imagen, 40, 40, false);
+
+        return BitmapDescriptorFactory.fromBitmap(imagenPequena);
     }
 
     private void activarClicksMarkers() {
@@ -267,8 +262,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         mMap.setOnMarkerClickListener(marker -> {
 
-            String idMascota =
-                    (String) marker.getTag();
+            String idMascota = (String) marker.getTag();
 
             if (idMascota != null) {
 
