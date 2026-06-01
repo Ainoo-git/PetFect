@@ -25,6 +25,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -142,6 +143,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private void enableMyLocation() {
 
+        if (mMap == null) return;
+
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -183,6 +186,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
 
+                    if (mMap == null) return;
+
+                    mMap.clear();
+
                     for (QueryDocumentSnapshot document :
                             queryDocumentSnapshots) {
 
@@ -195,6 +202,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         String nombre =
                                 document.getString("nombre");
 
+                        String estado =
+                                document.getString("estado");
+
                         String idMascota =
                                 document.getString("id");
 
@@ -206,11 +216,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             LatLng posicion =
                                     new LatLng(lat, lng);
 
+                            int icono = obtenerIconoPorEstado(estado);
+
                             Marker marker =
                                     mMap.addMarker(
                                             new MarkerOptions()
                                                     .position(posicion)
                                                     .title(nombre)
+                                                    .snippet(estado)
+                                                    .icon(BitmapDescriptorFactory.fromResource(icono))
                                     );
 
                             if (marker != null) {
@@ -233,7 +247,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     ).show();
                 });
     }
+
+    private int obtenerIconoPorEstado(String estado) {
+
+        if ("perdido".equalsIgnoreCase(estado)) {
+            return R.drawable.puntero_perdido;
+        }
+
+        if ("adopcion".equalsIgnoreCase(estado)) {
+            return R.drawable.puntero_adopcion;
+        }
+
+        return R.drawable.puntero_default;
+    }
+
     private void activarClicksMarkers() {
+
+        if (mMap == null) return;
 
         mMap.setOnMarkerClickListener(marker -> {
 
