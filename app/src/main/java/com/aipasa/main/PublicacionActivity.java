@@ -1,16 +1,18 @@
 package com.aipasa.main;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.*;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -19,9 +21,6 @@ import androidx.core.content.ContextCompat;
 import com.aipasa.R;
 import com.aipasa.firebase.SupabaseClient;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -40,46 +39,31 @@ import okhttp3.Response;
 
 public class PublicacionActivity extends AppCompatActivity {
 
+    private static final int REQUEST_CAMERA = 1;
     private static final int CAMERA_PERMISSION_CODE = 200;
-    private static final int STORAGE_PERMISSION_CODE = 300;
-    private static final int LOCATION_PERMISSION_CODE = 400;
 
     private ActivityResultLauncher<String> galeriaLauncher;
-    private ActivityResultLauncher<Void> camaraLauncher;
 
     private LinearLayout layoutImagen;
     private ImageView imgMascota;
     private Button btnPublicar;
     private CheckBox checkLegal;
 
-    private EditText etNombre;
-    private EditText etTelefono;
-    private EditText etEdad;
-    private EditText etChip;
-    private EditText etInfoAdicional;
+    private EditText etNombre, etTelefono, etEdad, etChip, etInfoAdicional;
 
-    private RadioButton cbPerdido;
-    private RadioButton cbAdopcion;
-    private RadioButton cbPerro;
-    private RadioButton cbGato;
-    private RadioButton cbOtro;
+    private RadioButton cbPerdido, cbAdopcion, cbPerro, cbGato, cbOtro;
 
     private Uri imageUri;
     private Bitmap imageBitmap;
 
     private String modo;
     private String idMascota;
-    private String fotoUrlActual = null;
-    private boolean usuarioCambioImagen = false;
-
-    private FusedLocationProviderClient fusedLocationClient;
+    private String fotoUrlActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicacion);
-
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         layoutImagen = findViewById(R.id.layoutImagen);
         imgMascota = findViewById(R.id.imgMascota);
@@ -101,56 +85,36 @@ public class PublicacionActivity extends AppCompatActivity {
         imgMascota.setVisibility(View.GONE);
         btnPublicar.setEnabled(false);
 
+        modo = getIntent().getStringExtra("modo");
+        idMascota = getIntent().getStringExtra("idMascota");
+
+        if ("editar".equals(modo)) {
+            btnPublicar.setText("Guardar cambios");
+        }
+
         layoutImagen.setOnClickListener(v -> mostrarOpcionesImagen());
         imgMascota.setOnClickListener(v -> mostrarOpcionesImagen());
 
         checkLegal.setOnCheckedChangeListener((buttonView, isChecked) ->
-                btnPublicar.setEnabled(isChecked)
-        );
+                btnPublicar.setEnabled(isChecked));
 
         galeriaLauncher = registerForActivityResult(
                 new ActivityResultContracts.GetContent(),
                 uri -> {
                     if (uri != null) {
-                        usuarioCambioImagen = true;
                         imageUri = uri;
                         imageBitmap = null;
 
-                        Glide.with(this).clear(imgMascota);
-                        imgMascota.setImageDrawable(null);
                         imgMascota.setImageURI(uri);
-
                         layoutImagen.setVisibility(View.GONE);
                         imgMascota.setVisibility(View.VISIBLE);
                     }
                 }
         );
 
-        camaraLauncher = registerForActivityResult(
-                new ActivityResultContracts.TakePicturePreview(),
-                bitmap -> {
-                    if (bitmap != null) {
-                        usuarioCambioImagen = true;
-                        imageBitmap = bitmap;
-                        imageUri = null;
-
-                        Glide.with(this).clear(imgMascota);
-                        imgMascota.setImageDrawable(null);
-                        imgMascota.setImageBitmap(bitmap);
-
-                        layoutImagen.setVisibility(View.GONE);
-                        imgMascota.setVisibility(View.VISIBLE);
-                    }
-                }
-        );
-
-        btnPublicar.setOnClickListener(v -> obtenerUbicacionYGuardar());
-
-        modo = getIntent().getStringExtra("modo");
-        idMascota = getIntent().getStringExtra("idMascota");
+        btnPublicar.setOnClickListener(v -> guardarMascota());
 
         if ("editar".equals(modo) && idMascota != null) {
-            btnPublicar.setText("Guardar cambios");
             cargarDatosMascota(idMascota);
         }
     }
@@ -164,7 +128,7 @@ public class PublicacionActivity extends AppCompatActivity {
                     if (which == 0) {
                         verificarPermisoCamara();
                     } else {
-                        verificarPermisoGaleria();
+                        abrirGaleria();
                     }
                 })
                 .show();
@@ -185,42 +149,9 @@ public class PublicacionActivity extends AppCompatActivity {
         }
     }
 
-    private void verificarPermisoGaleria() {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
-                    != PackageManager.PERMISSION_GRANTED) {
-
-                ActivityCompat.requestPermissions(
-                        this,
-                        new String[]{Manifest.permission.READ_MEDIA_IMAGES},
-                        STORAGE_PERMISSION_CODE
-                );
-
-            } else {
-                abrirGaleria();
-            }
-
-        } else {
-
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-
-                ActivityCompat.requestPermissions(
-                        this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        STORAGE_PERMISSION_CODE
-                );
-
-            } else {
-                abrirGaleria();
-            }
-        }
-    }
-
     private void abrirCamara() {
-        camaraLauncher.launch(null);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_CAMERA);
     }
 
     private void abrirGaleria() {
@@ -228,98 +159,25 @@ public class PublicacionActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(
-            int requestCode,
-            String[] permissions,
-            int[] grantResults
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    protected void onActivityResult(int requestCode,
+                                    int resultCode,
+                                    @Nullable Intent data) {
 
-        if (requestCode == CAMERA_PERMISSION_CODE) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (resultCode != RESULT_OK) return;
 
-                abrirCamara();
+        if (requestCode == REQUEST_CAMERA && data != null && data.getExtras() != null) {
+            imageBitmap = (Bitmap) data.getExtras().get("data");
+            imageUri = null;
 
-            } else {
-                Toast.makeText(
-                        this,
-                        "Permiso de cámara denegado",
-                        Toast.LENGTH_SHORT
-                ).show();
-            }
-        }
-
-        if (requestCode == STORAGE_PERMISSION_CODE) {
-
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                abrirGaleria();
-
-            } else {
-                Toast.makeText(
-                        this,
-                        "Permiso de galería denegado",
-                        Toast.LENGTH_SHORT
-                ).show();
-            }
-        }
-
-        if (requestCode == LOCATION_PERMISSION_CODE) {
-
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                obtenerUbicacionYGuardar();
-
-            } else {
-                Toast.makeText(
-                        this,
-                        "Permiso de ubicación denegado",
-                        Toast.LENGTH_SHORT
-                ).show();
-            }
+            imgMascota.setImageBitmap(imageBitmap);
+            layoutImagen.setVisibility(View.GONE);
+            imgMascota.setVisibility(View.VISIBLE);
         }
     }
 
-    private void obtenerUbicacionYGuardar() {
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(
-                    this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    LOCATION_PERMISSION_CODE
-            );
-
-            return;
-        }
-
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(location -> {
-
-                    if (location != null) {
-
-                        double latitud = location.getLatitude();
-                        double longitud = location.getLongitude();
-
-                        guardarMascotaConUbicacion(latitud, longitud);
-
-                    } else {
-
-                        Toast.makeText(
-                                this,
-                                "No se pudo obtener ubicación",
-                                Toast.LENGTH_SHORT
-                        ).show();
-                    }
-                });
-    }
-
-    private void guardarMascotaConUbicacion(double latitud, double longitud) {
+    private void guardarMascota() {
 
         String nombre = etNombre.getText().toString().trim();
         String telefono = etTelefono.getText().toString().trim();
@@ -327,69 +185,43 @@ public class PublicacionActivity extends AppCompatActivity {
         String chip = etChip.getText().toString().trim();
         String infoAdicional = etInfoAdicional.getText().toString().trim();
 
-        final String estado = cbPerdido.isChecked() ? "perdido" :
+        String estado = cbPerdido.isChecked() ? "perdido" :
                 cbAdopcion.isChecked() ? "adopcion" : null;
 
-        final String tipo = cbPerro.isChecked() ? "perro" :
+        String tipo = cbPerro.isChecked() ? "perro" :
                 cbGato.isChecked() ? "gato" :
                         cbOtro.isChecked() ? "otro" : null;
 
         if (nombre.isEmpty() || estado == null || tipo == null) {
-            Toast.makeText(
-                    this,
-                    "Completa los campos obligatorios",
-                    Toast.LENGTH_SHORT
-            ).show();
+            Toast.makeText(this, "Completa los campos obligatorios", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (imageUri == null && imageBitmap == null && !"editar".equals(modo)) {
-            Toast.makeText(
-                    this,
-                    "Selecciona una imagen",
-                    Toast.LENGTH_SHORT
-            ).show();
-            return;
-        }
+        if (imageUri == null && imageBitmap == null) {
 
-        if ("editar".equals(modo)
-                && imageUri == null
-                && imageBitmap == null
-                && fotoUrlActual != null) {
-
-            guardarEnFirestore(
-                    fotoUrlActual,
-                    nombre,
-                    tipo,
-                    estado,
-                    telefono,
-                    edad,
-                    chip,
-                    infoAdicional,
-                    latitud,
-                    longitud
-            );
+            if ("editar".equals(modo) && fotoUrlActual != null) {
+                guardarEnFirestore(
+                        fotoUrlActual,
+                        nombre,
+                        tipo,
+                        estado,
+                        telefono,
+                        edad,
+                        chip,
+                        infoAdicional
+                );
+            } else {
+                Toast.makeText(this, "Selecciona una imagen", Toast.LENGTH_SHORT).show();
+            }
 
             return;
         }
 
         try {
-
             byte[] imageBytes;
 
             if (imageUri != null) {
-
                 InputStream inputStream = getContentResolver().openInputStream(imageUri);
-
-                if (inputStream == null) {
-                    Toast.makeText(
-                            this,
-                            "No se pudo leer la imagen",
-                            Toast.LENGTH_SHORT
-                    ).show();
-                    return;
-                }
-
                 ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
                 int nRead;
@@ -404,26 +236,10 @@ public class PublicacionActivity extends AppCompatActivity {
 
                 inputStream.close();
 
-            } else if (imageBitmap != null) {
-
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-                imageBitmap.compress(
-                        Bitmap.CompressFormat.JPEG,
-                        80,
-                        baos
-                );
-
-                imageBytes = baos.toByteArray();
-
             } else {
-
-                Toast.makeText(
-                        this,
-                        "Selecciona una imagen",
-                        Toast.LENGTH_SHORT
-                ).show();
-                return;
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+                imageBytes = baos.toByteArray();
             }
 
             subirImagenASupabase(
@@ -434,56 +250,41 @@ public class PublicacionActivity extends AppCompatActivity {
                     telefono,
                     edad,
                     chip,
-                    infoAdicional,
-                    latitud,
-                    longitud
+                    infoAdicional
             );
 
         } catch (Exception e) {
             e.printStackTrace();
-
-            Toast.makeText(
-                    this,
-                    "Error procesando la imagen",
-                    Toast.LENGTH_SHORT
-            ).show();
+            Toast.makeText(this, "Error preparando imagen", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void subirImagenASupabase(
-            byte[] bytes,
-            String nombre,
-            String tipo,
-            String estado,
-            String telefono,
-            String edad,
-            String chip,
-            String infoAdicional,
-            double latitud,
-            double longitud
-    ) {
+    private void subirImagenASupabase(byte[] bytes,
+                                      String nombre,
+                                      String tipo,
+                                      String estado,
+                                      String telefono,
+                                      String edad,
+                                      String chip,
+                                      String infoAdicional) {
 
         String fileName = UUID.randomUUID().toString() + ".jpg";
 
-        RequestBody requestBody = RequestBody.create(
-                bytes,
-                MediaType.parse("image/jpeg")
-        );
+        RequestBody requestBody =
+                RequestBody.create(bytes, MediaType.parse("image/jpeg"));
 
         Request request = new Request.Builder()
-                .url(SupabaseClient.SUPABASE_URL
-                        + "/storage/v1/object/"
-                        + SupabaseClient.BUCKET_NAME
-                        + "/"
-                        + fileName)
+                .url(SupabaseClient.SUPABASE_URL +
+                        "/storage/v1/object/" +
+                        SupabaseClient.BUCKET_NAME +
+                        "/" + fileName)
                 .addHeader("apikey", SupabaseClient.SUPABASE_KEY)
                 .addHeader("Authorization", "Bearer " + SupabaseClient.SUPABASE_KEY)
                 .addHeader("Content-Type", "image/jpeg")
                 .put(requestBody)
                 .build();
 
-        SupabaseClient.getClient()
-                .newCall(request)
+        SupabaseClient.getClient().newCall(request)
                 .enqueue(new Callback() {
 
                     @Override
@@ -502,11 +303,11 @@ public class PublicacionActivity extends AppCompatActivity {
 
                         if (response.isSuccessful()) {
 
-                            String publicUrl = SupabaseClient.SUPABASE_URL
-                                    + "/storage/v1/object/public/"
-                                    + SupabaseClient.BUCKET_NAME
-                                    + "/"
-                                    + fileName;
+                            String publicUrl =
+                                    SupabaseClient.SUPABASE_URL +
+                                            "/storage/v1/object/public/" +
+                                            SupabaseClient.BUCKET_NAME +
+                                            "/" + fileName;
 
                             guardarEnFirestore(
                                     publicUrl,
@@ -516,13 +317,10 @@ public class PublicacionActivity extends AppCompatActivity {
                                     telefono,
                                     edad,
                                     chip,
-                                    infoAdicional,
-                                    latitud,
-                                    longitud
+                                    infoAdicional
                             );
 
                         } else {
-
                             runOnUiThread(() ->
                                     Toast.makeText(
                                             PublicacionActivity.this,
@@ -537,18 +335,14 @@ public class PublicacionActivity extends AppCompatActivity {
                 });
     }
 
-    private void guardarEnFirestore(
-            String urlDescarga,
-            String nombre,
-            String tipo,
-            String estado,
-            String telefono,
-            String edad,
-            String chip,
-            String infoAdicional,
-            double latitud,
-            double longitud
-    ) {
+    private void guardarEnFirestore(String urlDescarga,
+                                    String nombre,
+                                    String tipo,
+                                    String estado,
+                                    String telefono,
+                                    String edad,
+                                    String chip,
+                                    String infoAdicional) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -557,13 +351,10 @@ public class PublicacionActivity extends AppCompatActivity {
         if ("editar".equals(modo) && idMascota != null) {
             id = idMascota;
         } else {
-            id = db.collection("mascotas")
-                    .document()
-                    .getId();
+            id = db.collection("mascotas").document().getId();
         }
 
         Map<String, Object> mascota = new HashMap<>();
-
         mascota.put("id", id);
         mascota.put("nombre", nombre);
         mascota.put("tipo", tipo);
@@ -574,48 +365,19 @@ public class PublicacionActivity extends AppCompatActivity {
         mascota.put("infoAdicional", infoAdicional);
         mascota.put("fotoUrl", urlDescarga);
         mascota.put("fecha", System.currentTimeMillis());
-        mascota.put("latitud", latitud);
-        mascota.put("longitud", longitud);
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            mascota.put(
-                    "userId",
-                    FirebaseAuth.getInstance()
-                            .getCurrentUser()
-                            .getUid()
-            );
+            mascota.put("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
         }
 
         db.collection("mascotas")
                 .document(id)
                 .set(mascota)
                 .addOnSuccessListener(unused -> {
-
-                    if (!"editar".equals(modo)) {
-                        crearNotificacion(
-                                db,
-                                id,
-                                nombre,
-                                estado,
-                                urlDescarga
-                        );
-                    }
-
                     if ("editar".equals(modo)) {
-
-                        Toast.makeText(
-                                this,
-                                "Mascota actualizada",
-                                Toast.LENGTH_SHORT
-                        ).show();
-
+                        Toast.makeText(this, "Mascota actualizada", Toast.LENGTH_SHORT).show();
                     } else {
-
-                        Toast.makeText(
-                                this,
-                                "Mascota publicada",
-                                Toast.LENGTH_SHORT
-                        ).show();
+                        Toast.makeText(this, "Mascota publicada", Toast.LENGTH_SHORT).show();
                     }
 
                     finish();
@@ -623,40 +385,10 @@ public class PublicacionActivity extends AppCompatActivity {
                 .addOnFailureListener(e ->
                         Toast.makeText(
                                 this,
-                                "Error al publicar",
+                                "Error al guardar",
                                 Toast.LENGTH_SHORT
                         ).show()
                 );
-    }
-
-    private void crearNotificacion(
-            FirebaseFirestore db,
-            String idMascota,
-            String nombre,
-            String estado,
-            String urlDescarga
-    ) {
-
-        String uidActual = null;
-
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            uidActual = FirebaseAuth.getInstance()
-                    .getCurrentUser()
-                    .getUid();
-        }
-
-        Map<String, Object> notificacion = new HashMap<>();
-
-        notificacion.put("idUsuario", uidActual);
-        notificacion.put("idMascota", idMascota);
-        notificacion.put("nombreMascota", nombre);
-        notificacion.put("tipo", estado);
-        notificacion.put("imagenUrl", urlDescarga);
-        notificacion.put("fecha", Timestamp.now());
-        notificacion.put("leido", false);
-
-        db.collection("notificaciones")
-                .add(notificacion);
     }
 
     private void cargarDatosMascota(String id) {
@@ -689,25 +421,30 @@ public class PublicacionActivity extends AppCompatActivity {
 
                     if ("perro".equals(tipo)) {
                         cbPerro.setChecked(true);
-                    } else if ("gato".equals(tipo)) {
+                    }
+
+                    if ("gato".equals(tipo)) {
                         cbGato.setChecked(true);
-                    } else if ("otro".equals(tipo)) {
+                    }
+
+                    if ("otro".equals(tipo)) {
                         cbOtro.setChecked(true);
                     }
 
                     fotoUrlActual = doc.getString("fotoUrl");
 
                     if (fotoUrlActual != null && !fotoUrlActual.isEmpty()) {
-
+                        Glide.with(this).load(fotoUrlActual).into(imgMascota);
                         layoutImagen.setVisibility(View.GONE);
                         imgMascota.setVisibility(View.VISIBLE);
-
-                        if (!usuarioCambioImagen) {
-                            Glide.with(this)
-                                    .load(fotoUrlActual)
-                                    .into(imgMascota);
-                        }
                     }
-                });
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(
+                                this,
+                                "Error cargando datos",
+                                Toast.LENGTH_SHORT
+                        ).show()
+                );
     }
 }

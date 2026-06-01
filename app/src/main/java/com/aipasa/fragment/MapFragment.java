@@ -251,7 +251,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             return BitmapDescriptorFactory.defaultMarker();
         }
 
-        Bitmap imagenPequena = Bitmap.createScaledBitmap(imagen, 40, 40, false);
+        Bitmap imagenPequena = Bitmap.createScaledBitmap(imagen, 150, 150, false);
 
         return BitmapDescriptorFactory.fromBitmap(imagenPequena);
     }
