@@ -32,7 +32,6 @@ public class NotificacionModel {
             Timestamp fecha,
             boolean leido
     ) {
-
         this.idUsuario = idUsuario;
         this.idMascota = idMascota;
         this.nombreMascota = nombreMascota;
@@ -54,24 +53,48 @@ public class NotificacionModel {
         return idUsuario;
     }
 
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
     public String getIdMascota() {
         return idMascota;
+    }
+
+    public void setIdMascota(String idMascota) {
+        this.idMascota = idMascota;
     }
 
     public String getNombreMascota() {
         return nombreMascota;
     }
 
+    public void setNombreMascota(String nombreMascota) {
+        this.nombreMascota = nombreMascota;
+    }
+
     public String getTipo() {
         return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getImagenUrl() {
         return imagenUrl;
     }
 
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
+    }
+
     public Timestamp getFecha() {
         return fecha;
+    }
+
+    public void setFecha(Timestamp fecha) {
+        this.fecha = fecha;
     }
 
     public boolean isLeido() {

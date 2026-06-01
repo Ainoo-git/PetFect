@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -22,8 +21,6 @@ import androidx.core.content.ContextCompat;
 import com.aipasa.R;
 import com.aipasa.firebase.SupabaseClient;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -33,14 +30,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import okhttp3.*;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class PublicacionActivity extends AppCompatActivity {
 
     private static final int REQUEST_CAMERA = 1;
-    private static final int REQUEST_GALLERY = 2;
     private static final int CAMERA_PERMISSION_CODE = 200;
-    private static final int STORAGE_PERMISSION_CODE = 300;
 
     private ActivityResultLauncher<String> galeriaLauncher;
 
@@ -58,18 +58,12 @@ public class PublicacionActivity extends AppCompatActivity {
 
     private String modo;
     private String idMascota;
-    private String fotoUrlActual = null;
-    private boolean usuarioCambioImagen = false;
-
-    private FusedLocationProviderClient fusedLocationClient;
+    private String fotoUrlActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicacion);
-
-        fusedLocationClient =
-                LocationServices.getFusedLocationProviderClient(this);
 
         layoutImagen = findViewById(R.id.layoutImagen);
         imgMascota = findViewById(R.id.imgMascota);
@@ -91,6 +85,13 @@ public class PublicacionActivity extends AppCompatActivity {
         imgMascota.setVisibility(View.GONE);
         btnPublicar.setEnabled(false);
 
+        modo = getIntent().getStringExtra("modo");
+        idMascota = getIntent().getStringExtra("idMascota");
+
+        if ("editar".equals(modo)) {
+            btnPublicar.setText("Guardar cambios");
+        }
+
         layoutImagen.setOnClickListener(v -> mostrarOpcionesImagen());
         imgMascota.setOnClickListener(v -> mostrarOpcionesImagen());
 
@@ -101,27 +102,19 @@ public class PublicacionActivity extends AppCompatActivity {
                 new ActivityResultContracts.GetContent(),
                 uri -> {
                     if (uri != null) {
-                        usuarioCambioImagen = true;
                         imageUri = uri;
                         imageBitmap = null;
 
-                        Glide.with(this).clear(imgMascota);
-                        imgMascota.setImageDrawable(null);
                         imgMascota.setImageURI(uri);
-
                         layoutImagen.setVisibility(View.GONE);
                         imgMascota.setVisibility(View.VISIBLE);
                     }
                 }
         );
 
-        btnPublicar.setOnClickListener(v -> obtenerUbicacionYGuardar());
-
-        modo = getIntent().getStringExtra("modo");
-        idMascota = getIntent().getStringExtra("idMascota");
+        btnPublicar.setOnClickListener(v -> guardarMascota());
 
         if ("editar".equals(modo) && idMascota != null) {
-            btnPublicar.setText("Guardar cambios");
             cargarDatosMascota(idMascota);
         }
     }
@@ -145,27 +138,15 @@ public class PublicacionActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(this,
+            ActivityCompat.requestPermissions(
+                    this,
                     new String[]{Manifest.permission.CAMERA},
-                    CAMERA_PERMISSION_CODE);
+                    CAMERA_PERMISSION_CODE
+            );
 
-        } else abrirCamara();
-    }
-
-    private void verificarPermisoGaleria() {
-
-        String permiso = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
-                ? Manifest.permission.READ_MEDIA_IMAGES
-                : Manifest.permission.READ_EXTERNAL_STORAGE;
-
-        if (ContextCompat.checkSelfPermission(this, permiso)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(this,
-                    new String[]{permiso},
-                    STORAGE_PERMISSION_CODE);
-
-        } else abrirGaleria();
+        } else {
+            abrirCamara();
+        }
     }
 
     private void abrirCamara() {
@@ -178,74 +159,25 @@ public class PublicacionActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode,
+    protected void onActivityResult(int requestCode,
+                                    int resultCode,
                                     @Nullable Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode != RESULT_OK) return;
 
-        if (requestCode == REQUEST_GALLERY &&
-                resultCode == RESULT_OK &&
-                data != null) {
+        if (requestCode == REQUEST_CAMERA && data != null && data.getExtras() != null) {
+            imageBitmap = (Bitmap) data.getExtras().get("data");
+            imageUri = null;
 
-            usuarioCambioImagen = true;
-            imageUri = data.getData();
-            imageBitmap = null;
-
-            Glide.with(this).clear(imgMascota);
-            imgMascota.setImageDrawable(null);
-            imgMascota.setImageURI(imageUri);
+            imgMascota.setImageBitmap(imageBitmap);
+            layoutImagen.setVisibility(View.GONE);
+            imgMascota.setVisibility(View.VISIBLE);
         }
-
-        if (requestCode == REQUEST_GALLERY &&
-                resultCode == RESULT_OK &&
-                data != null) {
-
-            imageUri = data.getData();
-            imageBitmap = null;
-
-            imgMascota.setImageURI(imageUri);
-        }
-
-        layoutImagen.setVisibility(View.GONE);
-        imgMascota.setVisibility(View.VISIBLE);
     }
 
-    private void obtenerUbicacionYGuardar() {
-
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(
-                    this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    1);
-
-            return;
-        }
-
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(location -> {
-
-                    if (location != null) {
-
-                        double latitud = location.getLatitude();
-                        double longitud = location.getLongitude();
-
-                        guardarMascotaConUbicacion(latitud, longitud);
-
-                    } else {
-
-                        Toast.makeText(this,
-                                "No se pudo obtener ubicación",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    private void guardarMascotaConUbicacion(double latitud, double longitud) {
+    private void guardarMascota() {
 
         String nombre = etNombre.getText().toString().trim();
         String telefono = etTelefono.getText().toString().trim();
@@ -253,62 +185,44 @@ public class PublicacionActivity extends AppCompatActivity {
         String chip = etChip.getText().toString().trim();
         String infoAdicional = etInfoAdicional.getText().toString().trim();
 
-        final String estado = cbPerdido.isChecked() ? "perdido" :
+        String estado = cbPerdido.isChecked() ? "perdido" :
                 cbAdopcion.isChecked() ? "adopcion" : null;
 
-        final String tipo = cbPerro.isChecked() ? "perro" :
+        String tipo = cbPerro.isChecked() ? "perro" :
                 cbGato.isChecked() ? "gato" :
                         cbOtro.isChecked() ? "otro" : null;
 
         if (nombre.isEmpty() || estado == null || tipo == null) {
-            Toast.makeText(this,
-                    "Completa los campos obligatorios",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Completa los campos obligatorios", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (imageUri == null &&
-                imageBitmap == null &&
-                !"editar".equals(modo)) {
+        if (imageUri == null && imageBitmap == null) {
 
-            Toast.makeText(this,
-                    "Selecciona una imagen",
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if ("editar".equals(modo)
-                && imageUri == null
-                && imageBitmap == null
-                && fotoUrlActual != null) {
-
-            guardarEnFirestore(
-                    fotoUrlActual,
-                    nombre,
-                    tipo,
-                    estado,
-                    telefono,
-                    edad,
-                    chip,
-                    infoAdicional,
-                    latitud,
-                    longitud
-            );
+            if ("editar".equals(modo) && fotoUrlActual != null) {
+                guardarEnFirestore(
+                        fotoUrlActual,
+                        nombre,
+                        tipo,
+                        estado,
+                        telefono,
+                        edad,
+                        chip,
+                        infoAdicional
+                );
+            } else {
+                Toast.makeText(this, "Selecciona una imagen", Toast.LENGTH_SHORT).show();
+            }
 
             return;
         }
 
         try {
-
             byte[] imageBytes;
 
             if (imageUri != null) {
-
-                InputStream inputStream =
-                        getContentResolver().openInputStream(imageUri);
-
-                ByteArrayOutputStream buffer =
-                        new ByteArrayOutputStream();
+                InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
                 int nRead;
                 byte[] data = new byte[16384];
@@ -322,25 +236,10 @@ public class PublicacionActivity extends AppCompatActivity {
 
                 inputStream.close();
 
-            } else if (imageBitmap != null) {
-
-                ByteArrayOutputStream baos =
-                        new ByteArrayOutputStream();
-
-                imageBitmap.compress(
-                        Bitmap.CompressFormat.JPEG,
-                        80,
-                        baos
-                );
-
-                imageBytes = baos.toByteArray();
-
             } else {
-
-                Toast.makeText(this,
-                        "Selecciona una imagen",
-                        Toast.LENGTH_SHORT).show();
-                return;
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+                imageBytes = baos.toByteArray();
             }
 
             subirImagenASupabase(
@@ -351,16 +250,12 @@ public class PublicacionActivity extends AppCompatActivity {
                     telefono,
                     edad,
                     chip,
-                    infoAdicional,
-                    latitud,
-                    longitud
+                    infoAdicional
             );
 
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this,
-                    "Error procesando la imagen",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error preparando imagen", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -371,50 +266,40 @@ public class PublicacionActivity extends AppCompatActivity {
                                       String telefono,
                                       String edad,
                                       String chip,
-                                      String infoAdicional,
-                                      double latitud,
-                                      double longitud) {
+                                      String infoAdicional) {
 
         String fileName = UUID.randomUUID().toString() + ".jpg";
 
         RequestBody requestBody =
-                RequestBody.create(bytes,
-                        MediaType.parse("image/jpeg"));
+                RequestBody.create(bytes, MediaType.parse("image/jpeg"));
 
         Request request = new Request.Builder()
                 .url(SupabaseClient.SUPABASE_URL +
                         "/storage/v1/object/" +
                         SupabaseClient.BUCKET_NAME +
                         "/" + fileName)
-                .addHeader("apikey",
-                        SupabaseClient.SUPABASE_KEY)
-                .addHeader("Authorization",
-                        "Bearer " +
-                                SupabaseClient.SUPABASE_KEY)
-                .addHeader("Content-Type",
-                        "image/jpeg")
+                .addHeader("apikey", SupabaseClient.SUPABASE_KEY)
+                .addHeader("Authorization", "Bearer " + SupabaseClient.SUPABASE_KEY)
+                .addHeader("Content-Type", "image/jpeg")
                 .put(requestBody)
                 .build();
 
-        SupabaseClient.getClient()
-                .newCall(request)
+        SupabaseClient.getClient().newCall(request)
                 .enqueue(new Callback() {
 
                     @Override
-                    public void onFailure(Call call,
-                                          java.io.IOException e) {
-
+                    public void onFailure(Call call, java.io.IOException e) {
                         runOnUiThread(() ->
                                 Toast.makeText(
                                         PublicacionActivity.this,
                                         "Error subiendo imagen",
                                         Toast.LENGTH_SHORT
-                                ).show());
+                                ).show()
+                        );
                     }
 
                     @Override
-                    public void onResponse(Call call,
-                                           Response response) {
+                    public void onResponse(Call call, Response response) {
 
                         if (response.isSuccessful()) {
 
@@ -432,21 +317,20 @@ public class PublicacionActivity extends AppCompatActivity {
                                     telefono,
                                     edad,
                                     chip,
-                                    infoAdicional,
-                                    latitud,
-                                    longitud
+                                    infoAdicional
                             );
 
                         } else {
-
                             runOnUiThread(() ->
                                     Toast.makeText(
                                             PublicacionActivity.this,
-                                            "Error Supabase: "
-                                                    + response.code(),
+                                            "Error Supabase: " + response.code(),
                                             Toast.LENGTH_LONG
-                                    ).show());
+                                    ).show()
+                            );
                         }
+
+                        response.close();
                     }
                 });
     }
@@ -458,30 +342,19 @@ public class PublicacionActivity extends AppCompatActivity {
                                     String telefono,
                                     String edad,
                                     String chip,
-                                    String infoAdicional,
-                                    double latitud,
-                                    double longitud) {
+                                    String infoAdicional) {
 
-        FirebaseFirestore db =
-                FirebaseFirestore.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         String id;
 
-        if ("editar".equals(modo) &&
-                idMascota != null) {
-
+        if ("editar".equals(modo) && idMascota != null) {
             id = idMascota;
-
         } else {
-
-            id = db.collection("mascotas")
-                    .document()
-                    .getId();
+            id = db.collection("mascotas").document().getId();
         }
 
-        Map<String, Object> mascota =
-                new HashMap<>();
-
+        Map<String, Object> mascota = new HashMap<>();
         mascota.put("id", id);
         mascota.put("nombre", nombre);
         mascota.put("tipo", tipo);
@@ -493,67 +366,29 @@ public class PublicacionActivity extends AppCompatActivity {
         mascota.put("fotoUrl", urlDescarga);
         mascota.put("fecha", System.currentTimeMillis());
 
-        mascota.put("latitud", latitud);
-        mascota.put("longitud", longitud);
-
-        if (FirebaseAuth.getInstance()
-                .getCurrentUser() != null) {
-
-            mascota.put(
-                    "userId",
-                    FirebaseAuth.getInstance()
-                            .getCurrentUser()
-                            .getUid()
-            );
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            mascota.put("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
         }
 
         db.collection("mascotas")
                 .document(id)
                 .set(mascota)
                 .addOnSuccessListener(unused -> {
-
-                    // 🔔 CREAR NOTIFICACIÓN
-                    Map<String, Object> notificacion =
-                            new HashMap<>();
-
-                    notificacion.put("nombreMascota", nombre);
-                    notificacion.put("tipo", estado);
-                    notificacion.put("imagenUrl", urlDescarga);
-                    notificacion.put("fecha",
-                            System.currentTimeMillis());
-
-                    notificacion.put("leido", false);
-
-                    db.collection("notificaciones")
-                            .add(notificacion);
-
-                    // ✅ MENSAJE
                     if ("editar".equals(modo)) {
-
-                        Toast.makeText(
-                                this,
-                                "Mascota actualizada",
-                                Toast.LENGTH_SHORT
-                        ).show();
-
+                        Toast.makeText(this, "Mascota actualizada", Toast.LENGTH_SHORT).show();
                     } else {
-
-                        Toast.makeText(
-                                this,
-                                "Mascota publicada",
-                                Toast.LENGTH_SHORT
-                        ).show();
+                        Toast.makeText(this, "Mascota publicada", Toast.LENGTH_SHORT).show();
                     }
 
                     finish();
                 })
-
                 .addOnFailureListener(e ->
                         Toast.makeText(
                                 this,
-                                "Error al publicar",
+                                "Error al guardar",
                                 Toast.LENGTH_SHORT
-                        ).show());
+                        ).show()
+                );
     }
 
     private void cargarDatosMascota(String id) {
@@ -574,35 +409,42 @@ public class PublicacionActivity extends AppCompatActivity {
 
                     String estado = doc.getString("estado");
 
-                    if ("perdido".equals(estado))
+                    if ("perdido".equals(estado)) {
                         cbPerdido.setChecked(true);
+                    }
 
-                    if ("adopcion".equals(estado))
+                    if ("adopcion".equals(estado)) {
                         cbAdopcion.setChecked(true);
+                    }
 
                     String tipo = doc.getString("tipo");
 
                     if ("perro".equals(tipo)) {
                         cbPerro.setChecked(true);
-                    } else if ("gato".equals(tipo)) {
+                    }
+
+                    if ("gato".equals(tipo)) {
                         cbGato.setChecked(true);
-                    } else if ("otro".equals(tipo)) {
+                    }
+
+                    if ("otro".equals(tipo)) {
                         cbOtro.setChecked(true);
                     }
 
                     fotoUrlActual = doc.getString("fotoUrl");
 
                     if (fotoUrlActual != null && !fotoUrlActual.isEmpty()) {
-
+                        Glide.with(this).load(fotoUrlActual).into(imgMascota);
                         layoutImagen.setVisibility(View.GONE);
                         imgMascota.setVisibility(View.VISIBLE);
-
-                        if (!usuarioCambioImagen) {
-                            Glide.with(this)
-                                    .load(fotoUrlActual)
-                                    .into(imgMascota);
-                        }
                     }
-                });
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(
+                                this,
+                                "Error cargando datos",
+                                Toast.LENGTH_SHORT
+                        ).show()
+                );
     }
 }

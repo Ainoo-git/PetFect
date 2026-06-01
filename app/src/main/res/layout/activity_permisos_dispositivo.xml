@@ -2,7 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!--  TOOLBAR  -->
+
+    <!-- TOOLBAR -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,8 +17,10 @@
             android:titleTextColor="@color/white"
             app:navigationIcon="@drawable/outline_arrow"
             app:titleCentered="true" />
+
     </com.google.android.material.appbar.AppBarLayout>
-    <!--  CONTENIDO  -->
+
+    <!-- CONTENIDO -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,7 +31,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp">
-            <!--  TITULO  -->
+
+            <!-- TITULO -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,7 +41,8 @@
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
-            <!--  TEXTO  -->
+
+            <!-- TEXTO -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,7 +50,8 @@
                 android:text="@string/permisos_descripcion"
                 android:textColor="#777777"
                 android:textSize="14sp" />
-            <!--  CAMARA  -->
+
+            <!-- CAMARA -->
             <LinearLayout
                 android:id="@+id/permisoCamara"
                 android:layout_width="match_parent"
@@ -88,7 +94,8 @@
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
-            <!--  GALERIA  -->
+
+            <!-- GALERIA -->
             <LinearLayout
                 android:id="@+id/permisoGaleria"
                 android:layout_width="match_parent"
@@ -131,11 +138,13 @@
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
-            <!--  UBICACION  -->
+
+            <!-- UBICACION -->
             <LinearLayout
                 android:id="@+id/permisoUbicacion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:background="@color/rosita_fondoss_tarjetas_alertaslev"
                 android:clickable="true"
                 android:focusable="true"
@@ -173,6 +182,53 @@
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
+
+            <!-- NOTIFICACIONES -->
+            <LinearLayout
+                android:id="@+id/permisoNotificaciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    />
+                <!-- android:src="@drawable/notificaciones-->
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingStart="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/notificaciones"
+                        android:textColor="#534AB7"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="6dp"
+                        android:text="@string/notificaciones_descripcion"
+                        android:textColor="#5F5E5A"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
