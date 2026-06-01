@@ -16,3 +16,16 @@ local.properties
 .idea/
 servidor-notificaciones/serviceAccountKey.json
 servidor-notificaciones/serviceAccountKey.json
+servidor-notificaciones/serviceAccountKey.json
+servidor-notificaciones/serviceAccountKey.json
+**/*firebase-adminsdk*.json
+servidor-notificaciones/node_modules/
+
+# Firebase Admin private key
+servidor-notificaciones/serviceAccountKey.json
+**/serviceAccountKey.json
+**/*firebase-adminsdk*.json
+
+# Node local server dependencies
+servidor-notificaciones/node_modules/
+servidor-notificaciones/package-lock.json
