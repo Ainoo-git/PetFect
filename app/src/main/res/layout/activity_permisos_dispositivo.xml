@@ -1,30 +1,26 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <!-- TOOLBAR -->
-    <com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+        android:title="@string/permisos_dispositivo"
+        android:titleTextColor="@color/white"
+        app:navigationIcon="@drawable/outline_arrow"
+        app:titleCentered="true" />
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/rosita_fondoss_tarjetas_alertaslev"
-            android:title="@string/permisos_dispositivo"
-            android:titleTextColor="@color/white"
-            app:navigationIcon="@drawable/outline_arrow"
-            app:titleCentered="true" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <!-- CONTENIDO -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="?attr/actionBarSize">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +28,6 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <!-- TITULO -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,7 +37,6 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <!-- TEXTO -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,7 +45,6 @@
                 android:textColor="#777777"
                 android:textSize="14sp" />
 
-            <!-- CAMARA -->
             <LinearLayout
                 android:id="@+id/permisoCamara"
                 android:layout_width="match_parent"
@@ -92,10 +85,11 @@
                         android:text="@string/camara_descripcion"
                         android:textColor="#5F5E5A"
                         android:textSize="14sp" />
+
                 </LinearLayout>
+
             </LinearLayout>
 
-            <!-- GALERIA -->
             <LinearLayout
                 android:id="@+id/permisoGaleria"
                 android:layout_width="match_parent"
@@ -136,10 +130,11 @@
                         android:text="@string/galeria_descripcion"
                         android:textColor="#5F5E5A"
                         android:textSize="14sp" />
+
                 </LinearLayout>
+
             </LinearLayout>
 
-            <!-- UBICACION -->
             <LinearLayout
                 android:id="@+id/permisoUbicacion"
                 android:layout_width="match_parent"
@@ -180,10 +175,11 @@
                         android:text="@string/ubicacion_descripcion"
                         android:textColor="#5F5E5A"
                         android:textSize="14sp" />
+
                 </LinearLayout>
+
             </LinearLayout>
 
-            <!-- NOTIFICACIONES -->
             <LinearLayout
                 android:id="@+id/permisoNotificaciones"
                 android:layout_width="match_parent"
@@ -200,8 +196,7 @@
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    />
-                <!-- android:src="@drawable/notificaciones-->
+                    android:src="@drawable/ic_map" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -225,10 +220,13 @@
                         android:text="@string/notificaciones_descripcion"
                         android:textColor="#5F5E5A"
                         android:textSize="14sp" />
+
                 </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

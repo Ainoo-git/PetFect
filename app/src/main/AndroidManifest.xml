@@ -86,6 +86,7 @@
         <activity
             android:name=".configuracion.IdiomaActivity"
             android:exported="false" />
+
         <activity
             android:name=".configuracion.ConfiguracionActivity"
             android:exported="false" />
@@ -127,11 +128,7 @@
         <activity
             android:name=".creditos.Creditos"
             android:exported="false" />
-ç
 
-        <activity
-            android:name=".configuracion.IdiomaActivity"
-            android:exported="false" />
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@ import android.provider.Settings;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,10 +22,10 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 public class PermisosDispositivoActivity extends AppCompatActivity {
 
-    LinearLayout permisoCamara;
-    LinearLayout permisoGaleria;
-    LinearLayout permisoUbicacion;
-    LinearLayout permisoNotificaciones;
+    private LinearLayout permisoCamara;
+    private LinearLayout permisoGaleria;
+    private LinearLayout permisoUbicacion;
+    private LinearLayout permisoNotificaciones;
 
     private ActivityResultLauncher<String> permisoNotificacionesLauncher;
 
@@ -33,25 +34,41 @@ public class PermisosDispositivoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permisos_dispositivo);
 
-        // TOOLBAR
+        configurarToolbar();
+        inicializarVistas();
+        configurarPermisoNotificacionesLauncher();
+        configurarClicks();
+        configurarBotonAtrasSistema();
+    }
+
+    private void configurarToolbar() {
         MaterialToolbar toolbar = findViewById(R.id.topAppBar);
 
-        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+        });
+    }
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
+    private void configurarBotonAtrasSistema() {
+        getOnBackPressedDispatcher().addCallback(
+                this,
+                new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        finish();
+                    }
+                }
+        );
+    }
 
-        toolbar.setNavigationOnClickListener(v -> finish());
-
-        // VISTAS
+    private void inicializarVistas() {
         permisoCamara = findViewById(R.id.permisoCamara);
         permisoGaleria = findViewById(R.id.permisoGaleria);
         permisoUbicacion = findViewById(R.id.permisoUbicacion);
         permisoNotificaciones = findViewById(R.id.permisoNotificaciones);
+    }
 
-        // LAUNCHER PARA PEDIR PERMISO DE NOTIFICACIONES
+    private void configurarPermisoNotificacionesLauncher() {
         permisoNotificacionesLauncher =
                 registerForActivityResult(
                         new ActivityResultContracts.RequestPermission(),
@@ -67,22 +84,17 @@ public class PermisosDispositivoActivity extends AppCompatActivity {
                             }
                         }
                 );
+    }
 
-        // CLICK -> AJUSTES APP
+    private void configurarClicks() {
         permisoCamara.setOnClickListener(v -> abrirAjustesPermisos());
-
         permisoGaleria.setOnClickListener(v -> abrirAjustesPermisos());
-
         permisoUbicacion.setOnClickListener(v -> abrirAjustesPermisos());
-
-        // CLICK -> PEDIR PERMISO NOTIFICACIONES
         permisoNotificaciones.setOnClickListener(v -> pedirPermisoNotificaciones());
     }
 
     private void pedirPermisoNotificaciones() {
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-
             if (ContextCompat.checkSelfPermission(
                     this,
                     Manifest.permission.POST_NOTIFICATIONS
@@ -101,7 +113,6 @@ public class PermisosDispositivoActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT
                 ).show();
             }
-
         } else {
             suscribirNotificaciones();
 
@@ -114,7 +125,6 @@ public class PermisosDispositivoActivity extends AppCompatActivity {
     }
 
     private void suscribirNotificaciones() {
-
         FirebaseMessaging.getInstance()
                 .subscribeToTopic("allUsers")
                 .addOnSuccessListener(unused ->
@@ -134,7 +144,6 @@ public class PermisosDispositivoActivity extends AppCompatActivity {
     }
 
     private void abrirAjustesPermisos() {
-
         Intent intent = new Intent(
                 Settings.ACTION_APPLICATION_DETAILS_SETTINGS
         );
@@ -149,4 +158,5 @@ public class PermisosDispositivoActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
+
 }
