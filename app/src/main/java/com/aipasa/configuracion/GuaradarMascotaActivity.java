@@ -1,7 +1,9 @@
 package com.aipasa.configuracion;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,7 +60,6 @@ public class GuaradarMascotaActivity extends AppCompatActivity {
     }
 
     private void cargarGuardados() {
-
         String uid = auth.getCurrentUser().getUid();
 
         db.collection("usuarios")
@@ -66,10 +67,19 @@ public class GuaradarMascotaActivity extends AppCompatActivity {
                 .collection("guardados")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-
                     adapter.actualizarLista(
                             queryDocumentSnapshots.getDocuments()
                     );
                 });
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

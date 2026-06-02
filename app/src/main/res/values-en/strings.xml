@@ -276,10 +276,10 @@
     <string name="sin_estado">No status</string>
 
     <string name="detalle_mascota">Pet details</string>
-    <string name="edad_label_demo">Age: --</string>
-    <string name="chip_label_demo">Chip: --</string>
-    <string name="telefono_label_demo">Phone: --</string>
-    <string name="info_adicional_label_demo">Additional info: --</string>
+    <string name="edad_label_demo">Age: </string>
+    <string name="chip_label_demo">Chip: </string>
+    <string name="telefono_label_demo">Phone: </string>
+    <string name="info_adicional_label_demo">Additional info: </string>
 
 
 

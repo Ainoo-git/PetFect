@@ -1,34 +1,33 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <!--  TOOLBAR  -->
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/rosita_fondoss_tarjetas_alertaslev"
-            android:title="@string/permisos_dispositivo"
-            android:titleTextColor="@color/white"
-            app:navigationIcon="@drawable/outline_arrow"
-            app:titleCentered="true" />
-    </com.google.android.material.appbar.AppBarLayout>
-    <!--  CONTENIDO  -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+        android:title="@string/politica_privacidad"
+        android:titleTextColor="@color/white"
+        app:navigationIcon="@drawable/outline_arrow"
+        app:titleCentered="true" />
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="?attr/actionBarSize">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp">
-            <!--  TITULO  -->
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,7 +44,7 @@
                 android:text="@string/ultima_actualizacion_2026"
                 android:textColor="#8A8A8A"
                 android:textSize="12sp" />
-            <!--  INTRO  -->
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,7 +53,7 @@
                 android:text="@string/en_petfect_valoramos_tu_privacidad_y_trabajamos_pa"
                 android:textColor="#5F5E5A"
                 android:textSize="14sp" />
-            <!--  SECCIONES  -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -180,7 +179,7 @@
                 android:text="@string/podemos_actualizar_esta_politica_de_privacidad_oca"
                 android:textColor="#5F5E5A"
                 android:textSize="14sp" />
-            <!--  CAJA FINAL  -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -203,7 +202,11 @@
                     android:text="@string/petfect26_gmail_com"
                     android:textColor="#5F5E5A"
                     android:textSize="14sp" />
+
             </LinearLayout>
+
         </LinearLayout>
+
     </ScrollView>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</LinearLayout>

@@ -2,6 +2,7 @@ package com.aipasa.configuracion;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.R;
@@ -15,19 +16,27 @@ public class PoliticaPrivacidadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_politica_privacidad);
 
         configurarToolbar();
-
+        configurarBotonAtrasSistema();
     }
 
-    //===================nuevo==================
     private void configurarToolbar() {
         MaterialToolbar toolbar = findViewById(R.id.topAppBar);
-        setSupportActionBar(toolbar);
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
-        toolbar.setNavigationOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+        });
     }
-    //===========================================
+
+    private void configurarBotonAtrasSistema() {
+        getOnBackPressedDispatcher().addCallback(
+                this,
+                new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        finish();
+                    }
+                }
+        );
+    }
+
 }
