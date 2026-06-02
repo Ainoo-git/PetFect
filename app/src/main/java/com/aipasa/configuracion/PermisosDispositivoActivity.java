@@ -75,6 +75,8 @@ public class PermisosDispositivoActivity extends AppCompatActivity {
 
         permisoUbicacion.setOnClickListener(v -> abrirAjustesPermisos());
 
+        permisoNotificaciones.setOnClickListener(v -> abrirAjustesPermisos());
+
         // CLICK -> PEDIR PERMISO NOTIFICACIONES
         permisoNotificaciones.setOnClickListener(v -> pedirPermisoNotificaciones());
     }

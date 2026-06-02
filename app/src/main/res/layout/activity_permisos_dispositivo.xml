@@ -200,8 +200,7 @@
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    />
-                <!-- android:src="@drawable/notificaciones-->
+                    android:src="@drawable/campana"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
