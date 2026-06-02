@@ -428,18 +428,17 @@ public class ProfileFragment extends Fragment {
     private void mostrarConfirmacionCerrarSesion() {
 
         new AlertDialog.Builder(requireContext())
-                .setTitle("Cerrar sesión")
-                .setMessage("¿Quieres cerrar sesión?")
-                .setPositiveButton("Sí, cerrar sesión", (dialog, which) -> {
+                .setTitle(getString(R.string.cerrar_sesion))
+                .setMessage(getString(R.string.confirmar_cerrar_sesion))
+                .setPositiveButton(getString(R.string.si_cerrar_sesion), (dialog, which) -> {
                     FirebaseAuth.getInstance().signOut();
 
                     Intent intent = new Intent(requireContext(), Login.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
                     startActivity(intent);
                     requireActivity().finish();
                 })
-                .setNegativeButton("Cancelar", null)
+                .setNegativeButton(getString(R.string.cancelar), null)
                 .show();
     }
 
