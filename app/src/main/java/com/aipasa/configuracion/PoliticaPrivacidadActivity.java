@@ -15,8 +15,10 @@ public class PoliticaPrivacidadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_politica_privacidad);
 
         configurarToolbar();
+
     }
 
+    //===================nuevo==================
     private void configurarToolbar() {
         MaterialToolbar toolbar = findViewById(R.id.topAppBar);
         setSupportActionBar(toolbar);
@@ -27,4 +29,5 @@ public class PoliticaPrivacidadActivity extends AppCompatActivity {
 
         toolbar.setNavigationOnClickListener(v -> finish());
     }
+    //===========================================
 }
