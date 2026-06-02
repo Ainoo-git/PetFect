@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aipasa.R;
+import com.aipasa.firebase.NotificacionesAdapter;
 import com.aipasa.firebase.NotificacionModel;
 import com.aipasa.firebase.NotificacionesAdapter;
 import com.google.android.material.appbar.MaterialToolbar;
