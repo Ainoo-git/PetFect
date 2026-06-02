@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.aipasa.R;
 import com.aipasa.main.TarjetaFragment;
 import com.bumptech.glide.Glide;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -57,43 +56,38 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
         String id = doc.getId();
         Long fechaLong = doc.getLong("fecha");
 
-        // NOMBRE
         holder.txtNombre.setText(
-                nombre != null ? nombre : "Sin nombre"
+                nombre != null && !nombre.isEmpty()
+                        ? nombre
+                        : holder.itemView.getContext().getString(R.string.sin_nombre)
         );
 
-        // TIPO Y ESTADO
+        String tipoTraducido = traducirTipo(holder, tipo);
+        String estadoTraducido = traducirEstado(holder, estado);
+
         String tipoEstado = "";
 
-        if (tipo != null && !tipo.isEmpty()) {
-
-            tipoEstado +=
-                    tipo.substring(0,1).toUpperCase()
-                            + tipo.substring(1);
+        if (!tipoTraducido.isEmpty()) {
+            tipoEstado += tipoTraducido;
         }
 
-        if (estado != null && !estado.isEmpty()) {
-
+        if (!estadoTraducido.isEmpty()) {
             if (!tipoEstado.isEmpty()) {
                 tipoEstado += " • ";
             }
 
-            tipoEstado +=
-                    estado.substring(0,1).toUpperCase()
-                            + estado.substring(1);
+            tipoEstado += estadoTraducido;
         }
 
         holder.txtTipoEstado.setText(tipoEstado);
 
-        // INFO
         String info = "";
 
         if (edad != null && !edad.isEmpty()) {
-            info += "Edad: " + edad;
+            info += holder.itemView.getContext().getString(R.string.edad_label, edad);
         }
 
         if (infoAdicional != null && !infoAdicional.isEmpty()) {
-
             if (!info.isEmpty()) {
                 info += " • ";
             }
@@ -103,13 +97,11 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
 
         holder.txtInfoAdicional.setText(
                 info.isEmpty()
-                        ? "Sin información adicional"
+                        ? holder.itemView.getContext().getString(R.string.sin_informacion_adicional)
                         : info
         );
 
-        // FECHA
         if (fechaLong != null) {
-
             String fechaFormateada =
                     new SimpleDateFormat(
                             "dd/MM/yyyy",
@@ -117,35 +109,27 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
                     ).format(new Date(fechaLong));
 
             holder.txtFecha.setText(
-                    "Publicado: " + fechaFormateada
+                    holder.itemView.getContext().getString(R.string.publicado_label, fechaFormateada)
             );
 
         } else {
-
             holder.txtFecha.setText("");
         }
 
-        // IMAGEN
         if (fotoUrl != null && !fotoUrl.isEmpty()) {
-
             Glide.with(holder.itemView.getContext())
                     .load(fotoUrl)
                     .placeholder(R.drawable.ic_launcher_background)
                     .error(R.drawable.ic_search)
                     .centerCrop()
                     .into(holder.imgMascota);
-
         } else {
-
             holder.imgMascota.setImageResource(
                     R.drawable.ic_launcher_background
             );
         }
 
-        // FIREBASE
-        //Notificaciones
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() == null) {
@@ -155,7 +139,6 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
 
         String uid = auth.getCurrentUser().getUid();
 
-        // COMPROBAR SI ESTÁ GUARDADO
         db.collection("usuarios")
                 .document(uid)
                 .collection("guardados")
@@ -164,7 +147,6 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
                 .addOnSuccessListener(documentSnapshot -> {
 
                     if (documentSnapshot.exists()) {
-
                         holder.btnFavorito.setImageResource(
                                 R.drawable.marcador
                         );
@@ -172,7 +154,6 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
                         holder.btnFavorito.setTag(true);
 
                     } else {
-
                         holder.btnFavorito.setImageResource(
                                 R.drawable.marcador_vacio
                         );
@@ -181,7 +162,6 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
                     }
                 });
 
-        // CLICK FAVORITO
         holder.btnFavorito.setOnClickListener(v -> {
 
             boolean esFavorito =
@@ -189,8 +169,6 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
                             && (boolean) holder.btnFavorito.getTag();
 
             if (esFavorito) {
-
-                // ELIMINAR
                 db.collection("usuarios")
                         .document(uid)
                         .collection("guardados")
@@ -204,8 +182,6 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
                 holder.btnFavorito.setTag(false);
 
             } else {
-
-                // GUARDAR
                 db.collection("usuarios")
                         .document(uid)
                         .collection("guardados")
@@ -219,7 +195,7 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
                 holder.btnFavorito.setTag(true);
             }
         });
-    // CLICK TARJETA
+
         holder.itemView.setOnClickListener(v -> {
 
             if (id != null
@@ -240,19 +216,48 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
                 );
 
             } else {
-
                 Toast.makeText(
                         holder.itemView.getContext(),
-                        "No se puede abrir la publicación",
+                        holder.itemView.getContext().getString(R.string.no_se_puede_abrir_publicacion),
                         Toast.LENGTH_SHORT
                 ).show();
             }
         });
     }
 
+    private String traducirTipo(@NonNull ViewHolder holder, String tipo) {
+        if (tipo == null) return "";
+
+        switch (tipo.toLowerCase(Locale.ROOT)) {
+            case "perro":
+                return holder.itemView.getContext().getString(R.string.tipo_perro);
+            case "gato":
+                return holder.itemView.getContext().getString(R.string.tipo_gato);
+            case "otro":
+                return holder.itemView.getContext().getString(R.string.tipo_otro);
+            default:
+                return tipo;
+        }
+    }
+
+    private String traducirEstado(@NonNull ViewHolder holder, String estado) {
+        if (estado == null) return "";
+
+        switch (estado.toLowerCase(Locale.ROOT)) {
+            case "perdido":
+                return holder.itemView.getContext().getString(R.string.estado_perdido);
+            case "adopcion":
+            case "adopción":
+                return holder.itemView.getContext().getString(R.string.estado_adopcion);
+            case "encontrado":
+                return holder.itemView.getContext().getString(R.string.estado_encontrado);
+            default:
+                return estado;
+        }
+    }
+
     @Override
     public int getItemCount() {
-
         return listaMascotas != null
                 ? listaMascotas.size()
                 : 0;
@@ -261,9 +266,7 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
     public void actualizarLista(
             List<DocumentSnapshot> nuevaLista
     ) {
-
         this.listaMascotas = nuevaLista;
-
         notifyDataSetChanged();
     }
 
@@ -271,16 +274,13 @@ public class MascotaAdapterGuardados extends RecyclerView.Adapter<MascotaAdapter
             extends RecyclerView.ViewHolder {
 
         ImageView imgMascota;
-
         ImageButton btnFavorito;
-
         TextView txtNombre;
         TextView txtTipoEstado;
         TextView txtInfoAdicional;
         TextView txtFecha;
 
         public ViewHolder(@NonNull View itemView) {
-
             super(itemView);
 
             imgMascota =

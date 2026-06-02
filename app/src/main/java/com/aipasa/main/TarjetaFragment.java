@@ -20,13 +20,14 @@ import androidx.fragment.app.DialogFragment;
 
 import com.aipasa.R;
 import com.bumptech.glide.Glide;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Locale;
 
 public class TarjetaFragment extends DialogFragment {
 
     private ImageView imgAccion;
-    private TextView txtTitulo, txtFecha, txtDescripcion;
+    private TextView txtTitulo, txtFecha, txtEdad, txtChip, txtTelefono, txtInfoAdicional;
     private Button btnVerMas;
     private ImageButton btnGuardar;
     private MaterialToolbar topAppBar;
@@ -44,11 +45,9 @@ public class TarjetaFragment extends DialogFragment {
         return fragment;
     }
 
-    // 🔥 ESTO ES CLAVE: estilo fullscreen
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setStyle(STYLE_NORMAL, android.R.style.Theme_Material_Light_NoActionBar_Fullscreen);
     }
 
@@ -63,12 +62,14 @@ public class TarjetaFragment extends DialogFragment {
         imgAccion = view.findViewById(R.id.imgAccion);
         txtTitulo = view.findViewById(R.id.txtTitulo);
         txtFecha = view.findViewById(R.id.txtFecha);
-        txtDescripcion = view.findViewById(R.id.txtDescripcion);
+
+        txtEdad = view.findViewById(R.id.txtEdad);
+        txtChip = view.findViewById(R.id.txtChip);
+        txtTelefono = view.findViewById(R.id.txtTelefono);
+        txtInfoAdicional = view.findViewById(R.id.txtInfoAdicional);
 
         topAppBar = view.findViewById(R.id.topAppBar);
-        topAppBar.setNavigationOnClickListener(v -> {
-            dismiss(); // cierra el dialog correctamente
-        });
+        topAppBar.setNavigationOnClickListener(v -> dismiss());
 
         btnVerMas = view.findViewById(R.id.btnVerMas);
         btnGuardar = view.findViewById(R.id.btnGuardar);
@@ -80,14 +81,17 @@ public class TarjetaFragment extends DialogFragment {
         }
 
         if (articuloId == null || articuloId.isEmpty()) {
-            Toast.makeText(getContext(), "No se recibió la publicación", Toast.LENGTH_SHORT).show();
+            Toast.makeText(
+                    getContext(),
+                    getString(R.string.no_se_recibio_publicacion),
+                    Toast.LENGTH_SHORT
+            ).show();
             return view;
         }
 
         cargarMascota(articuloId);
 
         return view;
-
     }
 
     @Override
@@ -112,7 +116,11 @@ public class TarjetaFragment extends DialogFragment {
                 .addOnSuccessListener(documentSnapshot -> {
 
                     if (!documentSnapshot.exists()) {
-                        Toast.makeText(getContext(), "La publicación no existe", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(
+                                getContext(),
+                                getString(R.string.publicacion_no_existe),
+                                Toast.LENGTH_SHORT
+                        ).show();
                         return;
                     }
 
@@ -125,28 +133,63 @@ public class TarjetaFragment extends DialogFragment {
                     String info = documentSnapshot.getString("infoAdicional");
                     String fotoUrl = documentSnapshot.getString("fotoUrl");
 
-                    txtTitulo.setText(nombre != null ? nombre : "Sin nombre");
+                    txtTitulo.setText(
+                            nombre != null && !nombre.isEmpty()
+                                    ? nombre
+                                    : getString(R.string.sin_nombre)
+                    );
+
+                    String tipoTraducido = traducirTipo(tipo);
+                    String estadoTraducido = traducirEstado(estado);
 
                     String tipoEstado = "";
 
-                    if (tipo != null && !tipo.isEmpty()) {
-                        tipoEstado += tipo.substring(0, 1).toUpperCase() + tipo.substring(1);
+                    if (!tipoTraducido.isEmpty()) {
+                        tipoEstado += tipoTraducido;
                     }
 
-                    if (estado != null && !estado.isEmpty()) {
+                    if (!estadoTraducido.isEmpty()) {
                         if (!tipoEstado.isEmpty()) tipoEstado += " • ";
-                        tipoEstado += estado.substring(0, 1).toUpperCase() + estado.substring(1);
+                        tipoEstado += estadoTraducido;
                     }
 
                     txtFecha.setText(tipoEstado);
 
-                    String descripcion =
-                            "Edad: " + (edad != null ? edad : "No especificada") +
-                                    "\n\nChip: " + (chip != null ? chip : "No especificado") +
-                                    "\n\nTeléfono: " + (telefono != null ? telefono : "No disponible") +
-                                    "\n\nInfo adicional: " + (info != null ? info : "Sin información");
+                    txtEdad.setText(
+                            getString(
+                                    R.string.edad_label,
+                                    edad != null && !edad.isEmpty()
+                                            ? edad
+                                            : getString(R.string.no_especificada)
+                            )
+                    );
 
-                    txtDescripcion.setText(descripcion);
+                    txtChip.setText(
+                            getString(
+                                    R.string.chip_label,
+                                    chip != null && !chip.isEmpty()
+                                            ? chip
+                                            : getString(R.string.no_especificado)
+                            )
+                    );
+
+                    txtTelefono.setText(
+                            getString(
+                                    R.string.telefono_label,
+                                    telefono != null && !telefono.isEmpty()
+                                            ? telefono
+                                            : getString(R.string.no_disponible)
+                            )
+                    );
+
+                    txtInfoAdicional.setText(
+                            getString(
+                                    R.string.info_adicional_label,
+                                    info != null && !info.isEmpty()
+                                            ? info
+                                            : getString(R.string.sin_informacion)
+                            )
+                    );
 
                     if (fotoUrl != null && !fotoUrl.isEmpty()) {
                         Glide.with(this)
@@ -162,7 +205,11 @@ public class TarjetaFragment extends DialogFragment {
                     btnGuardar.bringToFront();
 
                     btnGuardar.setOnClickListener(v ->
-                            Toast.makeText(getContext(), "Guardado", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                    getContext(),
+                                    getString(R.string.guardado),
+                                    Toast.LENGTH_SHORT
+                            ).show()
                     );
 
                     btnVerMas.setOnClickListener(v -> {
@@ -171,17 +218,52 @@ public class TarjetaFragment extends DialogFragment {
                             intent.setData(Uri.parse("tel:" + telefono));
                             startActivity(intent);
                         } else {
-                            Toast.makeText(getContext(),
-                                    "No hay número de contacto disponible",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(
+                                    getContext(),
+                                    getString(R.string.no_hay_numero_contacto),
+                                    Toast.LENGTH_SHORT
+                            ).show();
                         }
                     });
 
                 })
                 .addOnFailureListener(e ->
-                        Toast.makeText(getContext(),
-                                "Error al cargar la publicación",
-                                Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                                getContext(),
+                                getString(R.string.error_cargar_publicacion),
+                                Toast.LENGTH_SHORT
+                        ).show()
                 );
+    }
+
+    private String traducirTipo(String tipo) {
+        if (tipo == null) return "";
+
+        switch (tipo.toLowerCase(Locale.ROOT)) {
+            case "perro":
+                return getString(R.string.tipo_perro);
+            case "gato":
+                return getString(R.string.tipo_gato);
+            case "otro":
+                return getString(R.string.tipo_otro);
+            default:
+                return tipo;
+        }
+    }
+
+    private String traducirEstado(String estado) {
+        if (estado == null) return "";
+
+        switch (estado.toLowerCase(Locale.ROOT)) {
+            case "perdido":
+                return getString(R.string.estado_perdido);
+            case "adopcion":
+            case "adopción":
+                return getString(R.string.estado_adopcion);
+            case "encontrado":
+                return getString(R.string.estado_encontrado);
+            default:
+                return estado;
+        }
     }
 }

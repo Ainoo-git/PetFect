@@ -238,5 +238,55 @@
     <string name="notificaciones_descripcion">Activa las notificaciones para recibir avisos cuando se publique una mascota perdida o en adopción.</string>
     <string name="foto_mascota">Foto de la mascota</string>
     <string name="guardar_mascota">Guardar mascota</string>
+    <string name="error_general">Error: %1$s</string>
+    <string name="debes_iniciar_sesion">Debes iniciar sesión</string>
+    <string name="subiendo_imagen">Subiendo imagen...</string>
+    <string name="error_al_publicar_detalle">Error al publicar: %1$s</string>
+    <string name="error_obteniendo_ubicacion">Error obteniendo ubicación</string>
+    <string name="no_se_pudo_leer_imagen">No se pudo leer la imagen</string>
+    <string name="error_preparando_imagen">Error preparando imagen</string>
+    <string name="error_al_guardar">Error al guardar</string>
+    <string name="error_cargando_datos">Error cargando datos</string>
+    <string name="mascotas_perdidas_contador">Mascotas Perdidas (%1$d)</string>
+    <string name="mascotas_adopcion_contador">Mascotas en Adopción (%1$d)</string>
+    <string name="no_hay_usuario_iniciado">No hay usuario iniciado</string>
+    <string name="error_subiendo_foto_perfil">Error subiendo foto de perfil</string>
+    <string name="foto_perfil_actualizada">Foto de perfil actualizada</string>
+    <string name="error_guardando_foto_firebase">Error guardando foto en Firebase</string>
+    <string name="error_supabase">Error Supabase: %1$s</string>
+    <string name="error_cargando_foto_perfil">Error cargando foto de perfil</string>
+    <string name="error_email">Error email: %1$s</string>
+    <string name="error_password">Error password: %1$s</string>
+    <string name="permiso_notificaciones_denegado">Permiso de notificaciones denegado</string>
+    <string name="notificaciones_ya_activadas">Las notificaciones ya están activadas</string>
+    <string name="notificaciones_activadas">Notificaciones activadas</string>
+    <string name="recibiras_avisos_nuevas_mascotas">Recibirás avisos de nuevas mascotas</string>
+    <string name="no_se_pudieron_activar_notificaciones">No se pudieron activar las notificaciones</string>
+    <string name="avisos_recientes">Avisos recientes</string>
+    <string name="avisos_recientes_descripcion">Aquí aparecerán las alertas de mascotas perdidas, adopciones y novedades importantes.</string>
+    <string name="icono_registro">Icono registro</string>
+    <string name="menu_settings">Ajustes</string>
+    <string name="menu_copy">Copiar</string>
+    <string name="menu_profile">Perfil</string>
+    <string name="menu_main_bab">Principal</string>
+    <string name="menu_main_bn">Principal</string>
+    <string name="menu_signout">Cerrar sesión</string>
+    <string name="mascota_default">Mascota</string>
+    <string name="sin_estado">Sin estado</string>
+    <string name="tipo_perro">Perro</string>
+    <string name="tipo_gato">Gato</string>
+    <string name="tipo_otro">Otro</string>
+
+    <string name="estado_perdido">Perdido</string>
+    <string name="estado_adopcion">Adopción</string>
+    <string name="estado_encontrado">Encontrado</string>
+
+    <string name="detalle_mascota">Detalle de mascota</string>
+    <string name="edad_label_demo">Edad: </string>
+    <string name="chip_label_demo">Chip: </string>
+    <string name="telefono_label_demo">Teléfono: </string>
+    <string name="info_adicional_label_demo">Info adicional: </string>
+
+
 
 </resources>

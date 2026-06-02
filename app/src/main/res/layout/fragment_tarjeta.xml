@@ -7,18 +7,18 @@
     android:layout_height="match_parent"
     android:background="#f5f5f5">
 
-    <!-- 🔥 APP BAR FUERA DEL SCROLL -->
+    <!-- APP BAR FUERA DEL SCROLL -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/rosita_fondoss_tarjetas_alertaslev"
-        android:title="@string/configuracion"
+        android:title="@string/detalle_mascota"
         android:titleTextColor="@color/white"
         app:navigationIcon="@drawable/outline_arrow"
         app:titleCentered="true" />
 
-    <!-- 🔥 SCROLL SOLO PARA CONTENIDO -->
+    <!-- SCROLL SOLO PARA CONTENIDO -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -93,16 +93,49 @@
                     android:textColor="#666666"
                     android:layout_marginBottom="16dp" />
 
-                <!-- DESCRIPCIÓN -->
-                <TextView
-                    android:id="@+id/txtDescripcion"
+                <LinearLayout
+                    android:id="@+id/layoutDescripcion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/detalle_mascota_demo"
-                    android:textSize="16sp"
-                    android:textColor="#333333"
-                    android:lineSpacingExtra="4dp"
-                    android:layout_marginBottom="24dp" />
+                    android:orientation="vertical"
+                    android:layout_marginBottom="24dp">
+
+                    <TextView
+                        android:id="@+id/txtEdad"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edad_label_demo"
+                        android:textSize="16sp"
+                        android:textColor="#333333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/txtChip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/chip_label_demo"
+                        android:textSize="16sp"
+                        android:textColor="#333333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/txtTelefono"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/telefono_label_demo"
+                        android:textSize="16sp"
+                        android:textColor="#333333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/txtInfoAdicional"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/info_adicional_label_demo"
+                        android:textSize="16sp"
+                        android:textColor="#333333" />
+
+                </LinearLayout>
 
                 <!-- BOTÓN CONTACTO -->
                 <Button
