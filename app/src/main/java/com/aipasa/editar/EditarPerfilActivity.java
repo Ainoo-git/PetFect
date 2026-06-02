@@ -1,10 +1,12 @@
 package com.aipasa.editar;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.R;
@@ -18,7 +20,9 @@ import java.util.Map;
 
 public class EditarPerfilActivity extends AppCompatActivity {
 
-    EditText etUsername, etEmail, etPassword;
+    EditText etUsername;
+    EditText etEmail;
+    EditText etPassword;
     Button btnGuardar;
 
     FirebaseAuth auth;
@@ -33,59 +37,51 @@ public class EditarPerfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_perfil);
 
-        // FIREBASE
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         user = auth.getCurrentUser();
 
-        // TOOLBAR
+        configurarToolbar();
+        inicializarVistas();
+        cargarDatosUsuario();
+        configurarBotonGuardar();
+    }
+
+    private void configurarToolbar() {
         MaterialToolbar toolbar = findViewById(R.id.topAppBar);
 
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
         toolbar.setNavigationOnClickListener(v -> finish());
+    }
 
-        // VISTAS
+    private void inicializarVistas() {
         etUsername = findViewById(R.id.etUsername);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-
         btnGuardar = findViewById(R.id.btnGuardar);
+    }
 
-
-        // CARGAR EMAIL (FIREBASE AUTH)
-
+    private void cargarDatosUsuario() {
         if (user != null) {
-
             currentEmail = user.getEmail();
-
             etEmail.setText(currentEmail);
-        }
-
-
-        // CARGAR USERNAME (FIRESTORE)
-
-        if (user != null) {
 
             db.collection("usuarios")
                     .document(user.getUid())
                     .get()
                     .addOnSuccessListener(documentSnapshot -> {
-
                         if (documentSnapshot.exists()) {
-
-                            currentUsername =
-                                    documentSnapshot.getString("username");
-
+                            currentUsername = documentSnapshot.getString("username");
                             etUsername.setText(currentUsername);
                         }
                     })
                     .addOnFailureListener(e ->
-
                             Toast.makeText(
                                     this,
                                     "Error cargando usuario",
@@ -93,29 +89,20 @@ public class EditarPerfilActivity extends AppCompatActivity {
                             ).show()
                     );
         }
+    }
 
-        // GUARDAR CAMBIOS
-
+    private void configurarBotonGuardar() {
         btnGuardar.setOnClickListener(v -> {
+            if (user == null) {
+                return;
+            }
 
-            if (user == null) return;
+            String newUsername = etUsername.getText().toString().trim();
+            String newEmail = etEmail.getText().toString().trim();
+            String newPassword = etPassword.getText().toString().trim();
 
-            String newUsername =
-                    etUsername.getText().toString().trim();
-
-            String newEmail =
-                    etEmail.getText().toString().trim();
-
-            String newPassword =
-                    etPassword.getText().toString().trim();
-
-
-
-            if (!newUsername.isEmpty()
-                    && !newUsername.equals(currentUsername)) {
-
+            if (!newUsername.isEmpty() && !newUsername.equals(currentUsername)) {
                 Map<String, Object> map = new HashMap<>();
-
                 map.put("username", newUsername);
 
                 db.collection("usuarios")
@@ -125,25 +112,16 @@ public class EditarPerfilActivity extends AppCompatActivity {
                 currentUsername = newUsername;
             }
 
-
-            // EMAIL
-
-            if (!newEmail.isEmpty()
-                    && !newEmail.equals(currentEmail)) {
-
+            if (!newEmail.isEmpty() && !newEmail.equals(currentEmail)) {
                 user.updateEmail(newEmail)
-
                         .addOnSuccessListener(unused ->
-
                                 Toast.makeText(
                                         this,
                                         "Email actualizado",
                                         Toast.LENGTH_SHORT
                                 ).show()
                         )
-
                         .addOnFailureListener(e ->
-
                                 Toast.makeText(
                                         this,
                                         "Error email: " + e.getMessage(),
@@ -154,24 +132,16 @@ public class EditarPerfilActivity extends AppCompatActivity {
                 currentEmail = newEmail;
             }
 
-
-            // PASSWORD
-
             if (!newPassword.isEmpty()) {
-
                 user.updatePassword(newPassword)
-
                         .addOnSuccessListener(unused ->
-
                                 Toast.makeText(
                                         this,
                                         "Contraseña actualizada",
                                         Toast.LENGTH_SHORT
                                 ).show()
                         )
-
                         .addOnFailureListener(e ->
-
                                 Toast.makeText(
                                         this,
                                         "Error password: " + e.getMessage(),
@@ -180,11 +150,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                         );
             }
 
-
-            // FINAL
-
             btnGuardar.postDelayed(() -> {
-
                 Toast.makeText(
                         this,
                         "Perfil actualizado",
@@ -196,4 +162,15 @@ public class EditarPerfilActivity extends AppCompatActivity {
             }, 1000);
         });
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

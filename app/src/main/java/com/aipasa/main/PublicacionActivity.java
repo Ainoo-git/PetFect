@@ -24,11 +24,14 @@ import com.aipasa.firebase.SupabaseClient;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -53,9 +56,17 @@ public class PublicacionActivity extends AppCompatActivity {
     private Button btnPublicar;
     private CheckBox checkLegal;
 
-    private EditText etNombre, etTelefono, etEdad, etChip, etInfoAdicional;
+    private EditText etNombre;
+    private EditText etTelefono;
+    private EditText etEdad;
+    private EditText etChip;
+    private EditText etInfoAdicional;
 
-    private RadioButton cbPerdido, cbAdopcion, cbPerro, cbGato, cbOtro;
+    private RadioButton cbPerdido;
+    private RadioButton cbAdopcion;
+    private RadioButton cbPerro;
+    private RadioButton cbGato;
+    private RadioButton cbOtro;
 
     private Uri imageUri;
     private Bitmap imageBitmap;
@@ -107,7 +118,8 @@ public class PublicacionActivity extends AppCompatActivity {
         imgMascota.setOnClickListener(v -> mostrarOpcionesImagen());
 
         checkLegal.setOnCheckedChangeListener((buttonView, isChecked) ->
-                btnPublicar.setEnabled(isChecked));
+                btnPublicar.setEnabled(isChecked)
+        );
 
         galeriaLauncher = registerForActivityResult(
                 new ActivityResultContracts.GetContent(),
@@ -176,13 +188,16 @@ public class PublicacionActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode,
-                                    int resultCode,
-                                    @Nullable Intent data) {
-
+    protected void onActivityResult(
+            int requestCode,
+            int resultCode,
+            @Nullable Intent data
+    ) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode != RESULT_OK) return;
+        if (resultCode != RESULT_OK) {
+            return;
+        }
 
         if (requestCode == REQUEST_CAMERA && data != null && data.getExtras() != null) {
             imageBitmap = (Bitmap) data.getExtras().get("data");
@@ -237,7 +252,6 @@ public class PublicacionActivity extends AppCompatActivity {
     }
 
     private void guardarMascota(double latitud, double longitud) {
-
         String nombre = etNombre.getText().toString().trim();
         String telefono = etTelefono.getText().toString().trim();
         String edad = etEdad.getText().toString().trim();
@@ -252,12 +266,15 @@ public class PublicacionActivity extends AppCompatActivity {
                         cbOtro.isChecked() ? "otro" : null;
 
         if (nombre.isEmpty() || estado == null || tipo == null) {
-            Toast.makeText(this, "Completa los campos obligatorios", Toast.LENGTH_SHORT).show();
+            Toast.makeText(
+                    this,
+                    "Completa los campos obligatorios",
+                    Toast.LENGTH_SHORT
+            ).show();
             return;
         }
 
         if (imageUri == null && imageBitmap == null) {
-
             if ("editar".equals(modo) && fotoUrlActual != null) {
                 guardarEnFirestore(
                         fotoUrlActual,
@@ -272,7 +289,11 @@ public class PublicacionActivity extends AppCompatActivity {
                         longitud
                 );
             } else {
-                Toast.makeText(this, "Selecciona una imagen", Toast.LENGTH_SHORT).show();
+                Toast.makeText(
+                        this,
+                        "Selecciona una imagen",
+                        Toast.LENGTH_SHORT
+                ).show();
             }
 
             return;
@@ -285,7 +306,11 @@ public class PublicacionActivity extends AppCompatActivity {
                 InputStream inputStream = getContentResolver().openInputStream(imageUri);
 
                 if (inputStream == null) {
-                    Toast.makeText(this, "No se pudo leer la imagen", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(
+                            this,
+                            "No se pudo leer la imagen",
+                            Toast.LENGTH_SHORT
+                    ).show();
                     return;
                 }
 
@@ -324,21 +349,27 @@ public class PublicacionActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "Error preparando imagen", Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(
+                    this,
+                    "Error preparando imagen",
+                    Toast.LENGTH_SHORT
+            ).show();
         }
     }
 
-    private void subirImagenASupabase(byte[] bytes,
-                                      String nombre,
-                                      String tipo,
-                                      String estado,
-                                      String telefono,
-                                      String edad,
-                                      String chip,
-                                      String infoAdicional,
-                                      double latitud,
-                                      double longitud) {
-
+    private void subirImagenASupabase(
+            byte[] bytes,
+            String nombre,
+            String tipo,
+            String estado,
+            String telefono,
+            String edad,
+            String chip,
+            String infoAdicional,
+            double latitud,
+            double longitud
+    ) {
         String fileName = UUID.randomUUID().toString() + ".jpg";
 
         RequestBody requestBody =
@@ -371,9 +402,7 @@ public class PublicacionActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(Call call, Response response) {
-
                         if (response.isSuccessful()) {
-
                             String publicUrl =
                                     SupabaseClient.SUPABASE_URL +
                                             "/storage/v1/object/public/" +
@@ -408,17 +437,18 @@ public class PublicacionActivity extends AppCompatActivity {
                 });
     }
 
-    private void guardarEnFirestore(String urlDescarga,
-                                    String nombre,
-                                    String tipo,
-                                    String estado,
-                                    String telefono,
-                                    String edad,
-                                    String chip,
-                                    String infoAdicional,
-                                    double latitud,
-                                    double longitud) {
-
+    private void guardarEnFirestore(
+            String urlDescarga,
+            String nombre,
+            String tipo,
+            String estado,
+            String telefono,
+            String edad,
+            String chip,
+            String infoAdicional,
+            double latitud,
+            double longitud
+    ) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         String id;
@@ -430,6 +460,7 @@ public class PublicacionActivity extends AppCompatActivity {
         }
 
         Map<String, Object> mascota = new HashMap<>();
+
         mascota.put("id", id);
         mascota.put("nombre", nombre);
         mascota.put("tipo", tipo);
@@ -443,8 +474,10 @@ public class PublicacionActivity extends AppCompatActivity {
         mascota.put("latitud", latitud);
         mascota.put("longitud", longitud);
 
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            mascota.put("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
+        FirebaseUser usuarioActual = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (usuarioActual != null) {
+            mascota.put("userId", usuarioActual.getUid());
         }
 
         db.collection("mascotas")
@@ -452,31 +485,113 @@ public class PublicacionActivity extends AppCompatActivity {
                 .set(mascota)
                 .addOnSuccessListener(unused -> {
                     if ("editar".equals(modo)) {
-                        Toast.makeText(this, "Mascota actualizada", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, "Mascota publicada", Toast.LENGTH_SHORT).show();
-                    }
+                        Toast.makeText(
+                                this,
+                                "Mascota actualizada",
+                                Toast.LENGTH_SHORT
+                        ).show();
 
-                    finish();
+                        finish();
+
+                    } else {
+                        guardarNotificacionGeneral(
+                                id,
+                                nombre,
+                                tipo,
+                                estado,
+                                urlDescarga
+                        );
+                    }
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(
                                 this,
-                                "Error al guardar",
-                                Toast.LENGTH_SHORT
+                                "Error al guardar mascota: " + e.getMessage(),
+                                Toast.LENGTH_LONG
                         ).show()
                 );
     }
 
-    private void cargarDatosMascota(String id) {
+    private void guardarNotificacionGeneral(
+            String idMascota,
+            String nombreMascota,
+            String tipo,
+            String estado,
+            String imagenUrl
+    ) {
+        FirebaseUser usuarioActual = FirebaseAuth.getInstance().getCurrentUser();
 
+        if (usuarioActual == null) {
+            Toast.makeText(
+                    this,
+                    "Mascota publicada, pero no se pudo crear notificación: usuario no encontrado",
+                    Toast.LENGTH_LONG
+            ).show();
+
+            finish();
+            return;
+        }
+
+        String titulo;
+        String mensaje;
+
+        if ("perdido".equalsIgnoreCase(estado)) {
+            titulo = "Nueva mascota perdida";
+            mensaje = "Se ha publicado " + nombreMascota + ", un " + tipo + " perdido.";
+        } else if ("adopcion".equalsIgnoreCase(estado)) {
+            titulo = "Nueva mascota en adopción";
+            mensaje = "Se ha publicado " + nombreMascota + ", un " + tipo + " en adopción.";
+        } else {
+            titulo = "Nueva publicación";
+            mensaje = "Se ha publicado una nueva mascota en PetFect.";
+        }
+
+        Map<String, Object> notificacion = new HashMap<>();
+
+        notificacion.put("idUsuario", usuarioActual.getUid());
+        notificacion.put("idMascota", idMascota);
+        notificacion.put("nombreMascota", nombreMascota);
+        notificacion.put("tipo", tipo);
+        notificacion.put("estado", estado);
+        notificacion.put("titulo", titulo);
+        notificacion.put("mensaje", mensaje);
+        notificacion.put("imagenUrl", imagenUrl);
+        notificacion.put("fecha", Timestamp.now());
+        notificacion.put("leido", false);
+        notificacion.put("eliminadaPor", new ArrayList<String>());
+
+        FirebaseFirestore.getInstance()
+                .collection("notificaciones")
+                .add(notificacion)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(
+                            this,
+                            "Mascota publicada y notificación creada",
+                            Toast.LENGTH_SHORT
+                    ).show();
+
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(
+                            this,
+                            "Mascota publicada, pero error creando notificación: " + e.getMessage(),
+                            Toast.LENGTH_LONG
+                    ).show();
+
+                    finish();
+                });
+    }
+
+    private void cargarDatosMascota(String id) {
         FirebaseFirestore.getInstance()
                 .collection("mascotas")
                 .document(id)
                 .get()
                 .addOnSuccessListener(doc -> {
-
-                    if (!doc.exists()) return;
+                    if (!doc.exists()) {
+                        return;
+                    }
 
                     etNombre.setText(doc.getString("nombre"));
                     etTelefono.setText(doc.getString("telefono"));
@@ -529,25 +644,36 @@ public class PublicacionActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-
+    public void onRequestPermissionsResult(
+            int requestCode,
+            @NonNull String[] permissions,
+            @NonNull int[] grantResults
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == CAMERA_PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length > 0 &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 abrirCamara();
             } else {
-                Toast.makeText(this, "Permiso de cámara denegado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(
+                        this,
+                        "Permiso de cámara denegado",
+                        Toast.LENGTH_SHORT
+                ).show();
             }
         }
 
         if (requestCode == LOCATION_PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length > 0 &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 obtenerUbicacionYGuardar();
             } else {
-                Toast.makeText(this, "Permiso de ubicación denegado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(
+                        this,
+                        "Permiso de ubicación denegado",
+                        Toast.LENGTH_SHORT
+                ).show();
             }
         }
     }
