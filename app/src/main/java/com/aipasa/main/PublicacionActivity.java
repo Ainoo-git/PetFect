@@ -64,6 +64,9 @@ public class PublicacionActivity extends AppCompatActivity {
     private String idMascota;
     private String fotoUrlActual;
 
+    private Double latitudOriginal;
+    private Double longitudOriginal;
+
     private FusedLocationProviderClient fusedLocationClient;
 
     @Override
@@ -120,7 +123,13 @@ public class PublicacionActivity extends AppCompatActivity {
                 }
         );
 
-        btnPublicar.setOnClickListener(v -> obtenerUbicacionYGuardar());
+        btnPublicar.setOnClickListener(v -> {
+            if ("editar".equals(modo)) {
+                guardarConUbicacionOriginal();
+            } else {
+                obtenerUbicacionYGuardar();
+            }
+        });
 
         if ("editar".equals(modo) && idMascota != null) {
             cargarDatosMascota(idMascota);
@@ -217,6 +226,14 @@ public class PublicacionActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT
                         ).show()
                 );
+    }
+
+    private void guardarConUbicacionOriginal() {
+        if (latitudOriginal != null && longitudOriginal != null) {
+            guardarMascota(latitudOriginal, longitudOriginal);
+        } else {
+            obtenerUbicacionYGuardar();
+        }
     }
 
     private void guardarMascota(double latitud, double longitud) {
@@ -492,6 +509,9 @@ public class PublicacionActivity extends AppCompatActivity {
                     }
 
                     fotoUrlActual = doc.getString("fotoUrl");
+
+                    latitudOriginal = doc.getDouble("latitud");
+                    longitudOriginal = doc.getDouble("longitud");
 
                     if (fotoUrlActual != null && !fotoUrlActual.isEmpty()) {
                         Glide.with(this).load(fotoUrlActual).into(imgMascota);
