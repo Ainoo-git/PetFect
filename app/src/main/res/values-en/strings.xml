@@ -274,4 +274,24 @@
     <string name="menu_signout">Sign out</string>
     <string name="mascota_default">Pet</string>
     <string name="sin_estado">No status</string>
+
+    <string name="detalle_mascota">Pet details</string>
+    <string name="edad_label_demo">Age: --</string>
+    <string name="chip_label_demo">Chip: --</string>
+    <string name="telefono_label_demo">Phone: --</string>
+    <string name="info_adicional_label_demo">Additional info: --</string>
+
+
+
+
+    <string name="tipo_perro">Dog</string>
+    <string name="tipo_gato">Cat</string>
+    <string name="tipo_otro">Other</string>
+
+    <string name="estado_perdido">Lost</string>
+    <string name="estado_adopcion">Adoption</string>
+    <string name="estado_encontrado">Found</string>
+
+
+
 </resources>

@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.List;
+import java.util.Locale;
 
 public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAdapter.ViewHolder> {
 
@@ -47,15 +48,25 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
         String infoAdicional = doc.getString("infoAdicional");
         String fotoUrl = doc.getString("fotoUrl");
 
-        holder.txtNombre.setText(nombre != null ? nombre : "Sin nombre");
-        holder.txtTipoEstado.setText((tipo != null ? tipo : "") + " • " + (estado != null ? estado : ""));
-        holder.txtInfoAdicional.setText(infoAdicional != null ? infoAdicional : "");
+        holder.txtNombre.setText(
+                nombre != null && !nombre.isEmpty()
+                        ? nombre
+                        : context.getString(R.string.sin_nombre)
+        );
 
-        if (fotoUrl != null) {
+        String tipoEstado = crearTipoEstado(tipo, estado);
+        holder.txtTipoEstado.setText(tipoEstado);
+
+        holder.txtInfoAdicional.setText(
+                infoAdicional != null && !infoAdicional.isEmpty()
+                        ? infoAdicional
+                        : context.getString(R.string.sin_informacion_adicional)
+        );
+
+        if (fotoUrl != null && !fotoUrl.isEmpty()) {
             Glide.with(context).load(fotoUrl).into(holder.imgMascota);
         }
 
-        // Al pulsar la tarjetita abre el dialog grande
         holder.itemView.setOnClickListener(v -> abrirDialog(v, doc));
     }
 
@@ -65,7 +76,11 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
         String tipo = doc.getString("tipo");
         String estado = doc.getString("estado");
         String fotoUrl = doc.getString("fotoUrl");
-        String tipoEstado = (tipo != null ? tipo : "") + " • " + (estado != null ? estado : "");
+
+        String edad = doc.getString("edad");
+        String chip = doc.getString("chip");
+        String telefono = doc.getString("telefono");
+        String info = doc.getString("infoAdicional");
 
         View dialogView = LayoutInflater.from(v.getContext())
                 .inflate(R.layout.fragment_tarjeta_perfil_mascota, null);
@@ -73,20 +88,60 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
         ImageView img = dialogView.findViewById(R.id.imgAccion);
         TextView txtTitulo = dialogView.findViewById(R.id.txtTitulo);
         TextView txtFecha = dialogView.findViewById(R.id.txtFecha);
-        TextView txtDescripcion = dialogView.findViewById(R.id.txtDescripcion);
+
+        TextView txtEdad = dialogView.findViewById(R.id.txtEdad);
+        TextView txtChip = dialogView.findViewById(R.id.txtChip);
+        TextView txtTelefono = dialogView.findViewById(R.id.txtTelefono);
+        TextView txtInfoAdicional = dialogView.findViewById(R.id.txtInfoAdicional);
+
         Button btnEditar = dialogView.findViewById(R.id.btnEditar);
         Button btnEliminar = dialogView.findViewById(R.id.btnEliminar);
 
-        txtTitulo.setText(nombre != null ? nombre : "Sin nombre");
-        txtFecha.setText(tipoEstado);
-        txtDescripcion.setText(
-                "Edad: " + doc.getString("edad") +
-                        "\nChip: " + doc.getString("chip") +
-                        "\nTeléfono: " + doc.getString("telefono") +
-                        "\nInfo: " + doc.getString("infoAdicional")
+        txtTitulo.setText(
+                nombre != null && !nombre.isEmpty()
+                        ? nombre
+                        : context.getString(R.string.sin_nombre)
         );
 
-        if (fotoUrl != null) {
+        txtFecha.setText(crearTipoEstado(tipo, estado));
+
+        txtEdad.setText(
+                context.getString(
+                        R.string.edad_label,
+                        edad != null && !edad.isEmpty()
+                                ? edad
+                                : context.getString(R.string.no_especificada)
+                )
+        );
+
+        txtChip.setText(
+                context.getString(
+                        R.string.chip_label,
+                        chip != null && !chip.isEmpty()
+                                ? chip
+                                : context.getString(R.string.no_especificado)
+                )
+        );
+
+        txtTelefono.setText(
+                context.getString(
+                        R.string.telefono_label,
+                        telefono != null && !telefono.isEmpty()
+                                ? telefono
+                                : context.getString(R.string.no_disponible)
+                )
+        );
+
+        txtInfoAdicional.setText(
+                context.getString(
+                        R.string.info_adicional_label,
+                        info != null && !info.isEmpty()
+                                ? info
+                                : context.getString(R.string.sin_informacion)
+                )
+        );
+
+        if (fotoUrl != null && !fotoUrl.isEmpty()) {
             Glide.with(v.getContext()).load(fotoUrl).into(img);
         }
 
@@ -107,6 +162,57 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
         });
     }
 
+    private String crearTipoEstado(String tipo, String estado) {
+        String tipoTraducido = traducirTipo(tipo);
+        String estadoTraducido = traducirEstado(estado);
+
+        String tipoEstado = "";
+
+        if (!tipoTraducido.isEmpty()) {
+            tipoEstado += tipoTraducido;
+        }
+
+        if (!estadoTraducido.isEmpty()) {
+            if (!tipoEstado.isEmpty()) {
+                tipoEstado += " • ";
+            }
+            tipoEstado += estadoTraducido;
+        }
+
+        return tipoEstado;
+    }
+
+    private String traducirTipo(String tipo) {
+        if (tipo == null) return "";
+
+        switch (tipo.toLowerCase(Locale.ROOT)) {
+            case "perro":
+                return context.getString(R.string.tipo_perro);
+            case "gato":
+                return context.getString(R.string.tipo_gato);
+            case "otro":
+                return context.getString(R.string.tipo_otro);
+            default:
+                return tipo;
+        }
+    }
+
+    private String traducirEstado(String estado) {
+        if (estado == null) return "";
+
+        switch (estado.toLowerCase(Locale.ROOT)) {
+            case "perdido":
+                return context.getString(R.string.estado_perdido);
+            case "adopcion":
+            case "adopción":
+                return context.getString(R.string.estado_adopcion);
+            case "encontrado":
+                return context.getString(R.string.estado_encontrado);
+            default:
+                return estado;
+        }
+    }
+
     @Override
     public int getItemCount() {
         return listaMascotas != null ? listaMascotas.size() : 0;
@@ -119,6 +225,7 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             imgMascota = itemView.findViewById(R.id.imgMascota);
             txtNombre = itemView.findViewById(R.id.txtNombre);
             txtTipoEstado = itemView.findViewById(R.id.txtTipoEstado);
@@ -130,20 +237,27 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
     private void abrirEditar(DocumentSnapshot doc) {
         android.content.Intent intent =
                 new android.content.Intent(context, com.aipasa.main.PublicacionActivity.class);
+
         intent.putExtra("modo", "editar");
         intent.putExtra("idMascota", doc.getId());
+
         context.startActivity(intent);
     }
 
     private void confirmarEliminar(DocumentSnapshot doc) {
         new android.app.AlertDialog.Builder(context)
-                .setTitle("Eliminar mascota")
-                .setMessage("¿Seguro que quieres eliminarla?")
-                .setPositiveButton("Sí", (dialog, which) -> {
+                .setTitle(context.getString(R.string.eliminar_mascota))
+                .setMessage(context.getString(R.string.seguro_eliminar_mascota))
+                .setPositiveButton(context.getString(R.string.si), (dialog, which) -> {
                     doc.getReference().delete();
-                    Toast.makeText(context, "Mascota eliminada", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(
+                            context,
+                            context.getString(R.string.mascota_eliminada),
+                            Toast.LENGTH_SHORT
+                    ).show();
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton(context.getString(R.string.no), null)
                 .show();
     }
 }
