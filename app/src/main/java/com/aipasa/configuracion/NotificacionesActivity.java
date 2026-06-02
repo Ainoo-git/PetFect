@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.aipasa.R;
 import com.aipasa.firebase.NotificacionesAdapter;
 import com.aipasa.firebase.NotificacionModel;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -39,6 +40,10 @@ public class NotificacionesActivity
                 R.layout.activity_notificaciones
         );
 
+        //========nuevo========
+        configurarToolbar();
+        //=====================
+
         recyclerNotificaciones =
                 findViewById(
                         R.id.recyclerNotificaciones
@@ -65,7 +70,18 @@ public class NotificacionesActivity
 
         cargarNotificaciones();
     }
+    //===================nuevo==================
+    private void configurarToolbar() {
+        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+        setSupportActionBar(toolbar);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        toolbar.setNavigationOnClickListener(v -> finish());
+    }
+    //===========================================
     private void cargarNotificaciones() {
 
         FirebaseUser usuario =
