@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
                 android:text="@string/permisos_usados_petfect"
-                android:textColor="@color/black"
+                android:textColor="@color/text_primary"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
                 android:text="@string/permisos_descripcion"
-                android:textColor="#777777"
+                android:textColor="@color/gris"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -83,7 +83,7 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="6dp"
                         android:text="@string/camara_descripcion"
-                        android:textColor="#5F5E5A"
+                        android:textColor="@color/gris"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -128,7 +128,7 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="6dp"
                         android:text="@string/galeria_descripcion"
-                        android:textColor="#5F5E5A"
+                        android:textColor="@color/gris"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -173,7 +173,7 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="6dp"
                         android:text="@string/ubicacion_descripcion"
-                        android:textColor="#5F5E5A"
+                        android:textColor="@color/gris"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -218,7 +218,7 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="6dp"
                         android:text="@string/notificaciones_descripcion"
-                        android:textColor="#5F5E5A"
+                        android:textColor="@color/gris"
                         android:textSize="14sp" />
 
                 </LinearLayout>
