@@ -1,23 +1,22 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
-    <!--  APPBARrr  -->
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    android:orientation="vertical">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/rosita_fondoss_tarjetas_alertaslev"
-            android:title="@string/terminos_y_condiciones"
-            android:titleTextColor="@color/white"
-            app:navigationIcon="@drawable/outline_arrow"
-            app:titleCentered="true" />
-    </com.google.android.material.appbar.AppBarLayout>
+    <!-- TOOLBAR SIMPLE -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+        android:title="@string/terminos_y_condiciones"
+        android:titleTextColor="@color/white"
+        app:navigationIcon="@drawable/outline_arrow"
+        app:titleCentered="true" />
     <!--  CONTENIDO  -->
     <ScrollView
         android:layout_width="match_parent"
@@ -455,4 +454,4 @@
                 android:textSize="11sp" />
         </LinearLayout>
     </ScrollView>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>
