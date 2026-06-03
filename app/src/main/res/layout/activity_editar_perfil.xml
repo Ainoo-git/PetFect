@@ -1,9 +1,11 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!--  APPBAR  -->
+
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -15,20 +17,23 @@
             android:title="@string/editar_perfil"
             android:titleTextColor="@color/white"
             app:navigationIcon="@drawable/outline_arrow"
+            app:navigationIconTint="@color/white"
             app:titleCentered="true" />
+
     </com.google.android.material.appbar.AppBarLayout>
-    <!--  CONTENIDO  -->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="?attr/actionBarSize">
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp">
-            <!--  NOMBRE USUARIO  -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,7 +48,7 @@
                 android:layout_marginBottom="16dp"
                 android:hint="@string/introduce_nombre_usuario"
                 android:padding="12dp" />
-            <!--  CORREO  -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,7 +64,7 @@
                 android:hint="@string/introduce_correo"
                 android:inputType="textEmailAddress"
                 android:padding="12dp" />
-            <!--  CONTRASEÑA  -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -75,7 +80,7 @@
                 android:hint="@string/nueva_contrasena"
                 android:inputType="textPassword"
                 android:padding="12dp" />
-            <!--  BOTÓN GUARDAR  -->
+
             <Button
                 android:id="@+id/btnGuardar"
                 android:layout_width="match_parent"
@@ -83,6 +88,9 @@
                 android:backgroundTint="@color/rosita_fondoss_tarjetas_alertaslev"
                 android:text="@string/guardar_cambios"
                 android:textColor="@color/white" />
+
         </LinearLayout>
+
     </ScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

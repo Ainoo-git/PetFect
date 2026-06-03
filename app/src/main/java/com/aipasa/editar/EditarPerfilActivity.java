@@ -20,17 +20,17 @@ import java.util.Map;
 
 public class EditarPerfilActivity extends AppCompatActivity {
 
-    EditText etUsername;
-    EditText etEmail;
-    EditText etPassword;
-    Button btnGuardar;
+    private EditText etUsername;
+    private EditText etEmail;
+    private EditText etPassword;
+    private Button btnGuardar;
 
-    FirebaseAuth auth;
-    FirebaseFirestore db;
-    FirebaseUser user;
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
+    private FirebaseUser user;
 
-    String currentUsername = "";
-    String currentEmail = "";
+    private String currentUsername = "";
+    private String currentEmail = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,32 +68,43 @@ public class EditarPerfilActivity extends AppCompatActivity {
     }
 
     private void cargarDatosUsuario() {
-        if (user != null) {
-            currentEmail = user.getEmail();
-            etEmail.setText(currentEmail);
+        if (user == null) {
+            Toast.makeText(this, "No hay usuario conectado", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
 
-            db.collection("usuarios")
-                    .document(user.getUid())
-                    .get()
-                    .addOnSuccessListener(documentSnapshot -> {
-                        if (documentSnapshot.exists()) {
-                            currentUsername = documentSnapshot.getString("username");
+        currentEmail = user.getEmail();
+
+        if (currentEmail != null) {
+            etEmail.setText(currentEmail);
+        }
+
+        db.collection("usuarios")
+                .document(user.getUid())
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        currentUsername = documentSnapshot.getString("username");
+
+                        if (currentUsername != null) {
                             etUsername.setText(currentUsername);
                         }
-                    })
-                    .addOnFailureListener(e ->
-                            Toast.makeText(
-                                    this,
-                                    "Error cargando usuario",
-                                    Toast.LENGTH_SHORT
-                            ).show()
-                    );
-        }
+                    }
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(
+                                this,
+                                "Error cargando usuario",
+                                Toast.LENGTH_SHORT
+                        ).show()
+                );
     }
 
     private void configurarBotonGuardar() {
         btnGuardar.setOnClickListener(v -> {
             if (user == null) {
+                Toast.makeText(this, "No hay usuario conectado", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -101,66 +112,76 @@ public class EditarPerfilActivity extends AppCompatActivity {
             String newEmail = etEmail.getText().toString().trim();
             String newPassword = etPassword.getText().toString().trim();
 
-            if (!newUsername.isEmpty() && !newUsername.equals(currentUsername)) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("username", newUsername);
-
-                db.collection("usuarios")
-                        .document(user.getUid())
-                        .update(map);
-
-                currentUsername = newUsername;
+            if (newUsername.isEmpty()) {
+                etUsername.setError("Introduce un nombre de usuario");
+                return;
             }
 
-            if (!newEmail.isEmpty() && !newEmail.equals(currentEmail)) {
-                user.updateEmail(newEmail)
-                        .addOnSuccessListener(unused ->
-                                Toast.makeText(
-                                        this,
-                                        "Email actualizado",
-                                        Toast.LENGTH_SHORT
-                                ).show()
-                        )
-                        .addOnFailureListener(e ->
-                                Toast.makeText(
-                                        this,
-                                        "Error email: " + e.getMessage(),
-                                        Toast.LENGTH_SHORT
-                                ).show()
-                        );
-
-                currentEmail = newEmail;
+            if (newEmail.isEmpty()) {
+                etEmail.setError("Introduce un correo electrónico");
+                return;
             }
 
-            if (!newPassword.isEmpty()) {
-                user.updatePassword(newPassword)
-                        .addOnSuccessListener(unused ->
-                                Toast.makeText(
-                                        this,
-                                        "Contraseña actualizada",
-                                        Toast.LENGTH_SHORT
-                                ).show()
-                        )
-                        .addOnFailureListener(e ->
-                                Toast.makeText(
-                                        this,
-                                        "Error password: " + e.getMessage(),
-                                        Toast.LENGTH_SHORT
-                                ).show()
-                        );
-            }
+            actualizarUsername(newUsername);
+            actualizarEmail(newEmail);
+            actualizarPassword(newPassword);
 
-            btnGuardar.postDelayed(() -> {
-                Toast.makeText(
-                        this,
-                        "Perfil actualizado",
-                        Toast.LENGTH_SHORT
-                ).show();
-
-                finish();
-
-            }, 1000);
+            Toast.makeText(this, "Perfil actualizado", Toast.LENGTH_SHORT).show();
+            finish();
         });
+    }
+
+    private void actualizarUsername(String newUsername) {
+        if (!newUsername.equals(currentUsername)) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("username", newUsername);
+
+            db.collection("usuarios")
+                    .document(user.getUid())
+                    .update(map)
+                    .addOnSuccessListener(unused -> currentUsername = newUsername)
+                    .addOnFailureListener(e ->
+                            Toast.makeText(
+                                    this,
+                                    "Error actualizando usuario",
+                                    Toast.LENGTH_SHORT
+                            ).show()
+                    );
+        }
+    }
+
+    private void actualizarEmail(String newEmail) {
+        if (!newEmail.equals(currentEmail)) {
+            user.updateEmail(newEmail)
+                    .addOnSuccessListener(unused -> currentEmail = newEmail)
+                    .addOnFailureListener(e ->
+                            Toast.makeText(
+                                    this,
+                                    "Error email: " + e.getMessage(),
+                                    Toast.LENGTH_SHORT
+                            ).show()
+                    );
+        }
+    }
+
+    private void actualizarPassword(String newPassword) {
+        if (!newPassword.isEmpty()) {
+            user.updatePassword(newPassword)
+                    .addOnSuccessListener(unused ->
+                            Toast.makeText(
+                                    this,
+                                    "Contraseña actualizada",
+                                    Toast.LENGTH_SHORT
+                            ).show()
+                    )
+                    .addOnFailureListener(e ->
+                            Toast.makeText(
+                                    this,
+                                    "Error password: " + e.getMessage(),
+                                    Toast.LENGTH_SHORT
+                            ).show()
+                    );
+        }
     }
 
     @Override
@@ -172,5 +193,4 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }
