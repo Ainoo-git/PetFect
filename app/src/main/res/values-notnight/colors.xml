@@ -10,7 +10,7 @@
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="background">#1B1B1B</color>
+    <color name="background">#FFFFFF</color>
     <color name="surface">#1E1E1E</color>
 
     <color name="text_primary">#000000</color>
