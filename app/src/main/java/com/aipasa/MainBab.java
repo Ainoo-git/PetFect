@@ -117,13 +117,4 @@ public class MainBab extends AppCompatActivity {
                         System.out.println("Error al suscribirse: " + e.getMessage()));
     }
 
-    @Override
-    public void onBackPressed() {
-
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
-        } else {
-            super.onBackPressed();
-        }
-    }
 }
