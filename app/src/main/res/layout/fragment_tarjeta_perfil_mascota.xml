@@ -16,7 +16,8 @@
         android:layout_marginEnd="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        app:cardBackgroundColor="@android:color/white">
+        app:cardBackgroundColor="@color/white">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,7 +43,7 @@
                 android:text="@string/nombre_mascota_demo"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_primary"
                 android:layout_marginBottom="8dp"/>
 
             <!-- Tipo y estado -->
