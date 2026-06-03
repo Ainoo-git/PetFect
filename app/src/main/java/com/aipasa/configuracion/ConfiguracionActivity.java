@@ -7,17 +7,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.aipasa.R;
-import com.aipasa.configuracion.NotificacionesActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 
 public class ConfiguracionActivity extends AppCompatActivity {
@@ -46,10 +47,12 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
     private void configurarToolbar() {
         MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
         toolbar.setNavigationOnClickListener(v -> finish());
@@ -70,7 +73,6 @@ public class ConfiguracionActivity extends AppCompatActivity {
         findViewById(R.id.politica_privacidad).setOnClickListener(v -> openPrivacidad());
         findViewById(R.id.guardados).setOnClickListener(v -> openGuardados());
         findViewById(R.id.notificaciones).setOnClickListener(v -> openNotificaciones());
-
         findViewById(R.id.idioma).setOnClickListener(v -> openIdioma());
     }
 
@@ -158,4 +160,15 @@ public class ConfiguracionActivity extends AppCompatActivity {
     private void openIdioma() {
         startActivity(new Intent(ConfiguracionActivity.this, IdiomaActivity.class));
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }
