@@ -88,9 +88,7 @@ public class PublicacionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_publicacion);
 
         MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
-
         topAppBar.setNavigationOnClickListener(v -> finish());
-
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -119,6 +117,7 @@ public class PublicacionActivity extends AppCompatActivity {
 
         if ("editar".equals(modo)) {
             btnPublicar.setText("Guardar cambios");
+            checkLegal.setChecked(true);
         }
 
         layoutImagen.setOnClickListener(v -> mostrarOpcionesImagen());
@@ -154,6 +153,12 @@ public class PublicacionActivity extends AppCompatActivity {
                         ColorStateList.valueOf(getColor(R.color.coral_alertasimp_errores))
                 );
 
+                Toast.makeText(
+                        this,
+                        "Debes aceptar los términos antes de publicar",
+                        Toast.LENGTH_SHORT
+                ).show();
+
                 return;
             }
 
@@ -163,6 +168,10 @@ public class PublicacionActivity extends AppCompatActivity {
                 obtenerUbicacionYGuardar();
             }
         });
+
+        if ("editar".equals(modo) && idMascota != null) {
+            cargarDatosMascota(idMascota);
+        }
     }
 
     private void mostrarOpcionesImagen() {
@@ -426,17 +435,19 @@ public class PublicacionActivity extends AppCompatActivity {
                                             SupabaseClient.BUCKET_NAME +
                                             "/" + fileName;
 
-                            guardarEnFirestore(
-                                    publicUrl,
-                                    nombre,
-                                    tipo,
-                                    estado,
-                                    telefono,
-                                    edad,
-                                    chip,
-                                    infoAdicional,
-                                    latitud,
-                                    longitud
+                            runOnUiThread(() ->
+                                    guardarEnFirestore(
+                                            publicUrl,
+                                            nombre,
+                                            tipo,
+                                            estado,
+                                            telefono,
+                                            edad,
+                                            chip,
+                                            infoAdicional,
+                                            latitud,
+                                            longitud
+                                    )
                             );
 
                         } else {
@@ -646,7 +657,11 @@ public class PublicacionActivity extends AppCompatActivity {
                     longitudOriginal = doc.getDouble("longitud");
 
                     if (fotoUrlActual != null && !fotoUrlActual.isEmpty()) {
-                        Glide.with(this).load(fotoUrlActual).into(imgMascota);
+                        Glide.with(this)
+                                .load(fotoUrlActual)
+                                .centerCrop()
+                                .into(imgMascota);
+
                         layoutImagen.setVisibility(View.GONE);
                         imgMascota.setVisibility(View.VISIBLE);
                     }

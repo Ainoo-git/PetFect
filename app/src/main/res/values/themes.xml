@@ -3,11 +3,11 @@
     <!-- BASE THEME -->
     <style name="Base.Theme.PetFect" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Colores globales si quieres -->
-        <item name="colorPrimary">@color/cian_botones</item>
-        <item name="colorSecondary">@color/cian_oscuro_iconos</item>
-    </style>
+    <item name="colorPrimary">@color/rosita_fondoss_tarjetas_alertaslev</item>
+    <item name="colorSecondary">@color/rosita_fondoss_tarjetas_alertaslev</item>
+  </style>
 
-    <!-- TU TEMA PRINCIPAL -->
+  <!-- TU TEMA PRINCIPAL -->
     <style name="Theme.PetFect" parent="Base.Theme.PetFect">
         <!-- Si quieres puedes añadir cosas globales aquí -->
     </style>
