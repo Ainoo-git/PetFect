@@ -11,6 +11,7 @@
 
     <color name="background">#282828</color>
     <color name="surface">#373737</color>
+    <color name="fondotar">#FBD6D6</color>
 
 
     <color name="text_primary">#FFFFFF</color>
