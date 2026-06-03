@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.*;
+import android.content.res.ColorStateList;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -111,7 +112,7 @@ public class PublicacionActivity extends AppCompatActivity {
         cbOtro = findViewById(R.id.rbOtro);
 
         imgMascota.setVisibility(View.GONE);
-        btnPublicar.setEnabled(false);
+        btnPublicar.setEnabled(true);
 
         modo = getIntent().getStringExtra("modo");
         idMascota = getIntent().getStringExtra("idMascota");
@@ -123,9 +124,14 @@ public class PublicacionActivity extends AppCompatActivity {
         layoutImagen.setOnClickListener(v -> mostrarOpcionesImagen());
         imgMascota.setOnClickListener(v -> mostrarOpcionesImagen());
 
-        checkLegal.setOnCheckedChangeListener((buttonView, isChecked) ->
-                btnPublicar.setEnabled(isChecked)
-        );
+        checkLegal.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                checkLegal.setTextColor(getColor(R.color.black));
+                checkLegal.setButtonTintList(
+                        ColorStateList.valueOf(getColor(R.color.rosita_fondoss_tarjetas_alertaslev))
+                );
+            }
+        });
 
         galeriaLauncher = registerForActivityResult(
                 new ActivityResultContracts.GetContent(),
@@ -142,16 +148,21 @@ public class PublicacionActivity extends AppCompatActivity {
         );
 
         btnPublicar.setOnClickListener(v -> {
+            if (!checkLegal.isChecked()) {
+                checkLegal.setTextColor(getColor(R.color.coral_alertasimp_errores));
+                checkLegal.setButtonTintList(
+                        ColorStateList.valueOf(getColor(R.color.coral_alertasimp_errores))
+                );
+
+                return;
+            }
+
             if ("editar".equals(modo)) {
                 guardarConUbicacionOriginal();
             } else {
                 obtenerUbicacionYGuardar();
             }
         });
-
-        if ("editar".equals(modo) && idMascota != null) {
-            cargarDatosMascota(idMascota);
-        }
     }
 
     private void mostrarOpcionesImagen() {
