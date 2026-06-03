@@ -1,5 +1,6 @@
 package com.aipasa.configuracion;
 
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -7,41 +8,51 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.aipasa.R;
-import com.aipasa.firebase.NotificacionesAdapter;
 import com.aipasa.firebase.NotificacionModel;
+import com.aipasa.firebase.NotificacionesAdapter;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class NotificacionesActivity extends AppCompatActivity {
+
 
     private RecyclerView recyclerNotificaciones;
     private NotificacionesAdapter adapter;
     private List<NotificacionModel> listaNotificaciones;
 
+
     private FirebaseFirestore db;
     private FirebaseAuth auth;
+
 
     private final ColorDrawable fondoRojo = new ColorDrawable(
             Color.rgb(220, 53, 69)
     );
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notificaciones);
+
 
         configurarToolbar();
         inicializarFirebase();
@@ -50,46 +61,44 @@ public class NotificacionesActivity extends AppCompatActivity {
         cargarNotificaciones();
     }
 
+
     private void configurarToolbar() {
         MaterialToolbar toolbar = findViewById(R.id.topAppBar);
         toolbar.setNavigationOnClickListener(v -> finish());
     }
+
 
     private void inicializarFirebase() {
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
     }
 
+
     private void inicializarRecycler() {
         recyclerNotificaciones = findViewById(R.id.recyclerNotificaciones);
 
+
         listaNotificaciones = new ArrayList<>();
+
 
         adapter = new NotificacionesAdapter(
                 this,
                 listaNotificaciones
         );
 
+
         recyclerNotificaciones.setLayoutManager(
                 new LinearLayoutManager(this)
         );
 
+
         recyclerNotificaciones.setAdapter(adapter);
-
-        db = FirebaseFirestore.getInstance();
-        auth = FirebaseAuth.getInstance();
-
-        cargarNotificaciones();
     }
 
-    private void configurarToolbar() {
-        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
-
-        toolbar.setNavigationOnClickListener(v -> finish());
-    }
 
     private void cargarNotificaciones() {
         FirebaseUser usuarioActual = auth.getCurrentUser();
+
 
         if (usuarioActual == null) {
             Toast.makeText(
@@ -100,7 +109,9 @@ public class NotificacionesActivity extends AppCompatActivity {
             return;
         }
 
+
         String uidActual = usuarioActual.getUid();
+
 
         db.collection("notificaciones")
                 .addSnapshotListener((value, error) -> {
@@ -113,27 +124,35 @@ public class NotificacionesActivity extends AppCompatActivity {
                         return;
                     }
 
+
                     if (value == null) {
                         return;
                     }
 
+
                     listaNotificaciones.clear();
+
 
                     for (DocumentSnapshot doc : value.getDocuments()) {
                         String idUsuarioPublicador = doc.getString("idUsuario");
+
 
                         if (idUsuarioPublicador != null && idUsuarioPublicador.equals(uidActual)) {
                             continue;
                         }
 
+
                         List<String> eliminadaPor = (List<String>) doc.get("eliminadaPor");
+
 
                         if (eliminadaPor != null && eliminadaPor.contains(uidActual)) {
                             continue;
                         }
 
+
                         NotificacionModel notificacion =
                                 doc.toObject(NotificacionModel.class);
+
 
                         if (notificacion != null) {
                             notificacion.setId(doc.getId());
@@ -141,9 +160,11 @@ public class NotificacionesActivity extends AppCompatActivity {
                         }
                     }
 
+
                     adapter.notifyDataSetChanged();
                 });
     }
+
 
     private void configurarEliminarArrastrando() {
         ItemTouchHelper.SimpleCallback callback =
@@ -160,6 +181,7 @@ public class NotificacionesActivity extends AppCompatActivity {
                         return false;
                     }
 
+
                     @Override
                     public void onSwiped(
                             @NonNull RecyclerView.ViewHolder viewHolder,
@@ -167,15 +189,19 @@ public class NotificacionesActivity extends AppCompatActivity {
                     ) {
                         int posicion = viewHolder.getAdapterPosition();
 
+
                         if (posicion == RecyclerView.NO_POSITION) {
                             return;
                         }
 
+
                         NotificacionModel notificacion =
                                 listaNotificaciones.get(posicion);
 
+
                         ocultarNotificacionParaMi(notificacion, posicion);
                     }
+
 
                     @Override
                     public void onChildDraw(
@@ -188,6 +214,7 @@ public class NotificacionesActivity extends AppCompatActivity {
                             boolean isCurrentlyActive
                     ) {
                         View itemView = viewHolder.itemView;
+
 
                         if (dX > 0) {
                             fondoRojo.setBounds(
@@ -207,7 +234,9 @@ public class NotificacionesActivity extends AppCompatActivity {
                             fondoRojo.setBounds(0, 0, 0, 0);
                         }
 
+
                         fondoRojo.draw(canvas);
+
 
                         super.onChildDraw(
                                 canvas,
@@ -221,9 +250,11 @@ public class NotificacionesActivity extends AppCompatActivity {
                     }
                 };
 
+
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
         itemTouchHelper.attachToRecyclerView(recyclerNotificaciones);
     }
+
 
     private void ocultarNotificacionParaMi(
             NotificacionModel notificacion,
@@ -231,17 +262,21 @@ public class NotificacionesActivity extends AppCompatActivity {
     ) {
         FirebaseUser usuarioActual = auth.getCurrentUser();
 
+
         if (usuarioActual == null) {
             adapter.notifyItemChanged(posicion);
             return;
         }
+
 
         if (notificacion.getId() == null || notificacion.getId().isEmpty()) {
             adapter.notifyItemChanged(posicion);
             return;
         }
 
+
         String uidActual = usuarioActual.getUid();
+
 
         db.collection("notificaciones")
                 .document(notificacion.getId())
@@ -252,6 +287,7 @@ public class NotificacionesActivity extends AppCompatActivity {
                         adapter.notifyItemRemoved(posicion);
                         adapter.notifyItemRangeChanged(posicion, listaNotificaciones.size());
                     }
+
 
                     Toast.makeText(
                             this,
@@ -266,7 +302,9 @@ public class NotificacionesActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT
                     ).show();
 
+
                     adapter.notifyItemChanged(posicion);
                 });
     }
 }
+

@@ -16,4 +16,14 @@
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#000000</color>
     <color name="gris">#B6B6B6</color>
+
+
+    <color name="fondo_pantalla_app">#F5F5F5</color>
+    <color name="fondo_tarjeta_app">#FFFFFFFF</color>
+    <color name="texto_titulo_app">#FF000000</color>
+    <color name="texto_normal_app">#FF000000</color>
+    <color name="texto_secundario_app">#9E9E9E</color>
+    <color name="texto_boton_claro_app">#FF000000</color>
+
+
 </resources>
