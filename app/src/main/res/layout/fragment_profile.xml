@@ -11,7 +11,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="44dp"
             android:background="@color/rosita_fondoss_tarjetas_alertaslev"
             android:title="@string/perfil"
             android:titleTextColor="@color/text_secondary" />
