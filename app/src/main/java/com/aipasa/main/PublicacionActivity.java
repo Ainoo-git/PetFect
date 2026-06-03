@@ -24,6 +24,7 @@ import com.aipasa.firebase.SupabaseClient;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -84,6 +85,11 @@ public class PublicacionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicacion);
+
+        MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
+
+        topAppBar.setNavigationOnClickListener(v -> finish());
+
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
