@@ -11,7 +11,8 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="background">#FFFFFF</color>
-    <color name="surface">#1E1E1E</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="fondotar">#FBD6D6</color>
 
     <color name="text_primary">#000000</color>
     <color name="text_secondary">#FFFFFF</color>

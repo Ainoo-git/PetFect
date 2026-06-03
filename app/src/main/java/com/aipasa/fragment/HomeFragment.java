@@ -459,7 +459,6 @@ public class HomeFragment extends Fragment {
                 .setBackgroundDrawable(
                         new ColorDrawable(Color.TRANSPARENT)
                 );
-
         dialog.show();
     }
 }
