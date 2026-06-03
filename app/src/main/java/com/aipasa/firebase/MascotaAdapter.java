@@ -100,6 +100,7 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
             holder.txtFecha.setText("");
         }
 
+
         if (fotoUrl != null && !fotoUrl.isEmpty()) {
             Glide.with(holder.itemView.getContext())
                     .load(fotoUrl)

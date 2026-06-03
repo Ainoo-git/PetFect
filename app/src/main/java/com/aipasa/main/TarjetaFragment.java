@@ -12,6 +12,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import com.google.android.gms.maps.model.BitmapDescriptor;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.appbar.MaterialToolbar;
 
 import androidx.annotation.NonNull;
@@ -31,7 +42,7 @@ public class TarjetaFragment extends DialogFragment {
     private Button btnVerMas;
     private ImageButton btnGuardar;
     private MaterialToolbar topAppBar;
-
+    private MapView mapMiniContacto;
     private static final String ARG_ARTICULO_ID = "ARTICULO_ID";
 
     public static TarjetaFragment newInstance(String articuloId) {
@@ -67,6 +78,10 @@ public class TarjetaFragment extends DialogFragment {
         txtChip = view.findViewById(R.id.txtChip);
         txtTelefono = view.findViewById(R.id.txtTelefono);
         txtInfoAdicional = view.findViewById(R.id.txtInfoAdicional);
+
+        mapMiniContacto = view.findViewById(R.id.mapMiniContacto);
+        mapMiniContacto.onCreate(savedInstanceState);
+        mapMiniContacto.onResume();
 
         topAppBar = view.findViewById(R.id.topAppBar);
         topAppBar.setNavigationOnClickListener(v -> dismiss());
@@ -132,6 +147,11 @@ public class TarjetaFragment extends DialogFragment {
                     String telefono = documentSnapshot.getString("telefono");
                     String info = documentSnapshot.getString("infoAdicional");
                     String fotoUrl = documentSnapshot.getString("fotoUrl");
+
+
+                    Double latitud = documentSnapshot.getDouble("latitud");
+                    Double longitud = documentSnapshot.getDouble("longitud");
+
 
                     txtTitulo.setText(
                             nombre != null && !nombre.isEmpty()
@@ -201,6 +221,13 @@ public class TarjetaFragment extends DialogFragment {
                     } else {
                         imgAccion.setImageResource(R.drawable.logologin);
                     }
+                    configurarMiniMapa(
+                            nombre,
+                            estado,
+                            latitud,
+                            longitud
+                    );
+
 
                     btnGuardar.bringToFront();
 
@@ -236,6 +263,67 @@ public class TarjetaFragment extends DialogFragment {
                 );
     }
 
+
+    private void configurarMiniMapa(
+            String nombre,
+            String estado,
+            Double latitud,
+            Double longitud
+    ) {
+        if (mapMiniContacto == null || latitud == null || longitud == null) {
+            return;
+        }
+
+        mapMiniContacto.getMapAsync(googleMap -> {
+            LatLng ubicacionMascota = new LatLng(latitud, longitud);
+
+            googleMap.clear();
+
+            googleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(ubicacionMascota, 15f)
+            );
+
+            int iconoPuntero;
+
+            if ("perdido".equalsIgnoreCase(estado)) {
+                iconoPuntero = R.drawable.puntero_perdido;
+            } else if ("adopcion".equalsIgnoreCase(estado)
+                    || "adopción".equalsIgnoreCase(estado)) {
+                iconoPuntero = R.drawable.puntero_adopcion;
+            } else {
+                iconoPuntero = R.drawable.puntero_perdido;
+            }
+
+            googleMap.addMarker(
+                    new MarkerOptions()
+                            .position(ubicacionMascota)
+                            .title(nombre != null ? nombre : getString(R.string.sin_nombre))
+                            .icon(crearIconoPequeno(iconoPuntero))
+            );
+
+            googleMap.getUiSettings().setZoomControlsEnabled(false);
+            googleMap.getUiSettings().setScrollGesturesEnabled(false);
+            googleMap.getUiSettings().setZoomGesturesEnabled(false);
+            googleMap.getUiSettings().setRotateGesturesEnabled(false);
+            googleMap.getUiSettings().setTiltGesturesEnabled(false);
+        });
+    }
+
+    private BitmapDescriptor crearIconoPequeno(int drawableId) {
+        Bitmap bitmapOriginal = BitmapFactory.decodeResource(
+                getResources(),
+                drawableId
+        );
+
+        Bitmap bitmapPequeno = Bitmap.createScaledBitmap(
+                bitmapOriginal,
+                80,
+                80,
+                false
+        );
+
+        return BitmapDescriptorFactory.fromBitmap(bitmapPequeno);
+    }
     private String traducirTipo(String tipo) {
         if (tipo == null) return "";
 
@@ -264,6 +352,42 @@ public class TarjetaFragment extends DialogFragment {
                 return getString(R.string.estado_encontrado);
             default:
                 return estado;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mapMiniContacto != null) {
+            mapMiniContacto.onResume();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (mapMiniContacto != null) {
+            mapMiniContacto.onPause();
+        }
+
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (mapMiniContacto != null) {
+            mapMiniContacto.onDestroy();
+        }
+
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+
+        if (mapMiniContacto != null) {
+            mapMiniContacto.onLowMemory();
         }
     }
 }

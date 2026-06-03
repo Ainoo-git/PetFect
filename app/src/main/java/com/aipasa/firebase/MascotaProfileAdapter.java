@@ -31,15 +31,21 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MascotaProfileAdapter.ViewHolder onCreateViewHolder(
+            @NonNull ViewGroup parent,
+            int viewType
+    ) {
         View view = LayoutInflater.from(context)
                 .inflate(R.layout.item_mascota, parent, false);
+
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+    public void onBindViewHolder(
+            @NonNull MascotaProfileAdapter.ViewHolder holder,
+            int position
+    ) {
         DocumentSnapshot doc = listaMascotas.get(position);
 
         String nombre = doc.getString("nombre");
@@ -64,14 +70,31 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
         );
 
         if (fotoUrl != null && !fotoUrl.isEmpty()) {
-            Glide.with(context).load(fotoUrl).into(holder.imgMascota);
+            Glide.with(context)
+                    .load(fotoUrl)
+                    .into(holder.imgMascota);
+        } else {
+            holder.imgMascota.setImageResource(R.drawable.logologin);
         }
 
-        holder.itemView.setOnClickListener(v -> abrirDialog(v, doc));
+        holder.itemView.setOnClickListener(v -> {
+            int posicionActual = holder.getBindingAdapterPosition();
+
+            if (posicionActual == RecyclerView.NO_POSITION) {
+                return;
+            }
+
+            DocumentSnapshot documentoActual = listaMascotas.get(posicionActual);
+
+            abrirDialog(v, documentoActual, posicionActual);
+        });
     }
 
-    private void abrirDialog(View v, DocumentSnapshot doc) {
-
+    private void abrirDialog(
+            View v,
+            DocumentSnapshot doc,
+            int posicion
+    ) {
         String nombre = doc.getString("nombre");
         String tipo = doc.getString("tipo");
         String estado = doc.getString("estado");
@@ -142,7 +165,11 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
         );
 
         if (fotoUrl != null && !fotoUrl.isEmpty()) {
-            Glide.with(v.getContext()).load(fotoUrl).into(img);
+            Glide.with(v.getContext())
+                    .load(fotoUrl)
+                    .into(img);
+        } else {
+            img.setImageResource(R.drawable.logologin);
         }
 
         android.app.AlertDialog dialog = new android.app.AlertDialog.Builder(v.getContext())
@@ -158,7 +185,7 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
 
         btnEliminar.setOnClickListener(v2 -> {
             dialog.dismiss();
-            confirmarEliminar(doc);
+            confirmarEliminar(doc, posicion);
         });
     }
 
@@ -176,6 +203,7 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
             if (!tipoEstado.isEmpty()) {
                 tipoEstado += " • ";
             }
+
             tipoEstado += estadoTraducido;
         }
 
@@ -183,7 +211,9 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
     }
 
     private String traducirTipo(String tipo) {
-        if (tipo == null) return "";
+        if (tipo == null) {
+            return "";
+        }
 
         switch (tipo.toLowerCase(Locale.ROOT)) {
             case "perro":
@@ -198,7 +228,9 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
     }
 
     private String traducirEstado(String estado) {
-        if (estado == null) return "";
+        if (estado == null) {
+            return "";
+        }
 
         switch (estado.toLowerCase(Locale.ROOT)) {
             case "perdido":
@@ -221,7 +253,10 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgMascota;
-        TextView txtNombre, txtTipoEstado, txtInfoAdicional, txtFecha;
+        TextView txtNombre;
+        TextView txtTipoEstado;
+        TextView txtInfoAdicional;
+        TextView txtFecha;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -236,7 +271,10 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
 
     private void abrirEditar(DocumentSnapshot doc) {
         android.content.Intent intent =
-                new android.content.Intent(context, com.aipasa.main.PublicacionActivity.class);
+                new android.content.Intent(
+                        context,
+                        com.aipasa.main.PublicacionActivity.class
+                );
 
         intent.putExtra("modo", "editar");
         intent.putExtra("idMascota", doc.getId());
@@ -244,12 +282,32 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
         context.startActivity(intent);
     }
 
-    private void confirmarEliminar(DocumentSnapshot doc) {
+    private void confirmarEliminar(
+            DocumentSnapshot doc,
+            int posicion
+    ) {
         new android.app.AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.eliminar_mascota))
                 .setMessage(context.getString(R.string.seguro_eliminar_mascota))
                 .setPositiveButton(context.getString(R.string.si), (dialog, which) -> {
-                    doc.getReference().delete();
+                    eliminarMascota(doc, posicion);
+                })
+                .setNegativeButton(context.getString(R.string.no), null)
+                .show();
+    }
+
+    private void eliminarMascota(
+            DocumentSnapshot doc,
+            int posicion
+    ) {
+        doc.getReference()
+                .delete()
+                .addOnSuccessListener(unused -> {
+                    if (posicion >= 0 && posicion < listaMascotas.size()) {
+                        listaMascotas.remove(posicion);
+                        notifyItemRemoved(posicion);
+                        notifyItemRangeChanged(posicion, listaMascotas.size());
+                    }
 
                     Toast.makeText(
                             context,
@@ -257,7 +315,12 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
                             Toast.LENGTH_SHORT
                     ).show();
                 })
-                .setNegativeButton(context.getString(R.string.no), null)
-                .show();
+                .addOnFailureListener(e ->
+                        Toast.makeText(
+                                context,
+                                "No se pudo eliminar la publicación",
+                                Toast.LENGTH_SHORT
+                        ).show()
+                );
     }
 }
