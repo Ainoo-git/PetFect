@@ -228,6 +228,7 @@ public class TarjetaFragment extends DialogFragment {
                             longitud
                     );
 
+
                     btnGuardar.bringToFront();
 
                     btnGuardar.setOnClickListener(v ->
@@ -297,7 +298,7 @@ public class TarjetaFragment extends DialogFragment {
                     new MarkerOptions()
                             .position(ubicacionMascota)
                             .title(nombre != null ? nombre : getString(R.string.sin_nombre))
-                            .icon(BitmapDescriptorFactory.fromResource(iconoPuntero))
+                            .icon(crearIconoPequeno(iconoPuntero))
             );
 
             googleMap.getUiSettings().setZoomControlsEnabled(false);
@@ -308,6 +309,21 @@ public class TarjetaFragment extends DialogFragment {
         });
     }
 
+    private BitmapDescriptor crearIconoPequeno(int drawableId) {
+        Bitmap bitmapOriginal = BitmapFactory.decodeResource(
+                getResources(),
+                drawableId
+        );
+
+        Bitmap bitmapPequeno = Bitmap.createScaledBitmap(
+                bitmapOriginal,
+                80,
+                80,
+                false
+        );
+
+        return BitmapDescriptorFactory.fromBitmap(bitmapPequeno);
+    }
     private String traducirTipo(String tipo) {
         if (tipo == null) return "";
 
