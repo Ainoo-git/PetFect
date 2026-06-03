@@ -392,45 +392,50 @@ public class HomeFragment extends Fragment {
     private void showTermsDialog() {
 
         Dialog dialog = new Dialog(requireContext());
-
         dialog.setContentView(R.layout.dialog_terms);
-
         dialog.setCancelable(false);
 
         Button btnAccept = dialog.findViewById(R.id.btnAccept);
         Button btnCancel = dialog.findViewById(R.id.btnCancel);
         CheckBox check = dialog.findViewById(R.id.checkAccept);
-        ScrollView scrollView = dialog.findViewById(R.id.scrollView);
+//        ScrollView scrollView = dialog.findViewById(R.id.scrollView);
 
-        final boolean[] scrolled = {false};
+//        final boolean[] scrolled = {false};
         final boolean[] checked = {false};
 
-        scrollView.getViewTreeObserver()
-                .addOnScrollChangedListener(() -> {
-
-                    View view = scrollView.getChildAt(0);
-
-                    int diff =
-                            view.getBottom()
-                                    - (scrollView.getHeight()
-                                    + scrollView.getScrollY());
-
-                    if (diff == 0) {
-                        scrolled[0] = true;
-                    }
-
-                    btnAccept.setEnabled(
-                            scrolled[0] && checked[0]
-                    );
-                });
+//        scrollView.getViewTreeObserver()
+//                .addOnScrollChangedListener(() -> {
+//
+//                    View view = scrollView.getChildAt(0);
+//
+//                    int diff =
+//                            view.getBottom()
+//                                    - (scrollView.getHeight()
+//                                    + scrollView.getScrollY());
+//
+//                    if (diff == 0) {
+//                        scrolled[0] = true;
+//                    }
+//
+//                    btnAccept.setEnabled(
+//                            scrolled[0] && checked[0]
+//                    );
+//                });
+//
+//        check.setOnCheckedChangeListener((buttonView, isChecked) -> {
+//
+//            checked[0] = isChecked;
+//
+//            btnAccept.setEnabled(
+//                    scrolled[0] && checked[0]
+//            );
+//        });
 
         check.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
             checked[0] = isChecked;
 
-            btnAccept.setEnabled(
-                    scrolled[0] && checked[0]
-            );
+            btnAccept.setEnabled(checked[0]);
         });
 
         btnAccept.setOnClickListener(v -> {

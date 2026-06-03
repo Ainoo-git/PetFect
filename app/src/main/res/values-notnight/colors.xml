@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
     <color name="gris_icono_inactivo">#9E9E9E</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="cian_oscuro_iconos">#1E7F81</color>
+    <color name="cian_oscuro_iconos">#0F5052</color>
     <color name="cian_botones">#3ACAAE</color>
     <color name="cian_clarito_bordes">#C3FFFC</color>
     <color name="rosita_fondoss_tarjetas_alertaslev">#FFC3C3</color>
     <color name="coral_alertasimp_errores">#FF8C8C</color>
 
-    <color name="background">#282828</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="background">#FFFFFF</color>
     <color name="surface">#1E1E1E</color>
 
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#FFFFFF</color>
+    <color name="gris">#525252</color>
 
-    <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#000000</color>
-    <color name="gris">#B6B6B6</color>
 </resources>
