@@ -3,7 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="gris_icono_inactivo">#9E9E9E</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="cian_oscuro_iconos">#0F5052</color>
+    <color name="cian_oscuro_iconos">#1E7F81</color>
     <color name="cian_botones">#3ACAAE</color>
     <color name="cian_clarito_bordes">#C3FFFC</color>
     <color name="rosita_fondoss_tarjetas_alertaslev">#FFC3C3</color>
@@ -14,5 +14,6 @@
 
 
     <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#777777</color>
+    <color name="text_secondary">#000000</color>
+    <color name="gris">#B6B6B6</color>
 </resources>
