@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/background">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -205,6 +205,8 @@
                 android:layout_marginTop="18dp"
                 android:enabled="false"
                 android:text="@string/publicar"
+                android:textStyle="bold"
+                android:textColor="@color/white"
                 app:backgroundTint="@color/cian_botones"
                 app:cornerRadius="18dp" />
         </LinearLayout>
