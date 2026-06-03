@@ -233,20 +233,27 @@ public class HomeFragment extends Fragment {
 
     private void mostrarNombreUsuario() {
 
-        if (currentUser != null) {
-
-            String email = currentUser.getEmail();
-
-            String nombre = email != null
-                    ? email.split("@")[0]
-                    : "Usuario";
-
-            tvNombreUsuario.setText("¡Hola, " + nombre + "!");
-
-        } else {
-
-            tvNombreUsuario.setText("¡Hola, Invitado!");
+        if (currentUser == null) {
+            tvNombreUsuario.setText(getString(R.string.hola_invitado));
+            return;
         }
+
+        db.collection("usuarios")
+                .document(currentUser.getUid())
+                .get()
+                .addOnSuccessListener(doc -> {
+
+                    String username = doc.getString("username");
+
+                    if (username != null && !username.trim().isEmpty()) {
+                        tvNombreUsuario.setText(getString(R.string.hola_nombre, username));
+                    } else {
+                        tvNombreUsuario.setText("¡Hola, Usuario!");
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    tvNombreUsuario.setText(getString(R.string.hola_usuario));
+                });
     }
 
     private void cargarPreferencias() {
@@ -275,7 +282,7 @@ public class HomeFragment extends Fragment {
 
                 Toast.makeText(
                         requireContext(),
-                        "Error al cargar",
+                        getString(R.string.error_al_cargar),
                         Toast.LENGTH_SHORT
                 ).show();
 
@@ -318,11 +325,11 @@ public class HomeFragment extends Fragment {
     private void actualizarTitulos() {
 
         tvTituloPerdidos.setText(
-                "Mascotas Perdidas (" + listaPerdidos.size() + ")"
+                getString(R.string.mascotas_perdidas_contador, listaPerdidos.size())
         );
 
         tvTituloAdopciones.setText(
-                "Mascotas en Adopción (" + listaAdopciones.size() + ")"
+                getString(R.string.mascotas_adopcion_contador, listaAdopciones.size())
         );
     }
 
@@ -343,13 +350,13 @@ public class HomeFragment extends Fragment {
                     && listaAdopciones.isEmpty()) {
 
                 tvNadaSeleccionado.setText(
-                        "No hay mascotas publicadas"
+                        getString(R.string.no_hay_mascotas_publicadas)
                 );
 
             } else {
 
                 tvNadaSeleccionado.setText(
-                        "No hay contenido visible según tus preferencias"
+                        getString(R.string.no_hay_contenido_preferencias)
                 );
             }
         }
@@ -361,6 +368,9 @@ public class HomeFragment extends Fragment {
         super.onResume();
 
         cargarPreferencias();
+
+        mostrarNombreUsuario();
+        cargarFotoPerfil();
 
         mostrarSecciones(
                 prefPerdidos,

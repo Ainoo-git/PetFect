@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
     <!-- Permisos -->
     <uses-feature
         android:name="android.hardware.camera"
@@ -10,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -18,80 +20,116 @@
         android:roundIcon="@mipmap/petfect_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PetFect">
-        <activity
-            android:name=".editar.EditarPerfilActivity"
-            android:exported="false" />
-        <activity
-            android:name=".configuracion.PoliticaPrivacidadActivity"
-            android:exported="false" />
-        <activity
-            android:name=".configuracion.PermisosDispositivoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".configuracion.TerminosCondicionesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".configuracion.LicenciaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".configuracion.AtribucionesActivity"
-            android:exported="false" />
 
-        <activity
-            android:name=".configuracion.ConfiguracionActivity"
-            android:exported="false" />
-        <!--
-<activity
-            android:name=".main.MapaActivity"
-            android:exported="false" />  Splash
-        -->
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
+        </service>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBabGwoDgx7BYIkf6YPWpdEJi3M573ZXNQ" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <!-- Splash -->
         <activity
             android:name=".splash.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Auth -->
+        </activity>
+
+
+        <!-- Auth -->
         <activity
             android:name=".auth.Login"
             android:exported="false" />
+
+        <activity
+            android:name=".auth.SignUp"
+            android:exported="false" />
+
+        <!-- Main -->
         <activity
             android:name=".MainBab"
             android:exported="false" />
-        <activity
-            android:name=".auth.SignUp"
-            android:exported="false" /> <!-- Main -->
+
         <activity
             android:name=".main.MainActivity"
-            android:exported="false" /> <!-- Perfil -->
+            android:exported="false" />
+
         <activity
             android:name=".main.PreferenciasActivity"
-            android:exported="false" /> <!-- Preferencias -->
+            android:exported="false" />
+
         <activity
             android:name=".main.PerdidosActivity"
-            android:exported="false" /> <!-- Perdidos -->
+            android:exported="false" />
+
         <activity
             android:name=".main.AdopcionesActivity"
-            android:exported="false" /> <!-- Adopciones -->
+            android:exported="false" />
+
         <activity
             android:name=".main.PublicacionActivity"
             android:exported="false" />
-        <!--   <activity
-             android:name=".main.ActivityTarjeta"
-             android:exported="false" /> -->
-        <activity android:name=".configuracion.GuaradarMascotaActivity"/>
-         <activity
-             android:name=".creditos.Creditos"
-             android:exported="false" />
 
-         <meta-data
-             android:name="preloaded_fonts"
-             android:resource="@array/preloaded_fonts" />
-     </application>
+        <!-- Configuración -->
+        <activity
+            android:name=".configuracion.IdiomaActivity"
+            android:exported="false" />
 
- </manifest>
+        <activity
+            android:name=".configuracion.ConfiguracionActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".configuracion.GuaradarMascotaActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".configuracion.NotificacionesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".configuracion.PoliticaPrivacidadActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".configuracion.PermisosDispositivoActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".configuracion.TerminosCondicionesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".configuracion.LicenciaActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".configuracion.AtribucionesActivity"
+            android:exported="false" />
+
+        <!-- Perfil -->
+        <activity
+            android:name=".editar.EditarPerfilActivity"
+            android:exported="false" />
+
+        <!-- Créditos -->
+        <activity
+            android:name=".creditos.Creditos"
+            android:exported="false" />
+
+    </application>
+
+</manifest>

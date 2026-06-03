@@ -253,7 +253,7 @@ La interfaz de PetFect mantiene una estética suave, cercana y relacionada con e
 
 | Notificaciones | Detalle Publicación | Editar Perfil |
 |----------------|---------------------|---------------|
-| <img src="https://github.com/user-attachments/assets/f04e00be-d16c-4e92-b955-63dfd1cef1e9" width="250" /> | <!-- Añadir captura detalle --> | <!-- Añadir captura editar perfil --> |
+| <!-- Añadir captura notificaciones --> | <!-- Añadir captura detalle --> | <!-- Añadir captura editar perfil --> |
 
 ---
 

@@ -19,32 +19,34 @@ public class LicenciaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_licencia);
 
-        // TOOLBAR
         Toolbar toolbar = findViewById(R.id.topAppBar);
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // flecha atrás
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        // LINK Apache License
+        toolbar.setNavigationOnClickListener(v -> finish());
+
         TextView linkApache = findViewById(R.id.linkApache);
 
         linkApache.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://www.apache.org/licenses/LICENSE-2.0"));
+            Intent intent = new Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("http://www.apache.org/licenses/LICENSE-2.0")
+            );
             startActivity(intent);
         });
     }
 
-    // BOTÓN ATRÁS DEL TOOLBAR
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish(); // vuelve atrás
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

@@ -2,6 +2,8 @@ package com.aipasa.fragment;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +27,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -35,15 +39,11 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-
     private FusedLocationProviderClient fusedLocationClient;
-
     private FirebaseFirestore db;
-
     private ActivityResultLauncher<String[]> requestPermissionLauncher;
 
     public MapFragment() {
-        // Constructor vacío obligatorio
     }
 
     @Override
@@ -73,9 +73,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         requestPermissionLauncher =
                 registerForActivityResult(
-                        new ActivityResultContracts
-                                .RequestMultiplePermissions(),
-
+                        new ActivityResultContracts.RequestMultiplePermissions(),
                         perms -> {
 
                             Boolean fineLocationGranted =
@@ -84,8 +82,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                             false
                                     );
 
-                            if (fineLocationGranted != null &&
-                                    fineLocationGranted) {
+                            if (fineLocationGranted != null && fineLocationGranted) {
 
                                 enableMyLocation();
 
@@ -97,7 +94,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                         Toast.LENGTH_SHORT
                                 ).show();
                             }
-                        });
+                        }
+                );
 
         SupportMapFragment mapFragment =
                 new SupportMapFragment();
@@ -124,9 +122,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION)
-
-                == PackageManager.PERMISSION_GRANTED) {
+                Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED) {
 
             enableMyLocation();
 
@@ -136,17 +133,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     new String[]{
                             Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.ACCESS_COARSE_LOCATION
-                    });
+                    }
+            );
         }
     }
 
     private void enableMyLocation() {
 
+        if (mMap == null) return;
+
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION)
-
-                == PackageManager.PERMISSION_GRANTED) {
+                Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED) {
 
             mMap.setMyLocationEnabled(true);
 
@@ -154,7 +153,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     .getLastLocation()
                     .addOnSuccessListener(
                             requireActivity(),
-
                             location -> {
 
                                 if (location != null) {
@@ -166,14 +164,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                             );
 
                                     mMap.animateCamera(
-                                            CameraUpdateFactory
-                                                    .newLatLngZoom(
-                                                            userLatLng,
-                                                            15f
-                                                    )
+                                            CameraUpdateFactory.newLatLngZoom(
+                                                    userLatLng,
+                                                    15f
+                                            )
                                     );
                                 }
-                            });
+                            }
+                    );
         }
     }
 
@@ -183,74 +181,100 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
 
-                    Toast.makeText(
-                            requireContext(),
-                            "Mascotas encontradas: "
-                                    + queryDocumentSnapshots.size(),
-                            Toast.LENGTH_LONG
-                    ).show();
+                    if (mMap == null) return;
 
-                    for (QueryDocumentSnapshot document :
-                            queryDocumentSnapshots) {
+                    mMap.clear();
 
-                        Double lat =
-                                document.getDouble("latitud");
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
 
-                        Double lng =
-                                document.getDouble("longitud");
+                        Double lat = document.getDouble("latitud");
+                        Double lng = document.getDouble("longitud");
 
-                        String nombre =
-                                document.getString("nombre");
+                        String nombre = document.getString("nombre");
+                        String estado = document.getString("estado");
+                        String idMascota = document.getString("id");
 
-                        String idMascota =
-                                document.getString("id");
+                        if (idMascota == null || idMascota.isEmpty()) {
+                            idMascota = document.getId();
+                        }
 
-                        if (lat != null &&
-                                lng != null &&
-                                lat != 0 &&
-                                lng != 0) {
+                        if (nombre == null || nombre.isEmpty()) {
+                            nombre = "Mascota";
+                        }
 
-                            LatLng posicion =
-                                    new LatLng(lat, lng);
+                        if (estado == null || estado.isEmpty()) {
+                            estado = "Sin estado";
+                        }
+
+                        if (lat != null && lng != null && lat != 0 && lng != 0) {
+
+                            LatLng posicion = new LatLng(lat, lng);
+
+                            int icono = obtenerIconoPorEstado(estado);
 
                             Marker marker =
                                     mMap.addMarker(
                                             new MarkerOptions()
                                                     .position(posicion)
                                                     .title(nombre)
+                                                    .snippet(estado)
+                                                    .icon(crearIconoPequeno(icono))
                                     );
 
                             if (marker != null) {
-
                                 marker.setTag(idMascota);
-
-                                Toast.makeText(
-                                        requireContext(),
-                                        "Marker añadido: " + nombre,
-                                        Toast.LENGTH_SHORT
-                                ).show();
                             }
                         }
                     }
 
                     activarClicksMarkers();
                 })
-
-                .addOnFailureListener(e -> {
-
-                    Toast.makeText(
-                            requireContext(),
-                            "Error Firestore",
-                            Toast.LENGTH_LONG
-                    ).show();
-                });
+                .addOnFailureListener(e ->
+                        Toast.makeText(
+                                requireContext(),
+                                "Error Firestore",
+                                Toast.LENGTH_LONG
+                        ).show()
+                );
     }
+
+    private int obtenerIconoPorEstado(String estado) {
+
+        if ("perdido".equalsIgnoreCase(estado)) {
+            return R.drawable.puntero_perdido;
+        }
+
+        if ("adopcion".equalsIgnoreCase(estado)) {
+            return R.drawable.puntero_adopcion;
+        }
+
+        return 0;
+    }
+
+    private BitmapDescriptor crearIconoPequeno(int drawableId) {
+
+        if (drawableId == 0) {
+            return BitmapDescriptorFactory.defaultMarker();
+        }
+
+        Bitmap imagen = BitmapFactory.decodeResource(getResources(), drawableId);
+
+        if (imagen == null) {
+            return BitmapDescriptorFactory.defaultMarker();
+        }
+
+        Bitmap imagenPequena = Bitmap.createScaledBitmap(imagen, 170, 170, false);
+
+        return BitmapDescriptorFactory.fromBitmap(imagenPequena);
+    }
+
     private void activarClicksMarkers() {
+
+        if (mMap == null) return;
 
         mMap.setOnMarkerClickListener(marker -> {
 
-            String idMascota =
-                    (String) marker.getTag();
+            String idMascota = (String) marker.getTag();
 
             if (idMascota != null) {
 

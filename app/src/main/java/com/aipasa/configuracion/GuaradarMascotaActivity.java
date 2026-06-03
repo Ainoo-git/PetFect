@@ -1,13 +1,16 @@
 package com.aipasa.configuracion;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aipasa.R;
 import com.aipasa.firebase.MascotaAdapterGuardados;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -16,17 +19,16 @@ import java.util.ArrayList;
 public class GuaradarMascotaActivity extends AppCompatActivity {
 
     private RecyclerView recyclerGuardados;
-
     private MascotaAdapterGuardados adapter;
-
     private FirebaseFirestore db;
-
     private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_guardar_mascota);
+
+        configurarToolbar();
 
         recyclerGuardados = findViewById(R.id.recyclerGuardados);
 
@@ -46,8 +48,18 @@ public class GuaradarMascotaActivity extends AppCompatActivity {
         cargarGuardados();
     }
 
-    private void cargarGuardados() {
+    private void configurarToolbar() {
+        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+        setSupportActionBar(toolbar);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        toolbar.setNavigationOnClickListener(v -> finish());
+    }
+
+    private void cargarGuardados() {
         String uid = auth.getCurrentUser().getUid();
 
         db.collection("usuarios")
@@ -55,10 +67,19 @@ public class GuaradarMascotaActivity extends AppCompatActivity {
                 .collection("guardados")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-
                     adapter.actualizarLista(
                             queryDocumentSnapshots.getDocuments()
                     );
                 });
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

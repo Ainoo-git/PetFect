@@ -37,7 +37,6 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
         return new ViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DocumentSnapshot doc = listaMascotas.get(position);
@@ -51,41 +50,57 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
         String id = doc.getId();
         Long fechaLong = doc.getLong("fecha");
 
-        // Nombre
-        holder.txtNombre.setText(nombre != null ? nombre : "Sin nombre");
+        holder.txtNombre.setText(
+                nombre != null && !nombre.isEmpty()
+                        ? nombre
+                        : holder.itemView.getContext().getString(R.string.sin_nombre)
+        );
 
-        // Tipo y Estado
+        String tipoTraducido = traducirTipo(holder, tipo);
+        String estadoTraducido = traducirEstado(holder, estado);
+
         String tipoEstado = "";
-        if (tipo != null && !tipo.isEmpty()) {
-            tipoEstado += tipo.substring(0,1).toUpperCase() + tipo.substring(1);
+
+        if (!tipoTraducido.isEmpty()) {
+            tipoEstado += tipoTraducido;
         }
-        if (estado != null && !estado.isEmpty()) {
+
+        if (!estadoTraducido.isEmpty()) {
             if (!tipoEstado.isEmpty()) tipoEstado += " • ";
-            tipoEstado += estado.substring(0,1).toUpperCase() + estado.substring(1);
+            tipoEstado += estadoTraducido;
         }
+
         holder.txtTipoEstado.setText(tipoEstado);
 
-        // Información adicional
         String info = "";
+
         if (edad != null && !edad.isEmpty()) {
-            info += "Edad: " + edad;
+            info += holder.itemView.getContext().getString(R.string.edad_label, edad);
         }
+
         if (infoAdicional != null && !infoAdicional.isEmpty()) {
             if (!info.isEmpty()) info += " • ";
             info += infoAdicional;
         }
-        holder.txtInfoAdicional.setText(info.isEmpty() ? "Sin información adicional" : info);
 
-        // Fecha
+        holder.txtInfoAdicional.setText(
+                info.isEmpty()
+                        ? holder.itemView.getContext().getString(R.string.sin_informacion_adicional)
+                        : info
+        );
+
         if (fechaLong != null) {
             String fechaFormateada = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                     .format(new Date(fechaLong));
-            holder.txtFecha.setText("Publicado: " + fechaFormateada);
+
+            holder.txtFecha.setText(
+                    holder.itemView.getContext().getString(R.string.publicado_label, fechaFormateada)
+            );
         } else {
             holder.txtFecha.setText("");
         }
 
-        // Imagen
+
         if (fotoUrl != null && !fotoUrl.isEmpty()) {
             Glide.with(holder.itemView.getContext())
                     .load(fotoUrl)
@@ -97,16 +112,6 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
             holder.imgMascota.setImageResource(R.drawable.ic_launcher_background);
         }
 
-        // --- CLICK PARA ABRIR ActivityTarjeta ---
-//        holder.itemView.setOnClickListener(v -> {
-//            if (id != null && !id.isEmpty()) {
-//                Intent intent = new Intent(holder.itemView.getContext(), ActivityTarjeta.class);
-//                intent.putExtra("ARTICULO_ID", id);
-//                holder.itemView.getContext().startActivity(intent);
-//            } else {
-//                Toast.makeText(holder.itemView.getContext(), "No se puede abrir la publicación", Toast.LENGTH_SHORT).show();
-//            }
-//        });
         holder.itemView.setOnClickListener(v -> {
             if (id != null && !id.isEmpty() && holder.itemView.getContext() instanceof AppCompatActivity) {
                 AppCompatActivity activity = (AppCompatActivity) holder.itemView.getContext();
@@ -115,12 +120,47 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
                 activity.getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.content_container, fragment)
-                        .addToBackStack(null) // permite volver atrás
+                        .addToBackStack(null)
                         .commit();
             } else {
-                Toast.makeText(holder.itemView.getContext(), "No se puede abrir la publicación", Toast.LENGTH_SHORT).show();
+                Toast.makeText(
+                        holder.itemView.getContext(),
+                        holder.itemView.getContext().getString(R.string.no_se_puede_abrir_publicacion),
+                        Toast.LENGTH_SHORT
+                ).show();
             }
         });
+    }
+
+    private String traducirTipo(@NonNull ViewHolder holder, String tipo) {
+        if (tipo == null) return "";
+
+        switch (tipo.toLowerCase(Locale.ROOT)) {
+            case "perro":
+                return holder.itemView.getContext().getString(R.string.tipo_perro);
+            case "gato":
+                return holder.itemView.getContext().getString(R.string.tipo_gato);
+            case "otro":
+                return holder.itemView.getContext().getString(R.string.tipo_otro);
+            default:
+                return tipo;
+        }
+    }
+
+    private String traducirEstado(@NonNull ViewHolder holder, String estado) {
+        if (estado == null) return "";
+
+        switch (estado.toLowerCase(Locale.ROOT)) {
+            case "perdido":
+                return holder.itemView.getContext().getString(R.string.estado_perdido);
+            case "adopcion":
+            case "adopción":
+                return holder.itemView.getContext().getString(R.string.estado_adopcion);
+            case "encontrado":
+                return holder.itemView.getContext().getString(R.string.estado_encontrado);
+            default:
+                return estado;
+        }
     }
 
     @Override
