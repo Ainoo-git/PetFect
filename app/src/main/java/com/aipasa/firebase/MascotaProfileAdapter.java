@@ -1,6 +1,7 @@
 package com.aipasa.firebase;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,6 +117,7 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
         TextView txtChip = dialogView.findViewById(R.id.txtChip);
         TextView txtTelefono = dialogView.findViewById(R.id.txtTelefono);
         TextView txtInfoAdicional = dialogView.findViewById(R.id.txtInfoAdicional);
+        TextView txtMostrarMasInfo = dialogView.findViewById(R.id.txtMostrarMasInfo);
 
         Button btnEditar = dialogView.findViewById(R.id.btnEditar);
         Button btnEliminar = dialogView.findViewById(R.id.btnEliminar);
@@ -164,6 +166,8 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
                 )
         );
 
+        configurarMostrarMasInfo(txtInfoAdicional, txtMostrarMasInfo);
+
         if (fotoUrl != null && !fotoUrl.isEmpty()) {
             Glide.with(v.getContext())
                     .load(fotoUrl)
@@ -186,6 +190,56 @@ public class MascotaProfileAdapter extends RecyclerView.Adapter<MascotaProfileAd
         btnEliminar.setOnClickListener(v2 -> {
             dialog.dismiss();
             confirmarEliminar(doc, posicion);
+        });
+    }
+
+    private void configurarMostrarMasInfo(
+            TextView txtInfoAdicional,
+            TextView txtMostrarMasInfo
+    ) {
+        final boolean[] infoExpandida = {false};
+
+        txtInfoAdicional.setMaxLines(2);
+        txtInfoAdicional.setEllipsize(TextUtils.TruncateAt.END);
+        txtMostrarMasInfo.setText(context.getString(R.string.mostrar_mas));
+        txtMostrarMasInfo.setVisibility(View.GONE);
+
+        txtInfoAdicional.post(() -> {
+            if (txtInfoAdicional.getLayout() == null) {
+                return;
+            }
+
+            int lineas = txtInfoAdicional.getLineCount();
+
+            if (lineas <= 0) {
+                txtMostrarMasInfo.setVisibility(View.GONE);
+                return;
+            }
+
+            int ultimaLinea = lineas - 1;
+            boolean textoCortado = txtInfoAdicional
+                    .getLayout()
+                    .getEllipsisCount(ultimaLinea) > 0;
+
+            if (textoCortado) {
+                txtMostrarMasInfo.setVisibility(View.VISIBLE);
+            } else {
+                txtMostrarMasInfo.setVisibility(View.GONE);
+            }
+        });
+
+        txtMostrarMasInfo.setOnClickListener(v -> {
+            infoExpandida[0] = !infoExpandida[0];
+
+            if (infoExpandida[0]) {
+                txtInfoAdicional.setMaxLines(Integer.MAX_VALUE);
+                txtInfoAdicional.setEllipsize(null);
+                txtMostrarMasInfo.setText(context.getString(R.string.mostrar_menos));
+            } else {
+                txtInfoAdicional.setMaxLines(2);
+                txtInfoAdicional.setEllipsize(TextUtils.TruncateAt.END);
+                txtMostrarMasInfo.setText(context.getString(R.string.mostrar_mas));
+            }
         });
     }
 

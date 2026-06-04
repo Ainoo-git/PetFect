@@ -18,7 +18,6 @@
         app:cardElevation="4dp"
         app:cardBackgroundColor="@color/background">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +32,7 @@
                 android:layout_height="250dp"
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/foto_mascota"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp" />
 
             <!-- Nombre -->
             <TextView
@@ -44,7 +43,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp" />
 
             <!-- Tipo y estado -->
             <TextView
@@ -54,7 +53,7 @@
                 android:text="@string/tipo_estado_demo"
                 android:textSize="16sp"
                 android:textColor="@color/gris"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp" />
 
             <LinearLayout
                 android:id="@+id/layoutDescripcion"
@@ -90,13 +89,30 @@
                     android:textColor="@color/gris"
                     android:layout_marginBottom="8dp" />
 
+                <!-- INFO ADICIONAL: SE VEN 2 LÍNEAS Y SI ES LARGA SALE MOSTRAR MÁS -->
                 <TextView
                     android:id="@+id/txtInfoAdicional"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/info_adicional_label_demo"
                     android:textSize="16sp"
-                    android:textColor="@color/gris" />
+                    android:textColor="@color/gris"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:id="@+id/txtMostrarMasInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mostrar_mas"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/rosita_fondoss_tarjetas_alertaslev"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -114,7 +130,7 @@
                     android:textColor="@android:color/black"
                     android:backgroundTint="@color/rosita_fondoss_tarjetas_alertaslev"
                     android:padding="12dp"
-                    android:layout_marginEnd="4dp"/>
+                    android:layout_marginEnd="4dp" />
 
                 <Button
                     android:id="@+id/btnEliminar"
@@ -125,7 +141,7 @@
                     android:textColor="@android:color/white"
                     android:backgroundTint="@color/coral_alertasimp_errores"
                     android:padding="12dp"
-                    android:layout_marginStart="4dp"/>
+                    android:layout_marginStart="4dp" />
 
             </LinearLayout>
 
