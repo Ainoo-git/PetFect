@@ -287,6 +287,7 @@
     <string name="telefono_label_demo">Teléfono: </string>
     <string name="info_adicional_label_demo">Info adicional: </string>
 
-
+    <string name="mostrar_mas">Mostrar más</string>
+    <string name="mostrar_menos">Mostrar menos</string>
 
 </resources>

@@ -292,6 +292,7 @@
     <string name="estado_adopcion">Adoption</string>
     <string name="estado_encontrado">Found</string>
 
-
+    <string name="mostrar_mas">Show more</string>
+    <string name="mostrar_menos">Show less</string>
 
 </resources>

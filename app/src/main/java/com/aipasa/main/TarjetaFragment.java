@@ -3,6 +3,7 @@ package com.aipasa.main;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -38,11 +38,13 @@ import java.util.Locale;
 public class TarjetaFragment extends DialogFragment {
 
     private ImageView imgAccion;
-    private TextView txtTitulo, txtFecha, txtEdad, txtChip, txtTelefono, txtInfoAdicional;
+    private TextView txtTitulo, txtFecha, txtEdad, txtChip, txtTelefono, txtInfoAdicional, txtMostrarMasInfo;
     private Button btnVerMas;
     private ImageButton btnGuardar;
     private MaterialToolbar topAppBar;
     private MapView mapMiniContacto;
+    private boolean infoExpandida = false;
+
     private static final String ARG_ARTICULO_ID = "ARTICULO_ID";
 
     public static TarjetaFragment newInstance(String articuloId) {
@@ -78,6 +80,7 @@ public class TarjetaFragment extends DialogFragment {
         txtChip = view.findViewById(R.id.txtChip);
         txtTelefono = view.findViewById(R.id.txtTelefono);
         txtInfoAdicional = view.findViewById(R.id.txtInfoAdicional);
+        txtMostrarMasInfo = view.findViewById(R.id.txtMostrarMasInfo);
 
         mapMiniContacto = view.findViewById(R.id.mapMiniContacto);
         mapMiniContacto.onCreate(savedInstanceState);
@@ -148,10 +151,8 @@ public class TarjetaFragment extends DialogFragment {
                     String info = documentSnapshot.getString("infoAdicional");
                     String fotoUrl = documentSnapshot.getString("fotoUrl");
 
-
                     Double latitud = documentSnapshot.getDouble("latitud");
                     Double longitud = documentSnapshot.getDouble("longitud");
-
 
                     txtTitulo.setText(
                             nombre != null && !nombre.isEmpty()
@@ -169,8 +170,8 @@ public class TarjetaFragment extends DialogFragment {
                     }
 
                     if (!estadoTraducido.isEmpty()) {
-                        if (!tipoEstado.isEmpty()) tipoEstado += " • ";
-                        tipoEstado += estadoTraducido;
+                        if (!tipoEstado.isEmpty()) tipoEstado += " ";
+                        tipoEstado += "• " + estadoTraducido;
                     }
 
                     txtFecha.setText(tipoEstado);
@@ -211,6 +212,8 @@ public class TarjetaFragment extends DialogFragment {
                             )
                     );
 
+                    configurarMostrarMasInfo();
+
                     if (fotoUrl != null && !fotoUrl.isEmpty()) {
                         Glide.with(this)
                                 .load(fotoUrl)
@@ -221,13 +224,13 @@ public class TarjetaFragment extends DialogFragment {
                     } else {
                         imgAccion.setImageResource(R.drawable.logologin);
                     }
+
                     configurarMiniMapa(
                             nombre,
                             estado,
                             latitud,
                             longitud
                     );
-
 
                     btnGuardar.bringToFront();
 
@@ -263,6 +266,45 @@ public class TarjetaFragment extends DialogFragment {
                 );
     }
 
+    private void configurarMostrarMasInfo() {
+        infoExpandida = false;
+
+        txtInfoAdicional.setMaxLines(2);
+        txtInfoAdicional.setEllipsize(TextUtils.TruncateAt.END);
+        txtMostrarMasInfo.setText(getString(R.string.mostrar_mas));
+        txtMostrarMasInfo.setVisibility(View.GONE);
+
+        txtInfoAdicional.post(() -> {
+            if (txtInfoAdicional.getLayout() != null) {
+                int lineas = txtInfoAdicional.getLineCount();
+
+                if (lineas > 0) {
+                    int ultimaLinea = lineas - 1;
+                    boolean textoCortado = txtInfoAdicional.getLayout().getEllipsisCount(ultimaLinea) > 0;
+
+                    if (textoCortado) {
+                        txtMostrarMasInfo.setVisibility(View.VISIBLE);
+                    } else {
+                        txtMostrarMasInfo.setVisibility(View.GONE);
+                    }
+                }
+            }
+        });
+
+        txtMostrarMasInfo.setOnClickListener(v -> {
+            infoExpandida = !infoExpandida;
+
+            if (infoExpandida) {
+                txtInfoAdicional.setMaxLines(Integer.MAX_VALUE);
+                txtInfoAdicional.setEllipsize(null);
+                txtMostrarMasInfo.setText(getString(R.string.mostrar_menos));
+            } else {
+                txtInfoAdicional.setMaxLines(2);
+                txtInfoAdicional.setEllipsize(TextUtils.TruncateAt.END);
+                txtMostrarMasInfo.setText(getString(R.string.mostrar_mas));
+            }
+        });
+    }
 
     private void configurarMiniMapa(
             String nombre,
@@ -324,6 +366,7 @@ public class TarjetaFragment extends DialogFragment {
 
         return BitmapDescriptorFactory.fromBitmap(bitmapPequeno);
     }
+
     private String traducirTipo(String tipo) {
         if (tipo == null) return "";
 
