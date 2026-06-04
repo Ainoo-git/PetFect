@@ -34,6 +34,6 @@
         app:backgroundTint="@color/cian_clarito_bordes"
         app:maxImageSize="35dp"
         app:srcCompat="@drawable/camara"
-        app:tint="@color/cian_oscuro_iconos" />
+        app:tint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

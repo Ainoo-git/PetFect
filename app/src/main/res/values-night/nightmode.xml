@@ -5,7 +5,11 @@
     <color name="cian_oscuro_iconos">#1F5F5C</color>
     <color name="cian_botones">#4DB6AC</color>
     <color name="cian_clarito_bordes">#163030</color>
-    <color name="rosita_fondoss_tarjetas_alertaslev">#D4A843</color>
+    <color name="rosita_fondoss_tarjetas_alertaslev">#4DB6AC</color>
     <color name="coral_alertasimp_errores">#E07A2F</color>
     <color name="petfect_background">#0C1E1E</color>
+    <color name="toolbar_background">#1F5F5C</color>
+    <color name="card_background">#163030</color>
+    <color name="text_primary">#E8F5F4</color>
+    <color name="text_hint">#9E9E9E</color>
 </resources>
