@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>PetFect — Dark Mode preview</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #1a1a1a;
+      padding: 32px;
+      color: #eee;
+    }
+    h1 { font-size: 22px; margin-bottom: 6px; }
+    .subtitulo { color: #888; font-size: 14px; margin-bottom: 40px; }
+
+    .fila {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+    .columna { flex: 1; min-width: 300px; }
+    .columna h2 { font-size: 16px; margin-bottom: 4px; }
+    .columna .desc { font-size: 13px; color: #888; margin-bottom: 18px; }
+
+    /* Paleta swatches */
+    .paleta {
+      display: flex;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 72px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .swatch {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 7px;
+      transition: flex 0.2s;
+    }
+    .swatch:hover { flex: 2.2; }
+    .swatch span {
+      font-size: 10px;
+      font-weight: 700;
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 5px;
+      letter-spacing: 0.3px;
+    }
+
+    /* Mockup teléfono */
+    .phone {
+      border-radius: 20px;
+      padding: 18px 16px;
+      width: 200px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+    .phone .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .phone .topbar .nombre { font-size: 13px; font-weight: 700; }
+    .phone .topbar .avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .phone .chips { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+    .phone .chip {
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+    }
+    .phone .card {
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+    .phone .card .card-titulo { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+    .phone .card .card-sub { font-size: 11px; }
+    .phone .btn {
+      border-radius: 8px;
+      padding: 9px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+    .phone .bottombar {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 14px;
+      padding-top: 10px;
+      font-size: 18px;
+    }
+
+    hr { border: none; border-top: 1px solid #333; margin: 8px 0 40px; }
+
+    .badge-actual {
+      display: inline-block;
+      background: #3a2020;
+      color: #e07070;
+      border-radius: 6px;
+      padding: 2px 10px;
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+    .badge-nueva {
+      display: inline-block;
+      background: #1a3330;
+      color: #4db6ac;
+      border-radius: 6px;
+      padding: 2px 10px;
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+
+    table { border-collapse: collapse; width: 100%; font-size: 12px; margin-top: 16px; }
+    td, th { padding: 6px 10px; text-align: left; border-bottom: 1px solid #2a2a2a; }
+    th { color: #888; font-weight: 600; }
+    .dot { display: inline-block; width: 14px; height: 14px; border-radius: 3px; margin-right: 6px; vertical-align: middle; }
+  </style>
+</head>
+<body>
+
+<h1>🌙 PetFect — Dark Mode</h1>
+<p class="subtitulo">Comparativa entre el modo oscuro actual y la propuesta basada en la paleta B (teal + ámbar).</p>
+
+<div class="fila">
+
+  <!-- COLUMNA ACTUAL -->
+  <div class="columna">
+    <span class="badge-actual">Modo oscuro ACTUAL</span>
+    <h2>Lo que hay ahora</h2>
+    <p class="desc">Rosa apagado (#D49090) encima de teal oscuro. Sin coherencia.</p>
+
+    <div class="paleta">
+      <div class="swatch" style="background:#0D1C1C"><span>#0D1C1C</span></div>
+      <div class="swatch" style="background:#175859"><span>#175859</span></div>
+      <div class="swatch" style="background:#23927C"><span>#23927C</span></div>
+      <div class="swatch" style="background:#88C8C3"><span>#88C8C3</span></div>
+      <div class="swatch" style="background:#D49090"><span>#D49090</span></div>
+      <div class="swatch" style="background:#E57A7A"><span>#E57A7A</span></div>
+    </div>
+
+    <div class="phone" style="background:#0D1C1C; color:#E0E0E0;">
+      <div class="topbar">
+        <span class="nombre">Hola, Sara 👋</span>
+        <div class="avatar" style="background:#175859">👤</div>
+      </div>
+      <div class="chips">
+        <span class="chip" style="background:#23927C">Adopciones</span>
+        <span class="chip" style="background:#175859">Perdidos</span>
+      </div>
+      <div class="card" style="background:#152525; color:#E0E0E0;">
+        <div class="card-titulo">Luna</div>
+        <div class="card-sub" style="color:#88C8C3;">Gato · En adopción</div>
+      </div>
+      <div class="btn" style="background:#D49090; color:#fff;">Contacto</div>
+      <div class="bottombar" style="border-top:1px solid #1f3535;">
+        <span style="color:#23927C">🏠</span>
+        <span style="color:#88C8C3">🔍</span>
+        <span style="color:#88C8C3">🗺️</span>
+        <span style="color:#88C8C3">👤</span>
+      </div>
+    </div>
+
+    <table>
+      <tr><th>Color</th><th>Hex</th><th>Uso</th></tr>
+      <tr><td><span class="dot" style="background:#175859"></span>cian_oscuro</td><td>#175859</td><td>Iconos</td></tr>
+      <tr><td><span class="dot" style="background:#23927C"></span>cian_botones</td><td>#23927C</td><td>Botones</td></tr>
+      <tr><td><span class="dot" style="background:#88C8C3"></span>cian_clarito</td><td>#88C8C3</td><td>Bordes</td></tr>
+      <tr><td><span class="dot" style="background:#D49090"></span>rosita</td><td>#D49090</td><td>Tarjetas / CTA</td></tr>
+      <tr><td><span class="dot" style="background:#E57A7A"></span>coral</td><td>#E57A7A</td><td>Alertas</td></tr>
+    </table>
+  </div>
+
+  <!-- COLUMNA PROPUESTA -->
+  <div class="columna">
+    <span class="badge-nueva">Propuesta NUEVA</span>
+    <h2>Dark mode con paleta B</h2>
+    <p class="desc">Misma familia teal, ámbar dorado como acento cálido. Oscuros con base teal, no negro puro.</p>
+
+    <div class="paleta">
+      <div class="swatch" style="background:#0C1E1E"><span>#0C1E1E</span></div>
+      <div class="swatch" style="background:#163030"><span>#163030</span></div>
+      <div class="swatch" style="background:#1F5F5C"><span>#1F5F5C</span></div>
+      <div class="swatch" style="background:#4DB6AC"><span>#4DB6AC</span></div>
+      <div class="swatch" style="background:#D4A843"><span>#D4A843</span></div>
+      <div class="swatch" style="background:#E07A2F"><span>#E07A2F</span></div>
+    </div>
+
+    <div class="phone" style="background:#0C1E1E; color:#E8F5F4;">
+      <div class="topbar">
+        <span class="nombre">Hola, Sara 👋</span>
+        <div class="avatar" style="background:#1F5F5C">👤</div>
+      </div>
+      <div class="chips">
+        <span class="chip" style="background:#1F5F5C">Adopciones</span>
+        <span class="chip" style="background:#163030; border:1px solid #1F5F5C">Perdidos</span>
+      </div>
+      <div class="card" style="background:#163030; color:#E8F5F4;">
+        <div class="card-titulo">Luna</div>
+        <div class="card-sub" style="color:#4DB6AC;">Gato · En adopción</div>
+      </div>
+      <div class="btn" style="background:#D4A843; color:#1a1000;">Contacto</div>
+      <div class="bottombar" style="border-top:1px solid #1F3535;">
+        <span style="color:#4DB6AC">🏠</span>
+        <span style="color:#4DB6AC">🔍</span>
+        <span style="color:#4DB6AC">🗺️</span>
+        <span style="color:#4DB6AC">👤</span>
+      </div>
+    </div>
+
+    <table>
+      <tr><th>Color</th><th>Hex</th><th>Uso</th></tr>
+      <tr><td><span class="dot" style="background:#1F5F5C"></span>cian_oscuro</td><td>#1F5F5C</td><td>Iconos / superficies</td></tr>
+      <tr><td><span class="dot" style="background:#4DB6AC"></span>cian_botones</td><td>#4DB6AC</td><td>Botones, activos</td></tr>
+      <tr><td><span class="dot" style="background:#163030"></span>cian_clarito</td><td>#163030</td><td>Cards / fondo elevado</td></tr>
+      <tr><td><span class="dot" style="background:#D4A843"></span>ámbar</td><td>#D4A843</td><td>CTA / "Contacto"</td></tr>
+      <tr><td><span class="dot" style="background:#E07A2F"></span>naranja</td><td>#E07A2F</td><td>Alertas</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<p style="color:#555; font-size:12px;">Fondo: #0C1E1E · Superficie cards: #163030 · Texto principal: #E8F5F4 · Texto secundario: #4DB6AC</p>
+
+</body>
+</html>

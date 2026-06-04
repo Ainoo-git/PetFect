@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="#80FFFFFF"
-        android:fontFamily="@font/text_app"
+
         android:hint="@string/username"
         app:boxStrokeColor="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
@@ -86,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:background="#80FFFFFF"
-        android:fontFamily="@font/text_app"
+
         android:hint="@string/password"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
@@ -110,7 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:background="#80FFFFFF"
-        android:fontFamily="@font/text_app"
+
         android:hint="@string/email"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"

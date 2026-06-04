@@ -84,7 +84,6 @@ public class TarjetaFragment extends DialogFragment {
 
         mapMiniContacto = view.findViewById(R.id.mapMiniContacto);
         mapMiniContacto.onCreate(savedInstanceState);
-        mapMiniContacto.onResume();
 
         topAppBar = view.findViewById(R.id.topAppBar);
         topAppBar.setNavigationOnClickListener(v -> dismiss());
@@ -132,6 +131,8 @@ public class TarjetaFragment extends DialogFragment {
                 .document(id)
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
+
+                    if (!isAdded()) return;
 
                     if (!documentSnapshot.exists()) {
                         Toast.makeText(
@@ -257,13 +258,14 @@ public class TarjetaFragment extends DialogFragment {
                     });
 
                 })
-                .addOnFailureListener(e ->
-                        Toast.makeText(
-                                getContext(),
-                                getString(R.string.error_cargar_publicacion),
-                                Toast.LENGTH_SHORT
-                        ).show()
-                );
+                .addOnFailureListener(e -> {
+                    if (!isAdded()) return;
+                    Toast.makeText(
+                            getContext(),
+                            getString(R.string.error_cargar_publicacion),
+                            Toast.LENGTH_SHORT
+                    ).show();
+                });
     }
 
     private void configurarMostrarMasInfo() {
@@ -352,18 +354,10 @@ public class TarjetaFragment extends DialogFragment {
     }
 
     private BitmapDescriptor crearIconoPequeno(int drawableId) {
-        Bitmap bitmapOriginal = BitmapFactory.decodeResource(
-                getResources(),
-                drawableId
-        );
+        Bitmap bitmapOriginal = BitmapFactory.decodeResource(getResources(), drawableId);
+        if (bitmapOriginal == null) return BitmapDescriptorFactory.defaultMarker();
 
-        Bitmap bitmapPequeno = Bitmap.createScaledBitmap(
-                bitmapOriginal,
-                80,
-                80,
-                false
-        );
-
+        Bitmap bitmapPequeno = Bitmap.createScaledBitmap(bitmapOriginal, 80, 80, false);
         return BitmapDescriptorFactory.fromBitmap(bitmapPequeno);
     }
 
