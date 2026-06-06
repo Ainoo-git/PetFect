@@ -40,6 +40,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.SetOptions;
 
 import java.io.ByteArrayOutputStream;
@@ -64,6 +65,8 @@ public class ProfileFragment extends Fragment {
 
     private Uri imageUri;
     private Bitmap imageBitmap;
+
+    private ListenerRegistration usuarioListener;
 
     // RECYCLER
     private RecyclerView rvMascotas;
