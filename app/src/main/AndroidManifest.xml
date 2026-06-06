@@ -25,7 +25,6 @@
             android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
             android:enabled="false"
             android:exported="false">
-
             <meta-data
                 android:name="autoStoreLocales"
                 android:value="true" />
@@ -43,14 +42,12 @@
         <activity
             android:name=".splash.Splash"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
 
         <!-- Auth -->
         <activity
@@ -88,15 +85,15 @@
 
         <!-- Configuración -->
         <activity
-            android:name=".configuracion.ConfiguracionActivity"
-            android:exported="false" />
-
-        <activity
             android:name=".configuracion.IdiomaActivity"
             android:exported="false" />
 
         <activity
-            android:name=".configuracion.NotificacionActivity"
+            android:name=".configuracion.ConfiguracionActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".configuracion.GuaradarMascotaActivity"
             android:exported="false" />
 
         <activity
@@ -121,10 +118,6 @@
 
         <activity
             android:name=".configuracion.AtribucionesActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".configuracion.GuaradarMascotaActivity"
             android:exported="false" />
 
         <!-- Perfil -->

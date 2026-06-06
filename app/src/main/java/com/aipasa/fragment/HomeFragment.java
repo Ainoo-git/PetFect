@@ -234,7 +234,7 @@ public class HomeFragment extends Fragment {
     private void mostrarNombreUsuario() {
 
         if (currentUser == null) {
-            tvNombreUsuario.setText("¡Hola, Invitado!");
+            tvNombreUsuario.setText(getString(R.string.hola_invitado));
             return;
         }
 
@@ -246,13 +246,13 @@ public class HomeFragment extends Fragment {
                     String username = doc.getString("username");
 
                     if (username != null && !username.trim().isEmpty()) {
-                        tvNombreUsuario.setText("¡Hola, " + username + "!");
+                        tvNombreUsuario.setText(getString(R.string.hola_nombre, username));
                     } else {
                         tvNombreUsuario.setText("¡Hola, Usuario!");
                     }
                 })
                 .addOnFailureListener(e -> {
-                    tvNombreUsuario.setText("¡Hola, Usuario!");
+                    tvNombreUsuario.setText(getString(R.string.hola_usuario));
                 });
     }
 
@@ -282,7 +282,7 @@ public class HomeFragment extends Fragment {
 
                 Toast.makeText(
                         requireContext(),
-                        "Error al cargar",
+                        getString(R.string.error_al_cargar),
                         Toast.LENGTH_SHORT
                 ).show();
 
@@ -325,11 +325,11 @@ public class HomeFragment extends Fragment {
     private void actualizarTitulos() {
 
         tvTituloPerdidos.setText(
-                "Mascotas Perdidas (" + listaPerdidos.size() + ")"
+                getString(R.string.mascotas_perdidas_contador, listaPerdidos.size())
         );
 
         tvTituloAdopciones.setText(
-                "Mascotas en Adopción (" + listaAdopciones.size() + ")"
+                getString(R.string.mascotas_adopcion_contador, listaAdopciones.size())
         );
     }
 
@@ -350,13 +350,13 @@ public class HomeFragment extends Fragment {
                     && listaAdopciones.isEmpty()) {
 
                 tvNadaSeleccionado.setText(
-                        "No hay mascotas publicadas"
+                        getString(R.string.no_hay_mascotas_publicadas)
                 );
 
             } else {
 
                 tvNadaSeleccionado.setText(
-                        "No hay contenido visible según tus preferencias"
+                        getString(R.string.no_hay_contenido_preferencias)
                 );
             }
         }
@@ -392,45 +392,50 @@ public class HomeFragment extends Fragment {
     private void showTermsDialog() {
 
         Dialog dialog = new Dialog(requireContext());
-
         dialog.setContentView(R.layout.dialog_terms);
-
         dialog.setCancelable(false);
 
         Button btnAccept = dialog.findViewById(R.id.btnAccept);
         Button btnCancel = dialog.findViewById(R.id.btnCancel);
         CheckBox check = dialog.findViewById(R.id.checkAccept);
-        ScrollView scrollView = dialog.findViewById(R.id.scrollView);
+//        ScrollView scrollView = dialog.findViewById(R.id.scrollView);
 
-        final boolean[] scrolled = {false};
+//        final boolean[] scrolled = {false};
         final boolean[] checked = {false};
 
-        scrollView.getViewTreeObserver()
-                .addOnScrollChangedListener(() -> {
-
-                    View view = scrollView.getChildAt(0);
-
-                    int diff =
-                            view.getBottom()
-                                    - (scrollView.getHeight()
-                                    + scrollView.getScrollY());
-
-                    if (diff == 0) {
-                        scrolled[0] = true;
-                    }
-
-                    btnAccept.setEnabled(
-                            scrolled[0] && checked[0]
-                    );
-                });
+//        scrollView.getViewTreeObserver()
+//                .addOnScrollChangedListener(() -> {
+//
+//                    View view = scrollView.getChildAt(0);
+//
+//                    int diff =
+//                            view.getBottom()
+//                                    - (scrollView.getHeight()
+//                                    + scrollView.getScrollY());
+//
+//                    if (diff == 0) {
+//                        scrolled[0] = true;
+//                    }
+//
+//                    btnAccept.setEnabled(
+//                            scrolled[0] && checked[0]
+//                    );
+//                });
+//
+//        check.setOnCheckedChangeListener((buttonView, isChecked) -> {
+//
+//            checked[0] = isChecked;
+//
+//            btnAccept.setEnabled(
+//                    scrolled[0] && checked[0]
+//            );
+//        });
 
         check.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
             checked[0] = isChecked;
 
-            btnAccept.setEnabled(
-                    scrolled[0] && checked[0]
-            );
+            btnAccept.setEnabled(checked[0]);
         });
 
         btnAccept.setOnClickListener(v -> {
@@ -454,7 +459,6 @@ public class HomeFragment extends Fragment {
                 .setBackgroundDrawable(
                         new ColorDrawable(Color.TRANSPARENT)
                 );
-
         dialog.show();
     }
 }

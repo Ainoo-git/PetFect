@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -267,86 +268,177 @@ public class ProfileFragment extends Fragment {
 
     private void subirImagenPerfilASupabase(byte[] bytes) {
 
-        String fileName = "perfiles/" + currentUser.getUid() + ".jpg";
+        if (currentUser == null) {
+            Toast.makeText(
+                    requireContext(),
+                    "No hay usuario iniciado",
+                    Toast.LENGTH_SHORT
+            ).show();
+            return;
+        }
+
+        String fileName =
+                "perfiles/" +
+                        currentUser.getUid() +
+                        "_" +
+                        System.currentTimeMillis() +
+                        ".jpg";
 
         RequestBody requestBody =
-                RequestBody.create(bytes, MediaType.parse("image/jpeg"));
+                RequestBody.create(
+                        bytes,
+                        MediaType.parse("image/jpeg")
+                );
 
         Request request = new Request.Builder()
-                .url(SupabaseClient.SUPABASE_URL + "/storage/v1/object/" +
-                        SupabaseClient.BUCKET_NAME + "/" + fileName)
+                .url(SupabaseClient.SUPABASE_URL +
+                        "/storage/v1/object/" +
+                        SupabaseClient.BUCKET_NAME +
+                        "/" + fileName)
                 .addHeader("apikey", SupabaseClient.SUPABASE_KEY)
                 .addHeader("Authorization", "Bearer " + SupabaseClient.SUPABASE_KEY)
                 .addHeader("Content-Type", "image/jpeg")
                 .put(requestBody)
                 .build();
 
-        SupabaseClient.getClient().newCall(request).enqueue(new Callback() {
+        SupabaseClient.getClient()
+                .newCall(request)
+                .enqueue(new Callback() {
 
-            @Override
-            public void onFailure(Call call, java.io.IOException e) {}
+                    @Override
+                    public void onFailure(Call call, java.io.IOException e) {
 
-            @Override
-            public void onResponse(Call call, Response response) {
+                        if (getActivity() == null) return;
 
-                if (response.isSuccessful()) {
+                        requireActivity().runOnUiThread(() ->
+                                Toast.makeText(
+                                        requireContext(),
+                                        "Error subiendo foto de perfil",
+                                        Toast.LENGTH_SHORT
+                                ).show()
+                        );
+                    }
 
-                    String publicUrl = SupabaseClient.SUPABASE_URL +
-                            "/storage/v1/object/public/" +
-                            SupabaseClient.BUCKET_NAME + "/" + fileName;
+                    @Override
+                    public void onResponse(Call call, Response response) {
 
-                    Map<String, Object> data = new HashMap<>();
+                        if (response.isSuccessful()) {
 
-                    data.put("fotoPerfil", publicUrl);
+                            String publicUrl =
+                                    SupabaseClient.SUPABASE_URL +
+                                            "/storage/v1/object/public/" +
+                                            SupabaseClient.BUCKET_NAME +
+                                            "/" + fileName;
 
-                    db.collection("usuarios")
-                            .document(currentUser.getUid())
-                            .set(data, SetOptions.merge());
+                            Map<String, Object> data = new HashMap<>();
 
-                    requireActivity().runOnUiThread(() ->
-                            Glide.with(requireContext())
-                                    .load(publicUrl)
-                                    .into(profileImage));
-                }
-            }
-        });
-    }
+                            data.put("fotoPerfil", publicUrl);
 
-    private void cargarImagenPerfil() {
+                            db.collection("usuarios")
+                                    .document(currentUser.getUid())
+                                    .set(data, SetOptions.merge())
+                                    .addOnSuccessListener(unused -> {
 
-        if (currentUser == null) return;
+                                        if (getActivity() == null) return;
 
-        db.collection("usuarios")
-                .document(currentUser.getUid())
-                .get()
-                .addOnSuccessListener(doc -> {
+                                        requireActivity().runOnUiThread(() -> {
 
-                    String url = doc.getString("fotoPerfil");
+                                            Glide.with(requireContext())
+                                                    .load(publicUrl)
+                                                    .circleCrop()
+                                                    .into(profileImage);
 
-                    if (url != null) {
+                                            Toast.makeText(
+                                                    requireContext(),
+                                                    "Foto de perfil actualizada",
+                                                    Toast.LENGTH_SHORT
+                                            ).show();
+                                        });
+                                    })
+                                    .addOnFailureListener(e -> {
 
-                        Glide.with(requireContext())
-                                .load(url)
-                                .into(profileImage);
+                                        if (getActivity() == null) return;
+
+                                        requireActivity().runOnUiThread(() ->
+                                                Toast.makeText(
+                                                        requireContext(),
+                                                        "Error guardando foto en Firebase",
+                                                        Toast.LENGTH_SHORT
+                                                ).show()
+                                        );
+                                    });
+
+                        } else {
+
+                            if (getActivity() == null) return;
+
+                            requireActivity().runOnUiThread(() ->
+                                    Toast.makeText(
+                                            requireContext(),
+                                            "Error Supabase: " + response.code(),
+                                            Toast.LENGTH_SHORT
+                                    ).show()
+                            );
+                        }
+
+                        response.close();
                     }
                 });
     }
 
+    private void cargarImagenPerfil() {
+
+            if (currentUser == null) return;
+
+            db.collection("usuarios")
+                    .document(currentUser.getUid())
+                    .get()
+                    .addOnSuccessListener(doc -> {
+
+                        if (!isAdded()) return;
+
+                        String url = doc.getString("fotoPerfil");
+
+                        if (url != null && !url.isEmpty()) {
+
+                            Glide.with(requireContext())
+                                    .load(url)
+                                    .circleCrop()
+                                    .placeholder(R.drawable.baseline_person_24)
+                                    .error(R.drawable.baseline_person_24)
+                                    .into(profileImage);
+
+                        } else {
+
+                            profileImage.setImageResource(R.drawable.baseline_person_24);
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+
+                        if (!isAdded()) return;
+
+                        Toast.makeText(
+                                requireContext(),
+                                "Error cargando foto de perfil",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                    });
+        }
+
     private void mostrarConfirmacionCerrarSesion() {
 
         new AlertDialog.Builder(requireContext())
-                .setTitle("Cerrar sesión")
-                .setMessage("¿Quieres cerrar sesión?")
-                .setPositiveButton("Sí, cerrar sesión", (dialog, which) -> {
+                .setTitle(getString(R.string.cerrar_sesion))
+                .setMessage(getString(R.string.confirmar_cerrar_sesion))
+                .setPositiveButton(getString(R.string.si_cerrar_sesion), (dialog, which) -> {
                     FirebaseAuth.getInstance().signOut();
 
                     Intent intent = new Intent(requireContext(), Login.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
                     startActivity(intent);
                     requireActivity().finish();
                 })
-                .setNegativeButton("Cancelar", null)
+                .setNegativeButton(getString(R.string.cancelar), null)
                 .show();
     }
 

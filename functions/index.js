@@ -1,44 +1,69 @@
-const { onDocumentCreated } = require("firebase-functions/v2/firestore");
+const {onDocumentCreated} = require("firebase-functions/v2/firestore");
 const admin = require("firebase-admin");
 
 admin.initializeApp();
 
 exports.onMascotaCreated = onDocumentCreated(
-  "mascotas/{mascotaId}",
-  async (event) => {
+    "mascotas/{mascotaId}",
+    async (event) => {
+      const mascota = event.data.data();
+      const mascotaId = event.params.mascotaId;
 
-    const mascota = event.data.data();
+      const nombre = mascota.nombre || "Una mascota";
+      const estado = mascota.estado || "";
+      const tipo = mascota.tipo || "mascota";
 
-    const nombre = mascota.nombre || "Una mascota";
-    const estado = mascota.estado || "";
-    const tipo = mascota.tipo || "mascota";
+      let titulo = "Nueva publicación en PetFect";
+      let cuerpo = `${nombre} ha sido publicada en PetFect`;
 
-    let titulo = "🐾 Nueva publicación en PetFect";
-    let cuerpo = `${nombre} ha sido publicada`;
+      if (estado === "perdido") {
+        titulo = "Mascota perdida";
+        cuerpo = `${nombre} se ha perdido. ¿Puedes ayudar?`;
+      } else if (estado === "adopcion") {
+        titulo = "Mascota en adopción";
+        cuerpo = `${nombre} busca un nuevo hogar`;
+      }
 
-    if (estado === "perdido") {
-      titulo = "🚨 Mascota perdida";
-      cuerpo = `${nombre} se ha perdido`;
-    } else if (estado === "adopcion") {
-      titulo = "🏡 En adopción";
-      cuerpo = `${nombre} busca hogar`;
-    }
+      let icono = "campana_noti";
 
-    const message = {
-      notification: {
-        title: titulo,
-        body: cuerpo
-      },
-      data: {
-        nombre,
-        estado,
-        tipo
-      },
-      topic: "allUsers"
-    };
+      if (estado === "perdido") {
+        icono = "puntero_perdido";
+      } else if (estado === "adopcion") {
+        icono = "puntero_adopcion";
+      }
 
-    await admin.messaging().send(message);
+      const message = {
+        notification: {
+          title: titulo,
+          body: cuerpo,
+        },
+        android: {
+          notification: {
+            icon: icono
+          }
+        },
+        data: {
+          mascotaId: mascotaId,
+          nombre: nombre,
+          estado: estado,
+          tipo: tipo,
+        },
+        topic: "allUsers",
+      };
+      const message = {
+        topic: "allUsers",
+        data: {
+          title: titulo,
+          body: cuerpo,
+          mascotaId: mascotaId,
+          nombre: nombre,
+          estado: estado,
+          tipo: tipo,
+        },
+      };
 
-    console.log("✔ Notificación enviada:", nombre);
-  }
+      await admin.messaging().send(message);
+
+      console.log("Notificación enviada:", nombre);
+    },
 );

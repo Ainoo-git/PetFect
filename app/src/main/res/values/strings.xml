@@ -235,7 +235,58 @@
     <string name="bienvenido_a_a_petfect_antes_de_utilizar_la_aplica">Bienvenido/a a PetFect 🐾 Antes de utilizar la aplicación, te recomendamos leer atentamente nuestros Términos y Condiciones y la Política de Privacidad. Estos documentos explican cómo funciona la plataforma, cómo protegemos tu información y cuáles son las normas de uso de la comunidad. Al continuar y aceptar, confirmas que has leído y aceptado esta información. PetFect es una aplicación diseñada para ayudar en la búsqueda de mascotas perdidas, facilitar adopciones responsables y conectar a usuarios, refugios y veterinarias de forma segura y sencilla. ──────────────────────────── TÉRMINOS Y CONDICIONES DE USO 1. Aceptación de los términos Al descargar, instalar o utilizar PetFect, aceptas cumplir estos términos y condiciones, así como nuestra Política de Privacidad. Si no estás de acuerdo con alguno de estos términos, por favor no utilices la aplicación. 2. Uso permitido PetFect está destinada exclusivamente a fines relacionados con el bienestar animal, adopciones y localización de mascotas. No está permitido: • Publicar información falsa • Suplantar identidades • Utilizar la aplicación para actividades ilegales • Publicar contenido ofensivo o inapropiado 3. Privacidad y datos PetFect puede recopilar determinados datos necesarios para el funcionamiento de la aplicación, como ubicación aproximada, correo electrónico y datos técnicos del dispositivo. Tus datos serán tratados conforme al RGPD y nunca serán vendidos a terceros sin consentimiento. 4. Responsabilidad PetFect actúa como plataforma intermediaria entre usuarios. No garantizamos el resultado de adopciones, búsquedas o publicaciones realizadas dentro de la aplicación. 5. Modificaciones PetFect puede actualizar estos términos cuando sea necesario para mejorar el servicio o adaptarse a cambios legales. ──────────────────────────── POLÍTICA DE PRIVACIDAD PetFect recopila únicamente la información necesaria para ofrecer correctamente sus servicios. Los datos pueden utilizarse para: • Gestión de cuentas • Alertas y notificaciones • Mejorar la experiencia de usuario • Localización de mascotas cercanas El usuario puede solicitar la modificación o eliminación de sus datos en cualquier momento contactando con soporte. Gracias por formar parte de PetFect.</string>
     <string name="espanol">Español</string>
     <string name="ingles">English</string>
+    <string name="notificaciones_descripcion">Activa las notificaciones para recibir avisos cuando se publique una mascota perdida o en adopción.</string>
     <string name="foto_mascota">Foto de la mascota</string>
     <string name="guardar_mascota">Guardar mascota</string>
+    <string name="error_general">Error: %1$s</string>
+    <string name="debes_iniciar_sesion">Debes iniciar sesión</string>
+    <string name="subiendo_imagen">Subiendo imagen...</string>
+    <string name="error_al_publicar_detalle">Error al publicar: %1$s</string>
+    <string name="error_obteniendo_ubicacion">Error obteniendo ubicación</string>
+    <string name="no_se_pudo_leer_imagen">No se pudo leer la imagen</string>
+    <string name="error_preparando_imagen">Error preparando imagen</string>
+    <string name="error_al_guardar">Error al guardar</string>
+    <string name="error_cargando_datos">Error cargando datos</string>
+    <string name="mascotas_perdidas_contador">Mascotas Perdidas (%1$d)</string>
+    <string name="mascotas_adopcion_contador">Mascotas en Adopción (%1$d)</string>
+    <string name="no_hay_usuario_iniciado">No hay usuario iniciado</string>
+    <string name="error_subiendo_foto_perfil">Error subiendo foto de perfil</string>
+    <string name="foto_perfil_actualizada">Foto de perfil actualizada</string>
+    <string name="error_guardando_foto_firebase">Error guardando foto en Firebase</string>
+    <string name="error_supabase">Error Supabase: %1$s</string>
+    <string name="error_cargando_foto_perfil">Error cargando foto de perfil</string>
+    <string name="error_email">Error email: %1$s</string>
+    <string name="error_password">Error password: %1$s</string>
+    <string name="permiso_notificaciones_denegado">Permiso de notificaciones denegado</string>
+    <string name="notificaciones_ya_activadas">Las notificaciones ya están activadas</string>
+    <string name="notificaciones_activadas">Notificaciones activadas</string>
+    <string name="recibiras_avisos_nuevas_mascotas">Recibirás avisos de nuevas mascotas</string>
+    <string name="no_se_pudieron_activar_notificaciones">No se pudieron activar las notificaciones</string>
+    <string name="avisos_recientes">Avisos recientes</string>
+    <string name="avisos_recientes_descripcion">Aquí aparecerán las alertas de mascotas perdidas, adopciones y novedades importantes.</string>
+    <string name="icono_registro">Icono registro</string>
+    <string name="menu_settings">Ajustes</string>
+    <string name="menu_copy">Copiar</string>
+    <string name="menu_profile">Perfil</string>
+    <string name="menu_main_bab">Principal</string>
+    <string name="menu_main_bn">Principal</string>
+    <string name="menu_signout">Cerrar sesión</string>
+    <string name="mascota_default">Mascota</string>
+    <string name="sin_estado">Sin estado</string>
+    <string name="tipo_perro">Perro</string>
+    <string name="tipo_gato">Gato</string>
+    <string name="tipo_otro">Otro</string>
+
+    <string name="estado_perdido">Perdido</string>
+    <string name="estado_adopcion">Adopción</string>
+    <string name="estado_encontrado">Encontrado</string>
+
+    <string name="detalle_mascota">Detalle de mascota</string>
+    <string name="edad_label_demo">Edad: </string>
+    <string name="chip_label_demo">Chip: </string>
+    <string name="telefono_label_demo">Teléfono: </string>
+    <string name="info_adicional_label_demo">Info adicional: </string>
+
+
 
 </resources>

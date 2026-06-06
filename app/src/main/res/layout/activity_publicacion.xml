@@ -2,12 +2,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/background">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/cian_botones"
+            android:title="@string/publicar"
+            android:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/flecha"
+            app:titleCentered="true" />
+
+    </com.google.android.material.appbar.AppBarLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -205,6 +220,8 @@
                 android:layout_marginTop="18dp"
                 android:enabled="false"
                 android:text="@string/publicar"
+                android:textStyle="bold"
+                android:textColor="@color/white"
                 app:backgroundTint="@color/cian_botones"
                 app:cornerRadius="18dp" />
         </LinearLayout>

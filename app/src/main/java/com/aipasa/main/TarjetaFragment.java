@@ -12,26 +12,40 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import com.google.android.gms.maps.model.BitmapDescriptor;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.appbar.MaterialToolbar;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.aipasa.R;
 import com.bumptech.glide.Glide;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Locale;
 
 public class TarjetaFragment extends DialogFragment {
 
     private ImageView imgAccion;
-    private TextView txtTitulo, txtFecha, txtDescripcion;
+    private TextView txtTitulo, txtFecha, txtEdad, txtChip, txtTelefono, txtInfoAdicional;
     private Button btnVerMas;
     private ImageButton btnGuardar;
-
+    private MaterialToolbar topAppBar;
+    private MapView mapMiniContacto;
     private static final String ARG_ARTICULO_ID = "ARTICULO_ID";
 
     public static TarjetaFragment newInstance(String articuloId) {
-
         TarjetaFragment fragment = new TarjetaFragment();
 
         Bundle args = new Bundle();
@@ -42,22 +56,35 @@ public class TarjetaFragment extends DialogFragment {
         return fragment;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(STYLE_NORMAL, android.R.style.Theme_Material_Light_NoActionBar_Fullscreen);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(
-                R.layout.fragment_tarjeta,
-                container,
-                false
-        );
+        View view = inflater.inflate(R.layout.fragment_tarjeta, container, false);
 
         imgAccion = view.findViewById(R.id.imgAccion);
         txtTitulo = view.findViewById(R.id.txtTitulo);
         txtFecha = view.findViewById(R.id.txtFecha);
-        txtDescripcion = view.findViewById(R.id.txtDescripcion);
+
+        txtEdad = view.findViewById(R.id.txtEdad);
+        txtChip = view.findViewById(R.id.txtChip);
+        txtTelefono = view.findViewById(R.id.txtTelefono);
+        txtInfoAdicional = view.findViewById(R.id.txtInfoAdicional);
+
+        mapMiniContacto = view.findViewById(R.id.mapMiniContacto);
+        mapMiniContacto.onCreate(savedInstanceState);
+        mapMiniContacto.onResume();
+
+        topAppBar = view.findViewById(R.id.topAppBar);
+        topAppBar.setNavigationOnClickListener(v -> dismiss());
 
         btnVerMas = view.findViewById(R.id.btnVerMas);
         btnGuardar = view.findViewById(R.id.btnGuardar);
@@ -65,19 +92,15 @@ public class TarjetaFragment extends DialogFragment {
         String articuloId = null;
 
         if (getArguments() != null) {
-            articuloId =
-                    getArguments().getString(ARG_ARTICULO_ID);
+            articuloId = getArguments().getString(ARG_ARTICULO_ID);
         }
 
-        if (articuloId == null ||
-                articuloId.isEmpty()) {
-
+        if (articuloId == null || articuloId.isEmpty()) {
             Toast.makeText(
                     getContext(),
-                    "No se recibió la publicación",
+                    getString(R.string.no_se_recibio_publicacion),
                     Toast.LENGTH_SHORT
             ).show();
-
             return view;
         }
 
@@ -86,10 +109,21 @@ public class TarjetaFragment extends DialogFragment {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setLayout(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+            );
+        }
+    }
+
     private void cargarMascota(String id) {
 
-        FirebaseFirestore db =
-                FirebaseFirestore.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("mascotas")
                 .document(id)
@@ -97,160 +131,263 @@ public class TarjetaFragment extends DialogFragment {
                 .addOnSuccessListener(documentSnapshot -> {
 
                     if (!documentSnapshot.exists()) {
-
                         Toast.makeText(
                                 getContext(),
-                                "La publicación no existe",
+                                getString(R.string.publicacion_no_existe),
                                 Toast.LENGTH_SHORT
                         ).show();
-
                         return;
                     }
 
-                    DocumentSnapshot doc = documentSnapshot;
+                    String nombre = documentSnapshot.getString("nombre");
+                    String tipo = documentSnapshot.getString("tipo");
+                    String estado = documentSnapshot.getString("estado");
+                    String edad = documentSnapshot.getString("edad");
+                    String chip = documentSnapshot.getString("chip");
+                    String telefono = documentSnapshot.getString("telefono");
+                    String info = documentSnapshot.getString("infoAdicional");
+                    String fotoUrl = documentSnapshot.getString("fotoUrl");
 
-                    String nombre =
-                            doc.getString("nombre");
 
-                    String tipo =
-                            doc.getString("tipo");
+                    Double latitud = documentSnapshot.getDouble("latitud");
+                    Double longitud = documentSnapshot.getDouble("longitud");
 
-                    String estado =
-                            doc.getString("estado");
-
-                    String edad =
-                            doc.getString("edad");
-
-                    String chip =
-                            doc.getString("chip");
-
-                    String telefono =
-                            doc.getString("telefono");
-
-                    String info =
-                            doc.getString("infoAdicional");
-
-                    String fotoUrl =
-                            doc.getString("fotoUrl");
 
                     txtTitulo.setText(
-                            nombre != null
+                            nombre != null && !nombre.isEmpty()
                                     ? nombre
-                                    : "Sin nombre"
+                                    : getString(R.string.sin_nombre)
                     );
+
+                    String tipoTraducido = traducirTipo(tipo);
+                    String estadoTraducido = traducirEstado(estado);
 
                     String tipoEstado = "";
 
-                    if (tipo != null &&
-                            !tipo.isEmpty()) {
-
-                        tipoEstado +=
-                                tipo.substring(0,1)
-                                        .toUpperCase()
-                                        + tipo.substring(1);
+                    if (!tipoTraducido.isEmpty()) {
+                        tipoEstado += tipoTraducido;
                     }
 
-                    if (estado != null &&
-                            !estado.isEmpty()) {
-
-                        if (!tipoEstado.isEmpty())
-                            tipoEstado += " • ";
-
-                        tipoEstado +=
-                                estado.substring(0,1)
-                                        .toUpperCase()
-                                        + estado.substring(1);
+                    if (!estadoTraducido.isEmpty()) {
+                        if (!tipoEstado.isEmpty()) tipoEstado += " • ";
+                        tipoEstado += estadoTraducido;
                     }
 
                     txtFecha.setText(tipoEstado);
 
-                    String descripcion =
+                    txtEdad.setText(
+                            getString(
+                                    R.string.edad_label,
+                                    edad != null && !edad.isEmpty()
+                                            ? edad
+                                            : getString(R.string.no_especificada)
+                            )
+                    );
 
-                            "Edad: "
-                                    + (edad != null
-                                    ? edad
-                                    : "No especificada")
+                    txtChip.setText(
+                            getString(
+                                    R.string.chip_label,
+                                    chip != null && !chip.isEmpty()
+                                            ? chip
+                                            : getString(R.string.no_especificado)
+                            )
+                    );
 
-                                    + "\n\nChip: "
+                    txtTelefono.setText(
+                            getString(
+                                    R.string.telefono_label,
+                                    telefono != null && !telefono.isEmpty()
+                                            ? telefono
+                                            : getString(R.string.no_disponible)
+                            )
+                    );
 
-                                    + (chip != null
-                                    ? chip
-                                    : "No especificado")
+                    txtInfoAdicional.setText(
+                            getString(
+                                    R.string.info_adicional_label,
+                                    info != null && !info.isEmpty()
+                                            ? info
+                                            : getString(R.string.sin_informacion)
+                            )
+                    );
 
-                                    + "\n\nTeléfono: "
-
-                                    + (telefono != null
-                                    ? telefono
-                                    : "No disponible")
-
-                                    + "\n\nInfo adicional: "
-
-                                    + (info != null
-                                    ? info
-                                    : "Sin información");
-
-                    txtDescripcion.setText(descripcion);
-
-                    if (fotoUrl != null &&
-                            !fotoUrl.isEmpty()) {
-
+                    if (fotoUrl != null && !fotoUrl.isEmpty()) {
                         Glide.with(this)
                                 .load(fotoUrl)
                                 .placeholder(R.drawable.logologin)
                                 .error(R.drawable.logologin)
                                 .centerCrop()
                                 .into(imgAccion);
-
                     } else {
-
-                        imgAccion.setImageResource(
-                                R.drawable.logologin
-                        );
+                        imgAccion.setImageResource(R.drawable.logologin);
                     }
+                    configurarMiniMapa(
+                            nombre,
+                            estado,
+                            latitud,
+                            longitud
+                    );
+
 
                     btnGuardar.bringToFront();
 
-                    btnGuardar.setOnClickListener(v -> {
-
-                        Toast.makeText(
-                                getContext(),
-                                "Guardado",
-                                Toast.LENGTH_SHORT
-                        ).show();
-                    });
-
-                    btnVerMas.setOnClickListener(v -> {
-
-                        if (telefono != null &&
-                                !telefono.isEmpty()) {
-
-                            Intent intent =
-                                    new Intent(Intent.ACTION_DIAL);
-
-                            intent.setData(
-                                    Uri.parse("tel:" + telefono)
-                            );
-
-                            startActivity(intent);
-
-                        } else {
-
+                    btnGuardar.setOnClickListener(v ->
                             Toast.makeText(
                                     getContext(),
-                                    "No hay número de contacto disponible",
+                                    getString(R.string.guardado),
+                                    Toast.LENGTH_SHORT
+                            ).show()
+                    );
+
+                    btnVerMas.setOnClickListener(v -> {
+                        if (telefono != null && !telefono.isEmpty()) {
+                            Intent intent = new Intent(Intent.ACTION_DIAL);
+                            intent.setData(Uri.parse("tel:" + telefono));
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(
+                                    getContext(),
+                                    getString(R.string.no_hay_numero_contacto),
                                     Toast.LENGTH_SHORT
                             ).show();
                         }
                     });
 
                 })
-
                 .addOnFailureListener(e ->
-
                         Toast.makeText(
                                 getContext(),
-                                "Error al cargar la publicación",
+                                getString(R.string.error_cargar_publicacion),
                                 Toast.LENGTH_SHORT
-                        ).show());
+                        ).show()
+                );
+    }
+
+
+    private void configurarMiniMapa(
+            String nombre,
+            String estado,
+            Double latitud,
+            Double longitud
+    ) {
+        if (mapMiniContacto == null || latitud == null || longitud == null) {
+            return;
+        }
+
+        mapMiniContacto.getMapAsync(googleMap -> {
+            LatLng ubicacionMascota = new LatLng(latitud, longitud);
+
+            googleMap.clear();
+
+            googleMap.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(ubicacionMascota, 15f)
+            );
+
+            int iconoPuntero;
+
+            if ("perdido".equalsIgnoreCase(estado)) {
+                iconoPuntero = R.drawable.puntero_perdido;
+            } else if ("adopcion".equalsIgnoreCase(estado)
+                    || "adopción".equalsIgnoreCase(estado)) {
+                iconoPuntero = R.drawable.puntero_adopcion;
+            } else {
+                iconoPuntero = R.drawable.puntero_perdido;
+            }
+
+            googleMap.addMarker(
+                    new MarkerOptions()
+                            .position(ubicacionMascota)
+                            .title(nombre != null ? nombre : getString(R.string.sin_nombre))
+                            .icon(crearIconoPequeno(iconoPuntero))
+            );
+
+            googleMap.getUiSettings().setZoomControlsEnabled(false);
+            googleMap.getUiSettings().setScrollGesturesEnabled(false);
+            googleMap.getUiSettings().setZoomGesturesEnabled(false);
+            googleMap.getUiSettings().setRotateGesturesEnabled(false);
+            googleMap.getUiSettings().setTiltGesturesEnabled(false);
+        });
+    }
+
+    private BitmapDescriptor crearIconoPequeno(int drawableId) {
+        Bitmap bitmapOriginal = BitmapFactory.decodeResource(
+                getResources(),
+                drawableId
+        );
+
+        Bitmap bitmapPequeno = Bitmap.createScaledBitmap(
+                bitmapOriginal,
+                80,
+                80,
+                false
+        );
+
+        return BitmapDescriptorFactory.fromBitmap(bitmapPequeno);
+    }
+    private String traducirTipo(String tipo) {
+        if (tipo == null) return "";
+
+        switch (tipo.toLowerCase(Locale.ROOT)) {
+            case "perro":
+                return getString(R.string.tipo_perro);
+            case "gato":
+                return getString(R.string.tipo_gato);
+            case "otro":
+                return getString(R.string.tipo_otro);
+            default:
+                return tipo;
+        }
+    }
+
+    private String traducirEstado(String estado) {
+        if (estado == null) return "";
+
+        switch (estado.toLowerCase(Locale.ROOT)) {
+            case "perdido":
+                return getString(R.string.estado_perdido);
+            case "adopcion":
+            case "adopción":
+                return getString(R.string.estado_adopcion);
+            case "encontrado":
+                return getString(R.string.estado_encontrado);
+            default:
+                return estado;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mapMiniContacto != null) {
+            mapMiniContacto.onResume();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (mapMiniContacto != null) {
+            mapMiniContacto.onPause();
+        }
+
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (mapMiniContacto != null) {
+            mapMiniContacto.onDestroy();
+        }
+
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+
+        if (mapMiniContacto != null) {
+            mapMiniContacto.onLowMemory();
+        }
     }
 }

@@ -1,10 +1,12 @@
 package com.aipasa.editar;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.R;
@@ -18,182 +20,177 @@ import java.util.Map;
 
 public class EditarPerfilActivity extends AppCompatActivity {
 
-    EditText etUsername, etEmail, etPassword;
-    Button btnGuardar;
+    private EditText etUsername;
+    private EditText etEmail;
+    private EditText etPassword;
+    private Button btnGuardar;
 
-    FirebaseAuth auth;
-    FirebaseFirestore db;
-    FirebaseUser user;
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
+    private FirebaseUser user;
 
-    String currentUsername = "";
-    String currentEmail = "";
+    private String currentUsername = "";
+    private String currentEmail = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_perfil);
 
-        // FIREBASE
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         user = auth.getCurrentUser();
 
-        // TOOLBAR
+        configurarToolbar();
+        inicializarVistas();
+        cargarDatosUsuario();
+        configurarBotonGuardar();
+    }
+
+    private void configurarToolbar() {
         MaterialToolbar toolbar = findViewById(R.id.topAppBar);
 
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
         toolbar.setNavigationOnClickListener(v -> finish());
+    }
 
-        // VISTAS
+    private void inicializarVistas() {
         etUsername = findViewById(R.id.etUsername);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-
         btnGuardar = findViewById(R.id.btnGuardar);
+    }
 
+    private void cargarDatosUsuario() {
+        if (user == null) {
+            Toast.makeText(this, "No hay usuario conectado", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
 
-        // CARGAR EMAIL (FIREBASE AUTH)
+        currentEmail = user.getEmail();
 
-        if (user != null) {
-
-            currentEmail = user.getEmail();
-
+        if (currentEmail != null) {
             etEmail.setText(currentEmail);
         }
 
+        db.collection("usuarios")
+                .document(user.getUid())
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        currentUsername = documentSnapshot.getString("username");
 
-        // CARGAR USERNAME (FIRESTORE)
+                        if (currentUsername != null) {
+                            etUsername.setText(currentUsername);
+                        }
+                    }
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(
+                                this,
+                                "Error cargando usuario",
+                                Toast.LENGTH_SHORT
+                        ).show()
+                );
+    }
 
-        if (user != null) {
+    private void configurarBotonGuardar() {
+        btnGuardar.setOnClickListener(v -> {
+            if (user == null) {
+                Toast.makeText(this, "No hay usuario conectado", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String newUsername = etUsername.getText().toString().trim();
+            String newEmail = etEmail.getText().toString().trim();
+            String newPassword = etPassword.getText().toString().trim();
+
+            if (newUsername.isEmpty()) {
+                etUsername.setError("Introduce un nombre de usuario");
+                return;
+            }
+
+            if (newEmail.isEmpty()) {
+                etEmail.setError("Introduce un correo electrónico");
+                return;
+            }
+
+            actualizarUsername(newUsername);
+            actualizarEmail(newEmail);
+            actualizarPassword(newPassword);
+
+            Toast.makeText(this, "Perfil actualizado", Toast.LENGTH_SHORT).show();
+            finish();
+        });
+    }
+
+    private void actualizarUsername(String newUsername) {
+        if (!newUsername.equals(currentUsername)) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("username", newUsername);
 
             db.collection("usuarios")
                     .document(user.getUid())
-                    .get()
-                    .addOnSuccessListener(documentSnapshot -> {
-
-                        if (documentSnapshot.exists()) {
-
-                            currentUsername =
-                                    documentSnapshot.getString("username");
-
-                            etUsername.setText(currentUsername);
-                        }
-                    })
+                    .update(map)
+                    .addOnSuccessListener(unused -> currentUsername = newUsername)
                     .addOnFailureListener(e ->
-
                             Toast.makeText(
                                     this,
-                                    "Error cargando usuario",
+                                    "Error actualizando usuario",
                                     Toast.LENGTH_SHORT
                             ).show()
                     );
         }
+    }
 
-        // GUARDAR CAMBIOS
+    private void actualizarEmail(String newEmail) {
+        if (!newEmail.equals(currentEmail)) {
+            user.updateEmail(newEmail)
+                    .addOnSuccessListener(unused -> currentEmail = newEmail)
+                    .addOnFailureListener(e ->
+                            Toast.makeText(
+                                    this,
+                                    "Error email: " + e.getMessage(),
+                                    Toast.LENGTH_SHORT
+                            ).show()
+                    );
+        }
+    }
 
-        btnGuardar.setOnClickListener(v -> {
+    private void actualizarPassword(String newPassword) {
+        if (!newPassword.isEmpty()) {
+            user.updatePassword(newPassword)
+                    .addOnSuccessListener(unused ->
+                            Toast.makeText(
+                                    this,
+                                    "Contraseña actualizada",
+                                    Toast.LENGTH_SHORT
+                            ).show()
+                    )
+                    .addOnFailureListener(e ->
+                            Toast.makeText(
+                                    this,
+                                    "Error password: " + e.getMessage(),
+                                    Toast.LENGTH_SHORT
+                            ).show()
+                    );
+        }
+    }
 
-            if (user == null) return;
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
 
-            String newUsername =
-                    etUsername.getText().toString().trim();
-
-            String newEmail =
-                    etEmail.getText().toString().trim();
-
-            String newPassword =
-                    etPassword.getText().toString().trim();
-
-
-
-            if (!newUsername.isEmpty()
-                    && !newUsername.equals(currentUsername)) {
-
-                Map<String, Object> map = new HashMap<>();
-
-                map.put("username", newUsername);
-
-                db.collection("usuarios")
-                        .document(user.getUid())
-                        .update(map);
-
-                currentUsername = newUsername;
-            }
-
-
-            // EMAIL
-
-            if (!newEmail.isEmpty()
-                    && !newEmail.equals(currentEmail)) {
-
-                user.updateEmail(newEmail)
-
-                        .addOnSuccessListener(unused ->
-
-                                Toast.makeText(
-                                        this,
-                                        "Email actualizado",
-                                        Toast.LENGTH_SHORT
-                                ).show()
-                        )
-
-                        .addOnFailureListener(e ->
-
-                                Toast.makeText(
-                                        this,
-                                        "Error email: " + e.getMessage(),
-                                        Toast.LENGTH_SHORT
-                                ).show()
-                        );
-
-                currentEmail = newEmail;
-            }
-
-
-            // PASSWORD
-
-            if (!newPassword.isEmpty()) {
-
-                user.updatePassword(newPassword)
-
-                        .addOnSuccessListener(unused ->
-
-                                Toast.makeText(
-                                        this,
-                                        "Contraseña actualizada",
-                                        Toast.LENGTH_SHORT
-                                ).show()
-                        )
-
-                        .addOnFailureListener(e ->
-
-                                Toast.makeText(
-                                        this,
-                                        "Error password: " + e.getMessage(),
-                                        Toast.LENGTH_SHORT
-                                ).show()
-                        );
-            }
-
-
-            // FINAL
-
-            btnGuardar.postDelayed(() -> {
-
-                Toast.makeText(
-                        this,
-                        "Perfil actualizado",
-                        Toast.LENGTH_SHORT
-                ).show();
-
-                finish();
-
-            }, 1000);
-        });
+        return super.onOptionsItemSelected(item);
     }
 }

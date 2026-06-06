@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="gris_icono_inactivo">#9E9E9E</color>
+    <color name="cian_oscuro_iconos">#0F5052</color>
+    <color name="cian_botones">#3ACAAE</color>
+    <color name="cian_clarito_bordes">#C3FFFC</color>
+    <color name="rosita_fondoss_tarjetas_alertaslev">#FFC3C3</color>
+    <color name="coral_alertasimp_errores">#FF8C8C</color>
+
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="background">#FFFFFF</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="fondotar">#FBD6D6</color>
+
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#FFFFFF</color>
+    <color name="gris">#525252</color>
+
+
+    <color name="fondo_pantalla_app">#1A1A1A</color>
+    <color name="fondo_tarjeta_app">#262626</color>
+    <color name="texto_titulo_app">#FFFFFF</color>
+    <color name="texto_normal_app">#EAEAEA</color>
+    <color name="texto_secundario_app">#BDBDBD</color>
+    <color name="texto_boton_claro_app">#000000</color>
+
+</resources>

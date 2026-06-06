@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="#f5f5f5">
+    android:background="@color/fondotar">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -16,7 +16,8 @@
         android:layout_marginEnd="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        app:cardBackgroundColor="@android:color/white">
+        app:cardBackgroundColor="@color/background">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,7 +43,7 @@
                 android:text="@string/nombre_mascota_demo"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_primary"
                 android:layout_marginBottom="8dp"/>
 
             <!-- Tipo y estado -->
@@ -52,19 +53,52 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tipo_estado_demo"
                 android:textSize="16sp"
-                android:textColor="#666666"
+                android:textColor="@color/gris"
                 android:layout_marginBottom="16dp"/>
 
-            <!-- Descripción -->
-            <TextView
-                android:id="@+id/txtDescripcion"
+            <LinearLayout
+                android:id="@+id/layoutDescripcion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/detalle_mascota_demo"
-                android:textSize="16sp"
-                android:textColor="#333333"
-                android:lineSpacingExtra="4dp"
-                android:layout_marginBottom="24dp"/>
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:id="@+id/txtEdad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edad_label_demo"
+                    android:textSize="16sp"
+                    android:textColor="@color/gris"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/txtChip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chip_label_demo"
+                    android:textSize="16sp"
+                    android:textColor="@color/gris"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/txtTelefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/telefono_label_demo"
+                    android:textSize="16sp"
+                    android:textColor="@color/gris"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/txtInfoAdicional"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/info_adicional_label_demo"
+                    android:textSize="16sp"
+                    android:textColor="@color/gris" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
