@@ -1,40 +1,49 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#80000000"
-    android:padding="12dp">
+    android:background="@android:color/transparent"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="18dp"
+    android:paddingBottom="18dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="4dp"
-        card_view:cardCornerRadius="24dp"
-        card_view:cardElevation="12dp">
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        card_view:cardCornerRadius="22dp"
+        card_view:cardElevation="12dp"
+        card_view:cardBackgroundColor="@color/card_background">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="18dp">
-            <!--  TITULO  -->
+            android:padding="16dp">
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/terminos_politicas"
-                android:textColor="#FF8C8C"
+                android:textColor="@color/cian_oscuro_iconos"
                 android:textSize="22sp"
-                android:textStyle="bold" />
-            <!--  SUBTEXTO  -->
+                android:textStyle="bold"
+                android:gravity="center" />
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/lee_info_continuar"
-                android:textColor="#777777"
-                android:textSize="13sp" />
-            <!--  BOTONES TEXTO  -->
+                android:textColor="@color/gris"
+                android:textSize="13sp"
+                android:gravity="center" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,14 +53,15 @@
                 <TextView
                     android:id="@+id/tvTerminos"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="42dp"
                     android:layout_weight="1"
-                    android:background="#FFF1F1"
+                    android:background="@color/cian_clarito_bordes"
                     android:gravity="center"
-                    android:padding="10dp"
                     android:text="@string/terminos"
-                    android:textColor="#FF8C8C"
-                    android:textStyle="bold" />
+                    android:textColor="@color/cian_oscuro_iconos"
+                    android:textStyle="bold"
+                    android:clickable="true"
+                    android:focusable="true" />
 
                 <Space
                     android:layout_width="8dp"
@@ -60,22 +70,23 @@
                 <TextView
                     android:id="@+id/tvPrivacidad"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="42dp"
                     android:layout_weight="1"
-                    android:background="#FFF1F1"
+                    android:background="@color/cian_clarito_bordes"
                     android:gravity="center"
-                    android:padding="10dp"
                     android:text="@string/privacidad"
-                    android:textColor="#FF8C8C"
-                    android:textStyle="bold" />
+                    android:textColor="@color/cian_oscuro_iconos"
+                    android:textStyle="bold"
+                    android:clickable="true"
+                    android:focusable="true" />
+
             </LinearLayout>
-            <!--  SCROLL  -->
+
             <ScrollView
                 android:id="@+id/scrollView"
                 android:layout_width="match_parent"
-                android:layout_height="420dp"
-                android:layout_marginTop="14dp"
-                android:background="#FAFAFA"
+                android:layout_height="260dp"
+                android:layout_marginTop="12dp"
                 android:fillViewport="true">
 
                 <TextView
@@ -83,46 +94,52 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lineSpacingExtra="5dp"
-                    android:padding="14dp"
+                    android:padding="12dp"
                     android:text="@string/bienvenido_a_a_petfect_antes_de_utilizar_la_aplica"
-                    android:textColor="#333333"
-                    android:textSize="15sp" />
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp" />
+
             </ScrollView>
-            <!--  CHECK  -->
+
             <CheckBox
                 android:id="@+id/checkAccept"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="12dp"
+                android:buttonTint="@color/cian_botones"
                 android:text="@string/he_leido_acepto"
-                android:textColor="#000000"
+                android:textColor="@color/text_primary"
                 android:textSize="14sp" />
-            <!--  BOTONES  -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:gravity="end"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnCancel"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="44dp"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="#DDDDDD"
+                    android:backgroundTint="@color/gris"
                     android:text="@string/cancelar"
-                    android:textColor="#444444" />
+                    android:textColor="@color/white" />
 
                 <Button
                     android:id="@+id/btnAccept"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#FF8C8C"
+                    android:layout_height="44dp"
+                    android:backgroundTint="@color/gris"
                     android:enabled="false"
                     android:text="@string/aceptar"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="@color/white" />
+
             </LinearLayout>
+
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
+
 </FrameLayout>

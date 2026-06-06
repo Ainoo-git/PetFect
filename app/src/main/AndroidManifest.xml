@@ -130,6 +130,8 @@
             android:name=".creditos.Creditos"
             android:exported="false" />
 
+
+
     </application>
 
 </manifest>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="#f5f5f5">
+    android:background="@color/petfect_background">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         android:layout_marginEnd="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        app:cardBackgroundColor="@android:color/white">
+        app:cardBackgroundColor="@color/card_background">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
                 android:text="@string/nombre_mascota_demo"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_primary"
                 android:layout_marginBottom="8dp"/>
 
             <!-- Tipo y estado -->
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tipo_estado_demo"
                 android:textSize="16sp"
-                android:textColor="#666666"
+                android:textColor="@color/text_hint"
                 android:layout_marginBottom="16dp"/>
 
             <LinearLayout
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/edad_label_demo"
                     android:textSize="16sp"
-                    android:textColor="#333333"
+                    android:textColor="@color/text_primary"
                     android:layout_marginBottom="8dp" />
 
                 <TextView
@@ -77,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/chip_label_demo"
                     android:textSize="16sp"
-                    android:textColor="#333333"
+                    android:textColor="@color/text_primary"
                     android:layout_marginBottom="8dp" />
 
                 <TextView
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/telefono_label_demo"
                     android:textSize="16sp"
-                    android:textColor="#333333"
+                    android:textColor="@color/text_primary"
                     android:layout_marginBottom="8dp" />
 
                 <TextView
@@ -95,7 +95,23 @@
                     android:layout_height="wrap_content"
                     android:text="@string/info_adicional_label_demo"
                     android:textSize="16sp"
-                    android:textColor="#333333" />
+                    android:textColor="@color/text_primary"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:id="@+id/txtMostrarMasInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mostrar_mas"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/cian_botones"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -110,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/editar"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/white"
                     android:backgroundTint="@color/rosita_fondoss_tarjetas_alertaslev"
                     android:padding="12dp"
                     android:layout_marginEnd="4dp"/>
@@ -121,8 +137,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/eliminar"
-                    android:textColor="@android:color/white"
-                    android:backgroundTint="@color/coral_alertasimp_errores"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/rosita_fondoss_tarjetas_alertaslev"
                     android:padding="12dp"
                     android:layout_marginStart="4dp"/>
 

@@ -81,13 +81,13 @@ public class ProfileFragment extends Fragment {
         // Toolbar
         MaterialToolbar toolbar = view.findViewById(R.id.topAppBar);
 
-        toolbar.setNavigationOnClickListener(v -> {
-
-            ((BottomNavigationView)
-                    requireActivity().findViewById(R.id.bottom_nav))
-                    .setSelectedItemId(R.id.home);
-
-        });
+        if (toolbar != null) {
+            toolbar.setNavigationOnClickListener(v -> {
+                ((BottomNavigationView)
+                        requireActivity().findViewById(R.id.bottom_nav))
+                        .setSelectedItemId(R.id.home);
+            });
+        }
 
         // Nombre usuario
         tvNombre = view.findViewById(R.id.nombre2);

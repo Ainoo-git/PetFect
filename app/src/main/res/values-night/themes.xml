@@ -1,17 +1,17 @@
 <resources>
 
     <style name="Base.Theme.PetFect" parent="Theme.Material3.DayNight.NoActionBar">
-
         <item name="colorPrimary">@color/cian_botones</item>
         <item name="colorOnPrimary">@color/black</item>
-
         <item name="colorSecondary">@color/cian_oscuro_iconos</item>
-        <item name="colorOnSecondary">@color/black</item>
-
-        <item name="android:windowBackground">@color/background_dark</item>
-
-        <item name="colorSurface">@color/surface_dark</item>
-
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorTertiary">@color/rosita_fondoss_tarjetas_alertaslev</item>
+        <item name="colorOnTertiary">@color/black</item>
+        <item name="colorSurface">@color/card_background</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="android:windowBackground">@color/petfect_background</item>
+        <item name="android:fontFamily">@font/text_app</item>
+        <item name="fontFamily">@font/text_app</item>
     </style>
 
     <style name="Theme.PetFect" parent="Base.Theme.PetFect" />
