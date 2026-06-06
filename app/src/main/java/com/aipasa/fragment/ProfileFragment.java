@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -50,12 +49,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.*;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ProfileFragment extends Fragment {
 
     private TextView tvNombre;
     private static final int PICK_IMAGE_REQUEST = 1001;
+
     private ImageView profileImage;
 
     private FirebaseUser currentUser;
@@ -68,7 +73,6 @@ public class ProfileFragment extends Fragment {
 
     private ListenerRegistration usuarioListener;
 
-    // RECYCLER
     private RecyclerView rvMascotas;
     private MascotaProfileAdapter adapter;
     private List<DocumentSnapshot> listaMascotas = new ArrayList<>();
@@ -84,11 +88,15 @@ public class ProfileFragment extends Fragment {
 
         MaterialToolbar toolbar = view.findViewById(R.id.topAppBar);
 
-        toolbar.setNavigationOnClickListener(v -> {
-            ((BottomNavigationView)
-                    requireActivity().findViewById(R.id.bottom_nav))
-                    .setSelectedItemId(R.id.home);
-        });
+        if (toolbar != null) {
+            toolbar.setNavigationOnClickListener(v -> {
+                BottomNavigationView bottomNav = requireActivity().findViewById(R.id.bottom_nav);
+
+                if (bottomNav != null) {
+                    bottomNav.setSelectedItemId(R.id.home);
+                }
+            });
+        }
 
         tvNombre = view.findViewById(R.id.nombre2);
         profileImage = view.findViewById(R.id.profile_image);
@@ -101,7 +109,7 @@ public class ProfileFragment extends Fragment {
         galeriaLauncher = registerForActivityResult(
                 new ActivityResultContracts.GetContent(),
                 uri -> {
-                    if (uri != null) {
+                    if (uri != null && profileImage != null) {
                         imageUri = uri;
                         imageBitmap = null;
 
@@ -112,30 +120,46 @@ public class ProfileFragment extends Fragment {
                 }
         );
 
-        profileImage.setOnClickListener(v -> mostrarOpcionesImagen());
+        if (profileImage != null) {
+            profileImage.setOnClickListener(v -> mostrarOpcionesImagen());
+        }
 
         Button btnCerrarSesion = view.findViewById(R.id.btnCerrarSesion);
-        btnCerrarSesion.setOnClickListener(v -> mostrarConfirmacionCerrarSesion());
-
         Button btnConfiguracion = view.findViewById(R.id.btnConfiguracion);
         Button btnEditPerfil = view.findViewById(R.id.btnEditarPerfil);
 
-        btnConfiguracion.setOnClickListener(v -> openConfig());
-        btnEditPerfil.setOnClickListener(v -> openEditPerfil());
+        if (btnCerrarSesion != null) {
+            btnCerrarSesion.setOnClickListener(v -> mostrarConfirmacionCerrarSesion());
+        }
+
+        if (btnConfiguracion != null) {
+            btnConfiguracion.setOnClickListener(v -> openConfig());
+        }
+
+        if (btnEditPerfil != null) {
+            btnEditPerfil.setOnClickListener(v -> openEditPerfil());
+        }
 
         rvMascotas = view.findViewById(R.id.rvMascotas);
-        rvMascotas.setLayoutManager(new LinearLayoutManager(requireContext()));
-        rvMascotas.setNestedScrollingEnabled(false);
 
-        adapter = new MascotaProfileAdapter(requireContext(), listaMascotas);
-        rvMascotas.setAdapter(adapter);
+        if (rvMascotas != null) {
+            rvMascotas.setLayoutManager(new LinearLayoutManager(requireContext()));
+            rvMascotas.setNestedScrollingEnabled(false);
 
-        cargarMisMascotas();
+            adapter = new MascotaProfileAdapter(requireContext(), listaMascotas);
+            rvMascotas.setAdapter(adapter);
+
+            cargarMisMascotas();
+        }
 
         return view;
     }
 
     private void escucharCambiosUsuario() {
+        if (tvNombre == null || profileImage == null) {
+            return;
+        }
+
         if (currentUser == null) {
             tvNombre.setText("Usuario");
             profileImage.setImageResource(R.drawable.baseline_person_24);
@@ -145,7 +169,7 @@ public class ProfileFragment extends Fragment {
         usuarioListener = db.collection("usuarios")
                 .document(currentUser.getUid())
                 .addSnapshotListener((doc, error) -> {
-                    if (!isAdded()) {
+                    if (!isAdded() || tvNombre == null || profileImage == null) {
                         return;
                     }
 
@@ -179,25 +203,31 @@ public class ProfileFragment extends Fragment {
     }
 
     private void cargarMisMascotas() {
-
-        if (currentUser == null) return;
+        if (currentUser == null) {
+            return;
+        }
 
         db.collection("mascotas")
                 .whereEqualTo("userId", currentUser.getUid())
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-
                     listaMascotas.clear();
 
                     for (DocumentSnapshot doc : queryDocumentSnapshots) {
                         listaMascotas.add(doc);
                     }
 
-                    adapter.notifyDataSetChanged();
+                    if (adapter != null) {
+                        adapter.notifyDataSetChanged();
+                    }
                 });
     }
 
     private void mostrarOpcionesImagen() {
+        if (!isAdded()) {
+            return;
+        }
+
         String[] opciones = {"Hacer foto", "Elegir de galería"};
 
         new AlertDialog.Builder(requireContext())
@@ -213,6 +243,10 @@ public class ProfileFragment extends Fragment {
     }
 
     private void verificarPermisoCamara() {
+        if (!isAdded()) {
+            return;
+        }
+
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
@@ -227,7 +261,9 @@ public class ProfileFragment extends Fragment {
     }
 
     private void abrirGaleria() {
-        galeriaLauncher.launch("image/*");
+        if (galeriaLauncher != null) {
+            galeriaLauncher.launch("image/*");
+        }
     }
 
     @Override
@@ -242,7 +278,7 @@ public class ProfileFragment extends Fragment {
             return;
         }
 
-        if (requestCode == 101 && data != null && data.getExtras() != null) {
+        if (requestCode == 101 && data != null && data.getExtras() != null && profileImage != null) {
             imageBitmap = (Bitmap) data.getExtras().get("data");
 
             profileImage.setImageBitmap(imageBitmap);
@@ -252,6 +288,10 @@ public class ProfileFragment extends Fragment {
     }
 
     private void procesarYSubirImagenPerfil(Uri imageUri, Bitmap imageBitmap) {
+        if (!isAdded()) {
+            return;
+        }
+
         try {
             byte[] imageBytes;
 
@@ -318,6 +358,10 @@ public class ProfileFragment extends Fragment {
     }
 
     private void subirImagenPerfilASupabase(byte[] bytes) {
+        if (!isAdded()) {
+            return;
+        }
+
         if (currentUser == null) {
             Toast.makeText(
                     requireContext(),
@@ -361,13 +405,17 @@ public class ProfileFragment extends Fragment {
                             return;
                         }
 
-                        requireActivity().runOnUiThread(() ->
-                                Toast.makeText(
-                                        requireContext(),
-                                        "Error subiendo foto de perfil",
-                                        Toast.LENGTH_SHORT
-                                ).show()
-                        );
+                        requireActivity().runOnUiThread(() -> {
+                            if (!isAdded()) {
+                                return;
+                            }
+
+                            Toast.makeText(
+                                    requireContext(),
+                                    "Error subiendo foto de perfil",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        });
                     }
 
                     @Override
@@ -390,40 +438,53 @@ public class ProfileFragment extends Fragment {
                                             return;
                                         }
 
-                                        requireActivity().runOnUiThread(() ->
-                                                Toast.makeText(
-                                                        requireContext(),
-                                                        "Foto de perfil actualizada",
-                                                        Toast.LENGTH_SHORT
-                                                ).show()
-                                        );
+                                        requireActivity().runOnUiThread(() -> {
+                                            if (!isAdded()) {
+                                                return;
+                                            }
+
+                                            Toast.makeText(
+                                                    requireContext(),
+                                                    "Foto de perfil actualizada",
+                                                    Toast.LENGTH_SHORT
+                                            ).show();
+                                        });
                                     })
                                     .addOnFailureListener(e -> {
                                         if (getActivity() == null) {
                                             return;
                                         }
 
-                                        requireActivity().runOnUiThread(() ->
-                                                Toast.makeText(
-                                                        requireContext(),
-                                                        "Error guardando foto en Firebase",
-                                                        Toast.LENGTH_SHORT
-                                                ).show()
-                                        );
+                                        requireActivity().runOnUiThread(() -> {
+                                            if (!isAdded()) {
+                                                return;
+                                            }
+
+                                            Toast.makeText(
+                                                    requireContext(),
+                                                    "Error guardando foto en Firebase",
+                                                    Toast.LENGTH_SHORT
+                                            ).show();
+                                        });
                                     });
 
                         } else {
                             if (getActivity() == null) {
+                                response.close();
                                 return;
                             }
 
-                            requireActivity().runOnUiThread(() ->
-                                    Toast.makeText(
-                                            requireContext(),
-                                            "Error Supabase: " + response.code(),
-                                            Toast.LENGTH_SHORT
-                                    ).show()
-                            );
+                            requireActivity().runOnUiThread(() -> {
+                                if (!isAdded()) {
+                                    return;
+                                }
+
+                                Toast.makeText(
+                                        requireContext(),
+                                        "Error Supabase: " + response.code(),
+                                        Toast.LENGTH_SHORT
+                                ).show();
+                            });
                         }
 
                         response.close();
@@ -432,6 +493,10 @@ public class ProfileFragment extends Fragment {
     }
 
     private void mostrarConfirmacionCerrarSesion() {
+        if (!isAdded()) {
+            return;
+        }
+
         new AlertDialog.Builder(requireContext())
                 .setTitle(getString(R.string.cerrar_sesion))
                 .setMessage(getString(R.string.confirmar_cerrar_sesion))
@@ -448,11 +513,21 @@ public class ProfileFragment extends Fragment {
     }
 
     private void openConfig() {
-        startActivity(new Intent(requireContext(), ConfiguracionActivity.class));
+        if (!isAdded()) {
+            return;
+        }
+
+        Intent intent = new Intent(requireActivity(), ConfiguracionActivity.class);
+        startActivity(intent);
     }
 
     private void openEditPerfil() {
-        startActivity(new Intent(requireContext(), EditarPerfilActivity.class));
+        if (!isAdded()) {
+            return;
+        }
+
+        Intent intent = new Intent(requireActivity(), EditarPerfilActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -463,5 +538,10 @@ public class ProfileFragment extends Fragment {
             usuarioListener.remove();
             usuarioListener = null;
         }
+
+        tvNombre = null;
+        profileImage = null;
+        rvMascotas = null;
+        adapter = null;
     }
 }

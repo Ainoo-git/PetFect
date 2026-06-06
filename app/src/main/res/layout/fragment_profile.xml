@@ -1,16 +1,35 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
-    <!--  CONTENIDO  -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@color/cian_botones"
+            android:title="@string/perfil"
+            android:titleTextColor="@color/white"
+            app:titleCentered="true" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollPerfil"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background"
         android:clipToPadding="false"
         android:fillViewport="true"
-        android:paddingBottom="130dp">
+        android:paddingBottom="130dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -20,7 +39,6 @@
             android:paddingEnd="16dp"
             android:paddingBottom="48dp">
 
-            <!--  FOTO PERFIL  -->
             <ImageView
                 android:id="@+id/profile_image"
                 android:layout_width="120dp"
@@ -36,7 +54,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!--  NOMBRE  -->
             <TextView
                 android:id="@+id/nombre2"
                 android:layout_width="0dp"
@@ -51,7 +68,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profile_image" />
 
-            <!--  DESCRIPCIÓN  -->
             <TextView
                 android:id="@+id/descripcion"
                 android:layout_width="0dp"
@@ -65,13 +81,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/nombre2" />
 
-            <!--  PUBLICACIONES  -->
             <LinearLayout
                 android:id="@+id/sectionMascotas"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:background="@color/card_background"
+                android:elevation="2dp"
                 android:orientation="vertical"
+                android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/descripcion">
@@ -81,14 +99,14 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
                     android:text="@string/publicaciones"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/cian_oscuro_iconos"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/text_hint" />
+                    android:background="@color/cian_clarito_bordes" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvMascotas"
@@ -96,9 +114,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:nestedScrollingEnabled="false" />
+
             </LinearLayout>
 
-            <!--  BOTONES PERFIL  -->
             <LinearLayout
                 android:id="@+id/layoutBotones"
                 android:layout_width="0dp"
@@ -115,7 +133,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/rosita_fondoss_tarjetas_alertaslev"
+                    android:backgroundTint="@color/cian_botones"
                     android:text="@string/editar_perfil"
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
@@ -126,23 +144,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/rosita_fondoss_tarjetas_alertaslev"
+                    android:backgroundTint="@color/cian_botones"
                     android:text="@string/configuracion"
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
+
             </LinearLayout>
 
-            <!--  CERRAR SESIÓN  -->
             <Button
                 android:id="@+id/btnCerrarSesion"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="32dp"
-                android:backgroundTint="@color/card_background"
+                android:backgroundTint="@color/coral_alertasimp_errores"
                 android:text="@string/cerrar_sesion"
                 android:textAllCaps="false"
-                android:textColor="@color/cian_botones"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -150,5 +168,7 @@
                 app:layout_constraintTop_toBottomOf="@id/layoutBotones" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.core.widget.NestedScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

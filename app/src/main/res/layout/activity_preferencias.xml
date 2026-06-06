@@ -33,7 +33,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
-        android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"
+        android:buttonTint="@color/cian_botones"
 
         android:text="@string/ver_mascotas_perdidas"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"
+        android:buttonTint="@color/cian_botones"
 
         android:text="@string/ver_animales_adopcion"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +57,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"
+        android:buttonTint="@color/cian_botones"
 
         android:text="@string/mostrar_veterinarias"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +69,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"
+        android:buttonTint="@color/cian_botones"
 
         android:text="@string/recibir_notificaciones"
         app:layout_constraintEnd_toEndOf="parent"

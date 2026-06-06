@@ -5,22 +5,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/background">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+        android:background="@color/cian_botones"
         android:title="@string/permisos_dispositivo"
         android:titleTextColor="@color/white"
         app:navigationIcon="@drawable/outline_arrow"
+        app:navigationIconTint="@color/white"
         app:titleCentered="true" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/background">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
                 android:text="@string/permisos_usados_petfect"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/cian_oscuro_iconos"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -50,8 +53,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+                android:background="@color/cian_clarito_bordes"
                 android:clickable="true"
+                android:elevation="3dp"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center_vertical"
@@ -61,7 +65,8 @@
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/camara" />
+                    android:src="@drawable/camara"
+                    app:tint="@color/cian_oscuro_iconos" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -74,7 +79,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/camara"
-                        android:textColor="#534AB7"
+                        android:textColor="@color/cian_oscuro_iconos"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -95,8 +100,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+                android:background="@color/cian_clarito_bordes"
                 android:clickable="true"
+                android:elevation="3dp"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center_vertical"
@@ -106,7 +112,8 @@
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/foto" />
+                    android:src="@drawable/foto"
+                    app:tint="@color/cian_oscuro_iconos" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -119,7 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/galeria"
-                        android:textColor="#534AB7"
+                        android:textColor="@color/cian_oscuro_iconos"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -140,8 +147,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+                android:background="@color/cian_clarito_bordes"
                 android:clickable="true"
+                android:elevation="3dp"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center_vertical"
@@ -151,7 +159,8 @@
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/ic_map" />
+                    android:src="@drawable/ic_map"
+                    app:tint="@color/cian_oscuro_iconos" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -164,7 +173,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/ubicacion"
-                        android:textColor="#534AB7"
+                        android:textColor="@color/cian_oscuro_iconos"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -185,8 +194,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+                android:background="@color/cian_clarito_bordes"
                 android:clickable="true"
+                android:elevation="3dp"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center_vertical"
@@ -196,7 +206,8 @@
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/campana" />
+                    android:src="@drawable/campana"
+                    app:tint="@color/cian_oscuro_iconos" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -209,7 +220,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/notificaciones"
-                        android:textColor="#534AB7"
+                        android:textColor="@color/cian_oscuro_iconos"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 

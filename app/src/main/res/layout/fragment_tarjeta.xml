@@ -7,43 +7,42 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
-    <!-- APP BAR FUERA DEL SCROLL -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+        android:layout_height="44dp"
+        android:background="@color/cian_botones"
         android:title="@string/detalle_mascota"
         android:titleTextColor="@color/white"
         app:navigationIcon="@drawable/outline_arrow"
         app:titleCentered="true" />
 
-    <!-- SCROLL SOLO PARA CONTENIDO -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background"
         android:padding="16dp">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/surface">
+            app:cardCornerRadius="18dp"
+            app:cardElevation="6dp"
+            app:cardBackgroundColor="@color/card_background">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:orientation="vertical"
-                android:background="@color/surface">
+                android:background="@color/card_background">
 
-                <!-- IMAGEN -->
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
-                    android:layout_marginBottom="12dp">
+                    android:layout_marginBottom="14dp"
+                    >
 
                     <ImageView
                         android:id="@+id/imgAccion"
@@ -54,7 +53,6 @@
 
                 </FrameLayout>
 
-                <!-- TITULO + GUARDAR -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -74,8 +72,8 @@
 
                     <ImageButton
                         android:id="@+id/btnGuardar"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
                         android:background="@android:color/transparent"
                         android:src="@drawable/marcador_vacio"
                         android:contentDescription="@string/guardar_mascota"
@@ -84,24 +82,26 @@
 
                 </LinearLayout>
 
-                <!-- TIPO Y ESTADO -->
                 <TextView
                     android:id="@+id/txtFecha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tipo_estado_demo"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
-                    android:textColor="@color/coral_alertasimp_errores"
+                    android:textColor="@color/cian_oscuro_iconos"
+                    android:background="@color/cian_clarito_bordes"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
                     android:layout_marginBottom="16dp" />
 
-                <!-- DESCRIPCIÓN -->
                 <LinearLayout
                     android:id="@+id/layoutDescripcion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="24dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/txtEdad"
@@ -130,7 +130,6 @@
                         android:textColor="@color/gris"
                         android:layout_marginBottom="8dp" />
 
-                    <!-- INFO ADICIONAL: SE VE UN POCO Y SI ES LARGA SALE MOSTRAR MÁS -->
                     <TextView
                         android:id="@+id/txtInfoAdicional"
                         android:layout_width="match_parent"
@@ -148,42 +147,40 @@
                         android:text="@string/mostrar_mas"
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        android:textColor="@color/rosita_fondoss_tarjetas_alertaslev"
+                        android:textColor="@color/cian_botones"
                         android:paddingTop="4dp"
                         android:paddingBottom="8dp"
                         android:clickable="true"
                         android:focusable="true"
                         android:visibility="gone" />
 
+                </LinearLayout>
 
-                <!-- BOTÓN CONTACTO ABAJO -->
                 <Button
                     android:id="@+id/btnVerMas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/contacto"
-                    android:textColor="@android:color/black"
-                    android:backgroundTint="@color/rosita_fondoss_tarjetas_alertaslev"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/cian_botones"
                     android:padding="12dp"
-                    android:layout_marginTop="12dp" />
-                    <!-- UBICACIÓN Y MAPA -->
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:text="@string/ubicacion"
-                        android:textColor="@color/text_primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp" />
 
-                    <com.google.android.gms.maps.MapView
-                        android:id="@+id/mapMiniContacto"
-                        android:layout_width="match_parent"
-                        android:layout_height="180dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ubicacion"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-                </LinearLayout>
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapMiniContacto"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp" />
 
             </LinearLayout>
 

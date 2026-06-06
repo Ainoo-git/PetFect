@@ -15,7 +15,7 @@
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+            android:background="@color/cian_botones"
             android:title="Guardados"
             android:titleTextColor="@color/white"
             app:navigationIcon="@drawable/outline_arrow" />
