@@ -1,13 +1,16 @@
 package com.aipasa.main;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.animation.CycleInterpolator;
 import android.widget.*;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -111,7 +114,6 @@ public class PublicacionActivity extends AppCompatActivity {
         cbOtro = findViewById(R.id.rbOtro);
 
         imgMascota.setVisibility(View.GONE);
-        btnPublicar.setEnabled(false);
 
         modo = getIntent().getStringExtra("modo");
         idMascota = getIntent().getStringExtra("idMascota");
@@ -120,12 +122,21 @@ public class PublicacionActivity extends AppCompatActivity {
             btnPublicar.setText("Guardar cambios");
         }
 
+        configurarBotonPublicarPorConfirmacion();
+
         layoutImagen.setOnClickListener(v -> mostrarOpcionesImagen());
         imgMascota.setOnClickListener(v -> mostrarOpcionesImagen());
 
-        checkLegal.setOnCheckedChangeListener((buttonView, isChecked) ->
-                btnPublicar.setEnabled(isChecked)
-        );
+        if (checkLegal != null) {
+            checkLegal.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked) {
+                    checkLegal.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
+                    ponerBotonPublicarActivo(true);
+                } else {
+                    ponerBotonPublicarActivo(false);
+                }
+            });
+        }
 
         galeriaLauncher = registerForActivityResult(
                 new ActivityResultContracts.GetContent(),
@@ -142,6 +153,10 @@ public class PublicacionActivity extends AppCompatActivity {
         );
 
         btnPublicar.setOnClickListener(v -> {
+            if (!validarVerificacionLegal()) {
+                return;
+            }
+
             if ("editar".equals(modo)) {
                 guardarConUbicacionOriginal();
             } else {
@@ -152,6 +167,76 @@ public class PublicacionActivity extends AppCompatActivity {
         if ("editar".equals(modo) && idMascota != null) {
             cargarDatosMascota(idMascota);
         }
+    }
+
+    private void configurarBotonPublicarPorConfirmacion() {
+        if (checkLegal == null || btnPublicar == null) {
+            return;
+        }
+
+        ponerBotonPublicarActivo(checkLegal.isChecked());
+    }
+
+    private void ponerBotonPublicarActivo(boolean activo) {
+        if (btnPublicar == null) {
+            return;
+        }
+
+        if (activo) {
+            btnPublicar.setBackgroundTintList(
+                    ColorStateList.valueOf(
+                            ContextCompat.getColor(this, R.color.cian_botones)
+                    )
+            );
+            btnPublicar.setTextColor(ContextCompat.getColor(this, R.color.white));
+        } else {
+            btnPublicar.setBackgroundTintList(
+                    ColorStateList.valueOf(
+                            ContextCompat.getColor(this, R.color.gris)
+                    )
+            );
+            btnPublicar.setTextColor(ContextCompat.getColor(this, R.color.white));
+        }
+
+        btnPublicar.setEnabled(true);
+    }
+
+    private boolean validarVerificacionLegal() {
+        if (checkLegal == null) {
+            return true;
+        }
+
+        if (!checkLegal.isChecked()) {
+            checkLegal.setTextColor(
+                    ContextCompat.getColor(this, R.color.red)
+            );
+
+            hacerTemblarCheckLegal();
+
+            return false;
+        }
+
+        checkLegal.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
+        ponerBotonPublicarActivo(true);
+
+        return true;
+    }
+
+    private void hacerTemblarCheckLegal() {
+        if (checkLegal == null) {
+            return;
+        }
+
+        ObjectAnimator shake = ObjectAnimator.ofFloat(
+                checkLegal,
+                "translationX",
+                0,
+                18
+        );
+
+        shake.setDuration(450);
+        shake.setInterpolator(new CycleInterpolator(4));
+        shake.start();
     }
 
     private void mostrarOpcionesImagen() {

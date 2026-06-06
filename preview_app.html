@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>PetFect — Preview colores</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #e0e0e0; padding: 32px; }
+    h1 { text-align: center; font-size: 20px; margin-bottom: 8px; color: #333; }
+    .subtitle { text-align: center; font-size: 13px; color: #888; margin-bottom: 32px; }
+
+    .row { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+    .col { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .label { font-size: 12px; color: #666; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* PHONE SHELL */
+    .phone {
+      width: 240px;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      border: 6px solid #222;
+      position: relative;
+    }
+    .screen { width: 100%; min-height: 480px; display: flex; flex-direction: column; }
+
+    /* TOOLBAR */
+    .toolbar {
+      padding: 12px 14px 10px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 14px; font-weight: 700;
+    }
+    .toolbar .avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; overflow: hidden;
+    }
+
+    /* CHIPS */
+    .chips { display: flex; gap: 6px; padding: 10px 10px 6px; flex-wrap: nowrap; overflow: hidden; }
+    .chip {
+      border-radius: 20px; padding: 5px 12px;
+      font-size: 11px; font-weight: 700; white-space: nowrap; color: white;
+    }
+
+    /* SECTION TITLE */
+    .section-title { font-size: 13px; font-weight: 700; padding: 10px 12px 4px; }
+
+    /* CARD */
+    .card {
+      margin: 5px 10px;
+      border-radius: 10px;
+      padding: 10px;
+      display: flex; gap: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    .card .img-placeholder {
+      width: 64px; height: 64px; border-radius: 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; background: #ddd;
+    }
+    .card .card-text { flex: 1; }
+    .card .card-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+    .card .card-type { font-size: 11px; margin-bottom: 2px; }
+    .card .card-desc { font-size: 10px; }
+    .card .card-date { font-size: 10px; margin-top: 3px; }
+
+    /* BOTTOM NAV */
+    .bottom-nav {
+      display: flex; justify-content: space-around; align-items: center;
+      padding: 8px 0 10px; margin-top: auto;
+    }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 9px; }
+    .nav-icon { font-size: 18px; }
+
+    /* DETAIL SCREEN */
+    .detail-img { width: 100%; height: 130px; object-fit: cover; background: #bbb; display: flex; align-items: center; justify-content: center; font-size: 40px; }
+    .detail-body { padding: 12px; }
+    .detail-name { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+    .detail-type { font-size: 12px; margin-bottom: 10px; }
+    .detail-row { font-size: 11px; margin-bottom: 5px; }
+    .detail-btn { margin: 10px 12px 0; border-radius: 8px; padding: 9px; text-align: center; font-size: 12px; font-weight: 700; }
+
+    /* PROFILE */
+    .profile-avatar { width: 70px; height: 70px; border-radius: 50%; margin: 16px auto 8px; background: #ccc; display: flex; align-items: center; justify-content: center; font-size: 32px; }
+    .profile-name { text-align: center; font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .profile-desc { text-align: center; font-size: 11px; margin-bottom: 12px; }
+    .profile-btns { display: flex; gap: 8px; padding: 0 12px; margin-bottom: 12px; }
+    .profile-btn { flex: 1; border-radius: 8px; padding: 8px; text-align: center; font-size: 11px; font-weight: 700; }
+
+    hr.sep { border: none; border-top: 2px solid #ccc; margin: 16px 0; }
+    .mode-header { text-align: center; font-size: 16px; font-weight: 700; color: #444; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+
+<h1>🐾 PetFect — Preview de colores actuales</h1>
+<p class="subtitle">Así se ven las pantallas principales con la paleta aplicada</p>
+
+<!-- ═══════════ LIGHT MODE ═══════════ -->
+<div class="mode-header">☀️ MODO CLARO</div>
+<div class="row">
+
+  <!-- HOME LIGHT -->
+  <div class="col">
+    <div class="label">Home</div>
+    <div class="phone">
+      <div class="screen" style="background:#F5FAFA;">
+        <div class="toolbar" style="background:#F5FAFA; color:#1A1A1A;">
+          <span style="font-size:13px;">Hola, Sara 👋</span>
+          <div class="avatar" style="background:#0D4F52; color:white;">S</div>
+        </div>
+        <div class="chips">
+          <span class="chip" style="background:#2A9D8F;">All</span>
+          <span class="chip" style="background:#2A9D8F;">Adopciones</span>
+          <span class="chip" style="background:#2A9D8F;">Perdidos</span>
+        </div>
+        <div class="section-title" style="color:#1A1A1A;">Mascotas Perdidas</div>
+        <div class="card" style="background:#FFFFFF;">
+          <div class="img-placeholder">🐶</div>
+          <div class="card-text">
+            <div class="card-name" style="color:#1A1A1A;">Rocky</div>
+            <div class="card-type" style="color:#0D4F52;">Perro · Perdido</div>
+            <div class="card-desc" style="color:#1A1A1A;">Labrador marrón, con collar azul</div>
+            <div class="card-date" style="color:#777;">Hace 2 días</div>
+          </div>
+        </div>
+        <div class="card" style="background:#FFFFFF;">
+          <div class="img-placeholder">🐱</div>
+          <div class="card-text">
+            <div class="card-name" style="color:#1A1A1A;">Luna</div>
+            <div class="card-type" style="color:#0D4F52;">Gato · Adopción</div>
+            <div class="card-desc" style="color:#1A1A1A;">Gatita atigrada muy cariñosa</div>
+            <div class="card-date" style="color:#777;">Hace 1 semana</div>
+          </div>
+        </div>
+        <div class="bottom-nav" style="background:#0D4F52;">
+          <div class="nav-item" style="color:#FFFFFF;">🏠<span>Inicio</span></div>
+          <div class="nav-item" style="color:#9E9E9E;">🔍<span>Buscar</span></div>
+          <div class="nav-item" style="color:#9E9E9E;">🗺️<span>Mapa</span></div>
+          <div class="nav-item" style="color:#9E9E9E;">👤<span>Perfil</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETALLE LIGHT -->
+  <div class="col">
+    <div class="label">Tarjeta detalle</div>
+    <div class="phone">
+      <div class="screen" style="background:#F5FAFA;">
+        <div class="toolbar" style="background:#E9C46A; color:#1A1A1A;">
+          ← <span>Detalle de mascota</span><span></span>
+        </div>
+        <div class="detail-img">🐶</div>
+        <div class="detail-body" style="background:#FFFFFF; margin:8px; border-radius:10px;">
+          <div class="detail-name" style="color:#1A1A1A;">Rocky</div>
+          <div class="detail-type" style="color:#777;">Perro · Perdido</div>
+          <div class="detail-row" style="color:#1A1A1A;">Edad: 3 años</div>
+          <div class="detail-row" style="color:#1A1A1A;">Chip: 941000023456</div>
+          <div class="detail-row" style="color:#1A1A1A;">Teléfono: 612 345 678</div>
+        </div>
+        <div class="detail-btn" style="background:#E9C46A; color:#1A1A1A; margin:6px 12px;">Contacto</div>
+        <div class="bottom-nav" style="background:#0D4F52; margin-top:auto;">
+          <div class="nav-item" style="color:#9E9E9E;">🏠</div>
+          <div class="nav-item" style="color:#9E9E9E;">🔍</div>
+          <div class="nav-item" style="color:#9E9E9E;">🗺️</div>
+          <div class="nav-item" style="color:#FFFFFF;">👤</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERFIL LIGHT -->
+  <div class="col">
+    <div class="label">Perfil</div>
+    <div class="phone">
+      <div class="screen" style="background:#F5FAFA;">
+        <div class="toolbar" style="background:#E9C46A; color:#1A1A1A; justify-content:center;">
+          Perfil
+        </div>
+        <div class="profile-avatar" style="background:#7FD1C8;">👤</div>
+        <div class="profile-name" style="color:#1A1A1A;">Sara García</div>
+        <div class="profile-desc" style="color:#777;">PetFect</div>
+        <div class="profile-btns">
+          <div class="profile-btn" style="background:#E9C46A; color:#1A1A1A;">Editar perfil</div>
+          <div class="profile-btn" style="background:#E9C46A; color:#1A1A1A;">Configuración</div>
+        </div>
+        <div class="section-title" style="color:#1A1A1A;">Publicaciones</div>
+        <div class="card" style="background:#FFFFFF;">
+          <div class="img-placeholder">🐶</div>
+          <div class="card-text">
+            <div class="card-name" style="color:#1A1A1A;">Rocky</div>
+            <div class="card-type" style="color:#0D4F52;">Perro · Perdido</div>
+          </div>
+        </div>
+        <div class="bottom-nav" style="background:#0D4F52; margin-top:auto;">
+          <div class="nav-item" style="color:#9E9E9E;">🏠</div>
+          <div class="nav-item" style="color:#9E9E9E;">🔍</div>
+          <div class="nav-item" style="color:#9E9E9E;">🗺️</div>
+          <div class="nav-item" style="color:#FFFFFF;">👤</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ DARK MODE ═══════════ -->
+<div class="mode-header">🌙 MODO OSCURO</div>
+<div class="row">
+
+  <!-- HOME DARK -->
+  <div class="col">
+    <div class="label">Home</div>
+    <div class="phone">
+      <div class="screen" style="background:#0C1E1E;">
+        <div class="toolbar" style="background:#0C1E1E; color:#E8F5F4;">
+          <span style="font-size:13px;">Hola, Sara 👋</span>
+          <div class="avatar" style="background:#1F5F5C; color:#E8F5F4;">S</div>
+        </div>
+        <div class="chips">
+          <span class="chip" style="background:#4DB6AC; color:#0C1E1E;">All</span>
+          <span class="chip" style="background:#4DB6AC; color:#0C1E1E;">Adopciones</span>
+          <span class="chip" style="background:#4DB6AC; color:#0C1E1E;">Perdidos</span>
+        </div>
+        <div class="section-title" style="color:#E8F5F4;">Mascotas Perdidas</div>
+        <div class="card" style="background:#163030;">
+          <div class="img-placeholder" style="background:#1F5F5C;">🐶</div>
+          <div class="card-text">
+            <div class="card-name" style="color:#E8F5F4;">Rocky</div>
+            <div class="card-type" style="color:#4DB6AC;">Perro · Perdido</div>
+            <div class="card-desc" style="color:#E8F5F4;">Labrador marrón, con collar azul</div>
+            <div class="card-date" style="color:#9E9E9E;">Hace 2 días</div>
+          </div>
+        </div>
+        <div class="card" style="background:#163030;">
+          <div class="img-placeholder" style="background:#1F5F5C;">🐱</div>
+          <div class="card-text">
+            <div class="card-name" style="color:#E8F5F4;">Luna</div>
+            <div class="card-type" style="color:#4DB6AC;">Gato · Adopción</div>
+            <div class="card-desc" style="color:#E8F5F4;">Gatita atigrada muy cariñosa</div>
+            <div class="card-date" style="color:#9E9E9E;">Hace 1 semana</div>
+          </div>
+        </div>
+        <div class="bottom-nav" style="background:#1F5F5C; margin-top:auto;">
+          <div class="nav-item" style="color:#FFFFFF;">🏠<span>Inicio</span></div>
+          <div class="nav-item" style="color:#9E9E9E;">🔍<span>Buscar</span></div>
+          <div class="nav-item" style="color:#9E9E9E;">🗺️<span>Mapa</span></div>
+          <div class="nav-item" style="color:#9E9E9E;">👤<span>Perfil</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETALLE DARK -->
+  <div class="col">
+    <div class="label">Tarjeta detalle</div>
+    <div class="phone">
+      <div class="screen" style="background:#0C1E1E;">
+        <div class="toolbar" style="background:#D4A843; color:#1A1A1A;">
+          ← <span>Detalle de mascota</span><span></span>
+        </div>
+        <div class="detail-img">🐶</div>
+        <div class="detail-body" style="background:#163030; margin:8px; border-radius:10px;">
+          <div class="detail-name" style="color:#E8F5F4;">Rocky</div>
+          <div class="detail-type" style="color:#9E9E9E;">Perro · Perdido</div>
+          <div class="detail-row" style="color:#E8F5F4;">Edad: 3 años</div>
+          <div class="detail-row" style="color:#E8F5F4;">Chip: 941000023456</div>
+          <div class="detail-row" style="color:#E8F5F4;">Teléfono: 612 345 678</div>
+        </div>
+        <div class="detail-btn" style="background:#D4A843; color:#1A1A1A; margin:6px 12px;">Contacto</div>
+        <div class="bottom-nav" style="background:#1F5F5C; margin-top:auto;">
+          <div class="nav-item" style="color:#9E9E9E;">🏠</div>
+          <div class="nav-item" style="color:#9E9E9E;">🔍</div>
+          <div class="nav-item" style="color:#9E9E9E;">🗺️</div>
+          <div class="nav-item" style="color:#FFFFFF;">👤</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERFIL DARK -->
+  <div class="col">
+    <div class="label">Perfil</div>
+    <div class="phone">
+      <div class="screen" style="background:#0C1E1E;">
+        <div class="toolbar" style="background:#D4A843; color:#1A1A1A; justify-content:center;">
+          Perfil
+        </div>
+        <div class="profile-avatar" style="background:#1F5F5C; color:#E8F5F4;">👤</div>
+        <div class="profile-name" style="color:#E8F5F4;">Sara García</div>
+        <div class="profile-desc" style="color:#9E9E9E;">PetFect</div>
+        <div class="profile-btns">
+          <div class="profile-btn" style="background:#D4A843; color:#1A1A1A;">Editar perfil</div>
+          <div class="profile-btn" style="background:#D4A843; color:#1A1A1A;">Configuración</div>
+        </div>
+        <div class="section-title" style="color:#E8F5F4;">Publicaciones</div>
+        <div class="card" style="background:#163030;">
+          <div class="img-placeholder" style="background:#1F5F5C;">🐶</div>
+          <div class="card-text">
+            <div class="card-name" style="color:#E8F5F4;">Rocky</div>
+            <div class="card-type" style="color:#4DB6AC;">Perro · Perdido</div>
+          </div>
+        </div>
+        <div class="bottom-nav" style="background:#1F5F5C; margin-top:auto;">
+          <div class="nav-item" style="color:#9E9E9E;">🏠</div>
+          <div class="nav-item" style="color:#9E9E9E;">🔍</div>
+          <div class="nav-item" style="color:#9E9E9E;">🗺️</div>
+          <div class="nav-item" style="color:#FFFFFF;">👤</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

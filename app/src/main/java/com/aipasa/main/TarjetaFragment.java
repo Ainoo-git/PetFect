@@ -3,6 +3,7 @@ package com.aipasa.main;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -38,11 +38,21 @@ import java.util.Locale;
 public class TarjetaFragment extends DialogFragment {
 
     private ImageView imgAccion;
-    private TextView txtTitulo, txtFecha, txtEdad, txtChip, txtTelefono, txtInfoAdicional;
+    private TextView txtTitulo;
+    private TextView txtFecha;
+    private TextView txtEdad;
+    private TextView txtChip;
+    private TextView txtTelefono;
+    private TextView txtInfoAdicional;
+    private TextView txtMostrarMasInfo;
+
     private Button btnVerMas;
     private ImageButton btnGuardar;
     private MaterialToolbar topAppBar;
     private MapView mapMiniContacto;
+
+    private boolean infoExpandida = false;
+
     private static final String ARG_ARTICULO_ID = "ARTICULO_ID";
 
     public static TarjetaFragment newInstance(String articuloId) {
@@ -64,27 +74,33 @@ public class TarjetaFragment extends DialogFragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState
+    ) {
         View view = inflater.inflate(R.layout.fragment_tarjeta, container, false);
 
         imgAccion = view.findViewById(R.id.imgAccion);
         txtTitulo = view.findViewById(R.id.txtTitulo);
         txtFecha = view.findViewById(R.id.txtFecha);
-
         txtEdad = view.findViewById(R.id.txtEdad);
         txtChip = view.findViewById(R.id.txtChip);
         txtTelefono = view.findViewById(R.id.txtTelefono);
         txtInfoAdicional = view.findViewById(R.id.txtInfoAdicional);
+        txtMostrarMasInfo = view.findViewById(R.id.txtMostrarMasInfo);
 
         mapMiniContacto = view.findViewById(R.id.mapMiniContacto);
-        mapMiniContacto.onCreate(savedInstanceState);
-        mapMiniContacto.onResume();
+
+        if (mapMiniContacto != null) {
+            mapMiniContacto.onCreate(savedInstanceState);
+        }
 
         topAppBar = view.findViewById(R.id.topAppBar);
-        topAppBar.setNavigationOnClickListener(v -> dismiss());
+
+        if (topAppBar != null) {
+            topAppBar.setNavigationOnClickListener(v -> dismiss());
+        }
 
         btnVerMas = view.findViewById(R.id.btnVerMas);
         btnGuardar = view.findViewById(R.id.btnGuardar);
@@ -122,13 +138,15 @@ public class TarjetaFragment extends DialogFragment {
     }
 
     private void cargarMascota(String id) {
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("mascotas")
                 .document(id)
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
+                    if (!isAdded()) {
+                        return;
+                    }
 
                     if (!documentSnapshot.exists()) {
                         Toast.makeText(
@@ -148,10 +166,8 @@ public class TarjetaFragment extends DialogFragment {
                     String info = documentSnapshot.getString("infoAdicional");
                     String fotoUrl = documentSnapshot.getString("fotoUrl");
 
-
                     Double latitud = documentSnapshot.getDouble("latitud");
                     Double longitud = documentSnapshot.getDouble("longitud");
-
 
                     txtTitulo.setText(
                             nombre != null && !nombre.isEmpty()
@@ -169,7 +185,10 @@ public class TarjetaFragment extends DialogFragment {
                     }
 
                     if (!estadoTraducido.isEmpty()) {
-                        if (!tipoEstado.isEmpty()) tipoEstado += " • ";
+                        if (!tipoEstado.isEmpty()) {
+                            tipoEstado += " • ";
+                        }
+
                         tipoEstado += estadoTraducido;
                     }
 
@@ -202,14 +221,15 @@ public class TarjetaFragment extends DialogFragment {
                             )
                     );
 
-                    txtInfoAdicional.setText(
-                            getString(
-                                    R.string.info_adicional_label,
-                                    info != null && !info.isEmpty()
-                                            ? info
-                                            : getString(R.string.sin_informacion)
-                            )
+                    String textoInfo = getString(
+                            R.string.info_adicional_label,
+                            info != null && !info.isEmpty()
+                                    ? info
+                                    : getString(R.string.sin_informacion)
                     );
+
+                    txtInfoAdicional.setText(textoInfo);
+                    configurarMostrarMasInfo();
 
                     if (fotoUrl != null && !fotoUrl.isEmpty()) {
                         Glide.with(this)
@@ -221,6 +241,7 @@ public class TarjetaFragment extends DialogFragment {
                     } else {
                         imgAccion.setImageResource(R.drawable.logologin);
                     }
+
                     configurarMiniMapa(
                             nombre,
                             estado,
@@ -228,41 +249,95 @@ public class TarjetaFragment extends DialogFragment {
                             longitud
                     );
 
+                    if (btnGuardar != null) {
+                        btnGuardar.bringToFront();
 
-                    btnGuardar.bringToFront();
+                        btnGuardar.setOnClickListener(v ->
+                                Toast.makeText(
+                                        getContext(),
+                                        getString(R.string.guardado),
+                                        Toast.LENGTH_SHORT
+                                ).show()
+                        );
+                    }
 
-                    btnGuardar.setOnClickListener(v ->
-                            Toast.makeText(
-                                    getContext(),
-                                    getString(R.string.guardado),
-                                    Toast.LENGTH_SHORT
-                            ).show()
-                    );
-
-                    btnVerMas.setOnClickListener(v -> {
-                        if (telefono != null && !telefono.isEmpty()) {
-                            Intent intent = new Intent(Intent.ACTION_DIAL);
-                            intent.setData(Uri.parse("tel:" + telefono));
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(
-                                    getContext(),
-                                    getString(R.string.no_hay_numero_contacto),
-                                    Toast.LENGTH_SHORT
-                            ).show();
-                        }
-                    });
-
+                    if (btnVerMas != null) {
+                        btnVerMas.setOnClickListener(v -> {
+                            if (telefono != null && !telefono.isEmpty()) {
+                                Intent intent = new Intent(Intent.ACTION_DIAL);
+                                intent.setData(Uri.parse("tel:" + telefono));
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(
+                                        getContext(),
+                                        getString(R.string.no_hay_numero_contacto),
+                                        Toast.LENGTH_SHORT
+                                ).show();
+                            }
+                        });
+                    }
                 })
-                .addOnFailureListener(e ->
-                        Toast.makeText(
-                                getContext(),
-                                getString(R.string.error_cargar_publicacion),
-                                Toast.LENGTH_SHORT
-                        ).show()
-                );
+                .addOnFailureListener(e -> {
+                    if (!isAdded()) {
+                        return;
+                    }
+
+                    Toast.makeText(
+                            getContext(),
+                            getString(R.string.error_cargar_publicacion),
+                            Toast.LENGTH_SHORT
+                    ).show();
+                });
     }
 
+    private void configurarMostrarMasInfo() {
+        if (txtInfoAdicional == null || txtMostrarMasInfo == null) {
+            return;
+        }
+
+        infoExpandida = false;
+
+        txtInfoAdicional.setMaxLines(Integer.MAX_VALUE);
+        txtInfoAdicional.setEllipsize(null);
+
+        txtMostrarMasInfo.setText(getString(R.string.mostrar_mas));
+        txtMostrarMasInfo.setVisibility(View.GONE);
+
+        txtInfoAdicional.postDelayed(() -> {
+            if (txtInfoAdicional == null || txtMostrarMasInfo == null) {
+                return;
+            }
+
+            int lineasTotales = txtInfoAdicional.getLineCount();
+
+            if (lineasTotales > 2) {
+                txtInfoAdicional.setMaxLines(2);
+                txtInfoAdicional.setEllipsize(TextUtils.TruncateAt.END);
+                txtMostrarMasInfo.setVisibility(View.VISIBLE);
+                txtMostrarMasInfo.setText(getString(R.string.mostrar_mas));
+            } else {
+                txtMostrarMasInfo.setVisibility(View.GONE);
+            }
+        }, 150);
+
+        txtMostrarMasInfo.setOnClickListener(v -> {
+            if (txtInfoAdicional == null || txtMostrarMasInfo == null) {
+                return;
+            }
+
+            if (infoExpandida) {
+                txtInfoAdicional.setMaxLines(2);
+                txtInfoAdicional.setEllipsize(TextUtils.TruncateAt.END);
+                txtMostrarMasInfo.setText(getString(R.string.mostrar_mas));
+                infoExpandida = false;
+            } else {
+                txtInfoAdicional.setMaxLines(Integer.MAX_VALUE);
+                txtInfoAdicional.setEllipsize(null);
+                txtMostrarMasInfo.setText(getString(R.string.mostrar_menos));
+                infoExpandida = true;
+            }
+        });
+    }
 
     private void configurarMiniMapa(
             String nombre,
@@ -310,22 +385,20 @@ public class TarjetaFragment extends DialogFragment {
     }
 
     private BitmapDescriptor crearIconoPequeno(int drawableId) {
-        Bitmap bitmapOriginal = BitmapFactory.decodeResource(
-                getResources(),
-                drawableId
-        );
+        Bitmap bitmapOriginal = BitmapFactory.decodeResource(getResources(), drawableId);
 
-        Bitmap bitmapPequeno = Bitmap.createScaledBitmap(
-                bitmapOriginal,
-                80,
-                80,
-                false
-        );
+        if (bitmapOriginal == null) {
+            return BitmapDescriptorFactory.defaultMarker();
+        }
 
+        Bitmap bitmapPequeno = Bitmap.createScaledBitmap(bitmapOriginal, 80, 80, false);
         return BitmapDescriptorFactory.fromBitmap(bitmapPequeno);
     }
+
     private String traducirTipo(String tipo) {
-        if (tipo == null) return "";
+        if (tipo == null) {
+            return "";
+        }
 
         switch (tipo.toLowerCase(Locale.ROOT)) {
             case "perro":
@@ -340,7 +413,9 @@ public class TarjetaFragment extends DialogFragment {
     }
 
     private String traducirEstado(String estado) {
-        if (estado == null) return "";
+        if (estado == null) {
+            return "";
+        }
 
         switch (estado.toLowerCase(Locale.ROOT)) {
             case "perdido":
@@ -377,6 +452,7 @@ public class TarjetaFragment extends DialogFragment {
     public void onDestroyView() {
         if (mapMiniContacto != null) {
             mapMiniContacto.onDestroy();
+            mapMiniContacto = null;
         }
 
         super.onDestroyView();

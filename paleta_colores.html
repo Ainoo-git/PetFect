@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>PetFect — Opciones de paleta</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #F7F7F7;
+      padding: 32px;
+      color: #222;
+    }
+    h1 { font-size: 22px; margin-bottom: 8px; }
+    .subtitulo { color: #888; font-size: 14px; margin-bottom: 40px; }
+
+    .seccion { margin-bottom: 48px; }
+    .seccion h2 { font-size: 18px; margin-bottom: 4px; }
+    .seccion .desc { font-size: 13px; color: #666; margin-bottom: 20px; }
+
+    .paleta {
+      display: flex;
+      gap: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+      margin-bottom: 20px;
+      height: 100px;
+    }
+    .color-bloque {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 10px;
+      transition: flex 0.2s;
+    }
+    .color-bloque:hover { flex: 2; }
+    .color-bloque span {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 7px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.55);
+      color: #222;
+      letter-spacing: 0.5px;
+    }
+
+    .mockup-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .mockup {
+      border-radius: 16px;
+      padding: 20px;
+      width: 180px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    .mockup .chip {
+      display: inline-block;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 6px;
+      margin-bottom: 10px;
+      color: white;
+    }
+    .mockup .card {
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+    .mockup .card .titulo { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .mockup .card .sub { font-size: 11px; opacity: 0.7; }
+    .mockup .btn {
+      border-radius: 8px;
+      padding: 9px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: white;
+      margin-top: 4px;
+    }
+    .mockup .icon-row {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 12px;
+      padding: 8px 0 2px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .mockup .icon { font-size: 18px; }
+
+    /* ACTUAL */
+    .actual-label {
+      display: inline-block;
+      background: #eee;
+      border-radius: 6px;
+      padding: 2px 10px;
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 6px;
+    }
+
+    hr { border: none; border-top: 1px solid #e0e0e0; margin: 40px 0; }
+  </style>
+</head>
+<body>
+
+<h1>🐾 PetFect — Opciones de paleta de colores</h1>
+<p class="subtitulo">Pasa el ratón por encima de cada color para ampliar. Los mockups muestran cómo quedaría en la app.</p>
+
+<!-- ───── ACTUAL ───── -->
+<div class="seccion">
+  <span class="actual-label">Paleta actual (referencia)</span>
+  <div class="paleta">
+    <div class="color-bloque" style="background:#0F5052"><span>#0F5052</span></div>
+    <div class="color-bloque" style="background:#3ACAAE"><span>#3ACAAE</span></div>
+    <div class="color-bloque" style="background:#C3FFFC"><span>#C3FFFC</span></div>
+    <div class="color-bloque" style="background:#FFC3C3"><span>#FFC3C3</span></div>
+    <div class="color-bloque" style="background:#FF8C8C"><span>#FF8C8C</span></div>
+    <div class="color-bloque" style="background:#F3FBFB; border: 1px solid #ddd"><span>#F3FBFB</span></div>
+  </div>
+  <div class="mockup-row">
+    <div class="mockup" style="background:#F3FBFB">
+      <span class="chip" style="background:#3ACAAE">Adopciones</span>
+      <span class="chip" style="background:#0F5052">Perdidos</span>
+      <div class="card" style="background:white">
+        <div class="titulo">Luna</div>
+        <div class="sub" style="color:#0F5052">Gato · En adopción</div>
+      </div>
+      <div class="btn" style="background:#FFC3C3; color:#333">Contacto</div>
+      <div class="icon-row">
+        <span class="icon" style="color:#0F5052">🏠</span>
+        <span class="icon" style="color:#0F5052">🔍</span>
+        <span class="icon" style="color:#0F5052">🗺️</span>
+        <span class="icon" style="color:#0F5052">👤</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;font-size:13px;color:#888;max-width:220px;">
+      ← El rosa del botón choca con todo lo demás (teal/cian). Sin puente entre ambas familias.
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ───── OPCIÓN A ───── -->
+<div class="seccion">
+  <h2>Opción A — Paleta cálida 🍑</h2>
+  <p class="desc">Coral, durazno y crema. Más afectuosa y humana — ideal para una app de adopción de mascotas. Sin cianes.</p>
+  <div class="paleta">
+    <div class="color-bloque" style="background:#C0533A"><span>#C0533A</span></div>
+    <div class="color-bloque" style="background:#E8735A"><span>#E8735A</span></div>
+    <div class="color-bloque" style="background:#F5A88D"><span>#F5A88D</span></div>
+    <div class="color-bloque" style="background:#FDDCCF"><span>#FDDCCF</span></div>
+    <div class="color-bloque" style="background:#FDF1ED; border:1px solid #ddd"><span>#FDF1ED</span></div>
+    <div class="color-bloque" style="background:#4A3728"><span>#4A3728</span></div>
+  </div>
+  <div class="mockup-row">
+    <div class="mockup" style="background:#FDF1ED">
+      <span class="chip" style="background:#E8735A">Adopciones</span>
+      <span class="chip" style="background:#C0533A">Perdidos</span>
+      <div class="card" style="background:white">
+        <div class="titulo">Luna</div>
+        <div class="sub" style="color:#C0533A">Gato · En adopción</div>
+      </div>
+      <div class="btn" style="background:#E8735A">Contacto</div>
+      <div class="icon-row">
+        <span class="icon" style="color:#C0533A">🏠</span>
+        <span class="icon" style="color:#C0533A">🔍</span>
+        <span class="icon" style="color:#C0533A">🗺️</span>
+        <span class="icon" style="color:#C0533A">👤</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;font-size:13px;color:#555;max-width:220px;">
+      Cohesiva, cálida y amigable. Todo en la misma familia de color. Parecido a apps como Petfinder o Wakyma.
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ───── OPCIÓN B ───── -->
+<div class="seccion">
+  <h2>Opción B — Teal + Ámbar dorado ✨</h2>
+  <p class="desc">Conserva el teal de la identidad actual pero sustituye el rosa por un dorado/ámbar como acento. Moderno, limpio.</p>
+  <div class="paleta">
+    <div class="color-bloque" style="background:#0D4F52"><span>#0D4F52</span></div>
+    <div class="color-bloque" style="background:#2A9D8F"><span>#2A9D8F</span></div>
+    <div class="color-bloque" style="background:#7FD1C8"><span>#7FD1C8</span></div>
+    <div class="color-bloque" style="background:#E9C46A"><span>#E9C46A</span></div>
+    <div class="color-bloque" style="background:#F4A261"><span>#F4A261</span></div>
+    <div class="color-bloque" style="background:#F5FAFA; border:1px solid #ddd"><span>#F5FAFA</span></div>
+  </div>
+  <div class="mockup-row">
+    <div class="mockup" style="background:#F5FAFA">
+      <span class="chip" style="background:#2A9D8F">Adopciones</span>
+      <span class="chip" style="background:#0D4F52">Perdidos</span>
+      <div class="card" style="background:white">
+        <div class="titulo">Luna</div>
+        <div class="sub" style="color:#0D4F52">Gato · En adopción</div>
+      </div>
+      <div class="btn" style="background:#E9C46A; color:#333">Contacto</div>
+      <div class="icon-row">
+        <span class="icon" style="color:#2A9D8F">🏠</span>
+        <span class="icon" style="color:#2A9D8F">🔍</span>
+        <span class="icon" style="color:#2A9D8F">🗺️</span>
+        <span class="icon" style="color:#2A9D8F">👤</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;font-size:13px;color:#555;max-width:220px;">
+      El dorado actúa de puente cálido sin romper la identidad teal. Muy parecido a lo que tenéis, pero arreglado.
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ───── OPCIÓN C ───── -->
+<div class="seccion">
+  <h2>Opción C — Morado lavanda 💜</h2>
+  <p class="desc">Morado suave, lavanda y un toque coral como acento. Estilo moderno tipo Instagram/Duolingo. Muy popular en apps de adopción nuevas.</p>
+  <div class="paleta">
+    <div class="color-bloque" style="background:#4A3780"><span>#4A3780</span></div>
+    <div class="color-bloque" style="background:#7B5EA7"><span>#7B5EA7</span></div>
+    <div class="color-bloque" style="background:#C3B1E1"><span>#C3B1E1</span></div>
+    <div class="color-bloque" style="background:#FF8C69"><span>#FF8C69</span></div>
+    <div class="color-bloque" style="background:#FFD6CC"><span>#FFD6CC</span></div>
+    <div class="color-bloque" style="background:#F7F4FD; border:1px solid #ddd"><span>#F7F4FD</span></div>
+  </div>
+  <div class="mockup-row">
+    <div class="mockup" style="background:#F7F4FD">
+      <span class="chip" style="background:#7B5EA7">Adopciones</span>
+      <span class="chip" style="background:#4A3780">Perdidos</span>
+      <div class="card" style="background:white">
+        <div class="titulo">Luna</div>
+        <div class="sub" style="color:#7B5EA7">Gato · En adopción</div>
+      </div>
+      <div class="btn" style="background:#FF8C69">Contacto</div>
+      <div class="icon-row">
+        <span class="icon" style="color:#7B5EA7">🏠</span>
+        <span class="icon" style="color:#7B5EA7">🔍</span>
+        <span class="icon" style="color:#7B5EA7">🗺️</span>
+        <span class="icon" style="color:#7B5EA7">👤</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;font-size:13px;color:#555;max-width:220px;">
+      El coral como acento es análogo al morado en el círculo cromático, así que no choca. Sensación moderna y diferente.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

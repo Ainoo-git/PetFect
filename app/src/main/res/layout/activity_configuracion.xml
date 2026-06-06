@@ -4,7 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,11 +15,12 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+            android:layout_height="44dp"
+            android:background="@color/cian_botones"
             android:title="@string/configuracion"
             android:titleTextColor="@color/white"
             app:navigationIcon="@drawable/outline_arrow"
+            app:navigationIconTint="@color/white"
             app:titleCentered="true" />
 
         <ScrollView
@@ -37,13 +39,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/modo_vista"
+                    android:textColor="@color/text_primary"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:thumbTint="@color/cian_botones"
+                    android:trackTint="@color/cian_clarito_bordes" />
 
                 <TextView
+                    android:id="@+id/tvDescripcionModo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/modo_vista_descripcion"
+                    android:layout_marginBottom="12dp"
+                    android:text="@string/modo_vista_descripcion_claro"
+                    android:textColor="@color/text_hint"
                     android:textSize="10sp"
                     android:textStyle="bold" />
 
@@ -61,7 +69,8 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/marcador_vacio" />
+                        android:src="@drawable/marcador_vacio"
+                        app:tint="@color/cian_oscuro_iconos" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -69,13 +78,14 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="@string/guardados"
+                        android:textColor="@color/text_primary"
                         android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/flecha_derecha"
-                        app:tint="@color/black" />
+                        app:tint="@color/cian_oscuro_iconos" />
 
                 </LinearLayout>
 
@@ -93,7 +103,8 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/campana" />
+                        android:src="@drawable/campana"
+                        app:tint="@color/cian_oscuro_iconos" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -101,12 +112,14 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="@string/notificaciones"
+                        android:textColor="@color/text_primary"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/tvBadgeCount"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
+                        android:background="@color/coral_alertasimp_errores"
                         android:gravity="center"
                         android:text="0"
                         android:textColor="@color/white"
@@ -117,7 +130,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/flecha_derecha"
-                        app:tint="@color/black" />
+                        app:tint="@color/cian_oscuro_iconos" />
 
                 </LinearLayout>
 
@@ -135,7 +148,8 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/idiomas" />
+                        android:src="@drawable/idiomas"
+                        app:tint="@color/cian_oscuro_iconos" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -143,13 +157,14 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="@string/idioma"
+                        android:textColor="@color/text_primary"
                         android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/flecha_derecha"
-                        app:tint="@color/black" />
+                        app:tint="@color/cian_oscuro_iconos" />
 
                 </LinearLayout>
 
@@ -167,7 +182,8 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/movil" />
+                        android:src="@drawable/movil"
+                        app:tint="@color/cian_oscuro_iconos" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -175,13 +191,14 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="@string/permisos_dispositivo"
+                        android:textColor="@color/text_primary"
                         android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/flecha_derecha"
-                        app:tint="@color/black" />
+                        app:tint="@color/cian_oscuro_iconos" />
 
                 </LinearLayout>
 
@@ -199,7 +216,8 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/candado" />
+                        android:src="@drawable/candado"
+                        app:tint="@color/cian_oscuro_iconos" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -207,13 +225,14 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="@string/politica_privacidad"
+                        android:textColor="@color/text_primary"
                         android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/flecha_derecha"
-                        app:tint="@color/black" />
+                        app:tint="@color/cian_oscuro_iconos" />
 
                 </LinearLayout>
 
@@ -231,7 +250,8 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/docu_legal" />
+                        android:src="@drawable/docu_legal"
+                        app:tint="@color/cian_oscuro_iconos" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -239,13 +259,14 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="@string/terminos_condiciones"
+                        android:textColor="@color/text_primary"
                         android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/flecha_derecha"
-                        app:tint="@color/black" />
+                        app:tint="@color/cian_oscuro_iconos" />
 
                 </LinearLayout>
 
@@ -263,7 +284,8 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/balanza" />
+                        android:src="@drawable/balanza"
+                        app:tint="@color/cian_oscuro_iconos" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -271,13 +293,14 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="@string/licencias"
+                        android:textColor="@color/text_primary"
                         android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/flecha_derecha"
-                        app:tint="@color/black" />
+                        app:tint="@color/cian_oscuro_iconos" />
 
                 </LinearLayout>
 
@@ -295,7 +318,8 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/personas" />
+                        android:src="@drawable/personas"
+                        app:tint="@color/cian_oscuro_iconos" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -303,13 +327,48 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:text="@string/atribuciones"
+                        android:textColor="@color/text_primary"
                         android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/flecha_derecha"
-                        app:tint="@color/black" />
+                        app:tint="@color/cian_oscuro_iconos" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/creditos"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/personas"
+                        app:tint="@color/cian_oscuro_iconos" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:text="@string/creditos"
+                        android:textColor="@color/text_primary"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/flecha_derecha"
+                        app:tint="@color/cian_oscuro_iconos" />
 
                 </LinearLayout>
 
@@ -327,7 +386,8 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/circulo_basura" />
+                        android:src="@drawable/circulo_basura"
+                        app:tint="@color/coral_alertasimp_errores" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -336,7 +396,8 @@
                         android:layout_weight="1"
                         android:text="@string/eliminar_cuenta"
                         android:textColor="@color/coral_alertasimp_errores"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -360,7 +421,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="32dp"
-        android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+        android:background="@color/card_background"
         android:elevation="12dp"
         android:orientation="vertical"
         android:padding="20dp"
@@ -371,7 +432,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
             android:text="@string/texto_eliminar_cuenta"
-            android:textColor="@color/black"
+            android:textColor="@color/text_primary"
             android:textSize="16sp" />
 
         <TextView
@@ -379,7 +440,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/correo_soporte"
-            android:textColor="@color/coral_alertasimp_errores"
+            android:textColor="@color/cian_botones"
             android:textSize="16sp"
             android:textStyle="bold" />
 

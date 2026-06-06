@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/fondotar">
+    android:background="@color/petfect_background">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -17,7 +17,6 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:cardBackgroundColor="@color/background">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -96,7 +95,23 @@
                     android:layout_height="wrap_content"
                     android:text="@string/info_adicional_label_demo"
                     android:textSize="16sp"
-                    android:textColor="@color/gris" />
+                    android:textColor="@color/gris"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:id="@+id/txtMostrarMasInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mostrar_mas"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/cian_botones"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -111,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/editar"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/white"
                     android:backgroundTint="@color/rosita_fondoss_tarjetas_alertaslev"
                     android:padding="12dp"
                     android:layout_marginEnd="4dp"/>
@@ -122,8 +137,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/eliminar"
-                    android:textColor="@android:color/white"
-                    android:backgroundTint="@color/coral_alertasimp_errores"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/rosita_fondoss_tarjetas_alertaslev"
                     android:padding="12dp"
                     android:layout_marginStart="4dp"/>
 
