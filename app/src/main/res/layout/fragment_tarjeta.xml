@@ -134,7 +134,34 @@
                         android:layout_height="wrap_content"
                         android:text="@string/info_adicional_label_demo"
                         android:textSize="16sp"
-                        android:textColor="@color/text_primary" />
+                        android:textColor="@color/text_primary"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+
+                    <TextView
+                        android:id="@+id/txtMostrarMasInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mostrar_mas"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/cian_botones"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:visibility="gone" />
+
+                    <!-- BOTÓN CONTACTO -->
+                    <Button
+                        android:id="@+id/btnVerMas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contacto"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/rosita_fondoss_tarjetas_alertaslev"
+                        android:padding="12dp"
+                        android:layout_marginTop="12dp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -154,16 +181,7 @@
 
                 </LinearLayout>
 
-                <!-- BOTÓN CONTACTO -->
-                <Button
-                    android:id="@+id/btnVerMas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/contacto"
-                    android:textColor="@color/white"
-                    android:backgroundTint="@color/rosita_fondoss_tarjetas_alertaslev"
-                    android:padding="12dp"
-                    android:layout_marginTop="12dp" />
+
 
             </LinearLayout>
 

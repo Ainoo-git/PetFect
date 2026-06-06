@@ -9,11 +9,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aipasa.MainBab;
 import com.aipasa.R;
 
 public class PreferenciasActivity extends AppCompatActivity {
 
-    private CheckBox cbPerdidos, cbAdopciones, cbVeterinarias, cbNotificaciones;
+    private CheckBox cbPerdidos;
+    private CheckBox cbAdopciones;
+    private CheckBox cbVeterinarias;
+    private CheckBox cbNotificaciones;
 
     private static final String PREFS = "petfect_prefs";
 
@@ -33,18 +37,24 @@ public class PreferenciasActivity extends AppCompatActivity {
 
         btnGuardar.setOnClickListener(v -> {
             guardarPreferencias();
-            Toast.makeText(this, "Preferencias guardadas", Toast.LENGTH_SHORT).show();
 
-            // Ir a Main después de configurar
-            Intent intent = new Intent(PreferenciasActivity.this, MainActivity.class);
+            Toast.makeText(
+                    PreferenciasActivity.this,
+                    "Preferencias guardadas",
+                    Toast.LENGTH_SHORT
+            ).show();
+
+            Intent intent = new Intent(PreferenciasActivity.this, MainBab.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
 
-            finish(); // cerramos Preferencias
+            finish();
         });
     }
 
     private void cargarPreferencias() {
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+
         cbPerdidos.setChecked(prefs.getBoolean("pref_perdidos", true));
         cbAdopciones.setChecked(prefs.getBoolean("pref_adopciones", true));
         cbVeterinarias.setChecked(prefs.getBoolean("pref_veterinarias", true));
@@ -53,6 +63,7 @@ public class PreferenciasActivity extends AppCompatActivity {
 
     private void guardarPreferencias() {
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+
         prefs.edit()
                 .putBoolean("pref_perdidos", cbPerdidos.isChecked())
                 .putBoolean("pref_adopciones", cbAdopciones.isChecked())

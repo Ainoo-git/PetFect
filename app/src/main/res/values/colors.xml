@@ -19,4 +19,7 @@
     <color name="background_dark">#1A1A1A</color>
     <color name="surface_dark">#262626</color>
 
+    <color name="red">#FF0000</color>
+    <color name="gris">#C8C5C5</color>
+
 </resources>

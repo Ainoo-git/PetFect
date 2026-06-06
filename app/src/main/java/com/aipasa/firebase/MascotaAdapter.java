@@ -66,7 +66,10 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
         }
 
         if (!estadoTraducido.isEmpty()) {
-            if (!tipoEstado.isEmpty()) tipoEstado += " • ";
+            if (!tipoEstado.isEmpty()) {
+                tipoEstado += " • ";
+            }
+
             tipoEstado += estadoTraducido;
         }
 
@@ -79,7 +82,10 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
         }
 
         if (infoAdicional != null && !infoAdicional.isEmpty()) {
-            if (!info.isEmpty()) info += " • ";
+            if (!info.isEmpty()) {
+                info += " • ";
+            }
+
             info += infoAdicional;
         }
 
@@ -100,7 +106,6 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
             holder.txtFecha.setText("");
         }
 
-
         if (fotoUrl != null && !fotoUrl.isEmpty()) {
             Glide.with(holder.itemView.getContext())
                     .load(fotoUrl)
@@ -113,15 +118,18 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
         }
 
         holder.itemView.setOnClickListener(v -> {
-            if (id != null && !id.isEmpty() && holder.itemView.getContext() instanceof AppCompatActivity) {
+            if (id != null && !id.isEmpty()
+                    && holder.itemView.getContext() instanceof AppCompatActivity) {
+
                 AppCompatActivity activity = (AppCompatActivity) holder.itemView.getContext();
+
                 TarjetaFragment fragment = TarjetaFragment.newInstance(id);
 
-                activity.getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.content_container, fragment)
-                        .addToBackStack(null)
-                        .commit();
+                fragment.show(
+                        activity.getSupportFragmentManager(),
+                        "tarjeta_mascota"
+                );
+
             } else {
                 Toast.makeText(
                         holder.itemView.getContext(),
@@ -133,7 +141,9 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
     }
 
     private String traducirTipo(@NonNull ViewHolder holder, String tipo) {
-        if (tipo == null) return "";
+        if (tipo == null) {
+            return "";
+        }
 
         switch (tipo.toLowerCase(Locale.ROOT)) {
             case "perro":
@@ -148,7 +158,9 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
     }
 
     private String traducirEstado(@NonNull ViewHolder holder, String estado) {
-        if (estado == null) return "";
+        if (estado == null) {
+            return "";
+        }
 
         switch (estado.toLowerCase(Locale.ROOT)) {
             case "perdido":
@@ -174,11 +186,16 @@ public class MascotaAdapter extends RecyclerView.Adapter<MascotaAdapter.ViewHold
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+
         ImageView imgMascota;
-        TextView txtNombre, txtTipoEstado, txtInfoAdicional, txtFecha;
+        TextView txtNombre;
+        TextView txtTipoEstado;
+        TextView txtInfoAdicional;
+        TextView txtFecha;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             imgMascota = itemView.findViewById(R.id.imgMascota);
             txtNombre = itemView.findViewById(R.id.txtNombre);
             txtTipoEstado = itemView.findViewById(R.id.txtTipoEstado);

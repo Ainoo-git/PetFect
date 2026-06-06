@@ -1,6 +1,7 @@
 package com.aipasa.auth;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.aipasa.MainBab;
 import com.aipasa.R;
+import com.aipasa.main.PreferenciasActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -32,6 +34,9 @@ public class Login extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 100;
 
+    private static final String PREFS = "petfect_prefs";
+    private static final String PREF_PREFERENCIAS_CONFIGURADAS = "preferencias_configuradas";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,10 +47,10 @@ public class Login extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        // Si ya está logueado → directo a Main
+        // Si ya está logueado → mira si tiene preferencias o no
         if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(this, MainBab.class));
-            finish();
+            abrirPantallaDespuesDeLogin();
+            return;
         }
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -85,8 +90,7 @@ public class Login extends AppCompatActivity {
                                 "Inicio de sesión correcto",
                                 Toast.LENGTH_SHORT).show();
 
-                        startActivity(new Intent(this, MainBab.class));
-                        finish();
+                        abrirPantallaDespuesDeLogin();
 
                     } else {
 
@@ -99,6 +103,24 @@ public class Login extends AppCompatActivity {
 
     public void OpenSignup(View view) {
         startActivity(new Intent(this, SignUp.class));
+    }
+
+    private void abrirPantallaDespuesDeLogin() {
+        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        boolean preferenciasConfiguradas =
+                prefs.getBoolean(PREF_PREFERENCIAS_CONFIGURADAS, false);
+
+        Intent intent;
+
+        if (preferenciasConfiguradas) {
+            intent = new Intent(this, MainBab.class);
+        } else {
+            intent = new Intent(this, PreferenciasActivity.class);
+        }
+
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -132,8 +154,7 @@ public class Login extends AppCompatActivity {
 
                     if (task.isSuccessful()) {
 
-                        startActivity(new Intent(this, MainBab.class));
-                        finish();
+                        abrirPantallaDespuesDeLogin();
 
                     } else {
 
