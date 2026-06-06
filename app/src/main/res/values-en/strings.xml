@@ -298,4 +298,9 @@
     <string name="error_verificacion">You must confirm the verification before continuing</string>
 
 
+    <string name="debes_aceptar_terminos">You must accept the terms and conditions to continue</string>
+    <string name="creditos">Credits</string>
+    <string name="modo_vista_descripcion_claro">Light mode enabled: the app uses a light background and soft colors.</string>
+    <string name="modo_vista_descripcion_oscuro">Dark mode enabled: the app uses a dark background to reduce brightness.</string>
+
 </resources>

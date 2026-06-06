@@ -17,7 +17,6 @@ public class PreferenciasActivity extends AppCompatActivity {
     private CheckBox cbPerdidos;
     private CheckBox cbAdopciones;
     private CheckBox cbVeterinarias;
-    private CheckBox cbNotificaciones;
 
     private static final String PREFS = "petfect_prefs";
 
@@ -29,46 +28,57 @@ public class PreferenciasActivity extends AppCompatActivity {
         cbPerdidos = findViewById(R.id.cbPerdidos);
         cbAdopciones = findViewById(R.id.cbAdopciones);
         cbVeterinarias = findViewById(R.id.cbVeterinarias);
-        cbNotificaciones = findViewById(R.id.cbNotificaciones);
 
         Button btnGuardar = findViewById(R.id.btnGuardarPreferencias);
 
         cargarPreferencias();
 
-        btnGuardar.setOnClickListener(v -> {
-            guardarPreferencias();
+        if (btnGuardar != null) {
+            btnGuardar.setOnClickListener(v -> {
+                guardarPreferencias();
 
-            Toast.makeText(
-                    PreferenciasActivity.this,
-                    "Preferencias guardadas",
-                    Toast.LENGTH_SHORT
-            ).show();
+                Toast.makeText(
+                        PreferenciasActivity.this,
+                        "Preferencias guardadas",
+                        Toast.LENGTH_SHORT
+                ).show();
 
-            Intent intent = new Intent(PreferenciasActivity.this, MainBab.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+                Intent intent = new Intent(PreferenciasActivity.this, MainBab.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
 
-            finish();
-        });
+                finish();
+            });
+        }
     }
 
     private void cargarPreferencias() {
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
 
-        cbPerdidos.setChecked(prefs.getBoolean("pref_perdidos", true));
-        cbAdopciones.setChecked(prefs.getBoolean("pref_adopciones", true));
-        cbVeterinarias.setChecked(prefs.getBoolean("pref_veterinarias", true));
-        cbNotificaciones.setChecked(prefs.getBoolean("pref_notificaciones", true));
+        if (cbPerdidos != null) {
+            cbPerdidos.setChecked(prefs.getBoolean("pref_perdidos", true));
+        }
+
+        if (cbAdopciones != null) {
+            cbAdopciones.setChecked(prefs.getBoolean("pref_adopciones", true));
+        }
+
+        if (cbVeterinarias != null) {
+            cbVeterinarias.setChecked(prefs.getBoolean("pref_veterinarias", true));
+        }
     }
 
     private void guardarPreferencias() {
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
 
+        boolean perdidos = cbPerdidos != null && cbPerdidos.isChecked();
+        boolean adopciones = cbAdopciones != null && cbAdopciones.isChecked();
+        boolean veterinarias = cbVeterinarias != null && cbVeterinarias.isChecked();
+
         prefs.edit()
-                .putBoolean("pref_perdidos", cbPerdidos.isChecked())
-                .putBoolean("pref_adopciones", cbAdopciones.isChecked())
-                .putBoolean("pref_veterinarias", cbVeterinarias.isChecked())
-                .putBoolean("pref_notificaciones", cbNotificaciones.isChecked())
+                .putBoolean("pref_perdidos", perdidos)
+                .putBoolean("pref_adopciones", adopciones)
+                .putBoolean("pref_veterinarias", veterinarias)
                 .putBoolean("preferencias_configuradas", true)
                 .apply();
     }

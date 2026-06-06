@@ -294,4 +294,9 @@
     <string name="error_verificacion">Debes confirmar la verificación antes de continuar</string>
 
 
+    <string name="debes_aceptar_terminos">Debes aceptar los términos y condiciones para continuar</string>
+    <string name="creditos">Créditos</string>
+    <string name="modo_vista_descripcion_claro">Modo claro activado: la app usa fondo claro y colores suaves.</string>
+    <string name="modo_vista_descripcion_oscuro">Modo oscuro activado: la app usa fondo oscuro para reducir el brillo.</string>
+
 </resources>

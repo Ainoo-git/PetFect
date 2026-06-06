@@ -21,7 +21,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-
         android:text="@string/preferencias_subtitulo"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"
-
         android:text="@string/ver_mascotas_perdidas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +44,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"
-
         android:text="@string/ver_animales_adopcion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,33 +55,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"
-
         android:text="@string/mostrar_veterinarias"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cbAdopciones" />
-
-    <CheckBox
-        android:id="@+id/cbNotificaciones"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:buttonTint="@color/rosita_fondoss_tarjetas_alertaslev"
-
-        android:text="@string/recibir_notificaciones"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cbVeterinarias" />
 
     <Button
         android:id="@+id/btnGuardarPreferencias"
         style="@style/BotonPetFect"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:layout_marginTop="312dp"
+        android:layout_marginTop="336dp"
         android:text="@string/siguiente"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cbNotificaciones" />
+        app:layout_constraintTop_toBottomOf="@id/cbVeterinarias" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

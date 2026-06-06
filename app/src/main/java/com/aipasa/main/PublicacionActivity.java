@@ -202,16 +202,10 @@ public class PublicacionActivity extends AppCompatActivity {
 
         if (!checkLegal.isChecked()) {
             checkLegal.setTextColor(
-                    ContextCompat.getColor(this, R.color.coral_alertasimp_errores)
+                    ContextCompat.getColor(this, R.color.red)
             );
 
             hacerTemblarCheckLegal();
-
-            Toast.makeText(
-                    this,
-                    "Debes confirmar la verificación antes de continuar",
-                    Toast.LENGTH_SHORT
-            ).show();
 
             return false;
         }

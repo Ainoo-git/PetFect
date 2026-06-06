@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.aipasa.R;
+import com.aipasa.creditos.Creditos;
 import com.google.android.material.appbar.MaterialToolbar;
 
 public class ConfiguracionActivity extends AppCompatActivity {
@@ -27,26 +29,42 @@ public class ConfiguracionActivity extends AppCompatActivity {
     private View overlay;
     private View card;
     private TextView email;
+    private TextView tvDescripcionModo;
 
     private static final String PREFS_SETTINGS = "settings";
     private static final String PREF_MODO_OSCURO = "modoOscuro";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        aplicarModoGuardadoAntesDeCargar();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion);
 
-        SharedPreferences prefs = getSharedPreferences(PREFS_SETTINGS, Context.MODE_PRIVATE);
-
         configurarToolbar();
         inicializarVistas();
+        configurarModoOscuro();
         configurarClicks();
-        configurarModoOscuro(prefs);
         configurarEliminarCuenta();
+    }
+
+    private void aplicarModoGuardadoAntesDeCargar() {
+        SharedPreferences prefs = getSharedPreferences(PREFS_SETTINGS, Context.MODE_PRIVATE);
+        boolean modoOscuro = prefs.getBoolean(PREF_MODO_OSCURO, false);
+
+        if (modoOscuro) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
     private void configurarToolbar() {
         MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+
+        if (toolbar == null) {
+            return;
+        }
 
         setSupportActionBar(toolbar);
 
@@ -63,39 +81,127 @@ public class ConfiguracionActivity extends AppCompatActivity {
         overlay = findViewById(R.id.overlayEliminarCuenta);
         card = findViewById(R.id.cardEliminarCuenta);
         email = findViewById(R.id.tvEmailSoporte);
+        tvDescripcionModo = findViewById(R.id.tvDescripcionModo);
     }
 
-    private void configurarClicks() {
-        findViewById(R.id.atribuciones).setOnClickListener(v -> openAtribuciones());
-        findViewById(R.id.licencias).setOnClickListener(v -> openLicencia());
-        findViewById(R.id.terminos_condiciones).setOnClickListener(v -> openTerminosYcondiciones());
-        findViewById(R.id.permisos_dispositivo).setOnClickListener(v -> openPermisos());
-        findViewById(R.id.politica_privacidad).setOnClickListener(v -> openPrivacidad());
-        findViewById(R.id.guardados).setOnClickListener(v -> openGuardados());
-        findViewById(R.id.notificaciones).setOnClickListener(v -> openNotificaciones());
-        findViewById(R.id.idioma).setOnClickListener(v -> openIdioma());
-    }
-
-    private void configurarModoOscuro(SharedPreferences prefs) {
+    private void configurarModoOscuro() {
         Switch switchModo = findViewById(R.id.switchModoOscuro);
 
-        boolean oscuroActivo = prefs.getBoolean(PREF_MODO_OSCURO, false);
-        switchModo.setChecked(oscuroActivo);
+        if (switchModo == null) {
+            return;
+        }
 
-        switchModo.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            prefs.edit()
-                    .putBoolean(PREF_MODO_OSCURO, isChecked)
-                    .apply();
+        SharedPreferences prefs = getSharedPreferences(PREFS_SETTINGS, Context.MODE_PRIVATE);
+        boolean modoOscuro = prefs.getBoolean(PREF_MODO_OSCURO, false);
 
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        actualizarTextoModo(modoOscuro);
+
+        switchModo.setOnCheckedChangeListener(null);
+        switchModo.setChecked(modoOscuro);
+
+        switchModo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences prefs = getSharedPreferences(PREFS_SETTINGS, Context.MODE_PRIVATE);
+                boolean valorActual = prefs.getBoolean(PREF_MODO_OSCURO, false);
+
+                if (valorActual == isChecked) {
+                    return;
+                }
+
+                prefs.edit()
+                        .putBoolean(PREF_MODO_OSCURO, isChecked)
+                        .apply();
+
+                actualizarTextoModo(isChecked);
+
+                if (isChecked) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
             }
         });
     }
 
+    private void actualizarTextoModo(boolean modoOscuro) {
+        if (tvDescripcionModo == null) {
+            return;
+        }
+
+        if (modoOscuro) {
+            tvDescripcionModo.setText(getString(R.string.modo_vista_descripcion_oscuro));
+        } else {
+            tvDescripcionModo.setText(getString(R.string.modo_vista_descripcion_claro));
+        }
+    }
+
+    private void configurarClicks() {
+        View guardados = findViewById(R.id.guardados);
+        View notificaciones = findViewById(R.id.notificaciones);
+        View idioma = findViewById(R.id.idioma);
+        View permisos = findViewById(R.id.permisos_dispositivo);
+        View privacidad = findViewById(R.id.politica_privacidad);
+        View terminos = findViewById(R.id.terminos_condiciones);
+        View licencias = findViewById(R.id.licencias);
+        View atribuciones = findViewById(R.id.atribuciones);
+        View creditos = findViewById(R.id.creditos);
+
+        if (guardados != null) {
+            guardados.setOnClickListener(v -> abrirActivitySeguro(GuaradarMascotaActivity.class));
+        }
+
+        if (notificaciones != null) {
+            notificaciones.setOnClickListener(v -> abrirActivitySeguro(NotificacionesActivity.class));
+        }
+
+        if (idioma != null) {
+            idioma.setOnClickListener(v -> abrirActivitySeguro(IdiomaActivity.class));
+        }
+
+        if (permisos != null) {
+            permisos.setOnClickListener(v -> abrirActivitySeguro(PermisosDispositivoActivity.class));
+        }
+
+        if (privacidad != null) {
+            privacidad.setOnClickListener(v -> abrirActivitySeguro(PoliticaPrivacidadActivity.class));
+        }
+
+        if (terminos != null) {
+            terminos.setOnClickListener(v -> abrirActivitySeguro(TerminosCondicionesActivity.class));
+        }
+
+        if (licencias != null) {
+            licencias.setOnClickListener(v -> abrirActivitySeguro(LicenciaActivity.class));
+        }
+
+        if (atribuciones != null) {
+            atribuciones.setOnClickListener(v -> abrirActivitySeguro(AtribucionesActivity.class));
+        }
+
+        if (creditos != null) {
+            creditos.setOnClickListener(v -> abrirActivitySeguro(Creditos.class));
+        }
+    }
+
+    private void abrirActivitySeguro(Class<?> activityClass) {
+        try {
+            Intent intent = new Intent(ConfiguracionActivity.this, activityClass);
+            startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(
+                    this,
+                    "No se pudo abrir esta pantalla",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
+    }
+
     private void configurarEliminarCuenta() {
+        if (eliminarCuenta == null || overlay == null || card == null || email == null) {
+            return;
+        }
+
         eliminarCuenta.setOnClickListener(v -> {
             overlay.setVisibility(View.VISIBLE);
             card.setVisibility(View.VISIBLE);
@@ -107,58 +213,36 @@ public class ConfiguracionActivity extends AppCompatActivity {
         });
 
         email.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_SENDTO);
-            intent.setData(Uri.parse("mailto:petfect26@gmail.com"));
-            startActivity(intent);
+            try {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:petfect26@gmail.com"));
+                startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(
+                        this,
+                        "No se pudo abrir el correo",
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
         });
 
         email.setOnLongClickListener(v -> {
             ClipboardManager clipboard =
                     (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 
-            ClipData clip = ClipData.newPlainText("email", "petfect26@gmail.com");
-            clipboard.setPrimaryClip(clip);
+            if (clipboard != null) {
+                ClipData clip = ClipData.newPlainText("email", "petfect26@gmail.com");
+                clipboard.setPrimaryClip(clip);
 
-            Toast.makeText(
-                    this,
-                    getString(R.string.correo_copiado),
-                    Toast.LENGTH_SHORT
-            ).show();
+                Toast.makeText(
+                        this,
+                        getString(R.string.correo_copiado),
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
 
             return true;
         });
-    }
-
-    private void openAtribuciones() {
-        startActivity(new Intent(ConfiguracionActivity.this, AtribucionesActivity.class));
-    }
-
-    private void openLicencia() {
-        startActivity(new Intent(ConfiguracionActivity.this, LicenciaActivity.class));
-    }
-
-    private void openTerminosYcondiciones() {
-        startActivity(new Intent(ConfiguracionActivity.this, TerminosCondicionesActivity.class));
-    }
-
-    private void openPermisos() {
-        startActivity(new Intent(ConfiguracionActivity.this, PermisosDispositivoActivity.class));
-    }
-
-    private void openPrivacidad() {
-        startActivity(new Intent(ConfiguracionActivity.this, PoliticaPrivacidadActivity.class));
-    }
-
-    private void openGuardados() {
-        startActivity(new Intent(ConfiguracionActivity.this, GuaradarMascotaActivity.class));
-    }
-
-    private void openNotificaciones() {
-        startActivity(new Intent(ConfiguracionActivity.this, NotificacionesActivity.class));
-    }
-
-    private void openIdioma() {
-        startActivity(new Intent(ConfiguracionActivity.this, IdiomaActivity.class));
     }
 
     @Override
@@ -170,5 +254,4 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }
