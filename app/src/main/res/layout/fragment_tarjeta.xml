@@ -31,13 +31,14 @@
             android:layout_margin="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/card_background">
+            app:cardBackgroundColor="@color/surface">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/card_background">
 
                 <!-- IMAGEN -->
                 <FrameLayout
@@ -72,6 +73,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/text_primary" />
 
+
                     <ImageButton
                         android:id="@+id/btnGuardar"
                         android:layout_width="40dp"
@@ -91,7 +93,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tipo_estado_demo"
                     android:textSize="16sp"
-                    android:textColor="@color/text_hint"
+                    android:textStyle="bold"
+                    android:textColor="@color/gris"
                     android:layout_marginBottom="16dp" />
 
                 <LinearLayout
@@ -107,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/edad_label_demo"
                         android:textSize="16sp"
-                        android:textColor="@color/text_primary"
+                        android:textColor="@color/gris"
                         android:layout_marginBottom="8dp" />
 
                     <TextView
@@ -116,7 +119,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/chip_label_demo"
                         android:textSize="16sp"
-                        android:textColor="@color/text_primary"
+                        android:textColor="@color/gris"
                         android:layout_marginBottom="8dp" />
 
                     <TextView
@@ -125,7 +128,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/telefono_label_demo"
                         android:textSize="16sp"
-                        android:textColor="@color/text_primary"
+                        android:textColor="@color/gris"
                         android:layout_marginBottom="8dp" />
 
                     <TextView
@@ -134,7 +137,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/info_adicional_label_demo"
                         android:textSize="16sp"
-                        android:textColor="@color/text_primary"
+                        android:textColor="@color/gris"
                         android:maxLines="2"
                         android:ellipsize="end" />
 
@@ -167,7 +170,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="Ubicación"
+                        android:text="@string/ubicacion"
                         android:textColor="@color/text_primary"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -180,13 +183,7 @@
                         android:layout_marginBottom="8dp" />
 
                 </LinearLayout>
-
-
-
             </LinearLayout>
-
         </com.google.android.material.card.MaterialCardView>
-
     </ScrollView>
-
 </LinearLayout>

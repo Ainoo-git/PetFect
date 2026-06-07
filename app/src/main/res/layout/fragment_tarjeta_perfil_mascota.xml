@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tipo_estado_demo"
                 android:textSize="16sp"
-                android:textColor="@color/text_hint"
+                android:textColor="@color/gris"
                 android:layout_marginBottom="16dp"/>
 
             <LinearLayout
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/edad_label_demo"
                     android:textSize="16sp"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/gris"
                     android:layout_marginBottom="8dp" />
 
                 <TextView
@@ -77,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/chip_label_demo"
                     android:textSize="16sp"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/gris"
                     android:layout_marginBottom="8dp" />
 
                 <TextView
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/telefono_label_demo"
                     android:textSize="16sp"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/gris"
                     android:layout_marginBottom="8dp" />
 
                 <TextView
@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/info_adicional_label_demo"
                     android:textSize="16sp"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/gris"
                     android:maxLines="2"
                     android:ellipsize="end" />
 

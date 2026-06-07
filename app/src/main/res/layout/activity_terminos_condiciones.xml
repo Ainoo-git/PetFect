@@ -1,28 +1,27 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
-    <!--  APPBARrr  -->
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    android:orientation="vertical">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/rosita_fondoss_tarjetas_alertaslev"
-            android:title="@string/terminos_y_condiciones"
-            android:titleTextColor="@color/white"
-            app:navigationIcon="@drawable/outline_arrow"
-            app:titleCentered="true" />
-    </com.google.android.material.appbar.AppBarLayout>
+    <!-- TOOLBAR SIMPLE -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/rosita_fondoss_tarjetas_alertaslev"
+        android:title="@string/terminos_y_condiciones"
+        android:titleTextColor="@color/white"
+        app:navigationIcon="@drawable/outline_arrow"
+        app:titleCentered="true" />
     <!--  CONTENIDO  -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
+        android:background="@color/background"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -55,7 +54,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/app_name"
-                        android:textColor="#534AB7"
+                        android:textColor="@color/gris"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -63,7 +62,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/terminos_y_condiciones_version_1_0"
-                        android:textColor="#888780"
+                        android:textColor="@color/gris"
                         android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -73,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:text="@string/ultima_actualizacion_mayo_2026_efectivos_desde_el"
-                android:textColor="#B4B2A9"
+                android:textColor="@color/gris"
                 android:textSize="11sp" />
 
             <View
@@ -87,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_1_aceptacion_de_los"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -97,7 +96,7 @@
                 android:layout_marginBottom="10dp"
                 android:lineSpacingMultiplier="1.6"
                 android:text="@string/al_descargar_instalar_o_usar_la_aplicacion_petfect"
-                android:textColor="#5F5E5A"
+                android:textColor="@color/gris"
                 android:textSize="14sp" />
             <!--  Caja aviso  -->
             <LinearLayout
@@ -128,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_2_quien_puede_usar_p"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -138,7 +137,7 @@
                 android:layout_marginBottom="20dp"
                 android:lineSpacingMultiplier="1.6"
                 android:text="@string/petfect_esta_dirigida_a_cualquier_persona_mayor_de"
-                android:textColor="#5F5E5A"
+                android:textColor="@color/gris"
                 android:textSize="14sp" />
 
             <View
@@ -152,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_3_cuentas_y_registro"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -162,7 +161,7 @@
                 android:layout_marginBottom="10dp"
                 android:lineSpacingMultiplier="1.6"
                 android:text="@string/para_acceder_a_todas_las_funciones_de_petfect_es_n"
-                android:textColor="#5F5E5A"
+                android:textColor="@color/gris"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -193,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_4_uso_permitido_y_co"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -203,7 +202,7 @@
                 android:layout_marginBottom="10dp"
                 android:lineSpacingMultiplier="1.6"
                 android:text="@string/petfect_es_una_plataforma_orientada_al_bienestar_a"
-                android:textColor="#5F5E5A"
+                android:textColor="@color/gris"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -234,7 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_5_publicaciones_de_a"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -244,7 +243,7 @@
                 android:layout_marginBottom="10dp"
                 android:lineSpacingMultiplier="1.6"
                 android:text="@string/petfect_actua_como_intermediaria_entre_usuarios_no"
-                android:textColor="#5F5E5A"
+                android:textColor="@color/gris"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -275,7 +274,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_6_datos_personales_y"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -285,7 +284,7 @@
                 android:layout_marginBottom="20dp"
                 android:lineSpacingMultiplier="1.6"
                 android:text="@string/el_tratamiento_de_tus_datos_personales_se_rige_por"
-                android:textColor="#5F5E5A"
+                android:textColor="@color/gris"
                 android:textSize="14sp" />
 
             <View
@@ -299,7 +298,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_7_servicios_premium"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -309,7 +308,7 @@
                 android:layout_marginBottom="20dp"
                 android:lineSpacingMultiplier="1.6"
                 android:text="@string/petfect_ofrece_servicios_de_pago_opcionales_los_pr"
-                android:textColor="#5F5E5A"
+                android:textColor="@color/gris"
                 android:textSize="14sp" />
 
             <View
@@ -323,7 +322,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_8_propiedad_intelect"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -333,7 +332,7 @@
                 android:layout_marginBottom="10dp"
                 android:lineSpacingMultiplier="1.6"
                 android:text="@string/todos_los_elementos_de_petfect_nombre_logotipo_dis"
-                android:textColor="#5F5E5A"
+                android:textColor="@color/gris"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -364,7 +363,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_9_limitacion_de_resp"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -374,7 +373,7 @@
                 android:layout_marginBottom="10dp"
                 android:lineSpacingMultiplier="1.6"
                 android:text="@string/petfect_actua_como_plataforma_de_intermediacion_no"
-                android:textColor="#5F5E5A"
+                android:textColor="@color/gris"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -405,7 +404,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_10_modificaciones_su"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -415,7 +414,7 @@
                 android:layout_marginBottom="16dp"
                 android:lineSpacingMultiplier="1.6"
                 android:text="@string/petfect_puede_modificar_estos_terminos_en_cualquie"
-                android:textColor="#5F5E5A"
+                android:textColor="@color/gris"
                 android:textSize="14sp" />
             <!--   Caja contacto   -->
             <LinearLayout
@@ -455,4 +454,4 @@
                 android:textSize="11sp" />
         </LinearLayout>
     </ScrollView>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>
