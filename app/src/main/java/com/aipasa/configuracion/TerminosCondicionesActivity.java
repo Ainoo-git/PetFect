@@ -23,6 +23,8 @@ public class TerminosCondicionesActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
         toolbar.setNavigationOnClickListener(v -> finish());

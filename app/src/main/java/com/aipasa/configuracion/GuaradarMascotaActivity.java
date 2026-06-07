@@ -54,6 +54,9 @@ public class GuaradarMascotaActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         }
 
         toolbar.setNavigationOnClickListener(v -> finish());

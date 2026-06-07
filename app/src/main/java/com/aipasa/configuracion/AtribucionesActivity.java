@@ -27,6 +27,8 @@ public class AtribucionesActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
         TextView linkFlaticon = findViewById(R.id.linkFlaticon);

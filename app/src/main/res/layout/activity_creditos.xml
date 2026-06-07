@@ -14,7 +14,6 @@
         android:title="@string/creditos"
         android:titleTextColor="@color/white"
         app:navigationIcon="@drawable/outline_arrow"
-        app:navigationIconTint="@color/white"
         app:titleCentered="true" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
