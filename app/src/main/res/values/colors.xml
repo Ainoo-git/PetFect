@@ -7,7 +7,7 @@
     <color name="cian_botones">#2A9D8F</color>
     <color name="cian_clarito_bordes">#7FD1C8</color>
     <color name="rosita_fondoss_tarjetas_alertaslev">#2A9D8F</color>
-    <color name="coral_alertasimp_errores">#F4A261</color>
+    <color name="coral_alertasimp_errores">#FF0058</color>
 
     <!-- Colores adaptativos (se sobreescriben en nightmode.xml) -->
     <color name="card_background">#FFFFFF</color>
@@ -22,7 +22,7 @@
 
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#000000</color>
-    <color name="gris">#B6B6B6</color>
+    <color name="gris">#BDBDBD</color>
 
 
     <color name="fondo_pantalla_app">#F5F5F5</color>
@@ -31,9 +31,5 @@
     <color name="texto_normal_app">#FF000000</color>
     <color name="texto_secundario_app">#9E9E9E</color>
     <color name="texto_boton_claro_app">#FF000000</color>
-
-
-    <color name="red">#FF0000</color>
-    <color name="gris">#C8C5C5</color>
 
 </resources>

@@ -10,9 +10,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:layout_gravity="center"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="2dp"
         card_view:cardCornerRadius="22dp"
         card_view:cardElevation="12dp"
         card_view:cardBackgroundColor="@color/card_background">
@@ -24,7 +23,7 @@
             android:padding="18dp">
             <!--  TITULO  -->
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/terminos_politicas"
                 android:textColor="@color/cian_oscuro_iconos"
@@ -80,25 +79,7 @@
                     android:focusable="true" />
 
             </LinearLayout>
-<!--             SCROLL  -->
-<!--            <ScrollView-->
-<!--                android:id="@+id/scrollView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="420dp"-->
-<!--                android:layout_marginTop="14dp"-->
-<!--                android:background="#FAFAFA"-->
-<!--                android:fillViewport="true">-->
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tvTerms"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:lineSpacingExtra="5dp"-->
-<!--                    android:padding="14dp"-->
-<!--                    android:text="@string/bienvenido_a_a_petfect_antes_de_utilizar_la_aplica"-->
-<!--                    android:textColor="#333333"-->
-<!--                    android:textSize="15sp" />-->
-<!--            </ScrollView>-->
             <!--  CHECK  -->
             <CheckBox
                 android:id="@+id/checkAccept"
@@ -122,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="44dp"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/gris"
+                    android:backgroundTint="@color/cian_botones"
                     android:text="@string/cancelar"
                     android:textColor="@color/white" />
 
@@ -130,7 +111,7 @@
                     android:id="@+id/btnAccept"
                     android:layout_width="wrap_content"
                     android:layout_height="44dp"
-                    android:backgroundTint="@color/gris"
+                    android:backgroundTint="@color/cian_botones"
                     android:enabled="false"
                     android:text="@string/aceptar"
                     android:textColor="@color/white" />

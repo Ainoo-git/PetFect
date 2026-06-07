@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_1_aceptacion_de_los"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_2_quien_puede_usar_p"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -151,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_3_cuentas_y_registro"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -192,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_4_uso_permitido_y_co"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -233,7 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_5_publicaciones_de_a"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -274,7 +274,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_6_datos_personales_y"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -298,7 +298,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_7_servicios_premium"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -322,7 +322,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_8_propiedad_intelect"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -363,7 +363,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_9_limitacion_de_resp"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -404,7 +404,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/activity_terminos_condiciones_10_modificaciones_su"
-                android:textColor="#534AB7"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 

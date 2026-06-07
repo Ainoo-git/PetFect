@@ -179,7 +179,6 @@ public class Login extends AppCompatActivity {
 
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            window.setDimAmount(0f);
         }
 
         TextView tvTerminos = dialog.findViewById(R.id.tvTerminos);
@@ -261,8 +260,10 @@ public class Login extends AppCompatActivity {
         Window shownWindow = dialog.getWindow();
 
         if (shownWindow != null) {
-            shownWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            shownWindow.setDimAmount(0f);
+            shownWindow.setLayout(
+                    android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+                    android.view.ViewGroup.LayoutParams.MATCH_PARENT
+            );
         }
     }
 

@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,7 +73,6 @@ public class HomeFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         currentUser = auth.getCurrentUser();
 
-        // Views
         sectionPerdidos = view.findViewById(R.id.sectionPerdidos);
         sectionAdopciones = view.findViewById(R.id.sectionAdopciones);
         sectionVeterinarias = view.findViewById(R.id.sectionVeterinarias);
@@ -91,23 +89,18 @@ public class HomeFragment extends Fragment {
         imgPerfil = view.findViewById(R.id.imgPerfil);
 
         configurarRecyclerViews();
-
         mostrarNombreUsuario();
-
         cargarPreferencias();
-
         configurarFab(view);
-
         configurarBotonesFiltrado(view);
-
         cargarFotoPerfil();
-
         cargarMascotas();
 
+        // ✅ TERMS (CORREGIDO)
         SharedPreferences prefs = requireContext()
-                .getSharedPreferences("petfect", Context.MODE_PRIVATE);
+                .getSharedPreferences(PREFS, Context.MODE_PRIVATE);
 
-        boolean accepted = prefs.getBoolean("terms_accepted", false);
+        boolean accepted = prefs.getBoolean("terminos_aceptados", false);
 
         if (!accepted) {
             showTermsDialog();
@@ -116,22 +109,18 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    // FAB
     private void configurarFab(View view) {
 
         FloatingActionButton fabCentral = view.findViewById(R.id.fab_central);
 
         if (fabCentral != null) {
 
-            fabCentral.setOnClickListener(v -> {
-
-                startActivity(
-                        new android.content.Intent(
-                                requireContext(),
-                                com.aipasa.main.PublicacionActivity.class
-                        )
-                );
-            });
+            fabCentral.setOnClickListener(v ->
+                    startActivity(new android.content.Intent(
+                            requireContext(),
+                            com.aipasa.main.PublicacionActivity.class
+                    ))
+            );
         }
     }
 
@@ -156,7 +145,6 @@ public class HomeFragment extends Fragment {
                 });
     }
 
-    // BOTONES FILTRO
     private void configurarBotonesFiltrado(View view) {
 
         Button btnAll = view.findViewById(R.id.btnAll);
@@ -171,70 +159,40 @@ public class HomeFragment extends Fragment {
 
         btnPerdidos.setOnClickListener(v ->
                 mostrarSecciones(true, false, false));
-
-        view.findViewById(R.id.imgPerfil).setOnClickListener(v -> {
-
-            if (getActivity() != null) {
-
-                ((com.google.android.material.bottomnavigation.BottomNavigationView)
-                        getActivity().findViewById(R.id.bottom_nav))
-                        .setSelectedItemId(R.id.profile);
-            }
-        });
     }
 
-    // VISIBILIDAD SECCIONES
     private void mostrarSecciones(boolean mostrarPerdidos,
                                   boolean mostrarAdopciones,
                                   boolean mostrarVeterinarias) {
 
         sectionPerdidos.setVisibility(
-                mostrarPerdidos && !listaPerdidos.isEmpty()
-                        ? View.VISIBLE
-                        : View.GONE
+                mostrarPerdidos && !listaPerdidos.isEmpty() ? View.VISIBLE : View.GONE
         );
 
         sectionAdopciones.setVisibility(
-                mostrarAdopciones && !listaAdopciones.isEmpty()
-                        ? View.VISIBLE
-                        : View.GONE
+                mostrarAdopciones && !listaAdopciones.isEmpty() ? View.VISIBLE : View.GONE
         );
 
         sectionVeterinarias.setVisibility(
-                mostrarVeterinarias
-                        ? View.VISIBLE
-                        : View.GONE
+                mostrarVeterinarias ? View.VISIBLE : View.GONE
         );
-
-        mostrarMensajeSiNada();
     }
 
-    // RECYCLERS
     private void configurarRecyclerViews() {
 
-        recyclerPerdidos.setLayoutManager(
-                new LinearLayoutManager(requireContext())
-        );
-
-        adapterPerdidos =
-                new MascotaAdapterGuardados(listaPerdidos);
-
+        recyclerPerdidos.setLayoutManager(new LinearLayoutManager(requireContext()));
+        adapterPerdidos = new MascotaAdapterGuardados(listaPerdidos);
         recyclerPerdidos.setAdapter(adapterPerdidos);
 
-        recyclerAdopciones.setLayoutManager(
-                new LinearLayoutManager(requireContext())
-        );
-
-        adapterAdopciones =
-                new MascotaAdapterGuardados(listaAdopciones);
-
+        recyclerAdopciones.setLayoutManager(new LinearLayoutManager(requireContext()));
+        adapterAdopciones = new MascotaAdapterGuardados(listaAdopciones);
         recyclerAdopciones.setAdapter(adapterAdopciones);
     }
 
     private void mostrarNombreUsuario() {
 
         if (currentUser == null) {
-            tvNombreUsuario.setText(getString(R.string.hola_invitado));
+            tvNombreUsuario.setText("Hola invitado");
             return;
         }
 
@@ -245,29 +203,19 @@ public class HomeFragment extends Fragment {
 
                     String username = doc.getString("username");
 
-                    if (username != null && !username.trim().isEmpty()) {
-                        tvNombreUsuario.setText(getString(R.string.hola_nombre, username));
-                    } else {
-                        tvNombreUsuario.setText("¡Hola, Usuario!");
+                    if (username != null && !username.isEmpty()) {
+                        tvNombreUsuario.setText("Hola " + username);
                     }
-                })
-                .addOnFailureListener(e -> {
-                    tvNombreUsuario.setText(getString(R.string.hola_usuario));
                 });
     }
 
     private void cargarPreferencias() {
 
         SharedPreferences prefs =
-                requireContext().getSharedPreferences(
-                        PREFS,
-                        MODE_PRIVATE
-                );
+                requireContext().getSharedPreferences(PREFS, MODE_PRIVATE);
 
         prefPerdidos = prefs.getBoolean("pref_perdidos", true);
-
         prefAdopciones = prefs.getBoolean("pref_adopciones", true);
-
         prefVeterinarias = prefs.getBoolean("pref_veterinarias", true);
     }
 
@@ -278,18 +226,7 @@ public class HomeFragment extends Fragment {
 
         mascotasListener = query.addSnapshotListener((snapshots, error) -> {
 
-            if (error != null) {
-
-                Toast.makeText(
-                        requireContext(),
-                        getString(R.string.error_al_cargar),
-                        Toast.LENGTH_SHORT
-                ).show();
-
-                return;
-            }
-
-            if (snapshots == null) return;
+            if (error != null || snapshots == null) return;
 
             listaPerdidos.clear();
             listaAdopciones.clear();
@@ -299,94 +236,15 @@ public class HomeFragment extends Fragment {
                 String estado = doc.getString("estado");
 
                 if ("perdido".equals(estado)) {
-
                     listaPerdidos.add(doc);
-
                 } else if ("adopcion".equals(estado)) {
-
                     listaAdopciones.add(doc);
                 }
             }
 
             adapterPerdidos.notifyDataSetChanged();
-
             adapterAdopciones.notifyDataSetChanged();
-
-            actualizarTitulos();
-
-            mostrarSecciones(
-                    prefPerdidos,
-                    prefAdopciones,
-                    prefVeterinarias
-            );
         });
-    }
-
-    private void actualizarTitulos() {
-
-        tvTituloPerdidos.setText(
-                getString(R.string.mascotas_perdidas_contador, listaPerdidos.size())
-        );
-
-        tvTituloAdopciones.setText(
-                getString(R.string.mascotas_adopcion_contador, listaAdopciones.size())
-        );
-    }
-
-    private void mostrarMensajeSiNada() {
-
-        boolean nadaVisible =
-                sectionPerdidos.getVisibility() != View.VISIBLE &&
-                        sectionAdopciones.getVisibility() != View.VISIBLE &&
-                        sectionVeterinarias.getVisibility() != View.VISIBLE;
-
-        tvNadaSeleccionado.setVisibility(
-                nadaVisible ? View.VISIBLE : View.GONE
-        );
-
-        if (nadaVisible) {
-
-            if (listaPerdidos.isEmpty()
-                    && listaAdopciones.isEmpty()) {
-
-                tvNadaSeleccionado.setText(
-                        getString(R.string.no_hay_mascotas_publicadas)
-                );
-
-            } else {
-
-                tvNadaSeleccionado.setText(
-                        getString(R.string.no_hay_contenido_preferencias)
-                );
-            }
-        }
-    }
-
-    @Override
-    public void onResume() {
-
-        super.onResume();
-
-        cargarPreferencias();
-
-        mostrarNombreUsuario();
-        cargarFotoPerfil();
-
-        mostrarSecciones(
-                prefPerdidos,
-                prefAdopciones,
-                prefVeterinarias
-        );
-    }
-
-    @Override
-    public void onDestroyView() {
-
-        super.onDestroyView();
-
-        if (mascotasListener != null) {
-            mascotasListener.remove();
-        }
     }
 
     private void showTermsDialog() {
@@ -398,67 +256,43 @@ public class HomeFragment extends Fragment {
         Button btnAccept = dialog.findViewById(R.id.btnAccept);
         Button btnCancel = dialog.findViewById(R.id.btnCancel);
         CheckBox check = dialog.findViewById(R.id.checkAccept);
-//        ScrollView scrollView = dialog.findViewById(R.id.scrollView);
 
-//        final boolean[] scrolled = {false};
-        final boolean[] checked = {false};
+        btnAccept.setEnabled(false);
 
-//        scrollView.getViewTreeObserver()
-//                .addOnScrollChangedListener(() -> {
-//
-//                    View view = scrollView.getChildAt(0);
-//
-//                    int diff =
-//                            view.getBottom()
-//                                    - (scrollView.getHeight()
-//                                    + scrollView.getScrollY());
-//
-//                    if (diff == 0) {
-//                        scrolled[0] = true;
-//                    }
-//
-//                    btnAccept.setEnabled(
-//                            scrolled[0] && checked[0]
-//                    );
-//                });
-//
-//        check.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//
-//            checked[0] = isChecked;
-//
-//            btnAccept.setEnabled(
-//                    scrolled[0] && checked[0]
-//            );
-//        });
-
-        check.setOnCheckedChangeListener((buttonView, isChecked) -> {
-
-            checked[0] = isChecked;
-
-            btnAccept.setEnabled(checked[0]);
-        });
+        check.setOnCheckedChangeListener((buttonView, isChecked) ->
+                btnAccept.setEnabled(isChecked)
+        );
 
         btnAccept.setOnClickListener(v -> {
 
             requireContext()
-                    .getSharedPreferences(
-                            "petfect",
-                            Context.MODE_PRIVATE
-                    )
+                    .getSharedPreferences(PREFS, Context.MODE_PRIVATE)
                     .edit()
-                    .putBoolean("terms_accepted", true)
+                    .putBoolean("terminos_aceptados", true)
                     .apply();
 
             dialog.dismiss();
         });
 
         btnCancel.setOnClickListener(v ->
-                requireActivity().finish());
+                requireActivity().finish()
+        );
 
-        dialog.getWindow()
-                .setBackgroundDrawable(
-                        new ColorDrawable(Color.TRANSPARENT)
-                );
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawable(
+                    new ColorDrawable(Color.TRANSPARENT)
+            );
+        }
+
         dialog.show();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        if (mascotasListener != null) {
+            mascotasListener.remove();
+        }
     }
 }

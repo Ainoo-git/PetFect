@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/petfect_background">
 
     <!-- APP BAR FUERA DEL SCROLL -->
     <com.google.android.material.appbar.MaterialToolbar
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:orientation="vertical"
-                android:background="@color/surface">
+                android:background="@color/card_background">
 
                 <!-- IMAGEN -->
                 <FrameLayout
@@ -73,6 +73,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/text_primary" />
 
+
                     <ImageButton
                         android:id="@+id/btnGuardar"
                         android:layout_width="40dp"
@@ -93,7 +94,7 @@
                     android:text="@string/tipo_estado_demo"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@color/text_hint"
+                    android:textColor="@color/gris"
                     android:layout_marginBottom="16dp" />
 
                 <LinearLayout

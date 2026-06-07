@@ -208,7 +208,7 @@ public class PublicacionActivity extends AppCompatActivity {
 
         if (!checkLegal.isChecked()) {
             checkLegal.setTextColor(
-                    ContextCompat.getColor(this, R.color.red)
+                    ContextCompat.getColor(this, R.color.coral_alertasimp_errores)
             );
 
             hacerTemblarCheckLegal();

@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:background="@color/petfect_background"
     card_view:cardCornerRadius="12dp"
     card_view:cardElevation="4dp">
 
@@ -14,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@color/card_background"
         android:padding="12dp">
 
         <ImageView
@@ -51,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textSize="12sp"
-                android:textColor="@color/text_secondary" />
+                android:textColor="@color/text_primary" />
 
         </LinearLayout>
 
