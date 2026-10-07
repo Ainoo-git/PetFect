@@ -1,5 +1,3 @@
-# 🐾 PetFect – “Ayuda y Encuentra”
-
 <div align="center">
 
 Aplicación Android para la localización de mascotas perdidas y la promoción de la adopción responsable.
@@ -233,27 +231,31 @@ La interfaz de PetFect mantiene una estética suave, cercana y relacionada con e
 
 | Home | Formulario |
 |------|------------|
-| <img src="https://github.com/user-attachments/assets/44698d40-babe-41ad-b78e-fae9bda97bca" width="250"> | <img src="https://github.com/user-attachments/assets/567757cf-5cad-49b1-9e82-543b55291a9e" width="250"> |
+| <img width="251" height="557" alt="image" src="https://github.com/user-attachments/assets/35b98960-71db-4837-8c12-31ffb776364f" /> | <img width="252" height="558" alt="image" src="https://github.com/user-attachments/assets/4c853759-fc6c-419b-9675-a3dce48a4a61" /> |
 
 | Búsqueda | Mapa |
 |----------|------|
-| <img src="https://github.com/user-attachments/assets/22d42854-aea9-4495-977b-eee1c01fb3f7" width="250"> | <img src="https://github.com/user-attachments/assets/db71bf33-b332-49d8-9c59-5658a3bf1a65" width="250"> |
+| <img width="251" height="557" alt="image" src="https://github.com/user-attachments/assets/d9dc567a-1b04-45b4-9ed2-b6ff4d6077b9" /> | <img width="247" height="557" alt="image" src="https://github.com/user-attachments/assets/df4ee557-4050-465f-acfa-ef074b6cf20b" /> |
 
-| Modo Oscuro | Modo Oscuro |
-|-------------|-------------| 
+| Modo Oscuro |
+|-------------|
 | <img src="https://github.com/user-attachments/assets/192ca139-fbd8-4d4e-a90c-6743a2956c73" width="250"> |
 
 ---
 
 ### Nuevas Funcionalidades
 
-| Perfil | Configuración | Guardados |
-|--------|---------------|-----------|
-| <!-- Añadir captura perfil --> | <!-- Añadir captura configuración --> | <!-- Añadir captura guardados --> |
+| Perfil | Perfil |
+|--------|--------|
+|<img width="252" height="556" alt="image" src="https://github.com/user-attachments/assets/4d6bb9f0-ef10-45bb-bfe3-d6e6b3f9cb70" />|<img width="251" height="557" alt="image" src="https://github.com/user-attachments/assets/969541d9-4b74-4a54-a1ec-81d2def9d0e2" />|
 
-| Notificaciones | Detalle Publicación | Editar Perfil |
-|----------------|---------------------|---------------|
-| <!-- Añadir captura notificaciones --> | <!-- Añadir captura detalle --> | <!-- Añadir captura editar perfil --> |
+| Edit Perfil | Configuración | Guardados |
+|-------------|---------------|-----------|
+| <img width="250" height="557" alt="image" src="https://github.com/user-attachments/assets/e23f4626-f726-490a-b403-78e9bef651da" /> |<img width="252" height="557" alt="image" src="https://github.com/user-attachments/assets/cbb19935-c466-452f-8a8f-749414d40abd"/>|<img width="253" height="557" alt="image" src="https://github.com/user-attachments/assets/0df390d8-d7c8-43df-a617-37e8822a1af0" />|
+
+| Notificaciones | Detalle Publicación Personaal | Detalle Publicación |
+|----------------|-------------------------------|---------------------|
+|<img width="251" height="557" alt="image" src="https://github.com/user-attachments/assets/ea9b0c79-dbea-438b-872d-128f321373c5" />|<img width="250" height="563" alt="image" src="https://github.com/user-attachments/assets/7243b5b9-be10-48f8-95b1-77b14d119f0d" />|<img width="247" height="562" alt="image" src="https://github.com/user-attachments/assets/1b5f4bde-bb17-43c8-8205-b3c8066dd01f" />|
 
 ---
 
